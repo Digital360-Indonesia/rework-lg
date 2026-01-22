@@ -1,0 +1,172 @@
+---
+/**
+ * ProductGrid Component - Level Garment
+ *
+ * Renders a category section with all its subcategories and products
+ *
+ * Features:
+ * - Category heading with anchor ID
+ * - Subcategory sections with descriptions
+ * - Responsive grid for product cards
+ * - Multiple images per subcategory
+ *
+ * @version 1.0.0
+ */
+
+import ProductCard from './ProductCard.astro';
+
+export interface Props {
+  category: {
+    id: string;
+    name: string;
+    anchor: string;
+    subcategories: Array<{
+      id: string;
+      name: string;
+      description: string;
+      whatsappMessage: string;
+      images: Array<{
+        src: string;
+        srcset?: string;
+        sizes?: string;
+        alt: string;
+      }>;
+    }>;
+  };
+}
+
+const { category } = Astro.props;
+---
+
+<section id={category.id.replace('#', '')} class="category-section">
+  <div class="container">
+    <h2 class="category-title">{category.name}</h2>
+
+    {
+      category.subcategories.map((subcategory) => (
+        <div class="subcategory-section">
+          <h3 class="subcategory-title">{subcategory.name}</h3>
+          <p class="subcategory-description">
+            {subcategory.description}
+          </p>
+
+          <div class={`products-grid products-grid-${subcategory.images.length}`}>
+            {
+              subcategory.images.map((image) => (
+                <ProductCard
+                  image={image}
+                  whatsappMessage={subcategory.whatsappMessage}
+                  category={category.name}
+                  subcategory={subcategory.name}
+                />
+              ))
+            }
+          </div>
+        </div>
+      ))
+    }
+  </div>
+</section>
+
+<style>
+  .category-section {
+    padding: 4rem 0;
+    scroll-margin-top: 100px;
+  }
+
+  .category-title {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 2.5rem;
+    color: #1a1a1a;
+    text-align: center;
+    font-family: 'Poppins', 'Inter', sans-serif;
+  }
+
+  .subcategory-section {
+    margin-bottom: 3rem;
+  }
+
+  .subcategory-section:last-child {
+    margin-bottom: 0;
+  }
+
+  .subcategory-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+    color: #1a1a1a;
+    font-family: 'Poppins', 'Inter', sans-serif;
+  }
+
+  .subcategory-description {
+    font-size: 1rem;
+    line-height: 1.75;
+    color: #6b7280;
+    margin-bottom: 1.5rem;
+    max-width: 48rem;
+    font-family: 'Inter', sans-serif;
+  }
+
+  /* Products Grid */
+  .products-grid {
+    display: grid;
+    gap: 1.5rem;
+  }
+
+  /* Dynamic grid columns based on number of images */
+  .products-grid-1 {
+    grid-template-columns: 1fr;
+  }
+
+  .products-grid-2 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .products-grid-3 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  /* Tablet Styles */
+  @media (max-width: 1023px) {
+    .category-section {
+      padding: 3rem 0;
+    }
+
+    .category-title {
+      font-size: 1.75rem;
+    }
+
+    .products-grid-2,
+    .products-grid-3 {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  /* Mobile Styles */
+  @media (max-width: 767px) {
+    .category-section {
+      padding: 2rem 0;
+      scroll-margin-top: 70px;
+    }
+
+    .category-title {
+      font-size: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .subcategory-title {
+      font-size: 1.125rem;
+    }
+
+    .subcategory-description {
+      font-size: 0.9375rem;
+    }
+
+    .products-grid-1,
+    .products-grid-2,
+    .products-grid-3 {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

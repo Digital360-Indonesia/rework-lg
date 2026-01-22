@@ -1,0 +1,291 @@
+---
+/**
+ * Header Component - Level Garment
+ * Responsive header with navigation and mobile menu
+ *
+ * Features:
+ * - Sticky header behavior
+ * - Logo with homepage link
+ * - Desktop navigation menu
+ * - Mobile hamburger menu with overlay
+ * - Promo CTA button (WhatsApp)
+ *
+ * @version 1.0.0
+ */
+import siteConfig from '../../data/site-config.json';
+
+const { siteName, navigation, externalLinks, contact } = siteConfig;
+
+// WhatsApp promo message (URL encoded)
+const promoWhatsAppUrl = `${contact.whatsappUrl}?text=${encodeURIComponent('Hai kak! Ada promo apa bulan ini?')}`;
+
+// Combined navigation items (main nav + external links)
+const allNavItems = [...navigation, ...externalLinks];
+
+// Filter only main nav items for header (Beranda, Produk, Portfolio)
+const headerNavItems = allNavItems.filter(item =>
+  ['Beranda', 'Produk', 'Portfolio'].includes(item.name)
+);
+
+interface Props {
+  variant?: 'default' | 'transparent';
+}
+
+const { variant = 'default' } = Astro.props;
+
+// Header styling based on variant
+const headerClasses = variant === 'transparent'
+  ? 'bg-transparent absolute top-0 left-0 right-0 z-50'
+  : 'bg-white shadow-md sticky top-0 z-50';
+---
+
+<header
+  id="main-header"
+  class={`header-wrapper ${headerClasses} transition-all duration-300`}
+>
+  <div class="container mx-auto px-4">
+    <div class="flex items-center justify-between h-20">
+      <!-- Logo -->
+      <a href="/" class="flex items-center gap-2 z-50" aria-label="Level Garment Homepage">
+        <img
+          src="/assets/images/07062024-lg-logo.png"
+          alt={siteName}
+          class="h-10 w-auto"
+          width="160"
+          height="56"
+        />
+      </a>
+
+      <!-- Desktop Navigation -->
+      <nav class="hidden lg:flex items-center gap-8" aria-label="Main navigation">
+        {headerNavItems.map((item) => (
+          <a
+            href={item.path}
+            class={`
+              nav-link relative font-medium transition-colors duration-200
+              ${variant === 'transparent' ? 'text-white hover:text-primary-light' : 'text-gray-700 hover:text-primary'}
+            `}
+            {...(item.external && { target: '_blank', rel: 'noopener noreferrer' })}
+          >
+            {item.name}
+          </a>
+        ))}
+      </nav>
+
+      <!-- Promo Button (Desktop) -->
+      <a
+        href={promoWhatsAppUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="hidden lg:inline-flex items-center justify-center px-6 py-2.5 bg-primary text-white font-semibold rounded-full hover:bg-primary-dark transition-all duration-200 shadow-md hover:shadow-lg transform hover:-translate-y-0.5"
+        aria-label="Chat WhatsApp untuk promo"
+      >
+        Promo
+      </a>
+
+      <!-- Mobile Menu Button -->
+      <button
+        id="mobile-menu-toggle"
+        type="button"
+        class="lg:hidden p-2 rounded-lg hover:bg-gray-100 transition-colors z-50"
+        aria-expanded="false"
+        aria-controls="mobile-menu"
+        aria-label="Toggle menu"
+      >
+        <span class="hamburger-icon block">
+          <span class="hamburger-line block w-6 h-0.5 bg-current transition-all duration-300"></span>
+          <span class="hamburger-line block w-6 h-0.5 bg-current mt-1.5 transition-all duration-300"></span>
+          <span class="hamburger-line block w-6 h-0.5 bg-current mt-1.5 transition-all duration-300"></span>
+        </span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile Menu Overlay -->
+  <div
+    id="mobile-menu-overlay"
+    class="mobile-menu-overlay fixed inset-0 bg-black/50 opacity-0 invisible transition-all duration-300 lg:hidden z-40"
+    aria-hidden="true"
+  ></div>
+
+  <!-- Mobile Menu -->
+  <div
+    id="mobile-menu"
+    class="mobile-menu fixed top-0 right-0 w-80 max-w-[85vw] h-full bg-white shadow-2xl transform translate-x-full transition-transform duration-300 lg:hidden z-50 overflow-y-auto"
+  >
+    <div class="flex flex-col h-full">
+      <!-- Mobile Menu Header -->
+      <div class="flex items-center justify-between p-4 border-b border-gray-200">
+        <a href="/" class="flex items-center gap-2" aria-label="Level Garment Homepage">
+          <img
+            src="/assets/images/07062024-lg-logo.png"
+            alt={siteName}
+            class="h-8 w-auto"
+            width="128"
+            height="45"
+          />
+        </a>
+        <button
+          id="mobile-menu-close"
+          type="button"
+          class="p-2 rounded-lg hover:bg-gray-100 transition-colors"
+          aria-label="Close menu"
+        >
+          <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+
+      <!-- Mobile Menu Content -->
+      <div class="flex-1 p-4 overflow-y-auto">
+        <nav aria-label="Mobile navigation">
+          <ul class="space-y-2">
+            {headerNavItems.map((item) => (
+              <li>
+                <a
+                  href={item.path}
+                  class="block px-4 py-3 rounded-lg text-gray-700 hover:bg-primary/10 hover:text-primary font-medium transition-colors"
+                  {...(item.external && { target: '_blank', rel: 'noopener noreferrer' })}
+                >
+                  {item.name}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+
+        <!-- Mobile Promo Button -->
+        <div class="mt-6 pt-6 border-t border-gray-200">
+          <a
+            href={promoWhatsAppUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="flex items-center justify-center w-full px-6 py-3 bg-primary text-white font-semibold rounded-full hover:bg-primary-dark transition-all duration-200 shadow-md"
+            aria-label="Chat WhatsApp untuk promo"
+          >
+            <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+            </svg>
+            Promo
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<style>
+  /* Header base styles */
+  .header-wrapper {
+    font-family: 'Inter', 'Poppins', sans-serif;
+  }
+
+  /* Navigation link hover effect - underline animation */
+  .nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: currentColor;
+    transition: width 0.3s ease;
+  }
+
+  .nav-link:hover::after {
+    width: 100%;
+  }
+
+  /* Mobile menu open state */
+  .mobile-menu-open #mobile-menu {
+    transform: translateX(0);
+  }
+
+  .mobile-menu-open #mobile-menu-overlay {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .mobile-menu-open .hamburger-line:first-child {
+    transform: rotate(45deg) translate(5px, 5px);
+  }
+
+  .mobile-menu-open .hamburger-line:nth-child(2) {
+    opacity: 0;
+  }
+
+  .mobile-menu-open .hamburger-line:nth-child(3) {
+    transform: rotate(-45deg) translate(5px, -6px);
+  }
+
+  /* Prevent body scroll when menu is open */
+  .mobile-menu-open body {
+    overflow: hidden;
+  }
+</style>
+
+<script>
+  // Mobile menu toggle functionality
+  const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+  const mobileMenuClose = document.getElementById('mobile-menu-close');
+  const mobileMenuOverlay = document.getElementById('mobile-menu-overlay');
+  const mobileMenu = document.getElementById('mobile-menu');
+  const body = document.body;
+
+  function openMenu() {
+    body.classList.add('mobile-menu-open');
+    mobileMenuToggle?.setAttribute('aria-expanded', 'true');
+  }
+
+  function closeMenu() {
+    body.classList.remove('mobile-menu-open');
+    mobileMenuToggle?.setAttribute('aria-expanded', 'false');
+  }
+
+  function toggleMenu() {
+    if (body.classList.contains('mobile-menu-open')) {
+      closeMenu();
+    } else {
+      openMenu();
+    }
+  }
+
+  // Event listeners
+  mobileMenuToggle?.addEventListener('click', toggleMenu);
+  mobileMenuClose?.addEventListener('click', closeMenu);
+  mobileMenuOverlay?.addEventListener('click', closeMenu);
+
+  // Close menu on escape key
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && body.classList.contains('mobile-menu-open')) {
+      closeMenu();
+    }
+  });
+
+  // Close menu on link click
+  const mobileMenuLinks = mobileMenu?.querySelectorAll('a[href]');
+  mobileMenuLinks?.forEach((link) => {
+    link.addEventListener('click', closeMenu);
+  });
+
+  // Handle header scroll effect (for transparent variant)
+  const header = document.getElementById('main-header');
+  let lastScroll = 0;
+
+  window.addEventListener('scroll', () => {
+    const currentScroll = window.pageYOffset;
+
+    if (header?.classList.contains('bg-transparent')) {
+      if (currentScroll > 50) {
+        header.classList.remove('bg-transparent');
+        header.classList.add('bg-white', 'shadow-md');
+      } else {
+        header.classList.add('bg-transparent');
+        header.classList.remove('bg-white', 'shadow-md');
+      }
+    }
+
+    lastScroll = currentScroll;
+  }, { passive: true });
+</script>

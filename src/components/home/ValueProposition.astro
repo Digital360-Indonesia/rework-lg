@@ -1,0 +1,170 @@
+---
+/**
+ * Value Proposition Section Component - Level Garment Homepage
+ *
+ * Features:
+ * - "Wujudkan Kebersamaan & Kreatifitas" heading
+ * - Video gallery with 4 videos
+ * - Responsive grid layout
+ * - Lazy-loaded videos with poster images
+ *
+ * @version 1.0.0
+ */
+
+// Video data - videos from CLI 6 optimization
+const videos = [
+  {
+    id: 1,
+    src: '/assets/videos/homepage/video_1.mp4',
+    poster: '/assets/videos/posters/video_1.webp',
+    alt: 'Level Garment Portfolio Video 1'
+  },
+  {
+    id: 2,
+    src: '/assets/videos/homepage/video_2.mp4',
+    poster: '/assets/videos/posters/video_2.webp',
+    alt: 'Level Garment Portfolio Video 2'
+  },
+  {
+    id: 3,
+    src: '/assets/videos/homepage/video_3.mp4',
+    poster: '/assets/videos/posters/video_3.webp',
+    alt: 'Level Garment Portfolio Video 3'
+  },
+  {
+    id: 4,
+    src: '/assets/videos/homepage/video_4.mp4',
+    poster: '/assets/videos/posters/video_4.webp',
+    alt: 'Level Garment Portfolio Video 4'
+  }
+];
+
+// Section content from WordPress
+const sectionHeading = "Wujudkan Kebersamaan & Kreatifitas";
+const sectionSubheading = "Mulai dari kaos, jaket, jersey, workshirt, topi semuanya bisa kamu custom disini!";
+---
+
+<!-- Value Proposition Section -->
+<section
+  id="value-proposition"
+  class="value-proposition-section py-16 lg:py-24 bg-white"
+>
+  <div class="container mx-auto px-4">
+    <!-- Section Header -->
+    <div class="text-center max-w-3xl mx-auto mb-12 lg:mb-16">
+      <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
+        {sectionHeading}
+      </h2>
+      <p class="text-lg sm:text-xl text-gray-600">
+        {sectionSubheading}
+      </p>
+    </div>
+
+    <!-- Video Gallery -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6">
+      {videos.map((video, index) => (
+        <div
+          class={`video-card group relative aspect-[9/16] rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1`}
+          style={`animation-delay: ${index * 0.1}s`}
+        >
+          <!-- Video Element -->
+          <video
+            src={video.src}
+            poster={video.poster}
+            alt={video.alt}
+            class="absolute inset-0 w-full h-full object-cover"
+            autoplay
+            muted
+            loop
+            playsinline
+            loading="lazy"
+            preload="metadata"
+          />
+
+          <!-- Overlay on hover -->
+          <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+
+          <!-- Play button overlay (shows on hover when paused) -->
+          <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+            <div class="w-16 h-16 bg-white/90 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 shadow-lg">
+              <svg class="w-6 h-6 text-primary ml-1" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M8 5v14l11-7z"/>
+              </svg>
+            </div>
+          </div>
+
+          <!-- Video number indicator -->
+          <div class="absolute top-4 left-4 w-8 h-8 bg-primary/90 text-white rounded-full flex items-center justify-center text-sm font-semibold">
+            {index + 1}
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  /* Video card styling */
+  .video-card {
+    animation: fadeInUp 0.6s ease-out forwards;
+    opacity: 0;
+  }
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Video hover effects */
+  .video-card:hover video {
+    transform: scale(1.05);
+    transition: transform 0.5s ease;
+  }
+
+  .video-card video {
+    transition: transform 0.5s ease;
+  }
+
+  /* Prevent video from being draggable */
+  .video-card video {
+    user-select: none;
+    -webkit-user-drag: none;
+  }
+
+  /* Custom scrollbar for video section on small screens */
+  @media (max-width: 639px) {
+    .video-card {
+      scroll-snap-align: center;
+    }
+  }
+</style>
+
+<script>
+  // Enhance video experience
+  document.querySelectorAll('.video-card').forEach((card) => {
+    const video = card.querySelector('video');
+
+    // Optional: Pause video when not in viewport to save resources
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          video?.play().catch(() => {
+            // Autoplay was prevented, that's okay
+          });
+        } else {
+          video?.pause();
+        }
+      });
+    }, {
+      threshold: 0.5
+    });
+
+    observer.observe(card);
+  });
+</script>

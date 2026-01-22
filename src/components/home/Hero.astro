@@ -1,0 +1,173 @@
+---
+/**
+ * Hero Section Component - Level Garment Homepage
+ *
+ * Features:
+ * - Two-column layout (slideshow background + content)
+ * - Headline and description text
+ * - Responsive design
+ * - Ken Burns effect for background slideshow
+ *
+ * @version 1.0.0
+ */
+
+interface Props {
+  variant?: 'default' | 'simple';
+}
+
+const { variant = 'default' } = Astro.props;
+
+// Hero content from WordPress
+const heroTitle = "Konveksi Pelajar Indonesia di Surabaya";
+const heroDescription = `Level Garment sebagai konveksi terpercaya para pelajar Indonesia untuk kebutuhan custom baju kegiatanmu seperti class meeting, study tour, foto album kenangan, event dies natalis, event konser sekolah, sampai ke event skala kecil maupun besar di kampusmu.
+
+Mulai dari kaos barcode spotify atau kaos sablon reflektif, jaket varsity full patch, workjacket, workshirt, jersey baseball, topi, lanyard & ID Card, semua kebutuhanmu serahkan aja ke Level Garment.
+
+Masih belum bikin kamu tertarik? Kami berikan cashback spesial untuk pemesanan pertamamu!`;
+---
+
+<!-- Hero Section -->
+<section
+  id="hero"
+  class="hero-section relative min-h-screen lg:min-h-[90vh] flex items-center overflow-hidden bg-gradient-to-br from-secondary via-secondary-dark to-dark"
+>
+  <!-- Background Pattern Overlay -->
+  <div class="absolute inset-0 opacity-5">
+    <div class="absolute inset-0" style="background-image: url('data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%2256%22 height=%2256%22><path d=%22M28 0L56 28L28 56L0 28Z%22 fill=%22white%22 fill-opacity=%220.4%22/></svg>'); background-size: 56px 56px;"></div>
+  </div>
+
+  <div class="container mx-auto px-4 py-20 lg:py-0 relative z-10">
+    <div class="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+      <!-- Left Column - Visual / Slideshow Placeholder -->
+      <div class="relative order-2 lg:order-1">
+        {variant === 'default' && (
+          <div class="relative aspect-[9/16] lg:aspect-[3/4] max-w-md mx-auto lg:max-w-full rounded-2xl overflow-hidden shadow-2xl">
+            <!-- Hero Image / Slideshow -->
+            <div class="hero-slideshow absolute inset-0">
+              <!-- Static gradient background as fallback -->
+              <div class="absolute inset-0 bg-gradient-to-br from-primary/30 to-accent/30"></div>
+
+              <!-- Decorative elements -->
+              <div class="absolute inset-0 flex items-center justify-center">
+                <div class="text-center text-white p-8">
+                  <svg class="w-24 h-24 mx-auto mb-4 opacity-80" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                  </svg>
+                  <p class="text-xl font-semibold">Level Garment</p>
+                  <p class="text-sm opacity-80 mt-2">Konveksi Pelajar Indonesia</p>
+                </div>
+              </div>
+
+              <!-- Animated gradient overlay -->
+              <div class="absolute inset-0 bg-gradient-to-t from-secondary/80 via-transparent to-transparent"></div>
+            </div>
+
+            <!-- Decorative dots -->
+            <div class="absolute -bottom-6 -right-6 w-24 h-24 bg-accent/20 rounded-full blur-2xl"></div>
+            <div class="absolute -top-6 -left-6 w-32 h-32 bg-primary/20 rounded-full blur-2xl"></div>
+          </div>
+        )}
+      </div>
+
+      <!-- Right Column - Content -->
+      <div class="order-1 lg:order-2 text-white">
+        <div class="space-y-6">
+          <!-- Main Title -->
+          <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight">
+            {heroTitle}
+          </h1>
+
+          <!-- Description -->
+          <div class="prose prose-lg prose-invert max-w-none">
+            <p class="text-gray-200 text-base sm:text-lg lg:text-xl leading-relaxed whitespace-pre-line">
+              {heroDescription}
+            </p>
+          </div>
+
+          <!-- CTA Buttons -->
+          <div class="flex flex-col sm:flex-row gap-4 pt-4">
+            <a
+              href="https://wa.me/6285183091599?text=Hai%20kak!%20Saya%20tertarik%20buat%20pesan%20custom%20baju."
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex items-center justify-center px-8 py-4 bg-primary hover:bg-primary-dark text-white font-semibold rounded-full transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
+            >
+              <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+              </svg>
+              Pesan Sekarang
+            </a>
+            <a
+              href="/product/"
+              class="inline-flex items-center justify-center px-8 py-4 border-2 border-white text-white hover:bg-white hover:text-secondary font-semibold rounded-full transition-all duration-300"
+            >
+              Lihat Produk
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scroll Indicator -->
+  <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
+    <a href="#value-proposition" class="text-white/70 hover:text-white transition-colors" aria-label="Scroll down">
+      <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"/>
+      </svg>
+    </a>
+  </div>
+</section>
+
+<style>
+  /* Hero slideshow animation (Ken Burns effect) */
+  .hero-slideshow {
+    animation: kenBurns 20s ease-in-out infinite alternate;
+  }
+
+  @keyframes kenBurns {
+    0% {
+      transform: scale(1);
+    }
+    100% {
+      transform: scale(1.1);
+    }
+  }
+
+  /* Text reveal animation */
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .hero-section h1,
+  .hero-section .prose,
+  .hero-section a {
+    animation: fadeInUp 0.8s ease-out forwards;
+  }
+
+  .hero-section h1 {
+    animation-delay: 0.2s;
+  }
+
+  .hero-section .prose {
+    animation-delay: 0.4s;
+    opacity: 0;
+  }
+
+  .hero-section a:first-of-type {
+    animation-delay: 0.6s;
+    opacity: 0;
+  }
+
+  .hero-section a:last-of-type {
+    animation-delay: 0.7s;
+    opacity: 0;
+  }
+</style>

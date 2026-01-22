@@ -1,0 +1,220 @@
+{
+  "categories": [
+    {
+      "id": "tshirt",
+      "name": "T-Shirt",
+      "lineupImage": "/assets/images/products/tshirt/20250523-Lineup-T-Shirt.webp",
+      "anchor": "#tshirt",
+      "subcategories": [
+        {
+          "id": "basic",
+          "name": "Basic",
+          "description": "Kaos dengan desain simpel dan potongan nyaman, cocok untuk dipakai harian ke sekolah atau kampus. Bisa dikustom logo sekolah, jurusan, atau komunitas dengan sablon berkualitas tinggi. Pilihan ideal untuk seragam kegiatan OSIS, ekskul, hingga acara santai.",
+          "whatsappMessage": "Saya dapat informasi T Shirt Basic dari website. Mohon informasi lebih lengkap, ya. Terima kasih.",
+          "images": [
+            {
+              "src": "/assets/images/products/tshirt/20250523-T-Shirt_Basic_1.webp",
+              "srcset": "/assets/images/products/tshirt/20250523-T-Shirt_Basic_1-w320.webp 320w, /assets/images/products/tshirt/20250523-T-Shirt_Basic_1-w480.webp 480w, /assets/images/products/tshirt/20250523-T-Shirt_Basic_1-w640.webp 640w, /assets/images/products/tshirt/20250523-T-Shirt_Basic_1-w768.webp 768w, /assets/images/products/tshirt/20250523-T-Shirt_Basic_1-w1024.webp 1024w",
+              "sizes": "(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw",
+              "alt": "T-Shirt Basic 1"
+            },
+            {
+              "src": "/assets/images/products/tshirt/20250523-T-Shirt_Basic_2.webp",
+              "srcset": "/assets/images/products/tshirt/20250523-T-Shirt_Basic_2-w320.webp 320w, /assets/images/products/tshirt/20250523-T-Shirt_Basic_2-w480.webp 480w, /assets/images/products/tshirt/20250523-T-Shirt_Basic_2-w640.webp 640w, /assets/images/products/tshirt/20250523-T-Shirt_Basic_2-w768.webp 768w, /assets/images/products/tshirt/20250523-T-Shirt_Basic_2-w1024.webp 1024w",
+              "sizes": "(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw",
+              "alt": "T-Shirt Basic 2"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "jersey",
+      "name": "Jersey",
+      "lineupImage": "/assets/images/products/jersey/20250523-Lineup-Jersey-.webp",
+      "anchor": "#jersey",
+      "subcategories": [
+        {
+          "id": "basic",
+          "name": "Basic",
+          "description": "Jersey ringan dan adem yang siap mendukung aktivitas luar ruang maupun olahraga ringan. Tersedia opsi desain custom nama dan logo tim dengan teknik printing tajam dan tahan lama. Cocok untuk pelajar aktif, pecinta sport, atau seragam komunitas.",
+          "whatsappMessage": "Saya dapat informasi Jersey Basic dari website. Mohon informasi lebih lengkap, ya. Terima kasih.",
+          "images": [
+            {
+              "src": "/assets/images/products/jersey/20250526-Jersey_1.webp",
+              "srcset": "/assets/images/products/jersey/20250526-Jersey_1-w320.webp 320w, /assets/images/products/jersey/20250526-Jersey_1-w480.webp 480w, /assets/images/products/jersey/20250526-Jersey_1-w640.webp 640w, /assets/images/products/jersey/20250526-Jersey_1-w768.webp 768w, /assets/images/products/jersey/20250526-Jersey_1-w1024.webp 1024w",
+              "sizes": "(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw",
+              "alt": "Jersey Basic"
+            }
+          ]
+        },
+        {
+          "id": "baseball",
+          "name": "Baseball",
+          "description": "Tampil beda dengan gaya klasik ala baseball. Jersey ini punya potongan relaxed dengan opsi bordir atau sablon custom logo kelas, angkatan, atau organisasi. Pilihan tepat untuk event sekolah, tim futsal, atau kegiatan komunitas kampus.",
+          "whatsappMessage": "Saya dapat informasi Jersey Baseball dari website. Mohon informasi lebih lengkap, ya. Terima kasih.",
+          "images": [
+            {
+              "src": "/assets/images/products/jersey/20250526-Jersey_2.webp",
+              "srcset": "/assets/images/products/jersey/20250526-Jersey_2-w320.webp 320w, /assets/images/products/jersey/20250526-Jersey_2-w480.webp 480w, /assets/images/products/jersey/20250526-Jersey_2-w640.webp 640w, /assets/images/products/jersey/20250526-Jersey_2-w768.webp 768w, /assets/images/products/jersey/20250526-Jersey_2-w1024.webp 1024w",
+              "sizes": "(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw",
+              "alt": "Jersey Baseball"
+            }
+          ]
+        },
+        {
+          "id": "basket",
+          "name": "Basket",
+          "description": "Dirancang untuk kenyamanan dan performa di lapangan. Material breathable dan ringan dengan opsi desain custom untuk tim sekolah atau kampus. Cocok dipakai dalam turnamen antar kelas, jurusan, atau klub basket.",
+          "whatsappMessage": "Saya dapat informasi Jersey Basket dari website. Mohon informasi lebih lengkap, ya. Terima kasih.",
+          "images": [
+            {
+              "src": "/assets/images/products/jersey/20250526-Jersey_3.webp",
+              "srcset": "/assets/images/products/jersey/20250526-Jersey_3-w320.webp 320w, /assets/images/products/jersey/20250526-Jersey_3-w480.webp 480w, /assets/images/products/jersey/20250526-Jersey_3-w640.webp 640w, /assets/images/products/jersey/20250526-Jersey_3-w768.webp 768w, /assets/images/products/jersey/20250526-Jersey_3-w1024.webp 1024w",
+              "sizes": "(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw",
+              "alt": "Jersey Basket"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "workshirt",
+      "name": "Workshirt",
+      "lineupImage": "/assets/images/products/workshirt/20250523-Lineup-Workshirt.webp",
+      "anchor": "#workshirt",
+      "subcategories": [
+        {
+          "id": "basic",
+          "name": "Basic",
+          "description": "Kemeja kasual yang nyaman dengan desain clean dan fit modern. Bisa disesuaikan dengan logo jurusan, fakultas, atau organisasi melalui teknik printing atau bordir. Ideal untuk kegiatan formal semi-kasual seperti rapat organisasi, praktik lapangan, atau event kampus.",
+          "whatsappMessage": "Saya dapat informasi Workshirt Basic dari website. Mohon informasi lebih lengkap, ya. Terima kasih.",
+          "images": [
+            {
+              "src": "/assets/images/products/workshirt/20250523-Workshirt_Basic_1.webp",
+              "srcset": "/assets/images/products/workshirt/20250523-Workshirt_Basic_1-w320.webp 320w, /assets/images/products/workshirt/20250523-Workshirt_Basic_1-w480.webp 480w, /assets/images/products/workshirt/20250523-Workshirt_Basic_1-w640.webp 640w, /assets/images/products/workshirt/20250523-Workshirt_Basic_1-w768.webp 768w, /assets/images/products/workshirt/20250523-Workshirt_Basic_1-w1024.webp 1024w",
+              "sizes": "(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw",
+              "alt": "Workshirt Basic 1"
+            },
+            {
+              "src": "/assets/images/products/workshirt/20250523-Workshirt_Basic_2.webp",
+              "srcset": "/assets/images/products/workshirt/20250523-Workshirt_Basic_2-w320.webp 320w, /assets/images/products/workshirt/20250523-Workshirt_Basic_2-w480.webp 480w, /assets/images/products/workshirt/20250523-Workshirt_Basic_2-w640.webp 640w, /assets/images/products/workshirt/20250523-Workshirt_Basic_2-w768.webp 768w, /assets/images/products/workshirt/20250523-Workshirt_Basic_2-w1024.webp 1024w",
+              "sizes": "(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw",
+              "alt": "Workshirt Basic 2"
+            }
+          ]
+        },
+        {
+          "id": "pdh",
+          "name": "PDH",
+          "description": "Tampil rapi dan profesional dengan PDH seragam organisasi. Dirancang khusus untuk kebutuhan pelajar dan mahasiswa aktif di organisasi kampus atau OSIS. Tersedia opsi bordir logo, nama, dan jabatan sesuai kebutuhan.",
+          "whatsappMessage": "Saya dapat informasi Workshirt PDH dari website. Mohon informasi lebih lengkap, ya. Terima kasih.",
+          "images": [
+            {
+              "src": "/assets/images/products/workshirt/20250523-Workshit_PDH_1.webp",
+              "srcset": "/assets/images/products/workshirt/20250523-Workshit_PDH_1-w320.webp 320w, /assets/images/products/workshirt/20250523-Workshit_PDH_1-w480.webp 480w, /assets/images/products/workshirt/20250523-Workshit_PDH_1-w640.webp 640w, /assets/images/products/workshirt/20250523-Workshit_PDH_1-w768.webp 768w, /assets/images/products/workshirt/20250523-Workshit_PDH_1-w1024.webp 1024w",
+              "sizes": "(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw",
+              "alt": "Workshirt PDH 1"
+            },
+            {
+              "src": "/assets/images/products/workshirt/20250523-Workshit_PDH_2.webp",
+              "srcset": "/assets/images/products/workshirt/20250523-Workshit_PDH_2-w320.webp 320w, /assets/images/products/workshirt/20250523-Workshit_PDH_2-w480.webp 480w, /assets/images/products/workshirt/20250523-Workshit_PDH_2-w640.webp 640w, /assets/images/products/workshirt/20250523-Workshit_PDH_2-w768.webp 768w, /assets/images/products/workshirt/20250523-Workshit_PDH_2-w1024.webp 1024w",
+              "sizes": "(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw",
+              "alt": "Workshirt PDH 2"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "jacket",
+      "name": "Jacket",
+      "lineupImage": "/assets/images/products/jacket/20250523-Lineup-Jacket.webp",
+      "anchor": "#jacket",
+      "subcategories": [
+        {
+          "id": "bomber",
+          "name": "Bomber",
+          "description": "Jaket stylish dengan siluet modern dan bahan yang nyaman untuk cuaca Indonesia. Bisa dikustom dengan logo angkatan, kelas, atau komunitas. Pilihan populer untuk jaket identitas pelajar dan mahasiswa.",
+          "whatsappMessage": "Saya dapat informasi Jacket Bomber dari website. Mohon informasi lebih lengkap, ya. Terima kasih.",
+          "images": [
+            {
+              "src": "/assets/images/products/jacket/20250523-Jacket_Bomber_1.webp",
+              "srcset": "/assets/images/products/jacket/20250523-Jacket_Bomber_1-w320.webp 320w, /assets/images/products/jacket/20250523-Jacket_Bomber_1-w480.webp 480w, /assets/images/products/jacket/20250523-Jacket_Bomber_1-w640.webp 640w, /assets/images/products/jacket/20250523-Jacket_Bomber_1-w768.webp 768w, /assets/images/products/jacket/20250523-Jacket_Bomber_1-w1024.webp 1024w",
+              "sizes": "(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw",
+              "alt": "Jacket Bomber"
+            }
+          ]
+        },
+        {
+          "id": "coach",
+          "name": "Coach",
+          "description": "Tampil sporty dengan jaket coach ringan namun tetap tahan angin. Cocok untuk kegiatan outdoor, olahraga, atau event kampus. Dapat dicetak atau dibordir logo sekolah, jurusan, atau tim.",
+          "whatsappMessage": "Saya dapat informasi Jacket Coach dari website. Mohon informasi lebih lengkap, ya. Terima kasih.",
+          "images": [
+            {
+              "src": "/assets/images/products/jacket/20250523-Jacket_Coach_1.webp",
+              "srcset": "/assets/images/products/jacket/20250523-Jacket_Coach_1-w320.webp 320w, /assets/images/products/jacket/20250523-Jacket_Coach_1-w480.webp 480w, /assets/images/products/jacket/20250523-Jacket_Coach_1-w640.webp 640w, /assets/images/products/jacket/20250523-Jacket_Coach_1-w768.webp 768w, /assets/images/products/jacket/20250523-Jacket_Coach_1-w1024.webp 1024w",
+              "sizes": "(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw",
+              "alt": "Jacket Coach"
+            }
+          ]
+        },
+        {
+          "id": "parka",
+          "name": "Parka",
+          "description": "Jaket panjang dengan desain keren dan fungsional. Dilengkapi hoodie dan banyak kantong, cocok untuk kegiatan luar ruang atau perjalanan study tour. Bisa ditambahkan identitas angkatan atau kelas sebagai seragam khusus.",
+          "whatsappMessage": "Saya dapat informasi Jacket Parka dari website. Mohon informasi lebih lengkap, ya. Terima kasih.",
+          "images": [
+            {
+              "src": "/assets/images/products/jacket/20250523-Jacket_Parka_1.webp",
+              "srcset": "/assets/images/products/jacket/20250523-Jacket_Parka_1-w320.webp 320w, /assets/images/products/jacket/20250523-Jacket_Parka_1-w480.webp 480w, /assets/images/products/jacket/20250523-Jacket_Parka_1-w640.webp 640w, /assets/images/products/jacket/20250523-Jacket_Parka_1-w768.webp 768w, /assets/images/products/jacket/20250523-Jacket_Parka_1-w1024.webp 1024w",
+              "sizes": "(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw",
+              "alt": "Jacket Parka"
+            }
+          ]
+        },
+        {
+          "id": "trucker",
+          "name": "Trucker",
+          "description": "Jaket denim bergaya timeless, ideal untuk pelajar dan mahasiswa yang ingin tampil beda. Tersedia opsi sablon atau bordir untuk personalisasi logo sekolah atau komunitas. Cocok untuk jaket angkatan yang awet dan stylish.",
+          "whatsappMessage": "Saya dapat informasi Jacket Trucker dari website. Mohon informasi lebih lengkap, ya. Terima kasih.",
+          "images": [
+            {
+              "src": "/assets/images/products/jacket/20250523-Jacket_Trucker_1.webp",
+              "srcset": "/assets/images/products/jacket/20250523-Jacket_Trucker_1-w320.webp 320w, /assets/images/products/jacket/20250523-Jacket_Trucker_1-w480.webp 480w, /assets/images/products/jacket/20250523-Jacket_Trucker_1-w640.webp 640w, /assets/images/products/jacket/20250523-Jacket_Trucker_1-w768.webp 768w, /assets/images/products/jacket/20250523-Jacket_Trucker_1-w1024.webp 1024w",
+              "sizes": "(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw",
+              "alt": "Jacket Trucker"
+            }
+          ]
+        },
+        {
+          "id": "varsity",
+          "name": "Varsity",
+          "description": "Jaket angkatan paling favorit! Dengan desain khas varsity dan kombinasi bahan premium, cocok untuk identitas kelas, jurusan, atau organisasi. Tersedia bordir nama dan logo untuk tampilan eksklusif dan seragam yang berkesan.",
+          "whatsappMessage": "Saya dapat informasi Jacket Varsity dari website. Mohon informasi lebih lengkap, ya. Terima kasih.",
+          "images": [
+            {
+              "src": "/assets/images/products/jacket/20250523-Jacket_Varsity_1.webp",
+              "srcset": "/assets/images/products/jacket/20250523-Jacket_Varsity_1-w320.webp 320w, /assets/images/products/jacket/20250523-Jacket_Varsity_1-w480.webp 480w, /assets/images/products/jacket/20250523-Jacket_Varsity_1-w640.webp 640w, /assets/images/products/jacket/20250523-Jacket_Varsity_1-w768.webp 768w, /assets/images/products/jacket/20250523-Jacket_Varsity_1-w1024.webp 1024w",
+              "sizes": "(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw",
+              "alt": "Jacket Varsity 1"
+            },
+            {
+              "src": "/assets/images/products/jacket/20250523-Jacket_Varsity_2.webp",
+              "srcset": "/assets/images/products/jacket/20250523-Jacket_Varsity_2-w320.webp 320w, /assets/images/products/jacket/20250523-Jacket_Varsity_2-w480.webp 480w, /assets/images/products/jacket/20250523-Jacket_Varsity_2-w640.webp 640w, /assets/images/products/jacket/20250523-Jacket_Varsity_2-w768.webp 768w, /assets/images/products/jacket/20250523-Jacket_Varsity_2-w1024.webp 1024w",
+              "sizes": "(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw",
+              "alt": "Jacket Varsity 2"
+            },
+            {
+              "src": "/assets/images/products/jacket/20250523-Jacket_Varsity_3.webp",
+              "srcset": "/assets/images/products/jacket/20250523-Jacket_Varsity_3-w320.webp 320w, /assets/images/products/jacket/20250523-Jacket_Varsity_3-w480.webp 480w, /assets/images/products/jacket/20250523-Jacket_Varsity_3-w640.webp 640w, /assets/images/products/jacket/20250523-Jacket_Varsity_3-w768.webp 768w, /assets/images/products/jacket/20250523-Jacket_Varsity_3-w1024.webp 1024w",
+              "sizes": "(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw",
+              "alt": "Jacket Varsity 3"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

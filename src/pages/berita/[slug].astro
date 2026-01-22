@@ -1,0 +1,187 @@
+---
+import BlogLayout from '../../layouts/BlogLayout.astro';
+import blogPosts from '../../data/blog-posts.json';
+
+export const getStaticPaths = () => {
+  const posts = blogPosts as any[];
+  return posts.map((post) => ({
+    params: { slug: post.slug },
+    props: {
+      title: post.title,
+      description: post.excerpt,
+      publishDate: post.publishDate,
+      modifiedDate: post.publishDate,
+      category: post.category,
+      readTime: Math.ceil(post.content.split(' ').length / 200),
+      image: post.image,
+      content: post.content
+    }
+  }));
+}
+
+const { title, description, image, publishDate, modifiedDate, category, readTime, content } = Astro.props;
+
+const posts = blogPosts as any[];
+const relatedPosts = posts
+  .filter(post => post.category === category && post.title !== title)
+  .slice(0, 3);
+---
+
+<BlogLayout
+  title={title}
+  description={description}
+  image={image}
+  publishDate={publishDate}
+  modifiedDate={modifiedDate}
+  category={category}
+  readTime={readTime}
+>
+  <div class="blog-post-content" set:html={content} />
+
+  {relatedPosts.length > 0 && (
+    <section class="related-posts section border-t border-gray-200 mt-12 pt-12">
+      <div class="container">
+        <h2 class="text-2xl font-bold mb-8">Artikel Terkait</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {relatedPosts.map(post => (
+            <article class="card card-hover overflow-hidden">
+              <a href={`/berita/${post.slug}/`} class="block">
+                <div class="aspect-video bg-gray-200">
+                  {post.image ? (
+                    <img
+                      src={post.image}
+                      alt={post.title}
+                      class="w-full h-full object-cover"
+                      loading="lazy"
+                    />
+                  ) : (
+                    <div class="w-full h-full flex items-center justify-center">
+                      <span class="text-gray-400">Blog Image</span>
+                    </div>
+                  )}
+                </div>
+              </a>
+              <div class="p-4">
+                <a href={`/berita/${post.slug}/`} class="block group">
+                  <h3 class="text-lg font-semibold mb-2 group-hover:text-primary transition-colors line-clamp-2">
+                    {post.title}
+                  </h3>
+                  <time datetime={post.publishDate} class="text-sm text-gray-500">
+                    {new Date(post.publishDate).toLocaleDateString('id-ID', {
+                      year: 'numeric',
+                      month: 'long',
+                      day: 'numeric'
+                    })}
+                  </time>
+                </a>
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <nav class="back-to-blog section">
+    <div class="container">
+      <a
+        href="/berita/"
+        class="inline-flex items-center gap-2 text-primary font-semibold hover:gap-3 transition-all"
+      >
+        <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+        </svg>
+        Kembali ke Berita
+      </a>
+    </div>
+  </nav>
+</BlogLayout>
+
+<style>
+  .blog-post-content {
+    color: #374151;
+    line-height: 1.75;
+  }
+
+  .blog-post-content :where(h2):not(:where([class~="not-prose"] *)) {
+    color: #111827;
+    font-weight: 600;
+    font-size: 1.5em;
+    margin-top: 2.5em;
+    margin-bottom: 1em;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid #e5e7eb;
+  }
+
+  .blog-post-content :where(h3):not(:where([class~="not-prose"] *)) {
+    color: #111827;
+    font-weight: 600;
+    font-size: 1.25em;
+    margin-top: 2em;
+    margin-bottom: 0.75em;
+  }
+
+  .blog-post-content :where(p):not(:where([class~="not-prose"] *)) {
+    margin-top: 1.25em;
+    margin-bottom: 1.25em;
+  }
+
+  .blog-post-content :where(img):not(:where([class~="not-prose"] *)) {
+    margin-top: 2em;
+    margin-bottom: 2em;
+    border-radius: 0.5rem;
+    max-width: 100%;
+    height: auto;
+  }
+
+  .blog-post-content :where(ul):not(:where([class~="not-prose"] *)) {
+    list-style-type: disc;
+    margin-top: 1.25em;
+    margin-bottom: 1.25em;
+    padding-left: 1.625em;
+  }
+
+  .blog-post-content :where(ol):not(:where([class~="not-prose"] *)) {
+    list-style-type: decimal;
+    margin-top: 1.25em;
+    margin-bottom: 1.25em;
+    padding-left: 1.625em;
+  }
+
+  .blog-post-content :where(li):not(:where([class~="not-prose"] *)) {
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+  }
+
+  .blog-post-content :where(blockquote):not(:where([class~="not-prose"] *)) {
+    border-left: 4px solid #1e40af;
+    padding-left: 1rem;
+    margin: 1.5em 0;
+    color: #6b7280;
+    font-style: italic;
+    background: #f9fafb;
+    padding: 1rem;
+    border-radius: 0.5rem;
+  }
+
+  .blog-post-content :where(strong):not(:where([class~="not-prose"] *)) {
+    font-weight: 600;
+    color: #111827;
+  }
+
+  .blog-post-content :where(a):not(:where([class~="not-prose"] *)) {
+    color: #1e40af;
+    text-decoration: underline;
+  }
+
+  .blog-post-content :where(a):not(:where([class~="not-prose"] *)):hover {
+    color: #1e3a8a;
+  }
+
+  .line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+</style>

@@ -1,0 +1,64 @@
+---
+/**
+ * Page Layout - Level Garment
+ * Layout for standard content pages with optional hero section
+ */
+import BaseLayout from './BaseLayout.astro';
+
+export interface Props {
+  title: string;
+  description?: string;
+  image?: string;
+  heroTitle?: string;
+  heroSubtitle?: string;
+  heroBackground?: string;
+  showHero?: boolean;
+}
+
+const {
+  title,
+  description,
+  image,
+  heroTitle,
+  heroSubtitle,
+  heroBackground = '/assets/images/page-hero-bg.jpg',
+  showHero = false,
+} = Astro.props;
+---
+
+<BaseLayout title={title} description={description} image={image}>
+  {showHero && (
+    <section class="page-hero relative bg-secondary text-white py-16 md:py-24">
+      {heroBackground && (
+        <div class="absolute inset-0 opacity-20">
+          <img
+            src={heroBackground}
+            alt=""
+            class="w-full h-full object-cover"
+            loading="eager"
+          />
+        </div>
+      )}
+      <div class="container relative z-10">
+        <div class="max-w-3xl">
+          <h1 class="mb-4">
+            {heroTitle || title}
+          </h1>
+          {heroSubtitle && (
+            <p class="text-xl md:text-2xl text-gray-200">
+              {heroSubtitle}
+            </p>
+          )}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <slot />
+</BaseLayout>
+
+<style>
+  .page-hero {
+    background: linear-gradient(135deg, #1E3A5F 0%, #0F1F33 100%);
+  }
+</style>

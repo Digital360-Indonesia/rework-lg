@@ -1,0 +1,135 @@
+---
+/**
+ * Navigation Component - Level Garment
+ * Reusable navigation menu component
+ *
+ * This component provides a standalone navigation menu that can be used
+ * independently or as part of the Header component. It supports both
+ * desktop and mobile layouts.
+ *
+ * @version 1.0.0
+ */
+import siteConfig from '../../data/site-config.json';
+
+const { navigation, externalLinks } = siteConfig;
+
+// Combined navigation items
+const allNavItems = [...navigation, ...externalLinks];
+
+interface Props {
+  /**
+   * Display variant
+   * - 'desktop': Horizontal navigation for desktop
+   * - 'mobile': Vertical navigation for mobile menu
+   * - 'footer': Simple list navigation for footer
+   */
+  variant?: 'desktop' | 'mobile' | 'footer';
+
+  /**
+   * Filter navigation items by name
+   * Example: ['Beranda', 'Produk', 'Portfolio']
+   */
+  includeItems?: string[];
+
+  /**
+   * Additional CSS classes
+   */
+  className?: string;
+
+  /**
+   * Current active path for highlighting
+   */
+  currentPath?: string;
+}
+
+const {
+  variant = 'desktop',
+  includeItems,
+  className = '',
+  currentPath = ''
+} = Astro.props;
+
+// Filter items if includeItems is provided
+const navItems = includeItems
+  ? allNavItems.filter(item => includeItems.includes(item.name))
+  : allNavItems;
+
+// Generate CSS classes based on variant
+const getNavClasses = () => {
+  const baseClasses = 'navigation';
+
+  const variantClasses = {
+    desktop: 'hidden lg:flex items-center gap-8',
+    mobile: 'space-y-2',
+    footer: 'flex flex-wrap gap-x-4 gap-y-2 text-sm'
+  };
+
+  return `${baseClasses} ${variantClasses[variant]} ${className}`;
+};
+
+const getItemClasses = () => {
+  const variantClasses = {
+    desktop: 'nav-link relative font-medium transition-colors duration-200 text-gray-700 hover:text-primary',
+    mobile: 'block px-4 py-3 rounded-lg text-gray-700 hover:bg-primary/10 hover:text-primary font-medium transition-colors',
+    footer: 'text-gray-300 hover:text-white transition-colors'
+  };
+
+  return variantClasses[variant];
+};
+
+// Check if link is active
+const isActive = (path: string) => {
+  if (currentPath === '/') {
+    return path === '/';
+  }
+  return currentPath.startsWith(path) && path !== '/';
+};
+---
+
+<!-- Navigation Menu -->
+<nav class={getNavClasses()} aria-label={`${variant} navigation`}>
+  {variant === 'desktop' || variant === 'mobile' ? (
+    <ul class={variant === 'mobile' ? 'space-y-2' : 'flex items-center gap-8'}>
+      {navItems.map((item) => (
+        <li>
+          <a
+            href={item.path}
+            class={`${getItemClasses()} ${isActive(item.path) ? 'text-primary font-semibold' : ''}`}
+            {...(item.external && { target: '_blank', rel: 'noopener noreferrer' })}
+          >
+            {item.name}
+          </a>
+        </li>
+      ))}
+    </ul>
+  ) : (
+    // Footer variant - simple list without ul wrapper
+    navItems.map((item) => (
+      <a
+        href={item.path}
+        class={getItemClasses()}
+        {...(item.external && { target: '_blank', rel: 'noopener noreferrer' })}
+      >
+        {item.name}
+      </a>
+    ))
+  )}
+</nav>
+
+<style>
+  /* Navigation link hover effect - underline animation (desktop only) */
+  .nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: currentColor;
+    transition: width 0.3s ease;
+  }
+
+  .nav-link:hover::after {
+    width: 100%;
+  }
+</style>

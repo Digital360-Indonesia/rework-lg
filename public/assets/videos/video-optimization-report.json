@@ -1,0 +1,135 @@
+{
+  "generatedAt": "2026-01-22T10:33:39.664Z",
+  "summary": {
+    "totalVideos": 4,
+    "totalOriginalSize": 7137986,
+    "totalOriginalFormatted": "6.81 MB",
+    "totalOptimizedSize": 7744082,
+    "totalOptimizedFormatted": "7.39 MB",
+    "totalSavings": -606096,
+    "totalSavingsFormatted": "NaN undefined",
+    "savingsPercent": "-8.5%"
+  },
+  "videos": [
+    {
+      "name": "video_1",
+      "original": {
+        "path": "video_1.mp4",
+        "size": 1755741,
+        "formattedSize": "1.67 MB",
+        "duration": 17.579002
+      },
+      "variants": [
+        {
+          "format": "mp4",
+          "path": "/assets/videos/homepage/video_1.mp4",
+          "size": 1850902,
+          "formattedSize": "1.77 MB",
+          "compression": "-5.4%"
+        },
+        {
+          "format": "webm",
+          "path": "/assets/videos/homepage/video_1.webm",
+          "size": 1981363,
+          "formattedSize": "1.89 MB",
+          "compression": "-12.9%"
+        }
+      ],
+      "poster": {
+        "path": "/assets/videos/posters/video_1.webp",
+        "size": 94006,
+        "formattedSize": "91.8 KB"
+      }
+    },
+    {
+      "name": "video_2",
+      "original": {
+        "path": "video_2.mp4",
+        "size": 1616228,
+        "formattedSize": "1.54 MB",
+        "duration": 17.160998
+      },
+      "variants": [
+        {
+          "format": "mp4",
+          "path": "/assets/videos/homepage/video_2.mp4",
+          "size": 2087060,
+          "formattedSize": "1.99 MB",
+          "compression": "-29.1%"
+        },
+        {
+          "format": "webm",
+          "path": "/assets/videos/homepage/video_2.webm",
+          "size": 1941973,
+          "formattedSize": "1.85 MB",
+          "compression": "-20.2%"
+        }
+      ],
+      "poster": {
+        "path": "/assets/videos/posters/video_2.webp",
+        "size": 120168,
+        "formattedSize": "117.35 KB"
+      }
+    },
+    {
+      "name": "video_3",
+      "original": {
+        "path": "video_3.mp4",
+        "size": 2153855,
+        "formattedSize": "2.05 MB",
+        "duration": 18.333333
+      },
+      "variants": [
+        {
+          "format": "mp4",
+          "path": "/assets/videos/homepage/video_3.mp4",
+          "size": 2592555,
+          "formattedSize": "2.47 MB",
+          "compression": "-20.4%"
+        },
+        {
+          "format": "webm",
+          "path": "/assets/videos/homepage/video_3.webm",
+          "size": 2110344,
+          "formattedSize": "2.01 MB",
+          "compression": "2.0%"
+        }
+      ],
+      "poster": {
+        "path": "/assets/videos/posters/video_3.webp",
+        "size": 126250,
+        "formattedSize": "123.29 KB"
+      }
+    },
+    {
+      "name": "video_4",
+      "original": {
+        "path": "video_4.mp4",
+        "size": 1612162,
+        "formattedSize": "1.54 MB",
+        "duration": 16.975011
+      },
+      "variants": [
+        {
+          "format": "mp4",
+          "path": "/assets/videos/homepage/video_4.mp4",
+          "size": 1840863,
+          "formattedSize": "1.76 MB",
+          "compression": "-14.2%"
+        },
+        {
+          "format": "webm",
+          "path": "/assets/videos/homepage/video_4.webm",
+          "size": 1912461,
+          "formattedSize": "1.82 MB",
+          "compression": "-18.6%"
+        }
+      ],
+      "poster": {
+        "path": "/assets/videos/posters/video_4.webp",
+        "size": 207220,
+        "formattedSize": "202.36 KB"
+      }
+    }
+  ]
+}

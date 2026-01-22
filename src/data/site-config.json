@@ -1,0 +1,126 @@
+{
+  "siteName": "Level Garment",
+  "tagline": "Konveksi Pelajar Surabaya & Indonesia",
+  "description": "Level Garment - Spesialis jaket kelas & seragam pelajar custom. Konveksi Surabaya terpercaya yang melayani pelajar di seluruh Indonesia. Gratis desain!",
+  "siteUrl": "https://levelgarment.com",
+  "contact": {
+    "phone": "085183091599",
+    "phoneFormatted": "0851-8309-1599",
+    "whatsapp": "6285183091599",
+    "whatsappUrl": "https://wa.me/6285183091599",
+    "email": "info@levelgarment.com",
+    "address": "Jl. Sidosermo IV Gg. III No. 37 (Raya Prapen), Sidosermo, Surabaya",
+    "city": "Surabaya",
+    "province": "Jawa Timur",
+    "country": "Indonesia"
+  },
+  "social": {
+    "instagram": "https://www.instagram.com/levelgarment/",
+    "tiktok": "https://www.tiktok.com/@levelgarment",
+    "facebook": "https://www.facebook.com/levelgarment",
+    "twitter": "https://www.twitter.com/levelgarment",
+    "youtube": "https://www.youtube.com/@levelgarment"
+  },
+  "navigation": [
+    {
+      "name": "Beranda",
+      "path": "/"
+    },
+    {
+      "name": "Produk",
+      "path": "/product/"
+    },
+    {
+      "name": "Promo",
+      "path": "/promo/"
+    },
+    {
+      "name": "Berita",
+      "path": "/berita/"
+    },
+    {
+      "name": "Kontak",
+      "path": "/kontak/"
+    }
+  ],
+  "externalLinks": [
+    {
+      "name": "Portfolio",
+      "path": "https://portfolio.levelgarment.com",
+      "external": true
+    }
+  ],
+  "company": {
+    "name": "Level Garment",
+    "establishedYear": "2020",
+    "slogan": "Yuk Level Up Acara-mu!"
+  },
+  "products": {
+    "categories": [
+      {
+        "id": "t-shirt",
+        "name": "T-Shirt",
+        "slug": "t-shirt",
+        "description": "Kaos custom berkualitas tinggi"
+      },
+      {
+        "id": "jersey",
+        "name": "Jersey",
+        "slug": "jersey",
+        "description": "Jersey olahraga custom",
+        "subcategories": ["Basic", "Baseball", "Basket"]
+      },
+      {
+        "id": "workshirt",
+        "name": "Workshirt",
+        "slug": "workshirt",
+        "description": "Kemeja kerja dan PDH custom",
+        "subcategories": ["Basic", "PDH"]
+      },
+      {
+        "id": "jacket",
+        "name": "Jaket",
+        "slug": "jacket",
+        "description": "Berbagai jenis jaket custom",
+        "subcategories": ["Bomber", "Coach", "Parka", "Trucker", "Varsity"]
+      }
+    ]
+  },
+  "seo": {
+    "defaultTitle": "Konveksi Pelajar Surabaya & Indonesia - Level Garment",
+    "defaultDescription": "Spesialis jaket kelas & seragam pelajar custom. Konveksi Surabaya terpercaya yang melayani pelajar di seluruh Indonesia. Gratis desain!",
+    "keywords": [
+      "konveksi surabaya",
+      "jaket kelas",
+      "seragam pelajar",
+      "konveksi pelajar",
+      "jersey custom",
+      "kaos kelas",
+      "jaket angkatan",
+      "baju komunitas",
+      "konveksi indonesia"
+    ]
+  },
+  "features": [
+    {
+      "icon": "design",
+      "title": "Gratis Desain",
+      "description": "Kami bantu desainkan sesuai keinginanmu tanpa biaya tambahan"
+    },
+    {
+      "icon": "quality",
+      "title": "Kualitas Premium",
+      "description": "Bahan berkualitas tinggi dengan jahitan rapi dan tahan lama"
+    },
+    {
+      "icon": "shipping",
+      "title": "Pengiriman Seluruh Indonesia",
+      "description": "Melayani pengiriman ke seluruh pelosok negeri"
+    },
+    {
+      "icon": "price",
+      "title": "Harga Terjangkau",
+      "description": "Harga pelajar dengan kualitas konveksi profesional"
+    }
+  ]
+}

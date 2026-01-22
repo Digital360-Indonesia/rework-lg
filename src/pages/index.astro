@@ -1,17 +1,60 @@
 ---
+/**
+ * Homepage - Level Garment
+ *
+ * Main landing page showcasing Level Garment's value proposition
+ *
+ * Sections:
+ * - Hero: Main headline and call-to-action
+ * - Value Proposition: "Wujudkan Kebersamaan & Kreatifitas" with video gallery
+ * - CTA: "Yuk Level Up Acara-mu!" section
+ *
+ * @version 1.0.0 (CLI 3 Migration Complete)
+ */
 
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/home/Hero.astro';
+import ValueProposition from '../components/home/ValueProposition.astro';
+import CTASection from '../components/home/CTASection.astro';
+import siteConfig from '../data/site-config.json';
+
+// Page metadata
+const pageTitle = siteConfig.seo.defaultTitle;
+const pageDescription = siteConfig.seo.defaultDescription;
+const ogImage = '/assets/images/logo/logo-colored.webp';
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<BaseLayout
+  title={pageTitle}
+  description={pageDescription}
+  image={ogImage}
+>
+  <!-- Hero Section -->
+  <Hero variant="default" />
+
+  <!-- Value Proposition & Video Gallery Section -->
+  <ValueProposition />
+
+  <!-- CTA Section -->
+  <CTASection variant="default" />
+
+  <!-- Additional spacing before footer -->
+  <div class="py-8 bg-gray-50"></div>
+</BaseLayout>
+
+<style>
+  /* Smooth scrolling for anchor links */
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* Section spacing adjustments */
+  :global(section) {
+    scroll-margin-top: 80px; /* Account for fixed header */
+  }
+
+  /* Prevent layout shift */
+  main {
+    min-height: 100vh;
+  }
+</style>

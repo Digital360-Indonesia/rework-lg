@@ -1,0 +1,1439 @@
+{
+  "version": "1.0.0",
+  "generatedAt": "2026-01-22T10:23:03.201Z",
+  "summary": {
+    "totalImages": 168,
+    "totalVideos": 4,
+    "totalOriginalSize": 9102520,
+    "totalOptimizedSize": 11224331,
+    "compressionRatio": "-23.31",
+    "totalOriginalFormatted": "8.68 MB",
+    "totalOptimizedFormatted": "10.7 MB"
+  },
+  "categories": {
+    "logo": [
+      {
+        "name": "logo-colored",
+        "source": "/levelgarment.com/wp-content/uploads/2024/06/07062024-lg-logo.png",
+        "variants": [
+          {
+            "size": 32,
+            "path": "/images/logo/logo-colored-w32.webp",
+            "originalSize": 25838,
+            "optimizedSize": 756,
+            "format": "webp"
+          },
+          {
+            "size": 64,
+            "path": "/images/logo/logo-colored-w64.webp",
+            "originalSize": 25838,
+            "optimizedSize": 2102,
+            "format": "webp"
+          },
+          {
+            "size": 128,
+            "path": "/images/logo/logo-colored-w128.webp",
+            "originalSize": 25838,
+            "optimizedSize": 5344,
+            "format": "webp"
+          },
+          {
+            "size": 256,
+            "path": "/images/logo/logo-colored-w256.webp",
+            "originalSize": 25838,
+            "optimizedSize": 11190,
+            "format": "webp"
+          },
+          {
+            "size": 413,
+            "path": "/images/logo/logo-colored.webp",
+            "originalSize": 25838,
+            "optimizedSize": 8998,
+            "format": "webp"
+          },
+          {
+            "size": 413,
+            "path": "/images/logo/logo-colored.png",
+            "originalSize": 25838,
+            "optimizedSize": 16049,
+            "format": "png"
+          }
+        ]
+      },
+      {
+        "name": "logo-white",
+        "source": "/levelgarment.com/wp-content/uploads/2022/03/07062024-lg-logo-white.png",
+        "variants": [
+          {
+            "size": 32,
+            "path": "/images/logo/logo-white-w32.webp",
+            "originalSize": 26943,
+            "optimizedSize": 494,
+            "format": "webp"
+          },
+          {
+            "size": 64,
+            "path": "/images/logo/logo-white-w64.webp",
+            "originalSize": 26943,
+            "optimizedSize": 1178,
+            "format": "webp"
+          },
+          {
+            "size": 128,
+            "path": "/images/logo/logo-white-w128.webp",
+            "originalSize": 26943,
+            "optimizedSize": 2908,
+            "format": "webp"
+          },
+          {
+            "size": 256,
+            "path": "/images/logo/logo-white-w256.webp",
+            "originalSize": 26943,
+            "optimizedSize": 5962,
+            "format": "webp"
+          },
+          {
+            "size": 413,
+            "path": "/images/logo/logo-white.webp",
+            "originalSize": 26943,
+            "optimizedSize": 5356,
+            "format": "webp"
+          },
+          {
+            "size": 413,
+            "path": "/images/logo/logo-white.png",
+            "originalSize": 26943,
+            "optimizedSize": 8252,
+            "format": "png"
+          }
+        ]
+      },
+      {
+        "name": "favicon",
+        "source": "/levelgarment.com/wp-content/uploads/2024/06/07062024-lg-favicon.png",
+        "variants": [
+          {
+            "size": 32,
+            "path": "/images/logo/favicon-w32.webp",
+            "originalSize": 22933,
+            "optimizedSize": 1004,
+            "format": "webp"
+          },
+          {
+            "size": 64,
+            "path": "/images/logo/favicon-w64.webp",
+            "originalSize": 22933,
+            "optimizedSize": 2104,
+            "format": "webp"
+          },
+          {
+            "size": 128,
+            "path": "/images/logo/favicon-w128.webp",
+            "originalSize": 22933,
+            "optimizedSize": 4022,
+            "format": "webp"
+          },
+          {
+            "size": 196,
+            "path": "/images/logo/favicon.webp",
+            "originalSize": 22933,
+            "optimizedSize": 2964,
+            "format": "webp"
+          },
+          {
+            "size": 196,
+            "path": "/images/logo/favicon.png",
+            "originalSize": 22933,
+            "optimizedSize": 4296,
+            "format": "png"
+          }
+        ]
+      }
+    ],
+    "products": {
+      "tshirt": [
+        {
+          "name": "20250523-T-Shirt_Basic_1",
+          "source": "20250523-T-Shirt_Basic_1.webp",
+          "variants": [
+            {
+              "size": 320,
+              "path": "/images/products/tshirt/20250523-T-Shirt_Basic_1-w320.webp",
+              "originalSize": 55182,
+              "optimizedSize": 6108,
+              "format": "webp"
+            },
+            {
+              "size": 480,
+              "path": "/images/products/tshirt/20250523-T-Shirt_Basic_1-w480.webp",
+              "originalSize": 55182,
+              "optimizedSize": 10440,
+              "format": "webp"
+            },
+            {
+              "size": 640,
+              "path": "/images/products/tshirt/20250523-T-Shirt_Basic_1-w640.webp",
+              "originalSize": 55182,
+              "optimizedSize": 14958,
+              "format": "webp"
+            },
+            {
+              "size": 768,
+              "path": "/images/products/tshirt/20250523-T-Shirt_Basic_1-w768.webp",
+              "originalSize": 55182,
+              "optimizedSize": 18692,
+              "format": "webp"
+            },
+            {
+              "size": 1024,
+              "path": "/images/products/tshirt/20250523-T-Shirt_Basic_1-w1024.webp",
+              "originalSize": 55182,
+              "optimizedSize": 26886,
+              "format": "webp"
+            },
+            {
+              "size": 1184,
+              "path": "/images/products/tshirt/20250523-T-Shirt_Basic_1.webp",
+              "originalSize": 55182,
+              "optimizedSize": 37710,
+              "format": "webp"
+            }
+          ]
+        },
+        {
+          "name": "20250523-T-Shirt_Basic_2",
+          "source": "20250523-T-Shirt_Basic_2.webp",
+          "variants": [
+            {
+              "size": 320,
+              "path": "/images/products/tshirt/20250523-T-Shirt_Basic_2-w320.webp",
+              "originalSize": 76076,
+              "optimizedSize": 8082,
+              "format": "webp"
+            },
+            {
+              "size": 480,
+              "path": "/images/products/tshirt/20250523-T-Shirt_Basic_2-w480.webp",
+              "originalSize": 76076,
+              "optimizedSize": 14010,
+              "format": "webp"
+            },
+            {
+              "size": 640,
+              "path": "/images/products/tshirt/20250523-T-Shirt_Basic_2-w640.webp",
+              "originalSize": 76076,
+              "optimizedSize": 20532,
+              "format": "webp"
+            },
+            {
+              "size": 768,
+              "path": "/images/products/tshirt/20250523-T-Shirt_Basic_2-w768.webp",
+              "originalSize": 76076,
+              "optimizedSize": 25714,
+              "format": "webp"
+            },
+            {
+              "size": 1024,
+              "path": "/images/products/tshirt/20250523-T-Shirt_Basic_2-w1024.webp",
+              "originalSize": 76076,
+              "optimizedSize": 36852,
+              "format": "webp"
+            },
+            {
+              "size": 1184,
+              "path": "/images/products/tshirt/20250523-T-Shirt_Basic_2.webp",
+              "originalSize": 76076,
+              "optimizedSize": 53104,
+              "format": "webp"
+            }
+          ]
+        },
+        {
+          "name": "20250523-Lineup-T-Shirt",
+          "source": "20250523-Lineup-T-Shirt.webp",
+          "variants": [
+            {
+              "size": 100,
+              "path": "/images/products/tshirt/20250523-Lineup-T-Shirt.webp",
+              "originalSize": 732,
+              "optimizedSize": 688,
+              "format": "webp"
+            }
+          ]
+        }
+      ],
+      "jersey": [
+        {
+          "name": "20250526-Jersey_1",
+          "source": "20250526-Jersey_1.webp",
+          "variants": [
+            {
+              "size": 320,
+              "path": "/images/products/jersey/20250526-Jersey_1-w320.webp",
+              "originalSize": 71594,
+              "optimizedSize": 7570,
+              "format": "webp"
+            },
+            {
+              "size": 480,
+              "path": "/images/products/jersey/20250526-Jersey_1-w480.webp",
+              "originalSize": 71594,
+              "optimizedSize": 13238,
+              "format": "webp"
+            },
+            {
+              "size": 640,
+              "path": "/images/products/jersey/20250526-Jersey_1-w640.webp",
+              "originalSize": 71594,
+              "optimizedSize": 19654,
+              "format": "webp"
+            },
+            {
+              "size": 768,
+              "path": "/images/products/jersey/20250526-Jersey_1-w768.webp",
+              "originalSize": 71594,
+              "optimizedSize": 24714,
+              "format": "webp"
+            },
+            {
+              "size": 1024,
+              "path": "/images/products/jersey/20250526-Jersey_1-w1024.webp",
+              "originalSize": 71594,
+              "optimizedSize": 35328,
+              "format": "webp"
+            },
+            {
+              "size": 1184,
+              "path": "/images/products/jersey/20250526-Jersey_1.webp",
+              "originalSize": 71594,
+              "optimizedSize": 50728,
+              "format": "webp"
+            }
+          ]
+        },
+        {
+          "name": "20250526-Jersey_2",
+          "source": "20250526-Jersey_2.webp",
+          "variants": [
+            {
+              "size": 320,
+              "path": "/images/products/jersey/20250526-Jersey_2-w320.webp",
+              "originalSize": 87924,
+              "optimizedSize": 9512,
+              "format": "webp"
+            },
+            {
+              "size": 480,
+              "path": "/images/products/jersey/20250526-Jersey_2-w480.webp",
+              "originalSize": 87924,
+              "optimizedSize": 16672,
+              "format": "webp"
+            },
+            {
+              "size": 640,
+              "path": "/images/products/jersey/20250526-Jersey_2-w640.webp",
+              "originalSize": 87924,
+              "optimizedSize": 24436,
+              "format": "webp"
+            },
+            {
+              "size": 768,
+              "path": "/images/products/jersey/20250526-Jersey_2-w768.webp",
+              "originalSize": 87924,
+              "optimizedSize": 30766,
+              "format": "webp"
+            },
+            {
+              "size": 1024,
+              "path": "/images/products/jersey/20250526-Jersey_2-w1024.webp",
+              "originalSize": 87924,
+              "optimizedSize": 43978,
+              "format": "webp"
+            },
+            {
+              "size": 1184,
+              "path": "/images/products/jersey/20250526-Jersey_2.webp",
+              "originalSize": 87924,
+              "optimizedSize": 64790,
+              "format": "webp"
+            }
+          ]
+        },
+        {
+          "name": "20250526-Jersey_3",
+          "source": "20250526-Jersey_3.webp",
+          "variants": [
+            {
+              "size": 320,
+              "path": "/images/products/jersey/20250526-Jersey_3-w320.webp",
+              "originalSize": 72734,
+              "optimizedSize": 7952,
+              "format": "webp"
+            },
+            {
+              "size": 480,
+              "path": "/images/products/jersey/20250526-Jersey_3-w480.webp",
+              "originalSize": 72734,
+              "optimizedSize": 13662,
+              "format": "webp"
+            },
+            {
+              "size": 640,
+              "path": "/images/products/jersey/20250526-Jersey_3-w640.webp",
+              "originalSize": 72734,
+              "optimizedSize": 19954,
+              "format": "webp"
+            },
+            {
+              "size": 768,
+              "path": "/images/products/jersey/20250526-Jersey_3-w768.webp",
+              "originalSize": 72734,
+              "optimizedSize": 25122,
+              "format": "webp"
+            },
+            {
+              "size": 1024,
+              "path": "/images/products/jersey/20250526-Jersey_3-w1024.webp",
+              "originalSize": 72734,
+              "optimizedSize": 36276,
+              "format": "webp"
+            },
+            {
+              "size": 1184,
+              "path": "/images/products/jersey/20250526-Jersey_3.webp",
+              "originalSize": 72734,
+              "optimizedSize": 52652,
+              "format": "webp"
+            }
+          ]
+        },
+        {
+          "name": "20250523-Lineup-Jersey-",
+          "source": "20250523-Lineup-Jersey-.png",
+          "variants": [
+            {
+              "size": 100,
+              "path": "/images/products/jersey/20250523-Lineup-Jersey-.webp",
+              "originalSize": 23232,
+              "optimizedSize": 1390,
+              "format": "webp"
+            },
+            {
+              "size": 100,
+              "path": "/images/products/jersey/20250523-Lineup-Jersey-.png",
+              "originalSize": 23232,
+              "optimizedSize": 7847,
+              "format": "png"
+            }
+          ]
+        }
+      ],
+      "workshirt": [
+        {
+          "name": "20250523-Workshirt_Basic_1",
+          "source": "20250523-Workshirt_Basic_1.webp",
+          "variants": [
+            {
+              "size": 320,
+              "path": "/images/products/workshirt/20250523-Workshirt_Basic_1-w320.webp",
+              "originalSize": 74336,
+              "optimizedSize": 7542,
+              "format": "webp"
+            },
+            {
+              "size": 480,
+              "path": "/images/products/workshirt/20250523-Workshirt_Basic_1-w480.webp",
+              "originalSize": 74336,
+              "optimizedSize": 12842,
+              "format": "webp"
+            },
+            {
+              "size": 640,
+              "path": "/images/products/workshirt/20250523-Workshirt_Basic_1-w640.webp",
+              "originalSize": 74336,
+              "optimizedSize": 19018,
+              "format": "webp"
+            },
+            {
+              "size": 768,
+              "path": "/images/products/workshirt/20250523-Workshirt_Basic_1-w768.webp",
+              "originalSize": 74336,
+              "optimizedSize": 23720,
+              "format": "webp"
+            },
+            {
+              "size": 1024,
+              "path": "/images/products/workshirt/20250523-Workshirt_Basic_1-w1024.webp",
+              "originalSize": 74336,
+              "optimizedSize": 34556,
+              "format": "webp"
+            },
+            {
+              "size": 1184,
+              "path": "/images/products/workshirt/20250523-Workshirt_Basic_1.webp",
+              "originalSize": 74336,
+              "optimizedSize": 52966,
+              "format": "webp"
+            }
+          ]
+        },
+        {
+          "name": "20250523-Workshirt_Basic_2",
+          "source": "20250523-Workshirt_Basic_2.webp",
+          "variants": [
+            {
+              "size": 320,
+              "path": "/images/products/workshirt/20250523-Workshirt_Basic_2-w320.webp",
+              "originalSize": 72032,
+              "optimizedSize": 7214,
+              "format": "webp"
+            },
+            {
+              "size": 480,
+              "path": "/images/products/workshirt/20250523-Workshirt_Basic_2-w480.webp",
+              "originalSize": 72032,
+              "optimizedSize": 12160,
+              "format": "webp"
+            },
+            {
+              "size": 640,
+              "path": "/images/products/workshirt/20250523-Workshirt_Basic_2-w640.webp",
+              "originalSize": 72032,
+              "optimizedSize": 18092,
+              "format": "webp"
+            },
+            {
+              "size": 768,
+              "path": "/images/products/workshirt/20250523-Workshirt_Basic_2-w768.webp",
+              "originalSize": 72032,
+              "optimizedSize": 23064,
+              "format": "webp"
+            },
+            {
+              "size": 1024,
+              "path": "/images/products/workshirt/20250523-Workshirt_Basic_2-w1024.webp",
+              "originalSize": 72032,
+              "optimizedSize": 33188,
+              "format": "webp"
+            },
+            {
+              "size": 1184,
+              "path": "/images/products/workshirt/20250523-Workshirt_Basic_2.webp",
+              "originalSize": 72032,
+              "optimizedSize": 50850,
+              "format": "webp"
+            }
+          ]
+        },
+        {
+          "name": "20250523-Workshit_PDH_1",
+          "source": "20250523-Workshit_PDH_1.webp",
+          "variants": [
+            {
+              "size": 320,
+              "path": "/images/products/workshirt/20250523-Workshit_PDH_1-w320.webp",
+              "originalSize": 63228,
+              "optimizedSize": 6940,
+              "format": "webp"
+            },
+            {
+              "size": 480,
+              "path": "/images/products/workshirt/20250523-Workshit_PDH_1-w480.webp",
+              "originalSize": 63228,
+              "optimizedSize": 12234,
+              "format": "webp"
+            },
+            {
+              "size": 640,
+              "path": "/images/products/workshirt/20250523-Workshit_PDH_1-w640.webp",
+              "originalSize": 63228,
+              "optimizedSize": 17952,
+              "format": "webp"
+            },
+            {
+              "size": 768,
+              "path": "/images/products/workshirt/20250523-Workshit_PDH_1-w768.webp",
+              "originalSize": 63228,
+              "optimizedSize": 22550,
+              "format": "webp"
+            },
+            {
+              "size": 1024,
+              "path": "/images/products/workshirt/20250523-Workshit_PDH_1-w1024.webp",
+              "originalSize": 63228,
+              "optimizedSize": 32408,
+              "format": "webp"
+            },
+            {
+              "size": 1184,
+              "path": "/images/products/workshirt/20250523-Workshit_PDH_1.webp",
+              "originalSize": 63228,
+              "optimizedSize": 46052,
+              "format": "webp"
+            }
+          ]
+        },
+        {
+          "name": "20250523-Workshit_PDH_2",
+          "source": "20250523-Workshit_PDH_2.webp",
+          "variants": [
+            {
+              "size": 320,
+              "path": "/images/products/workshirt/20250523-Workshit_PDH_2-w320.webp",
+              "originalSize": 82758,
+              "optimizedSize": 8252,
+              "format": "webp"
+            },
+            {
+              "size": 480,
+              "path": "/images/products/workshirt/20250523-Workshit_PDH_2-w480.webp",
+              "originalSize": 82758,
+              "optimizedSize": 13848,
+              "format": "webp"
+            },
+            {
+              "size": 640,
+              "path": "/images/products/workshirt/20250523-Workshit_PDH_2-w640.webp",
+              "originalSize": 82758,
+              "optimizedSize": 20478,
+              "format": "webp"
+            },
+            {
+              "size": 768,
+              "path": "/images/products/workshirt/20250523-Workshit_PDH_2-w768.webp",
+              "originalSize": 82758,
+              "optimizedSize": 25638,
+              "format": "webp"
+            },
+            {
+              "size": 1024,
+              "path": "/images/products/workshirt/20250523-Workshit_PDH_2-w1024.webp",
+              "originalSize": 82758,
+              "optimizedSize": 37230,
+              "format": "webp"
+            },
+            {
+              "size": 1184,
+              "path": "/images/products/workshirt/20250523-Workshit_PDH_2.webp",
+              "originalSize": 82758,
+              "optimizedSize": 57996,
+              "format": "webp"
+            }
+          ]
+        },
+        {
+          "name": "20250523-Lineup-Workshirt",
+          "source": "20250523-Lineup-Workshirt.webp",
+          "variants": [
+            {
+              "size": 100,
+              "path": "/images/products/workshirt/20250523-Lineup-Workshirt.webp",
+              "originalSize": 1172,
+              "optimizedSize": 1116,
+              "format": "webp"
+            }
+          ]
+        }
+      ],
+      "jacket": [
+        {
+          "name": "20250523-Jacket_Bomber_1",
+          "source": "20250523-Jacket_Bomber_1.webp",
+          "variants": [
+            {
+              "size": 320,
+              "path": "/images/products/jacket/20250523-Jacket_Bomber_1-w320.webp",
+              "originalSize": 70050,
+              "optimizedSize": 7460,
+              "format": "webp"
+            },
+            {
+              "size": 480,
+              "path": "/images/products/jacket/20250523-Jacket_Bomber_1-w480.webp",
+              "originalSize": 70050,
+              "optimizedSize": 12666,
+              "format": "webp"
+            },
+            {
+              "size": 640,
+              "path": "/images/products/jacket/20250523-Jacket_Bomber_1-w640.webp",
+              "originalSize": 70050,
+              "optimizedSize": 18580,
+              "format": "webp"
+            },
+            {
+              "size": 768,
+              "path": "/images/products/jacket/20250523-Jacket_Bomber_1-w768.webp",
+              "originalSize": 70050,
+              "optimizedSize": 23296,
+              "format": "webp"
+            },
+            {
+              "size": 1024,
+              "path": "/images/products/jacket/20250523-Jacket_Bomber_1-w1024.webp",
+              "originalSize": 70050,
+              "optimizedSize": 33570,
+              "format": "webp"
+            },
+            {
+              "size": 1184,
+              "path": "/images/products/jacket/20250523-Jacket_Bomber_1.webp",
+              "originalSize": 70050,
+              "optimizedSize": 49824,
+              "format": "webp"
+            }
+          ]
+        },
+        {
+          "name": "20250523-Jacket_Coach_1",
+          "source": "20250523-Jacket_Coach_1.webp",
+          "variants": [
+            {
+              "size": 320,
+              "path": "/images/products/jacket/20250523-Jacket_Coach_1-w320.webp",
+              "originalSize": 63428,
+              "optimizedSize": 7190,
+              "format": "webp"
+            },
+            {
+              "size": 480,
+              "path": "/images/products/jacket/20250523-Jacket_Coach_1-w480.webp",
+              "originalSize": 63428,
+              "optimizedSize": 12412,
+              "format": "webp"
+            },
+            {
+              "size": 640,
+              "path": "/images/products/jacket/20250523-Jacket_Coach_1-w640.webp",
+              "originalSize": 63428,
+              "optimizedSize": 18018,
+              "format": "webp"
+            },
+            {
+              "size": 768,
+              "path": "/images/products/jacket/20250523-Jacket_Coach_1-w768.webp",
+              "originalSize": 63428,
+              "optimizedSize": 22356,
+              "format": "webp"
+            },
+            {
+              "size": 1024,
+              "path": "/images/products/jacket/20250523-Jacket_Coach_1-w1024.webp",
+              "originalSize": 63428,
+              "optimizedSize": 32116,
+              "format": "webp"
+            },
+            {
+              "size": 1184,
+              "path": "/images/products/jacket/20250523-Jacket_Coach_1.webp",
+              "originalSize": 63428,
+              "optimizedSize": 45026,
+              "format": "webp"
+            }
+          ]
+        },
+        {
+          "name": "20250523-Jacket_Parka_1",
+          "source": "20250523-Jacket_Parka_1.webp",
+          "variants": [
+            {
+              "size": 320,
+              "path": "/images/products/jacket/20250523-Jacket_Parka_1-w320.webp",
+              "originalSize": 72988,
+              "optimizedSize": 7438,
+              "format": "webp"
+            },
+            {
+              "size": 480,
+              "path": "/images/products/jacket/20250523-Jacket_Parka_1-w480.webp",
+              "originalSize": 72988,
+              "optimizedSize": 12776,
+              "format": "webp"
+            },
+            {
+              "size": 640,
+              "path": "/images/products/jacket/20250523-Jacket_Parka_1-w640.webp",
+              "originalSize": 72988,
+              "optimizedSize": 18674,
+              "format": "webp"
+            },
+            {
+              "size": 768,
+              "path": "/images/products/jacket/20250523-Jacket_Parka_1-w768.webp",
+              "originalSize": 72988,
+              "optimizedSize": 23154,
+              "format": "webp"
+            },
+            {
+              "size": 1024,
+              "path": "/images/products/jacket/20250523-Jacket_Parka_1-w1024.webp",
+              "originalSize": 72988,
+              "optimizedSize": 33670,
+              "format": "webp"
+            },
+            {
+              "size": 1184,
+              "path": "/images/products/jacket/20250523-Jacket_Parka_1.webp",
+              "originalSize": 72988,
+              "optimizedSize": 52510,
+              "format": "webp"
+            }
+          ]
+        },
+        {
+          "name": "20250523-Jacket_Trucker_1",
+          "source": "20250523-Jacket_Trucker_1.webp",
+          "variants": [
+            {
+              "size": 320,
+              "path": "/images/products/jacket/20250523-Jacket_Trucker_1-w320.webp",
+              "originalSize": 64904,
+              "optimizedSize": 7152,
+              "format": "webp"
+            },
+            {
+              "size": 480,
+              "path": "/images/products/jacket/20250523-Jacket_Trucker_1-w480.webp",
+              "originalSize": 64904,
+              "optimizedSize": 12022,
+              "format": "webp"
+            },
+            {
+              "size": 640,
+              "path": "/images/products/jacket/20250523-Jacket_Trucker_1-w640.webp",
+              "originalSize": 64904,
+              "optimizedSize": 17582,
+              "format": "webp"
+            },
+            {
+              "size": 768,
+              "path": "/images/products/jacket/20250523-Jacket_Trucker_1-w768.webp",
+              "originalSize": 64904,
+              "optimizedSize": 22442,
+              "format": "webp"
+            },
+            {
+              "size": 1024,
+              "path": "/images/products/jacket/20250523-Jacket_Trucker_1-w1024.webp",
+              "originalSize": 64904,
+              "optimizedSize": 32434,
+              "format": "webp"
+            },
+            {
+              "size": 1184,
+              "path": "/images/products/jacket/20250523-Jacket_Trucker_1.webp",
+              "originalSize": 64904,
+              "optimizedSize": 47092,
+              "format": "webp"
+            }
+          ]
+        },
+        {
+          "name": "20250523-Jacket_Varsity_1",
+          "source": "20250523-Jacket_Varsity_1.webp",
+          "variants": [
+            {
+              "size": 320,
+              "path": "/images/products/jacket/20250523-Jacket_Varsity_1-w320.webp",
+              "originalSize": 63274,
+              "optimizedSize": 7812,
+              "format": "webp"
+            },
+            {
+              "size": 480,
+              "path": "/images/products/jacket/20250523-Jacket_Varsity_1-w480.webp",
+              "originalSize": 63274,
+              "optimizedSize": 13024,
+              "format": "webp"
+            },
+            {
+              "size": 640,
+              "path": "/images/products/jacket/20250523-Jacket_Varsity_1-w640.webp",
+              "originalSize": 63274,
+              "optimizedSize": 18812,
+              "format": "webp"
+            },
+            {
+              "size": 768,
+              "path": "/images/products/jacket/20250523-Jacket_Varsity_1-w768.webp",
+              "originalSize": 63274,
+              "optimizedSize": 23318,
+              "format": "webp"
+            },
+            {
+              "size": 1024,
+              "path": "/images/products/jacket/20250523-Jacket_Varsity_1-w1024.webp",
+              "originalSize": 63274,
+              "optimizedSize": 32734,
+              "format": "webp"
+            },
+            {
+              "size": 1184,
+              "path": "/images/products/jacket/20250523-Jacket_Varsity_1.webp",
+              "originalSize": 63274,
+              "optimizedSize": 45118,
+              "format": "webp"
+            }
+          ]
+        },
+        {
+          "name": "20250523-Jacket_Varsity_2",
+          "source": "20250523-Jacket_Varsity_2.webp",
+          "variants": [
+            {
+              "size": 320,
+              "path": "/images/products/jacket/20250523-Jacket_Varsity_2-w320.webp",
+              "originalSize": 87628,
+              "optimizedSize": 7786,
+              "format": "webp"
+            },
+            {
+              "size": 480,
+              "path": "/images/products/jacket/20250523-Jacket_Varsity_2-w480.webp",
+              "originalSize": 87628,
+              "optimizedSize": 13510,
+              "format": "webp"
+            },
+            {
+              "size": 640,
+              "path": "/images/products/jacket/20250523-Jacket_Varsity_2-w640.webp",
+              "originalSize": 87628,
+              "optimizedSize": 20504,
+              "format": "webp"
+            },
+            {
+              "size": 768,
+              "path": "/images/products/jacket/20250523-Jacket_Varsity_2-w768.webp",
+              "originalSize": 87628,
+              "optimizedSize": 25360,
+              "format": "webp"
+            },
+            {
+              "size": 1024,
+              "path": "/images/products/jacket/20250523-Jacket_Varsity_2-w1024.webp",
+              "originalSize": 87628,
+              "optimizedSize": 36980,
+              "format": "webp"
+            },
+            {
+              "size": 1184,
+              "path": "/images/products/jacket/20250523-Jacket_Varsity_2.webp",
+              "originalSize": 87628,
+              "optimizedSize": 64338,
+              "format": "webp"
+            }
+          ]
+        },
+        {
+          "name": "20250523-Jacket_Varsity_3",
+          "source": "20250523-Jacket_Varsity_3.webp",
+          "variants": [
+            {
+              "size": 320,
+              "path": "/images/products/jacket/20250523-Jacket_Varsity_3-w320.webp",
+              "originalSize": 86782,
+              "optimizedSize": 9286,
+              "format": "webp"
+            },
+            {
+              "size": 480,
+              "path": "/images/products/jacket/20250523-Jacket_Varsity_3-w480.webp",
+              "originalSize": 86782,
+              "optimizedSize": 15980,
+              "format": "webp"
+            },
+            {
+              "size": 640,
+              "path": "/images/products/jacket/20250523-Jacket_Varsity_3-w640.webp",
+              "originalSize": 86782,
+              "optimizedSize": 23504,
+              "format": "webp"
+            },
+            {
+              "size": 768,
+              "path": "/images/products/jacket/20250523-Jacket_Varsity_3-w768.webp",
+              "originalSize": 86782,
+              "optimizedSize": 28936,
+              "format": "webp"
+            },
+            {
+              "size": 1024,
+              "path": "/images/products/jacket/20250523-Jacket_Varsity_3-w1024.webp",
+              "originalSize": 86782,
+              "optimizedSize": 40800,
+              "format": "webp"
+            },
+            {
+              "size": 1184,
+              "path": "/images/products/jacket/20250523-Jacket_Varsity_3.webp",
+              "originalSize": 86782,
+              "optimizedSize": 58742,
+              "format": "webp"
+            }
+          ]
+        },
+        {
+          "name": "20250523-Lineup-Jacket",
+          "source": "20250523-Lineup-Jacket.webp",
+          "variants": [
+            {
+              "size": 100,
+              "path": "/images/products/jacket/20250523-Lineup-Jacket.webp",
+              "originalSize": 1510,
+              "optimizedSize": 1408,
+              "format": "webp"
+            }
+          ]
+        }
+      ]
+    },
+    "blog": [
+      {
+        "name": "20250819_Cara-memilih-jersey-yang-tepat-untuk-aktivitas-olahraga-anda-650x387",
+        "source": "20250819_Cara-memilih-jersey-yang-tepat-untuk-aktivitas-olahraga-anda-650x387.jpg",
+        "variants": [
+          {
+            "size": 320,
+            "path": "/images/blog/20250819_Cara-memilih-jersey-yang-tepat-untuk-aktivitas-olahraga-anda-650x387-w320.webp",
+            "originalSize": 35433,
+            "optimizedSize": 8796,
+            "format": "webp"
+          },
+          {
+            "size": 480,
+            "path": "/images/blog/20250819_Cara-memilih-jersey-yang-tepat-untuk-aktivitas-olahraga-anda-650x387-w480.webp",
+            "originalSize": 35433,
+            "optimizedSize": 14402,
+            "format": "webp"
+          },
+          {
+            "size": 640,
+            "path": "/images/blog/20250819_Cara-memilih-jersey-yang-tepat-untuk-aktivitas-olahraga-anda-650x387-w640.webp",
+            "originalSize": 35433,
+            "optimizedSize": 19698,
+            "format": "webp"
+          },
+          {
+            "size": 650,
+            "path": "/images/blog/20250819_Cara-memilih-jersey-yang-tepat-untuk-aktivitas-olahraga-anda-650x387.webp",
+            "originalSize": 35433,
+            "optimizedSize": 20564,
+            "format": "webp"
+          },
+          {
+            "size": 650,
+            "path": "/images/blog/20250819_Cara-memilih-jersey-yang-tepat-untuk-aktivitas-olahraga-anda-650x387.jpg",
+            "originalSize": 35433,
+            "optimizedSize": 35892,
+            "format": "jpg"
+          }
+        ]
+      },
+      {
+        "name": "20250819_Jersey-sebagai-pilihan-fashion-casual-tampil-keren-dengan-sentuhan-olahraga-650x387",
+        "source": "20250819_Jersey-sebagai-pilihan-fashion-casual-tampil-keren-dengan-sentuhan-olahraga-650x387.jpg",
+        "variants": [
+          {
+            "size": 320,
+            "path": "/images/blog/20250819_Jersey-sebagai-pilihan-fashion-casual-tampil-keren-dengan-sentuhan-olahraga-650x387-w320.webp",
+            "originalSize": 48910,
+            "optimizedSize": 13026,
+            "format": "webp"
+          },
+          {
+            "size": 480,
+            "path": "/images/blog/20250819_Jersey-sebagai-pilihan-fashion-casual-tampil-keren-dengan-sentuhan-olahraga-650x387-w480.webp",
+            "originalSize": 48910,
+            "optimizedSize": 22390,
+            "format": "webp"
+          },
+          {
+            "size": 640,
+            "path": "/images/blog/20250819_Jersey-sebagai-pilihan-fashion-casual-tampil-keren-dengan-sentuhan-olahraga-650x387-w640.webp",
+            "originalSize": 48910,
+            "optimizedSize": 31676,
+            "format": "webp"
+          },
+          {
+            "size": 650,
+            "path": "/images/blog/20250819_Jersey-sebagai-pilihan-fashion-casual-tampil-keren-dengan-sentuhan-olahraga-650x387.webp",
+            "originalSize": 48910,
+            "optimizedSize": 32728,
+            "format": "webp"
+          },
+          {
+            "size": 650,
+            "path": "/images/blog/20250819_Jersey-sebagai-pilihan-fashion-casual-tampil-keren-dengan-sentuhan-olahraga-650x387.jpg",
+            "originalSize": 48910,
+            "optimizedSize": 50766,
+            "format": "jpg"
+          }
+        ]
+      },
+      {
+        "name": "20250819_Keunggulan-jersey-dalam-dunia-olahraga-kenapa-harus-memilih-jersey-berkualitas-650x387",
+        "source": "20250819_Keunggulan-jersey-dalam-dunia-olahraga-kenapa-harus-memilih-jersey-berkualitas-650x387.jpg",
+        "variants": [
+          {
+            "size": 320,
+            "path": "/images/blog/20250819_Keunggulan-jersey-dalam-dunia-olahraga-kenapa-harus-memilih-jersey-berkualitas-650x387-w320.webp",
+            "originalSize": 43620,
+            "optimizedSize": 11938,
+            "format": "webp"
+          },
+          {
+            "size": 480,
+            "path": "/images/blog/20250819_Keunggulan-jersey-dalam-dunia-olahraga-kenapa-harus-memilih-jersey-berkualitas-650x387-w480.webp",
+            "originalSize": 43620,
+            "optimizedSize": 19914,
+            "format": "webp"
+          },
+          {
+            "size": 640,
+            "path": "/images/blog/20250819_Keunggulan-jersey-dalam-dunia-olahraga-kenapa-harus-memilih-jersey-berkualitas-650x387-w640.webp",
+            "originalSize": 43620,
+            "optimizedSize": 27680,
+            "format": "webp"
+          },
+          {
+            "size": 650,
+            "path": "/images/blog/20250819_Keunggulan-jersey-dalam-dunia-olahraga-kenapa-harus-memilih-jersey-berkualitas-650x387.webp",
+            "originalSize": 43620,
+            "optimizedSize": 28402,
+            "format": "webp"
+          },
+          {
+            "size": 650,
+            "path": "/images/blog/20250819_Keunggulan-jersey-dalam-dunia-olahraga-kenapa-harus-memilih-jersey-berkualitas-650x387.jpg",
+            "originalSize": 43620,
+            "optimizedSize": 44833,
+            "format": "jpg"
+          }
+        ]
+      },
+      {
+        "name": "20250819_Pusat-konveksi-jaket-kelas-dan-jaket-angkatan-terbaik-di-surabaya_-650x387",
+        "source": "20250819_Pusat-konveksi-jaket-kelas-dan-jaket-angkatan-terbaik-di-surabaya_-650x387.jpg",
+        "variants": [
+          {
+            "size": 320,
+            "path": "/images/blog/20250819_Pusat-konveksi-jaket-kelas-dan-jaket-angkatan-terbaik-di-surabaya_-650x387-w320.webp",
+            "originalSize": 56848,
+            "optimizedSize": 13398,
+            "format": "webp"
+          },
+          {
+            "size": 480,
+            "path": "/images/blog/20250819_Pusat-konveksi-jaket-kelas-dan-jaket-angkatan-terbaik-di-surabaya_-650x387-w480.webp",
+            "originalSize": 56848,
+            "optimizedSize": 23260,
+            "format": "webp"
+          },
+          {
+            "size": 640,
+            "path": "/images/blog/20250819_Pusat-konveksi-jaket-kelas-dan-jaket-angkatan-terbaik-di-surabaya_-650x387-w640.webp",
+            "originalSize": 56848,
+            "optimizedSize": 32160,
+            "format": "webp"
+          },
+          {
+            "size": 650,
+            "path": "/images/blog/20250819_Pusat-konveksi-jaket-kelas-dan-jaket-angkatan-terbaik-di-surabaya_-650x387.webp",
+            "originalSize": 56848,
+            "optimizedSize": 33202,
+            "format": "webp"
+          },
+          {
+            "size": 650,
+            "path": "/images/blog/20250819_Pusat-konveksi-jaket-kelas-dan-jaket-angkatan-terbaik-di-surabaya_-650x387.jpg",
+            "originalSize": 56848,
+            "optimizedSize": 51446,
+            "format": "jpg"
+          }
+        ]
+      },
+      {
+        "name": "level01-650x387",
+        "source": "level01-650x387.png",
+        "variants": [
+          {
+            "size": 320,
+            "path": "/images/blog/level01-650x387-w320.webp",
+            "originalSize": 79206,
+            "optimizedSize": 6234,
+            "format": "webp"
+          },
+          {
+            "size": 480,
+            "path": "/images/blog/level01-650x387-w480.webp",
+            "originalSize": 79206,
+            "optimizedSize": 10580,
+            "format": "webp"
+          },
+          {
+            "size": 640,
+            "path": "/images/blog/level01-650x387-w640.webp",
+            "originalSize": 79206,
+            "optimizedSize": 15318,
+            "format": "webp"
+          },
+          {
+            "size": 650,
+            "path": "/images/blog/level01-650x387.webp",
+            "originalSize": 79206,
+            "optimizedSize": 16862,
+            "format": "webp"
+          },
+          {
+            "size": 650,
+            "path": "/images/blog/level01-650x387.png",
+            "originalSize": 79206,
+            "optimizedSize": 87792,
+            "format": "png"
+          }
+        ]
+      },
+      {
+        "name": "level02-650x387",
+        "source": "level02-650x387.png",
+        "variants": [
+          {
+            "size": 320,
+            "path": "/images/blog/level02-650x387-w320.webp",
+            "originalSize": 84393,
+            "optimizedSize": 9590,
+            "format": "webp"
+          },
+          {
+            "size": 480,
+            "path": "/images/blog/level02-650x387-w480.webp",
+            "originalSize": 84393,
+            "optimizedSize": 16596,
+            "format": "webp"
+          },
+          {
+            "size": 640,
+            "path": "/images/blog/level02-650x387-w640.webp",
+            "originalSize": 84393,
+            "optimizedSize": 25232,
+            "format": "webp"
+          },
+          {
+            "size": 650,
+            "path": "/images/blog/level02-650x387.webp",
+            "originalSize": 84393,
+            "optimizedSize": 24240,
+            "format": "webp"
+          },
+          {
+            "size": 650,
+            "path": "/images/blog/level02-650x387.png",
+            "originalSize": 84393,
+            "optimizedSize": 94772,
+            "format": "png"
+          }
+        ]
+      },
+      {
+        "name": "level03-650x387",
+        "source": "level03-650x387.png",
+        "variants": [
+          {
+            "size": 320,
+            "path": "/images/blog/level03-650x387-w320.webp",
+            "originalSize": 96141,
+            "optimizedSize": 9300,
+            "format": "webp"
+          },
+          {
+            "size": 480,
+            "path": "/images/blog/level03-650x387-w480.webp",
+            "originalSize": 96141,
+            "optimizedSize": 16102,
+            "format": "webp"
+          },
+          {
+            "size": 640,
+            "path": "/images/blog/level03-650x387-w640.webp",
+            "originalSize": 96141,
+            "optimizedSize": 25760,
+            "format": "webp"
+          },
+          {
+            "size": 650,
+            "path": "/images/blog/level03-650x387.webp",
+            "originalSize": 96141,
+            "optimizedSize": 27662,
+            "format": "webp"
+          },
+          {
+            "size": 650,
+            "path": "/images/blog/level03-650x387.png",
+            "originalSize": 96141,
+            "optimizedSize": 106048,
+            "format": "png"
+          }
+        ]
+      },
+      {
+        "name": "level04-650x387",
+        "source": "level04-650x387.png",
+        "variants": [
+          {
+            "size": 320,
+            "path": "/images/blog/level04-650x387-w320.webp",
+            "originalSize": 79818,
+            "optimizedSize": 9742,
+            "format": "webp"
+          },
+          {
+            "size": 480,
+            "path": "/images/blog/level04-650x387-w480.webp",
+            "originalSize": 79818,
+            "optimizedSize": 16320,
+            "format": "webp"
+          },
+          {
+            "size": 640,
+            "path": "/images/blog/level04-650x387-w640.webp",
+            "originalSize": 79818,
+            "optimizedSize": 24040,
+            "format": "webp"
+          },
+          {
+            "size": 650,
+            "path": "/images/blog/level04-650x387.webp",
+            "originalSize": 79818,
+            "optimizedSize": 24938,
+            "format": "webp"
+          },
+          {
+            "size": 650,
+            "path": "/images/blog/level04-650x387.png",
+            "originalSize": 79818,
+            "optimizedSize": 96142,
+            "format": "png"
+          }
+        ]
+      },
+      {
+        "name": "level05-650x387",
+        "source": "level05-650x387.png",
+        "variants": [
+          {
+            "size": 320,
+            "path": "/images/blog/level05-650x387-w320.webp",
+            "originalSize": 85705,
+            "optimizedSize": 12356,
+            "format": "webp"
+          },
+          {
+            "size": 480,
+            "path": "/images/blog/level05-650x387-w480.webp",
+            "originalSize": 85705,
+            "optimizedSize": 20558,
+            "format": "webp"
+          },
+          {
+            "size": 640,
+            "path": "/images/blog/level05-650x387-w640.webp",
+            "originalSize": 85705,
+            "optimizedSize": 33030,
+            "format": "webp"
+          },
+          {
+            "size": 650,
+            "path": "/images/blog/level05-650x387.webp",
+            "originalSize": 85705,
+            "optimizedSize": 33786,
+            "format": "webp"
+          },
+          {
+            "size": 650,
+            "path": "/images/blog/level05-650x387.png",
+            "originalSize": 85705,
+            "optimizedSize": 95862,
+            "format": "png"
+          }
+        ]
+      },
+      {
+        "name": "level08-650x387",
+        "source": "level08-650x387.png",
+        "variants": [
+          {
+            "size": 320,
+            "path": "/images/blog/level08-650x387-w320.webp",
+            "originalSize": 87182,
+            "optimizedSize": 9514,
+            "format": "webp"
+          },
+          {
+            "size": 480,
+            "path": "/images/blog/level08-650x387-w480.webp",
+            "originalSize": 87182,
+            "optimizedSize": 16350,
+            "format": "webp"
+          },
+          {
+            "size": 640,
+            "path": "/images/blog/level08-650x387-w640.webp",
+            "originalSize": 87182,
+            "optimizedSize": 24578,
+            "format": "webp"
+          },
+          {
+            "size": 650,
+            "path": "/images/blog/level08-650x387.webp",
+            "originalSize": 87182,
+            "optimizedSize": 26452,
+            "format": "webp"
+          },
+          {
+            "size": 650,
+            "path": "/images/blog/level08-650x387.png",
+            "originalSize": 87182,
+            "optimizedSize": 96104,
+            "format": "png"
+          }
+        ]
+      }
+    ],
+    "ui": [],
+    "portfolio": [],
+    "videos": [
+      {
+        "name": "video_1",
+        "source": "video_1.mp4",
+        "path": "/videos/homepage/video_1.mp4",
+        "size": 1755741,
+        "formattedSize": "1.67 MB",
+        "note": "Videos need FFmpeg for compression - currently copied as-is"
+      },
+      {
+        "name": "video_2",
+        "source": "video_2.mp4",
+        "path": "/videos/homepage/video_2.mp4",
+        "size": 1616228,
+        "formattedSize": "1.54 MB",
+        "note": "Videos need FFmpeg for compression - currently copied as-is"
+      },
+      {
+        "name": "video_3",
+        "source": "video_3.mp4",
+        "path": "/videos/homepage/video_3.mp4",
+        "size": 2153855,
+        "formattedSize": "2.05 MB",
+        "note": "Videos need FFmpeg for compression - currently copied as-is"
+      },
+      {
+        "name": "video_4",
+        "source": "video_4.mp4",
+        "path": "/videos/homepage/video_4.mp4",
+        "size": 1612162,
+        "formattedSize": "1.54 MB",
+        "note": "Videos need FFmpeg for compression - currently copied as-is"
+      }
+    ]
+  }
+}
