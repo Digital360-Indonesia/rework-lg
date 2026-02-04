@@ -19,11 +19,12 @@ const { variant = 'default' } = Astro.props;
 
 // Hero content from WordPress (matches live site exactly)
 const heroTitle = "Konveksi Pelajar Indonesia di Surabaya";
-const heroDescription = `Level Garment sebagai konveksi terpercaya para pelajar Indonesia untuk kebutuhan custom baju kegiatanmu seperti class meeting, study tour, foto album kenangan, event dies natalis, event konser sekolah, sampai ke event skala kecil maupun besar di kampusmu.
 
-Mulai dari kaos barcode spotify atau kaos sablon reflektif, jaket varsity full patch, workjacket, workshirt, jersey baseball, topi, lanyard & ID Card, semua kebutuhanmu serahkan aja ke Level Garment.
-
-Masih belum bikin kamu tertarik? Kami berikan cashback spesial untuk pemesanan pertamamu!`;
+const heroDescription = [
+  "Level Garment sebagai konveksi terpercaya para pelajar Indonesia untuk kebutuhan custom baju kegiatanmu seperti class meeting, study tour, foto album kenangan, event dies natalis, event konser sekolah, sampai ke event skala kecil maupun besar di kampusmu.",
+  "Mulai dari kaos barcode spotify atau kaos sablon reflektif, jaket varsity full patch, workjacket, workshirt, jersey baseball, topi, lanyard & ID Card, semua kebutuhanmu serahkan aja ke Level Garment.",
+  "Masih belum bikin kamu tertarik? Kami berikan cashback spesial untuk pemesanan pertamamu!"
+];
 
 // Slideshow images from live site
 const slideshowImages = [
@@ -82,9 +83,11 @@ const slideshowImages = [
 
           <!-- Description -->
           <div class="prose prose-lg max-w-none">
-            <p class="text-gray-600 text-base sm:text-lg lg:text-xl leading-relaxed whitespace-pre-line">
-              {heroDescription}
-            </p>
+            <div class="text-gray-600 text-base sm:text-lg lg:text-xl leading-relaxed space-y-4">
+              {heroDescription.map((paragraph, index) => (
+                <p key={index}>{paragraph}</p>
+              ))}
+            </div>
           </div>
 
           <!-- CTA Buttons -->
