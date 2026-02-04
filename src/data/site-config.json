@@ -31,6 +31,10 @@
       "path": "/product/"
     },
     {
+      "name": "Portfolio",
+      "path": "/portfolio/"
+    },
+    {
       "name": "Promo",
       "path": "/promo/"
     },
@@ -43,13 +47,7 @@
       "path": "/kontak/"
     }
   ],
-  "externalLinks": [
-    {
-      "name": "Portfolio",
-      "path": "https://portfolio.levelgarment.com",
-      "external": true
-    }
-  ],
+  "externalLinks": [],
   "company": {
     "name": "Level Garment",
     "establishedYear": "2020",

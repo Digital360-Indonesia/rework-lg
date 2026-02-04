@@ -11,7 +11,7 @@
  * - Hover effects on cards
  * - Smooth scroll behavior
  *
- * @version 1.0.0
+ * @version 2.0.0
  */
 import productsData from '../../data/products.json';
 
@@ -20,7 +20,11 @@ const { categories } = productsData;
 
 <nav class="category-nav" aria-label="Product category navigation">
   <div class="container">
-    <h2 class="category-nav-title">Product Line Up</h2>
+    <div class="nav-header">
+      <span class="nav-badge">Kategori</span>
+      <h2 class="category-nav-title">Pilih Jenis Produk</h2>
+      <p class="nav-subtitle">Temukan produk yang sesuai dengan kebutuhan komunitasmu</p>
+    </div>
     <div class="category-grid">
       {categories.map((category) => (
         <a
@@ -28,7 +32,7 @@ const { categories } = productsData;
           class="category-card"
           aria-label={`View ${category.name} products`}
         >
-          <div class="category-card-image">
+          <div class="category-circle">
             <img
               src={category.lineupImage}
               alt={`${category.name} category preview`}
@@ -37,9 +41,7 @@ const { categories } = productsData;
               loading="eager"
             />
           </div>
-          <div class="category-card-name">
-            {category.name}
-          </div>
+          <span class="category-name">{category.name}</span>
         </a>
       ))}
     </div>
@@ -47,93 +49,201 @@ const { categories } = productsData;
 </nav>
 
 <style>
+  /* CSS Custom Properties - Brand Colors */
+  :root {
+    --primary: #AF7AD5;
+    --primary-light: #C494E0;
+    --primary-dark: #9A66C2;
+    --secondary: #1E3A5F;
+    --secondary-light: #2A4A73;
+    --secondary-dark: #152E4D;
+    --accent: #FFC107;
+    --accent-light: #FFD54F;
+    --accent-dark: #FFA000;
+  }
+
   /* Category Navigation Styles */
   .category-nav {
-    padding: 3rem 0;
-    background-color: #ffffff;
+    padding: 4rem 0;
+    background: linear-gradient(180deg, #ffffff 0%, #f8f9fc 100%);
+    position: relative;
+  }
+
+  .category-nav::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--primary), transparent);
+    opacity: 0.3;
+  }
+
+  .nav-header {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+
+  .nav-badge {
+    display: inline-block;
+    padding: 0.375rem 1rem;
+    background: linear-gradient(135deg, rgba(175, 122, 213, 0.15) 0%, rgba(175, 122, 213, 0.08) 100%);
+    border: 1px solid rgba(175, 122, 213, 0.2);
+    border-radius: 2rem;
+    color: var(--primary-dark);
+    font-size: 0.8125rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    font-family: 'Inter', sans-serif;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
   }
 
   .category-nav-title {
-    font-size: 1.75rem;
+    font-size: 2rem;
     font-weight: 700;
     text-align: center;
-    margin-bottom: 2rem;
-    color: #1a1a1a;
-    font-family: 'Poppins', 'Inter', sans-serif;
+    margin-bottom: 0.75rem;
+    color: var(--secondary);
+    font-family: 'Poppins', sans-serif;
+    letter-spacing: -0.02em;
+  }
+
+  .nav-subtitle {
+    font-size: 1rem;
+    color: #6b7280;
+    text-align: center;
+    font-family: 'Inter', sans-serif;
   }
 
   .category-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 1.5rem;
-    align-items: start;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 2.5rem;
+    align-items: center;
   }
 
-  /* Category Card */
+  /* Category Card - Circular */
   .category-card {
     display: flex;
     flex-direction: column;
     align-items: center;
     text-decoration: none;
     transition: all 0.3s ease;
-    padding: 1rem;
-    border-radius: 1rem;
   }
 
   .category-card:hover {
     transform: translateY(-4px);
-    background-color: #f8f9fa;
   }
 
-  .category-card-image {
-    width: 100%;
-    aspect-ratio: 1;
-    border-radius: 1rem;
+  .category-card:hover .category-circle {
+    box-shadow: 0 8px 24px rgba(175, 122, 213, 0.4);
+    border-color: var(--primary);
+  }
+
+  .category-card:hover .category-name {
+    color: var(--primary);
+  }
+
+  .category-circle {
+    width: 6rem;
+    height: 6rem;
+    border-radius: 50%;
     overflow: hidden;
+    background: #ffffff;
+    border: 3px solid rgba(175, 122, 213, 0.2);
+    transition: all 0.3s ease;
     margin-bottom: 0.75rem;
-    background-color: #f3f4f6;
+    box-shadow: 0 4px 12px rgba(30, 58, 95, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
-  .category-card-image img {
+  .category-circle img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: contain;
+    padding: 0.25rem;
     transition: transform 0.3s ease;
   }
 
-  .category-card:hover .category-card-image img {
+  .category-card:hover .category-circle img {
     transform: scale(1.05);
   }
 
-  .category-card-name {
-    font-size: 1rem;
+  .category-name {
+    font-size: 0.9375rem;
     font-weight: 600;
+    color: var(--secondary);
     text-align: center;
-    color: #1a1a1a;
-    font-family: 'Poppins', 'Inter', sans-serif;
+    font-family: 'Poppins', sans-serif;
+    transition: color 0.3s ease;
   }
 
   /* Tablet Styles */
   @media (max-width: 1023px) {
+    .category-nav {
+      padding: 3rem 0;
+    }
+
+    .category-nav-title {
+      font-size: 1.75rem;
+    }
+
+    .nav-subtitle {
+      font-size: 0.9375rem;
+    }
+
     .category-grid {
-      grid-template-columns: repeat(2, 1fr);
+      gap: 2rem;
+    }
+
+    .category-circle {
+      width: 5.5rem;
+      height: 5.5rem;
     }
   }
 
   /* Mobile Styles */
   @media (max-width: 767px) {
     .category-nav {
-      padding: 2rem 0;
+      padding: 2.5rem 0;
+    }
+
+    .nav-header {
+      margin-bottom: 2rem;
+    }
+
+    .nav-badge {
+      font-size: 0.75rem;
+      padding: 0.3125rem 0.875rem;
     }
 
     .category-nav-title {
       font-size: 1.5rem;
-      margin-bottom: 1.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .nav-subtitle {
+      font-size: 0.875rem;
     }
 
     .category-grid {
-      grid-template-columns: 1fr;
-      gap: 1rem;
+      gap: 1.5rem;
+    }
+
+    .category-circle {
+      width: 4.5rem;
+      height: 4.5rem;
+      border-width: 2.5px;
+      margin-bottom: 0.625rem;
+    }
+
+    .category-name {
+      font-size: 0.875rem;
     }
   }
 </style>

@@ -33,12 +33,12 @@ const formatDate = (dateString: string) => {
 // Get category color
 const getCategoryColor = (cat: string) => {
   const colors: Record<string, string> = {
-    'Edukasi': 'bg-blue-100 text-blue-700',
-    'Rekomendasi': 'bg-purple-100 text-purple-700',
-    'Tips': 'bg-green-100 text-green-700',
-    'Berita': 'bg-orange-100 text-orange-700'
+    'Edukasi': 'bg-primary/10 text-primary',
+    'Rekomendasi': 'bg-primary/10 text-primary',
+    'Tips': 'bg-primary/10 text-primary',
+    'Berita': 'bg-primary/10 text-primary'
   };
-  return colors[cat] || 'bg-gray-100 text-gray-700';
+  return colors[cat] || 'bg-primary/10 text-primary';
 };
 ---
 

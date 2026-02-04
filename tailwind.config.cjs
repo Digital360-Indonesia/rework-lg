@@ -4,11 +4,11 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        // Level Garment brand colors (to be refined from original WordPress theme)
+        // Level Garment brand colors
         primary: {
-          DEFAULT: '#FF6B35',
-          light: '#FF8C5A',
-          dark: '#E85A2E',
+          DEFAULT: '#AF7AD5',
+          light: '#C494E0',
+          dark: '#9A66C2',
         },
         secondary: {
           DEFAULT: '#1E3A5F',

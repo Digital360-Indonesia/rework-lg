@@ -1,0 +1,51 @@
+---
+/**
+ * Portfolio Grid Component - Level Garment
+ * Grid layout for portfolio items with filtering
+ */
+
+import PortfolioCard from './PortfolioCard.astro';
+
+export interface Props {
+  items: Array<{
+    id: string;
+    name: string;
+    slug: string;
+    category: string;
+    image: string;
+    description: string;
+    materials?: string[];
+    year?: string;
+  }>;
+  columns?: 2 | 3 | 4;
+}
+
+const { items, columns = 3 } = Astro.props;
+
+// Grid columns based on prop
+const gridCols = columns === 2
+  ? 'grid-cols-1 md:grid-cols-2 lg:grid-cols-2'
+  : columns === 4
+  ? 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'
+  : 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3';
+---
+
+<div class="portfolio-grid grid gap-6 md:gap-8 {gridCols}">
+  {items.map((item) => (
+    <PortfolioCard
+      name={item.name}
+      slug={item.slug}
+      category={item.category}
+      image={item.image}
+      description={item.description}
+      materials={item.materials}
+      year={item.year}
+    />
+  ))}
+</div>
+
+<style>
+  .portfolio-grid {
+    font-family: 'Poppins', 'Inter', sans-serif;
+  }
+</style>

@@ -1,0 +1,349 @@
+---
+/**
+ * Portfolio Detail Page - Level Garment
+ *
+ * Dynamic route for individual portfolio items
+ *
+ * @version 1.0.0
+ */
+
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageLayout from '../../layouts/PageLayout.astro';
+import portfolioData from '../../data/portfolio.json';
+import siteConfig from '../../data/site-config.json';
+
+// Generate static paths for all portfolio items
+export function getStaticPaths() {
+  return portfolioData.items.map((item) => {
+    return {
+      params: { slug: item.slug },
+      props: { item },
+    };
+  });
+}
+
+// Get the item from props (provided by getStaticPaths)
+const { item } = Astro.props;
+
+// Get category info
+const category = portfolioData.categories.find(c => c.id === item.category);
+
+// Page metadata
+const title = `${item.name} - Portfolio - Level Garment`;
+const description = item.description;
+const image = item.image;
+---
+
+<PageLayout
+  title={title}
+  description={description}
+  image={image}
+  showHero={false}
+>
+  <!-- Breadcrumb -->
+  <div class="bg-gray-50 py-4">
+    <div class="container mx-auto px-4">
+      <nav class="flex items-center gap-2 text-sm" aria-label="Breadcrumb">
+        <a href="/" class="text-gray-600 hover:text-primary transition-colors">Beranda</a>
+        <svg class="w-4 h-4 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+        </svg>
+        <a href="/portfolio/" class="text-gray-600 hover:text-primary transition-colors">Portfolio</a>
+        <svg class="w-4 h-4 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+        </svg>
+        <span class="text-gray-800 font-medium truncate">{item.name}</span>
+      </nav>
+    </div>
+  </div>
+
+  <!-- Portfolio Detail -->
+  <div class="container mx-auto px-4 py-12">
+    <div class="grid lg:grid-cols-2 gap-12 items-start">
+      <!-- Image Section -->
+      <div class="space-y-6">
+        <button
+          class="main-image-btn group relative w-full rounded-2xl overflow-hidden shadow-xl bg-gray-100 aspect-[4/3]"
+          aria-label="View larger image"
+        >
+          <img
+            src={item.image}
+            alt={`Portfolio ${item.name}`}
+            class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+            width="800"
+            height="600"
+          />
+          <div class="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors flex items-center justify-center">
+            <svg class="w-12 h-12 text-white opacity-0 group-hover:opacity-100 transition-opacity" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7" />
+            </svg>
+          </div>
+        </button>
+
+        <!-- Gallery Section -->
+        {item.gallery && item.gallery.length > 1 && (
+          <div>
+            <h3 class="text-lg font-bold text-gray-800 mb-4">Galeri Produk</h3>
+            <div class="grid grid-cols-3 gap-3">
+              {item.gallery.slice(1).map((galleryImage, index) => (
+                <button
+                  class={`gallery-thumb group relative rounded-xl overflow-hidden shadow-md aspect-square bg-gray-100 ${index === 0 ? 'col-span-2 row-span-2' : ''}`}
+                  data-image={galleryImage}
+                  aria-label={`View gallery image ${index + 2}`}
+                >
+                  <img
+                    src={galleryImage}
+                    alt={`Gallery image ${index + 2}`}
+                    class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+                    loading="lazy"
+                    width="400"
+                    height="400"
+                  />
+                  <div class="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors flex items-center justify-center">
+                    <svg class="w-8 h-8 text-white opacity-0 group-hover:opacity-100 transition-opacity" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7" />
+                    </svg>
+                  </div>
+                </button>
+              ))}
+            </div>
+          </div>
+        )}
+
+        <!-- Category Badge -->
+        {category && (
+          <div class="flex items-center gap-4">
+            <span class="inline-block px-4 py-2 bg-primary/10 text-primary font-semibold rounded-full">
+              {category.name}
+            </span>
+            {item.year && (
+              <span class="inline-block px-4 py-2 bg-gray-100 text-gray-700 font-semibold rounded-full">
+                {item.year}
+              </span>
+            )}
+          </div>
+        )}
+      </div>
+
+      <!-- Content Section -->
+      <div class="space-y-8">
+        <!-- Title -->
+        <div>
+          <h1 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">
+            {item.name}
+          </h1>
+          <p class="text-gray-600 text-lg leading-relaxed">
+            {item.description}
+          </p>
+        </div>
+
+        <!-- Materials -->
+        {item.materials && item.materials.length > 0 && (
+          <div class="bg-gray-50 rounded-2xl p-6">
+            <h3 class="text-lg font-bold text-gray-800 mb-4 flex items-center gap-2">
+              <svg class="w-5 h-5 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+              </svg>
+              Bahan yang Digunakan
+            </h3>
+            <div class="flex flex-wrap gap-2">
+              {item.materials.map((material) => (
+                <span class="px-4 py-2 bg-white text-gray-700 font-medium rounded-lg shadow-sm">
+                  {material}
+                </span>
+              ))}
+            </div>
+          </div>
+        )}
+
+        <!-- Features -->
+        {item.features && item.features.length > 0 && (
+          <div class="bg-gray-50 rounded-2xl p-6">
+            <h3 class="text-lg font-bold text-gray-800 mb-4 flex items-center gap-2">
+              <svg class="w-5 h-5 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+              </svg>
+              Fitur
+            </h3>
+            <ul class="space-y-2">
+              {item.features.map((feature) => (
+                <li class="flex items-center gap-2 text-gray-700">
+                  <svg class="w-5 h-5 text-green-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                  </svg>
+                  {feature}
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+
+        <!-- CTA -->
+        <div class="bg-gradient-to-r from-primary/10 to-purple-50 rounded-2xl p-6">
+          <h3 class="text-lg font-bold text-gray-800 mb-2">
+            Tertarik dengan produk ini?
+          </h3>
+          <p class="text-gray-600 mb-4">
+            Kami bisa buatkan seragam/jaket seperti ini untuk Anda!
+          </p>
+          <a
+            href={`${siteConfig.contact.whatsappUrl}?text=${encodeURIComponent(`Hai kak! Saya tertarik buat produk seperti portfolio ${item.name}. Bisa info detailnya?`)}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center px-6 py-3 bg-primary text-white font-bold rounded-full hover:bg-primary-dark transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
+          >
+            <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+            </svg>
+            Tanya via WhatsApp
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Related Projects -->
+    <div class="mt-20">
+      <h2 class="text-2xl md:text-3xl font-bold text-center text-gray-800 mb-8">
+        Project Lainnya
+      </h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {portfolioData.items
+          .filter(i => i.category === item.category && i.id !== item.id)
+          .slice(0, 3)
+          .map((relatedItem) => (
+            <a
+              href={`/portfolio/${relatedItem.slug}/`}
+              class="group bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1"
+            >
+              <div class="relative aspect-[4/3] bg-gray-100">
+                <img
+                  src={relatedItem.image}
+                  alt={`Portfolio ${relatedItem.name}`}
+                  class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                  loading="lazy"
+                  width="400"
+                  height="300"
+                />
+              </div>
+              <div class="p-4">
+                <h3 class="font-bold text-gray-800 group-hover:text-primary transition-colors line-clamp-2">
+                  {relatedItem.name}
+                </h3>
+              </div>
+            </a>
+          ))}
+      </div>
+    </div>
+  </div>
+</PageLayout>
+
+<style>
+  .line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+</style>
+
+<!-- Lightbox Modal -->
+<div id="lightbox" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/90 backdrop-blur-sm">
+  <button id="lightbox-close" class="absolute top-4 right-4 text-white hover:text-gray-300 transition-colors z-10" aria-label="Close lightbox">
+    <svg class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+    </svg>
+  </button>
+  <button id="lightbox-prev" class="absolute left-4 top-1/2 -translate-y-1/2 text-white hover:text-gray-300 transition-colors" aria-label="Previous image">
+    <svg class="w-10 h-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+    </svg>
+  </button>
+  <button id="lightbox-next" class="absolute right-4 top-1/2 -translate-y-1/2 text-white hover:text-gray-300 transition-colors" aria-label="Next image">
+    <svg class="w-10 h-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+    </svg>
+  </button>
+  <img id="lightbox-image" src="" alt="" class="max-w-[90vw] max-h-[90vh] object-contain" />
+  <div id="lightbox-counter" class="absolute bottom-4 left-1/2 -translate-x-1/2 text-white text-lg font-medium"></div>
+</div>
+
+<script define:vars={{ gallery: item.gallery || [] }}>
+  // Gallery images
+  const galleryImages = gallery;
+
+  if (galleryImages.length > 0) {
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImage = document.getElementById('lightbox-image');
+    const lightboxClose = document.getElementById('lightbox-close');
+    const lightboxPrev = document.getElementById('lightbox-prev');
+    const lightboxNext = document.getElementById('lightbox-next');
+    const lightboxCounter = document.getElementById('lightbox-counter');
+    const galleryThumbs = document.querySelectorAll('.gallery-thumb');
+
+    let currentIndex = 0;
+
+    function openLightbox(index) {
+      currentIndex = index;
+      updateLightboxImage();
+      lightbox.classList.remove('hidden');
+      lightbox.classList.add('flex');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeLightbox() {
+      lightbox.classList.add('hidden');
+      lightbox.classList.remove('flex');
+      document.body.style.overflow = '';
+    }
+
+    function updateLightboxImage() {
+      lightboxImage.src = galleryImages[currentIndex];
+      lightboxImage.alt = `Gallery image ${currentIndex + 1}`;
+      lightboxCounter.textContent = `${currentIndex + 1} / ${galleryImages.length}`;
+    }
+
+    function showPrev() {
+      currentIndex = (currentIndex - 1 + galleryImages.length) % galleryImages.length;
+      updateLightboxImage();
+    }
+
+    function showNext() {
+      currentIndex = (currentIndex + 1) % galleryImages.length;
+      updateLightboxImage();
+    }
+
+    // Add click handlers to gallery thumbnails
+    galleryThumbs.forEach((thumb, index) => {
+      thumb.addEventListener('click', () => {
+        const imageSrc = thumb.getAttribute('data-image');
+        const imageIndex = galleryImages.indexOf(imageSrc);
+        openLightbox(imageIndex >= 0 ? imageIndex : 0);
+      });
+    });
+
+    // Add click handler to main image
+    const mainImageBtn = document.querySelector('.main-image-btn');
+    mainImageBtn?.addEventListener('click', () => openLightbox(0));
+
+    // Lightbox controls
+    lightboxClose?.addEventListener('click', closeLightbox);
+    lightboxPrev?.addEventListener('click', showPrev);
+    lightboxNext?.addEventListener('click', showNext);
+
+    // Close on backdrop click
+    lightbox?.addEventListener('click', (e) => {
+      if (e.target === lightbox) {
+        closeLightbox();
+      }
+    });
+
+    // Keyboard navigation
+    document.addEventListener('keydown', (e) => {
+      if (!lightbox.classList.contains('hidden')) {
+        if (e.key === 'Escape') closeLightbox();
+        if (e.key === 'ArrowLeft') showPrev();
+        if (e.key === 'ArrowRight') showNext();
+      }
+    });
+  }
+</script>

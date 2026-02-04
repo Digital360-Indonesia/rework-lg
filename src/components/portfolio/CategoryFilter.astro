@@ -1,0 +1,107 @@
+---
+/**
+ * Category Filter Component - Level Garment
+ * Filter buttons for portfolio categories
+ */
+
+export interface Props {
+  categories: Array<{
+    id: string;
+    name: string;
+    slug: string;
+  }>;
+  activeCategory?: string;
+}
+
+const { categories, activeCategory = 'all' } = Astro.props;
+
+const allCategories = [
+  { id: 'all', name: 'Semua', slug: 'all' },
+  ...categories
+];
+---
+
+<div class="category-filter-wrapper" id="category-filter">
+  <div class="flex flex-wrap justify-center gap-3 mb-12">
+    {allCategories.map((category) => (
+      <button
+        data-category={category.slug}
+        class={`category-filter-btn px-6 py-2.5 rounded-full font-medium transition-all duration-300 ${
+          activeCategory === category.slug
+            ? 'bg-primary text-white shadow-lg scale-105'
+            : 'bg-white text-gray-700 hover:bg-primary/10 hover:text-primary shadow-md'
+        }`}
+      >
+        {category.name}
+      </button>
+    ))}
+  </div>
+</div>
+
+<style>
+  .category-filter-wrapper {
+    font-family: 'Poppins', 'Inter', sans-serif;
+  }
+
+  .category-filter-btn {
+    border: 2px solid transparent;
+    cursor: pointer;
+  }
+
+  .category-filter-btn:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(175, 122, 213, 0.3);
+  }
+</style>
+
+<script>
+  // Category filtering functionality
+  const filterButtons = document.querySelectorAll('.category-filter-btn');
+  const portfolioCards = document.querySelectorAll('.portfolio-card');
+
+  filterButtons.forEach((button) => {
+    button.addEventListener('click', () => {
+      const category = button.getAttribute('data-category');
+
+      // Update active state
+      filterButtons.forEach((btn) => {
+        if (btn.getAttribute('data-category') === category) {
+          btn.classList.add('bg-primary', 'text-white', 'shadow-lg', 'scale-105');
+          btn.classList.remove('bg-white', 'text-gray-700', 'hover:bg-primary/10', 'hover:text-primary');
+        } else {
+          btn.classList.remove('bg-primary', 'text-white', 'shadow-lg', 'scale-105');
+          btn.classList.add('bg-white', 'text-gray-700', 'hover:bg-primary/10', 'hover:text-primary');
+        }
+      });
+
+      // Filter cards
+      portfolioCards.forEach((card) => {
+        if (category === 'all') {
+          card.style.display = 'block';
+          card.style.animation = 'fadeIn 0.3s ease';
+        } else {
+          const cardCategory = card.getAttribute('data-category');
+          if (cardCategory === category) {
+            card.style.display = 'block';
+            card.style.animation = 'fadeIn 0.3s ease';
+          } else {
+            card.style.display = 'none';
+          }
+        }
+      });
+    });
+  });
+</script>
+
+<style is:global>
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+</style>

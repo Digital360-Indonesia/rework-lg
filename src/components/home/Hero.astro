@@ -3,10 +3,10 @@
  * Hero Section Component - Level Garment Homepage
  *
  * Features:
- * - Two-column layout (slideshow background + content)
- * - Headline and description text
- * - Responsive design
- * - Ken Burns effect for background slideshow
+ * - Full screen height (100vh - header height)
+ * - Two-column layout: 40% image left, 60% content right
+ * - White background
+ * - Slideshow with Tinder-style Card Stack Swipe animation
  *
  * @version 1.0.0
  */
@@ -17,69 +17,72 @@ interface Props {
 
 const { variant = 'default' } = Astro.props;
 
-// Hero content from WordPress
+// Hero content from WordPress (matches live site exactly)
 const heroTitle = "Konveksi Pelajar Indonesia di Surabaya";
 const heroDescription = `Level Garment sebagai konveksi terpercaya para pelajar Indonesia untuk kebutuhan custom baju kegiatanmu seperti class meeting, study tour, foto album kenangan, event dies natalis, event konser sekolah, sampai ke event skala kecil maupun besar di kampusmu.
 
 Mulai dari kaos barcode spotify atau kaos sablon reflektif, jaket varsity full patch, workjacket, workshirt, jersey baseball, topi, lanyard & ID Card, semua kebutuhanmu serahkan aja ke Level Garment.
 
 Masih belum bikin kamu tertarik? Kami berikan cashback spesial untuk pemesanan pertamamu!`;
+
+// Slideshow images from live site
+const slideshowImages = [
+  '/assets/images/homepage/slideshow/20250424-slide_lg_3.webp',
+  '/assets/images/homepage/slideshow/20250424-slide_lg_4.webp',
+  '/assets/images/homepage/slideshow/20250424-slide_lg_5.webp',
+  '/assets/images/homepage/slideshow/20250424-slide_lg_6.webp',
+  '/assets/images/homepage/slideshow/20250424-slide_lg_8.webp',
+  '/assets/images/homepage/slideshow/20250424-slide_lg_7.webp',
+  '/assets/images/homepage/slideshow/20250424-slide_lg_1.webp',
+  '/assets/images/homepage/slideshow/20250424-slide_lg_2.webp',
+];
 ---
 
-<!-- Hero Section -->
+<!-- Hero Section - Full Screen with White Background -->
 <section
   id="hero"
-  class="hero-section relative min-h-screen lg:min-h-[90vh] flex items-center overflow-hidden bg-gradient-to-br from-secondary via-secondary-dark to-dark"
+  class="hero-section relative w-full bg-white"
+  style="height: calc(100vh - 80px);"
 >
-  <!-- Background Pattern Overlay -->
-  <div class="absolute inset-0 opacity-5">
-    <div class="absolute inset-0" style="background-image: url('data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%2256%22 height=%2256%22><path d=%22M28 0L56 28L28 56L0 28Z%22 fill=%22white%22 fill-opacity=%220.4%22/></svg>'); background-size: 56px 56px;"></div>
-  </div>
-
-  <div class="container mx-auto px-4 py-20 lg:py-0 relative z-10">
-    <div class="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
-      <!-- Left Column - Visual / Slideshow Placeholder -->
-      <div class="relative order-2 lg:order-1">
+  <div class="container mx-auto px-4 h-full">
+    <!-- Two Column Layout: 40% Image / 60% Content -->
+    <div class="grid grid-cols-1 lg:grid-cols-5 gap-8 h-full items-center">
+      <!-- Left Column - Card Stack Slideshow (40% width = 2/5 columns) -->
+      <div class="lg:col-span-2 order-2 lg:order-1">
         {variant === 'default' && (
-          <div class="relative aspect-[9/16] lg:aspect-[3/4] max-w-md mx-auto lg:max-w-full rounded-2xl overflow-hidden shadow-2xl">
-            <!-- Hero Image / Slideshow -->
-            <div class="hero-slideshow absolute inset-0">
-              <!-- Static gradient background as fallback -->
-              <div class="absolute inset-0 bg-gradient-to-br from-primary/30 to-accent/30"></div>
-
-              <!-- Decorative elements -->
-              <div class="absolute inset-0 flex items-center justify-center">
-                <div class="text-center text-white p-8">
-                  <svg class="w-24 h-24 mx-auto mb-4 opacity-80" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
-                  </svg>
-                  <p class="text-xl font-semibold">Level Garment</p>
-                  <p class="text-sm opacity-80 mt-2">Konveksi Pelajar Indonesia</p>
+          <div class="relative w-full h-[50vh] lg:h-[70vh] rounded-2xl">
+            <!-- Card Stack Container -->
+            <div class="card-stack-container absolute inset-0">
+              {slideshowImages.map((img, index) => (
+                <div
+                  class={`card-stack-item absolute inset-0 rounded-2xl overflow-hidden shadow-2xl ${index === 0 ? 'top-card' : ''}`}
+                  data-index={index}
+                  style={`z-index: ${slideshowImages.length - index};`}
+                >
+                  <img
+                    src={img}
+                    alt={`Level Garment Slide ${index + 1}`}
+                    class="w-full h-full object-cover"
+                    loading={index === 0 ? 'eager' : 'lazy'}
+                  />
                 </div>
-              </div>
-
-              <!-- Animated gradient overlay -->
-              <div class="absolute inset-0 bg-gradient-to-t from-secondary/80 via-transparent to-transparent"></div>
+              ))}
             </div>
-
-            <!-- Decorative dots -->
-            <div class="absolute -bottom-6 -right-6 w-24 h-24 bg-accent/20 rounded-full blur-2xl"></div>
-            <div class="absolute -top-6 -left-6 w-32 h-32 bg-primary/20 rounded-full blur-2xl"></div>
           </div>
         )}
       </div>
 
-      <!-- Right Column - Content -->
-      <div class="order-1 lg:order-2 text-white">
+      <!-- Right Column - Content (60% width = 3/5 columns) -->
+      <div class="lg:col-span-3 order-1 lg:order-2">
         <div class="space-y-6">
           <!-- Main Title -->
-          <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight">
+          <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight text-gray-900">
             {heroTitle}
           </h1>
 
           <!-- Description -->
-          <div class="prose prose-lg prose-invert max-w-none">
-            <p class="text-gray-200 text-base sm:text-lg lg:text-xl leading-relaxed whitespace-pre-line">
+          <div class="prose prose-lg max-w-none">
+            <p class="text-gray-600 text-base sm:text-lg lg:text-xl leading-relaxed whitespace-pre-line">
               {heroDescription}
             </p>
           </div>
@@ -99,7 +102,7 @@ Masih belum bikin kamu tertarik? Kami berikan cashback spesial untuk pemesanan p
             </a>
             <a
               href="/product/"
-              class="inline-flex items-center justify-center px-8 py-4 border-2 border-white text-white hover:bg-white hover:text-secondary font-semibold rounded-full transition-all duration-300"
+              class="inline-flex items-center justify-center px-8 py-4 border-2 border-primary text-primary hover:bg-primary hover:text-white font-semibold rounded-full transition-all duration-300"
             >
               Lihat Produk
             </a>
@@ -111,7 +114,7 @@ Masih belum bikin kamu tertarik? Kami berikan cashback spesial untuk pemesanan p
 
   <!-- Scroll Indicator -->
   <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
-    <a href="#value-proposition" class="text-white/70 hover:text-white transition-colors" aria-label="Scroll down">
+    <a href="#value-proposition" class="text-gray-400 hover:text-gray-600 transition-colors" aria-label="Scroll down">
       <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"/>
       </svg>
@@ -120,18 +123,55 @@ Masih belum bikin kamu tertarik? Kami berikan cashback spesial untuk pemesanan p
 </section>
 
 <style>
-  /* Hero slideshow animation (Ken Burns effect) */
-  .hero-slideshow {
-    animation: kenBurns 20s ease-in-out infinite alternate;
+  /* Tinder-style Card Stack Swipe Animation */
+
+  .card-stack-item {
+    transform-origin: center bottom;
+    transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   }
 
-  @keyframes kenBurns {
-    0% {
-      transform: scale(1);
-    }
-    100% {
-      transform: scale(1.1);
-    }
+  /* Initial stack state - cards stacked with offset */
+  .card-stack-item:not(.top-card) {
+    transform: scale(0.9) translateY(10px);
+    opacity: 0.7;
+  }
+
+  /* Second card in stack */
+  .card-stack-item:nth-child(2):not(.top-card),
+  .card-stack-item[data-stack-position="1"] {
+    transform: scale(0.92) translateY(8px);
+    opacity: 0.8;
+  }
+
+  /* Third card in stack */
+  .card-stack-item:nth-child(3):not(.top-card),
+  .card-stack-item[data-stack-position="2"] {
+    transform: scale(0.94) translateY(6px);
+    opacity: 0.85;
+  }
+
+  /* Top card (currently visible) */
+  .card-stack-item.top-card {
+    transform: scale(1) translateY(0) rotate(0deg);
+    opacity: 1;
+  }
+
+  /* Card swiping left (dislike) */
+  .card-stack-item.swipe-left {
+    transform: translateX(-150%) translateY(50px) rotate(-30deg) !important;
+    opacity: 0 !important;
+  }
+
+  /* Card swiping right (like) */
+  .card-stack-item.swipe-right {
+    transform: translateX(150%) translateY(50px) rotate(30deg) !important;
+    opacity: 0 !important;
+  }
+
+  /* Card scaling up to become top card */
+  .card-stack-item.scaling-up {
+    transform: scale(1) translateY(0) rotate(0deg);
+    opacity: 1;
   }
 
   /* Text reveal animation */
@@ -171,3 +211,66 @@ Masih belum bikin kamu tertarik? Kami berikan cashback spesial untuk pemesanan p
     opacity: 0;
   }
 </style>
+
+<script>
+  // Tinder-style Card Stack Swipe Animation
+  const cards = document.querySelectorAll('.card-stack-item');
+  const slideDuration = 4000; // 4 seconds per swipe
+  let currentIndex = 0;
+  const totalCards = cards.length;
+
+  function updateStack() {
+    cards.forEach((card, index) => {
+      const cardEl = card as HTMLElement;
+      const relativeIndex = (index - currentIndex + totalCards) % totalCards;
+
+      // Reset all classes
+      cardEl.classList.remove('top-card', 'swipe-left', 'swipe-right', 'scaling-up');
+      cardEl.style.transform = '';
+      cardEl.style.opacity = '';
+      cardEl.style.zIndex = `${totalCards - relativeIndex}`;
+
+      if (relativeIndex === 0) {
+        // Top card - currently visible
+        cardEl.classList.add('top-card');
+      } else if (relativeIndex === 1) {
+        // Second card - slightly smaller, offset
+        cardEl.style.transform = 'scale(0.94) translateY(6px)';
+        cardEl.style.opacity = '0.9';
+      } else if (relativeIndex === 2) {
+        // Third card - even smaller
+        cardEl.style.transform = 'scale(0.88) translateY(12px)';
+        cardEl.style.opacity = '0.7';
+      } else {
+        // Cards deeper in stack
+        cardEl.style.transform = 'scale(0.82) translateY(18px)';
+        cardEl.style.opacity = '0.5';
+      }
+    });
+  }
+
+  function swipeCard() {
+    const currentCard = cards[currentIndex] as HTMLElement;
+
+    // Randomly swipe left or right
+    const swipeDirection = Math.random() > 0.5 ? 'swipe-left' : 'swipe-right';
+    currentCard.classList.add(swipeDirection);
+
+    // After animation completes, move to next card
+    setTimeout(() => {
+      currentIndex = (currentIndex + 1) % totalCards;
+      updateStack();
+
+      // Reset the swiped card position for next time
+      setTimeout(() => {
+        currentCard.classList.remove(swipeDirection);
+      }, 100);
+    }, 800); // Match the CSS transition duration
+  }
+
+  // Initialize stack
+  updateStack();
+
+  // Start auto-swipe
+  setInterval(swipeCard, slideDuration);
+</script>

@@ -3,39 +3,50 @@
  * Value Proposition Section Component - Level Garment Homepage
  *
  * Features:
- * - "Wujudkan Kebersamaan & Kreatifitas" heading
- * - Video gallery with 4 videos
- * - Responsive grid layout
- * - Lazy-loaded videos with poster images
+ * - "Wujudkan Kebersamaan & Kreatifitas" heading (left-aligned, full width no wrap)
+ * - Auto-sliding video carousel (7 videos, loops continuously)
+ * - Smooth horizontal sliding animation
+ * - Autoplay with no controls
  *
  * @version 1.0.0
  */
 
-// Video data - videos from CLI 6 optimization
+// Video data - 7 videos from project folder
 const videos = [
   {
     id: 1,
-    src: '/assets/videos/homepage/video_1.mp4',
-    poster: '/assets/videos/posters/video_1.webp',
+    src: '/assets/videos/homepage/video-1_1.mp4',
     alt: 'Level Garment Portfolio Video 1'
   },
   {
     id: 2,
-    src: '/assets/videos/homepage/video_2.mp4',
-    poster: '/assets/videos/posters/video_2.webp',
+    src: '/assets/videos/homepage/video-2_1.mp4',
     alt: 'Level Garment Portfolio Video 2'
   },
   {
     id: 3,
-    src: '/assets/videos/homepage/video_3.mp4',
-    poster: '/assets/videos/posters/video_3.webp',
+    src: '/assets/videos/homepage/video-3_1.mp4',
     alt: 'Level Garment Portfolio Video 3'
   },
   {
     id: 4,
-    src: '/assets/videos/homepage/video_4.mp4',
-    poster: '/assets/videos/posters/video_4.webp',
+    src: '/assets/videos/homepage/video-4_1.mp4',
     alt: 'Level Garment Portfolio Video 4'
+  },
+  {
+    id: 5,
+    src: '/assets/videos/homepage/video-5_1.mp4',
+    alt: 'Level Garment Portfolio Video 5'
+  },
+  {
+    id: 6,
+    src: '/assets/videos/homepage/video-6_1.mp4',
+    alt: 'Level Garment Portfolio Video 6'
+  },
+  {
+    id: 7,
+    src: '/assets/videos/homepage/video-7_1.mp4',
+    alt: 'Level Garment Portfolio Video 7'
   }
 ];
 
@@ -49,30 +60,27 @@ const sectionSubheading = "Mulai dari kaos, jaket, jersey, workshirt, topi semua
   id="value-proposition"
   class="value-proposition-section py-16 lg:py-24 bg-white"
 >
+  <!-- Section Header - Left Aligned -->
   <div class="container mx-auto px-4">
-    <!-- Section Header -->
-    <div class="text-center max-w-3xl mx-auto mb-12 lg:mb-16">
-      <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
+    <div class="text-left max-w-none mb-12 lg:mb-16">
+      <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-6 whitespace-nowrap">
         {sectionHeading}
       </h2>
       <p class="text-lg sm:text-xl text-gray-600">
         {sectionSubheading}
       </p>
     </div>
+  </div>
 
-    <!-- Video Gallery -->
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6">
-      {videos.map((video, index) => (
-        <div
-          class={`video-card group relative aspect-[9/16] rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1`}
-          style={`animation-delay: ${index * 0.1}s`}
-        >
-          <!-- Video Element -->
+  <!-- Auto-Sliding Video Carousel - Full Width -->
+  <div class="video-carousel-container overflow-hidden -mx-4 lg:-mx-0">
+    <div class="video-carousel-track flex gap-3 lg:gap-4 px-4 lg:px-0" id="videoTrack">
+      {videos.map((video) => (
+        <div class="video-card flex-shrink-0 w-[60vw] sm:w-[45vw] lg:w-[18vw] aspect-[9/16] rounded-xl overflow-hidden shadow-lg">
           <video
             src={video.src}
-            poster={video.poster}
             alt={video.alt}
-            class="absolute inset-0 w-full h-full object-cover"
+            class="w-full h-full object-cover"
             autoplay
             muted
             loop
@@ -80,23 +88,6 @@ const sectionSubheading = "Mulai dari kaos, jaket, jersey, workshirt, topi semua
             loading="lazy"
             preload="metadata"
           />
-
-          <!-- Overlay on hover -->
-          <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-
-          <!-- Play button overlay (shows on hover when paused) -->
-          <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
-            <div class="w-16 h-16 bg-white/90 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 shadow-lg">
-              <svg class="w-6 h-6 text-primary ml-1" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M8 5v14l11-7z"/>
-              </svg>
-            </div>
-          </div>
-
-          <!-- Video number indicator -->
-          <div class="absolute top-4 left-4 w-8 h-8 bg-primary/90 text-white rounded-full flex items-center justify-center text-sm font-semibold">
-            {index + 1}
-          </div>
         </div>
       ))}
     </div>
@@ -104,67 +95,68 @@ const sectionSubheading = "Mulai dari kaos, jaket, jersey, workshirt, topi semua
 </section>
 
 <style>
+  /* Video carousel smooth sliding animation */
+  .video-carousel-track {
+    animation: slideRight 20s linear infinite;
+  }
+
+  @keyframes slideRight {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+
+  /* Pause animation on hover */
+  .video-carousel-container:hover .video-carousel-track {
+    animation-play-state: paused;
+  }
+
   /* Video card styling */
   .video-card {
-    animation: fadeInUp 0.6s ease-out forwards;
-    opacity: 0;
-  }
-
-  @keyframes fadeInUp {
-    from {
-      opacity: 0;
-      transform: translateY(20px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-
-  /* Video hover effects */
-  .video-card:hover video {
-    transform: scale(1.05);
-    transition: transform 0.5s ease;
-  }
-
-  .video-card video {
-    transition: transform 0.5s ease;
-  }
-
-  /* Prevent video from being draggable */
-  .video-card video {
     user-select: none;
     -webkit-user-drag: none;
   }
 
-  /* Custom scrollbar for video section on small screens */
-  @media (max-width: 639px) {
-    .video-card {
-      scroll-snap-align: center;
-    }
+  .video-card video {
+    pointer-events: none;
+    user-select: none;
+    -webkit-user-drag: none;
   }
 </style>
 
 <script>
-  // Enhance video experience
-  document.querySelectorAll('.video-card').forEach((card) => {
-    const video = card.querySelector('video');
+  // Duplicate videos for seamless looping
+  const track = document.getElementById('videoTrack');
+  const videos = track.querySelectorAll('.video-card');
 
-    // Optional: Pause video when not in viewport to save resources
+  // Clone all videos and append to create seamless loop
+  videos.forEach((video) => {
+    const clone = video.cloneNode(true);
+    const videoElement = clone.querySelector('video');
+    // Reset cloned video
+    if (videoElement) {
+      videoElement.currentTime = 0;
+    }
+    track.appendChild(clone);
+  });
+
+  // Enhance video experience - autoplay when in viewport
+  document.querySelectorAll('.video-card video').forEach((video) => {
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
-          video?.play().catch(() => {
+          video.play().catch(() => {
             // Autoplay was prevented, that's okay
           });
-        } else {
-          video?.pause();
         }
       });
     }, {
-      threshold: 0.5
+      threshold: 0.1
     });
 
-    observer.observe(card);
+    observer.observe(video);
   });
 </script>

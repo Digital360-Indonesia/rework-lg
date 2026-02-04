@@ -1,0 +1,761 @@
+{
+  "categories": [
+    {
+      "id": "jaket",
+      "name": "Jaket",
+      "slug": "jacket"
+    },
+    {
+      "id": "kaos",
+      "name": "Kaos",
+      "slug": "kaos"
+    },
+    {
+      "id": "kemeja",
+      "name": "Kemeja",
+      "slug": "kemeja"
+    }
+  ],
+  "items": [
+    {
+      "id": "amanatul_ummah",
+      "name": "Madrasah Bertaraf Internasional (MBI) Amanatul Ummah",
+      "slug": "amanatul-ummah",
+      "category": "jaket",
+      "image": "/assets/images/portfolio/Gambar.jpg",
+      "thumbnail": "/assets/images/portfolio/Gambar.jpg",
+      "description": "Madrasah Bertaraf Internasional (MBI) Amanatul Ummah - Portfolio Level Garment",
+      "year": "2024"
+    },
+    {
+      "id": "jersey_sma_3_tuban",
+      "name": "Jersey SMA 3 Tuban",
+      "slug": "jersey-sma-3-tuban",
+      "category": "jaket",
+      "image": "/assets/images/portfolio/Printing.jpg",
+      "thumbnail": "/assets/images/portfolio/Printing.jpg",
+      "description": "Jersey SMA 3 Tuban - Portfolio Level Garment",
+      "year": "2024"
+    },
+    {
+      "id": "jersey_smp_tnh_mojokerto",
+      "name": "Jersey SMP TNH Mojokerto",
+      "slug": "jersey-smp-tnh-mojokerto",
+      "category": "jaket",
+      "image": "/assets/images/portfolio/Kain.png",
+      "thumbnail": "/assets/images/portfolio/Kain.png",
+      "description": "Jersey SMP TNH Mojokerto - Portfolio Level Garment",
+      "year": "2024"
+    },
+    {
+      "id": "cimsa_universitas_pelita_harapan",
+      "name": "CIMSA Universitas Pelita Harapan",
+      "slug": "cimsa-universitas-pelita-harapan",
+      "category": "jaket",
+      "image": "/assets/images/portfolio/portofolio-level.jpg",
+      "thumbnail": "/assets/images/portfolio/portofolio-level.jpg",
+      "description": "CIMSA Universitas Pelita Harapan - Portfolio Level Garment",
+      "year": "2024"
+    },
+    {
+      "id": "kaos_baseball_narkalin",
+      "name": "Kaos Baseball Narkalin",
+      "slug": "kaos-baseball-narkalin",
+      "category": "jaket",
+      "image": "/assets/images/portfolio/Portofolio.jpg",
+      "thumbnail": "/assets/images/portfolio/Portofolio.jpg",
+      "description": "Kaos Baseball Narkalin - Portfolio Level Garment",
+      "year": "2024"
+    },
+    {
+      "id": "actuarial_unesa",
+      "name": "Actuarial UNESA",
+      "slug": "actuarial-unesa",
+      "category": "kemeja",
+      "image": "/assets/images/portfolio/Kerah.jpg",
+      "thumbnail": "/assets/images/portfolio/Kerah.jpg",
+      "description": "Actuarial UNESA - Portfolio Level Garment",
+      "year": "2024"
+    },
+    {
+      "id": "jersey_baseball_beauviour_squad",
+      "name": "Jersey Baseball Beauviour Squad",
+      "slug": "jersey-baseball-beauviour-squad",
+      "category": "jaket",
+      "image": "/assets/images/portfolio/Printing-2.jpg",
+      "thumbnail": "/assets/images/portfolio/Printing-2.jpg",
+      "description": "Jersey Baseball Beauviour Squad - Portfolio Level Garment",
+      "year": "2024"
+    },
+    {
+      "id": "jersey_baseball_eternite",
+      "name": "Jersey Baseball Eternite",
+      "slug": "jersey-baseball-eternite",
+      "category": "jaket",
+      "image": "/assets/images/portfolio/portofolio-level.jpg",
+      "thumbnail": "/assets/images/portfolio/portofolio-level.jpg",
+      "description": "Jersey Baseball Eternite - Portfolio Level Garment",
+      "year": "2024"
+    },
+    {
+      "id": "gdgoc_by_universitas_gunadarma",
+      "name": "GDGoC By Universitas Gunadarma",
+      "slug": "gdgoc-by-universitas-gunadarma",
+      "category": "jaket",
+      "image": "/assets/images/portfolio/portofolio-level.jpg",
+      "thumbnail": "/assets/images/portfolio/portofolio-level.jpg",
+      "description": "GDGoC By Universitas Gunadarma - Portfolio Level Garment",
+      "year": "2024"
+    },
+    {
+      "id": "forever_red_bloods_its",
+      "name": "Forever Red Bloods ITS",
+      "slug": "forever-red-bloods-its",
+      "category": "jaket",
+      "image": "/assets/images/portfolio/portofolio-level.png",
+      "thumbnail": "/assets/images/portfolio/portofolio-level.png",
+      "description": "Forever Red Bloods ITS - Portfolio Level Garment",
+      "year": "2024"
+    },
+    {
+      "id": "master_of_machine_its",
+      "name": "Master Of Machine ITS",
+      "slug": "master-of-machine-its",
+      "category": "jaket",
+      "image": "/assets/images/portfolio/Sabon-2.jpg",
+      "thumbnail": "/assets/images/portfolio/Sabon-2.jpg",
+      "description": "Master Of Machine ITS - Portfolio Level Garment",
+      "year": "2024"
+    },
+    {
+      "id": "jaket_varsity_pens_choir",
+      "name": "Jaket Varsity PENS Choir",
+      "slug": "jaket-varsity-pens-choir",
+      "category": "jaket",
+      "image": "/assets/images/portfolio/portofolio-level.jpg",
+      "thumbnail": "/assets/images/portfolio/portofolio-level.jpg",
+      "description": "Jaket Varsity PENS Choir - Portfolio Level Garment",
+      "year": "2024"
+    },
+    {
+      "id": "jaket_varsity_argon_universitas_airlangga",
+      "name": "Jaket Varsity ARGON Universitas Airlangga",
+      "slug": "jaket-varsity-argon-universitas-airlangga",
+      "category": "jaket",
+      "image": "/assets/images/portfolio/portofolio-level.png",
+      "thumbnail": "/assets/images/portfolio/portofolio-level.png",
+      "description": "Jaket Varsity ARGON Universitas Airlangga - Portfolio Level Garment",
+      "year": "2024"
+    },
+    {
+      "id": "jaket_indist",
+      "name": "Jaket Indist",
+      "slug": "jaket-indist",
+      "category": "jaket",
+      "image": "/assets/images/portfolio/portofolio-level.jpg",
+      "thumbnail": "/assets/images/portfolio/portofolio-level.jpg",
+      "description": "Jaket Indist - Portfolio Level Garment",
+      "year": "2024"
+    },
+    {
+      "id": "dpm_universitas_muhammadiyah_lamongan",
+      "name": "DPM Universitas Muhammadiyah Lamongan",
+      "slug": "dpm-universitas-muhammadiyah-lamongan",
+      "category": "jaket",
+      "image": "/assets/images/portfolio/Saku-Racis.jpg",
+      "thumbnail": "/assets/images/portfolio/Saku-Racis.jpg",
+      "description": "DPM Universitas Muhammadiyah Lamongan - Portfolio Level Garment",
+      "year": "2024"
+    },
+    {
+      "id": "ukki_universitas_surabaya",
+      "name": "UKKI Universitas Surabaya",
+      "slug": "ukki-universitas-surabaya",
+      "category": "kemeja",
+      "image": "/assets/images/portfolio/portofolio-level.jpg",
+      "thumbnail": "/assets/images/portfolio/portofolio-level.jpg",
+      "description": "UKKI Universitas Surabaya - Portfolio Level Garment",
+      "year": "2024"
+    },
+    {
+      "id": "paduan_suara_universitas_surabaya",
+      "name": "Paduan Suara Universitas Surabaya",
+      "slug": "paduan-suara-universitas-surabaya",
+      "category": "jaket",
+      "image": "/assets/images/portfolio/portofolio-level.jpg",
+      "thumbnail": "/assets/images/portfolio/portofolio-level.jpg",
+      "description": "Paduan Suara Universitas Surabaya - Portfolio Level Garment",
+      "year": "2024"
+    },
+    {
+      "id": "food_technology_universitas_ciputra",
+      "name": "Food Technology Universitas Ciputra",
+      "slug": "food-technology-universitas-ciputra",
+      "category": "kemeja",
+      "image": "/assets/images/portfolio/portofolio-level.jpg",
+      "thumbnail": "/assets/images/portfolio/portofolio-level.jpg",
+      "description": "Food Technology Universitas Ciputra - Portfolio Level Garment",
+      "year": "2024"
+    },
+    {
+      "id": "jaket_varsity_its_software_engineering",
+      "name": "Jaket Varsity ITS Software Engineering",
+      "slug": "jaket-varsity-its-software-engineering",
+      "category": "jaket",
+      "image": "/assets/images/portfolio/portofolio-level.jpg",
+      "thumbnail": "/assets/images/portfolio/portofolio-level.jpg",
+      "description": "Jaket Varsity ITS Software Engineering - Portfolio Level Garment",
+      "year": "2024"
+    },
+    {
+      "id": "jaket_dki_farmasi_universitas_airlangga",
+      "name": "Jaket DKI Farmasi Universitas Airlangga",
+      "slug": "jaket-dki-farmasi-universitas-airlangga",
+      "category": "jaket",
+      "image": "/assets/images/portfolio/portofolio-level.jpg",
+      "thumbnail": "/assets/images/portfolio/portofolio-level.jpg",
+      "description": "Jaket DKI Farmasi Universitas Airlangga - Portfolio Level Garment",
+      "year": "2024"
+    },
+    {
+      "id": "jaket_varsity_sk_fisip_universitas_airlangga",
+      "name": "Jaket Varsity SK FISIP Universitas Airlangga",
+      "slug": "jaket-varsity-sk-fisip-universitas-airlangga",
+      "category": "jaket",
+      "image": "/assets/images/portfolio/portofolio-level.jpg",
+      "thumbnail": "/assets/images/portfolio/portofolio-level.jpg",
+      "description": "Jaket Varsity SK FISIP Universitas Airlangga - Portfolio Level Garment",
+      "year": "2024"
+    },
+    {
+      "id": "jaket_varsity_szeged_iisma_2024",
+      "name": "Jaket Varsity SZEGED IISMA 2024",
+      "slug": "jaket-varsity-szeged-iisma-2024",
+      "category": "jaket",
+      "image": "/assets/images/portfolio/portofolio-level.jpg",
+      "thumbnail": "/assets/images/portfolio/portofolio-level.jpg",
+      "description": "Jaket Varsity SZEGED IISMA 2024 - Portfolio Level Garment",
+      "year": "2024"
+    },
+    {
+      "id": "radio_muda_universitas_negerti_surabaya",
+      "name": "Radio Muda Universitas Negerti Surabaya",
+      "slug": "radio-muda-universitas-negerti-surabaya",
+      "category": "kemeja",
+      "image": "/assets/images/portfolio/portofolio-level-3.jpg",
+      "thumbnail": "/assets/images/portfolio/portofolio-level-3.jpg",
+      "description": "Radio Muda Universitas Negerti Surabaya - Portfolio Level Garment",
+      "year": "2024"
+    },
+    {
+      "id": "fakultas_kedokteran_universitas_muhammadiyah_surakarta",
+      "name": "Fakultas Kedokteran Universitas Muhammadiyah Surakarta",
+      "slug": "fakultas-kedokteran-universitas-muhammadiyah-surakarta",
+      "category": "kemeja",
+      "image": "/assets/images/portfolio/RESULT.jpg",
+      "thumbnail": "/assets/images/portfolio/RESULT.jpg",
+      "description": "Fakultas Kedokteran Universitas Muhammadiyah Surakarta - Portfolio Level Garment",
+      "year": "2024"
+    },
+    {
+      "id": "smp_budi_utomo",
+      "name": "SMP Budi Utomo",
+      "slug": "smp-budi-utomo",
+      "category": "kemeja",
+      "image": "/assets/images/portfolio/portofolio-level.jpg",
+      "thumbnail": "/assets/images/portfolio/portofolio-level.jpg",
+      "description": "SMP Budi Utomo - Portfolio Level Garment",
+      "year": "2024"
+    },
+    {
+      "id": "kemeja_bpm_universitas_sam_ratulangi",
+      "name": "Kemeja BPM Universitas Sam Ratulangi",
+      "slug": "kemeja-bpm-universitas-sam-ratulangi",
+      "category": "kemeja",
+      "image": "/assets/images/portfolio/portofolio-level.jpg",
+      "thumbnail": "/assets/images/portfolio/portofolio-level.jpg",
+      "description": "Kemeja BPM Universitas Sam Ratulangi - Portfolio Level Garment",
+      "year": "2024"
+    },
+    {
+      "id": "ini_lho_its",
+      "name": "Ini Lho ITS",
+      "slug": "ini-lho-its",
+      "category": "jaket",
+      "image": "/assets/images/portfolio/ProjectBoard_Level.jpg",
+      "thumbnail": "/assets/images/portfolio/ProjectBoard_Level.jpg",
+      "description": "Ini Lho ITS - Portfolio Level Garment",
+      "year": "2024"
+    },
+    {
+      "id": "electric_burnout",
+      "name": "SMP Yohanes",
+      "slug": "electric-burnout",
+      "category": "jaket",
+      "image": "/assets/images/portfolio/ProjectBoard_Level.jpg",
+      "thumbnail": "/assets/images/portfolio/ProjectBoard_Level.jpg",
+      "description": "SMP Yohanes - Portfolio Level Garment",
+      "year": "2024"
+    },
+    {
+      "id": "socience_21",
+      "name": "SOCIENCE 21",
+      "slug": "socience-21",
+      "category": "jaket",
+      "image": "/assets/images/portfolio/Sablon-2.png",
+      "thumbnail": "/assets/images/portfolio/Sablon-2.png",
+      "description": "SOCIENCE 21 - Portfolio Level Garment",
+      "year": "2024"
+    },
+    {
+      "id": "mabista_day_universitas_17_agustus",
+      "name": "MABISTA DAY UNIVERSITAS 17 AGUSTUS",
+      "slug": "mabista-day-universitas-17-agustus",
+      "category": "jaket",
+      "image": "/assets/images/portfolio/ProjectBoard_Level.jpg",
+      "thumbnail": "/assets/images/portfolio/ProjectBoard_Level.jpg",
+      "description": "MABISTA DAY UNIVERSITAS 17 AGUSTUS - Portfolio Level Garment",
+      "year": "2024"
+    },
+    {
+      "id": "kaos_smaxi",
+      "name": "Kaos SMAXI",
+      "slug": "kaos-smaxi",
+      "category": "jaket",
+      "image": "/assets/images/portfolio/ProjectBoard_Level.png",
+      "thumbnail": "/assets/images/portfolio/ProjectBoard_Level.png",
+      "description": "Kaos SMAXI - Portfolio Level Garment",
+      "year": "2024"
+    },
+    {
+      "id": "smp_negeri_1_gunung_meriah",
+      "name": "SMP Negeri 1 Gunung Meriah",
+      "slug": "smp-negeri-1-gunung-meriah",
+      "category": "jaket",
+      "image": "/assets/images/portfolio/ProjectBoard_Level.png",
+      "thumbnail": "/assets/images/portfolio/ProjectBoard_Level.png",
+      "description": "SMP Negeri 1 Gunung Meriah - Portfolio Level Garment",
+      "year": "2024"
+    },
+    {
+      "id": "tim_sapuangin_its",
+      "name": "Tim Sapuangin (ITS)",
+      "slug": "tim-sapuangin-its",
+      "category": "kemeja",
+      "image": "/assets/images/portfolio/RESULT.jpg",
+      "thumbnail": "/assets/images/portfolio/RESULT.jpg",
+      "description": "Tim Sapuangin (ITS) - Portfolio Level Garment",
+      "year": "2024"
+    },
+    {
+      "id": "terrasen_its",
+      "name": "TERRASEN ITS",
+      "slug": "terrasen-its",
+      "category": "jaket",
+      "image": "/assets/images/portfolio/FULL.jpg",
+      "thumbnail": "/assets/images/portfolio/FULL.jpg",
+      "description": "TERRASEN ITS - Portfolio Level Garment",
+      "year": "2024"
+    },
+    {
+      "id": "jaket_varsity_smp_muham",
+      "name": "Jaket Varsity SMP Muhammadiyah 5",
+      "slug": "jaket-varsity-smp-muham",
+      "category": "jaket",
+      "image": "/assets/images/portfolio/RESULT.jpg",
+      "thumbnail": "/assets/images/portfolio/RESULT.jpg",
+      "description": "Jaket Varsity SMP Muhammadiyah 5 - Portfolio Level Garment",
+      "year": "2024"
+    },
+    {
+      "id": "jaket_versity_winee",
+      "name": "Jaket Varsity Exine",
+      "slug": "jaket-versity-winee",
+      "category": "jaket",
+      "image": "/assets/images/portfolio/Desain-tanpa-judul.png",
+      "thumbnail": "/assets/images/portfolio/Desain-tanpa-judul.png",
+      "description": "Jaket Varsity Exine - Portfolio Level Garment",
+      "year": "2024"
+    },
+    {
+      "id": "dewo_robotic_unesa",
+      "name": "DEWO ROBOTIC UNESA",
+      "slug": "dewo-robotic-unesa",
+      "category": "jaket",
+      "image": "/assets/images/portfolio/Desain-tanpa-judul.png",
+      "thumbnail": "/assets/images/portfolio/Desain-tanpa-judul.png",
+      "description": "DEWO ROBOTIC UNESA - Portfolio Level Garment",
+      "year": "2024"
+    },
+    {
+      "id": "its_tim_sapuangin",
+      "name": "ITS Tim Sapuangin",
+      "slug": "its-tim-sapuangin",
+      "category": "jaket",
+      "image": "/assets/images/portfolio/Desain-tanpa-judul.jpg",
+      "thumbnail": "/assets/images/portfolio/Desain-tanpa-judul.jpg",
+      "description": "ITS Tim Sapuangin - Portfolio Level Garment",
+      "year": "2024"
+    },
+    {
+      "id": "kemeja_dubelsbee",
+      "name": "Kemeja Dubelsbee",
+      "slug": "kemeja-dubelsbee",
+      "category": "jaket",
+      "image": "/assets/images/portfolio/Lengan-Pendek.png",
+      "thumbnail": "/assets/images/portfolio/Lengan-Pendek.png",
+      "description": "Kemeja Dubelsbee - Portfolio Level Garment",
+      "year": "2024"
+    },
+    {
+      "id": "desporev_univ_petra",
+      "name": "Univ Petra Desporev",
+      "slug": "desporev-univ-petra",
+      "category": "jaket",
+      "image": "/assets/images/portfolio/DTF202.webp",
+      "thumbnail": "/assets/images/portfolio/DTF202.webp",
+      "description": "Univ Petra Desporev - Portfolio Level Garment",
+      "year": "2024"
+    },
+    {
+      "id": "untag_sastra_jepang",
+      "name": "Untag Sastra Jepang",
+      "slug": "untag-sastra-jepang",
+      "category": "jaket",
+      "image": "/assets/images/portfolio/Banner-2.webp",
+      "thumbnail": "/assets/images/portfolio/Banner-2.webp",
+      "description": "Untag Sastra Jepang - Portfolio Level Garment",
+      "year": "2024"
+    },
+    {
+      "id": "kemeja_himawari_untag",
+      "name": "Himawari Untag",
+      "slug": "kemeja-himawari-untag",
+      "category": "kemeja",
+      "image": "/assets/images/portfolio/Banner-5.jpg",
+      "thumbnail": "/assets/images/portfolio/Banner-5.jpg",
+      "description": "Himawari Untag - Portfolio Level Garment",
+      "year": "2024"
+    },
+    {
+      "id": "digiknow_institut_teknologi_telkom_surabaya",
+      "name": "ITTS Digiknow",
+      "slug": "digiknow-institut-teknologi-telkom-surabaya",
+      "category": "jaket",
+      "image": "/assets/images/portfolio/Banner_5_11zon.jpg",
+      "thumbnail": "/assets/images/portfolio/Banner_5_11zon.jpg",
+      "description": "ITTS Digiknow - Portfolio Level Garment",
+      "year": "2024"
+    },
+    {
+      "id": "digiknow_telkom_indonesia",
+      "name": "ITTS DigiKnow",
+      "slug": "digiknow-telkom-indonesia",
+      "category": "jaket",
+      "image": "/assets/images/portfolio/Banner_1_11zon.jpg",
+      "thumbnail": "/assets/images/portfolio/Banner_1_11zon.jpg",
+      "description": "ITTS DigiKnow - Portfolio Level Garment",
+      "year": "2024"
+    },
+    {
+      "id": "entrepreneur_itts_kemeja",
+      "name": "ITTS Entrepreneur",
+      "slug": "entrepreneur-itts-kemeja",
+      "category": "jaket",
+      "image": "/assets/images/portfolio/Bannner.webp",
+      "thumbnail": "/assets/images/portfolio/Bannner.webp",
+      "description": "ITTS Entrepreneur - Portfolio Level Garment",
+      "year": "2024"
+    },
+    {
+      "id": "mbi_amanatul_ummah_2",
+      "name": "MBI Amanatul Ummah",
+      "slug": "mbi-amanatul-ummah-2",
+      "category": "jaket",
+      "image": "/assets/images/portfolio/Full-View.jpg",
+      "thumbnail": "/assets/images/portfolio/Full-View.jpg",
+      "description": "MBI Amanatul Ummah - Portfolio Level Garment",
+      "year": "2024"
+    },
+    {
+      "id": "sma_kemala_bhayangkari",
+      "name": "SMA Kemala Bhayangkari",
+      "slug": "sma-kemala-bhayangkari",
+      "category": "jaket",
+      "image": "/assets/images/portfolio/baner.jpg",
+      "thumbnail": "/assets/images/portfolio/baner.jpg",
+      "description": "SMA Kemala Bhayangkari - Portfolio Level Garment",
+      "year": "2024"
+    },
+    {
+      "id": "hang_tuah",
+      "name": "Hang Tuah",
+      "slug": "hang-tuah",
+      "category": "jaket",
+      "image": "/assets/images/portfolio/Full-view.jpg",
+      "thumbnail": "/assets/images/portfolio/Full-view.jpg",
+      "description": "Hang Tuah - Portfolio Level Garment",
+      "year": "2024"
+    },
+    {
+      "id": "domus",
+      "name": "Domus",
+      "slug": "domus",
+      "category": "jaket",
+      "image": "/assets/images/portfolio/Banner-min.jpg",
+      "thumbnail": "/assets/images/portfolio/Banner-min.jpg",
+      "description": "Domus - Portfolio Level Garment",
+      "year": "2024"
+    },
+    {
+      "id": "pmm_3_unair",
+      "name": "PMM 3 UNAIR",
+      "slug": "pmm-3-unair",
+      "category": "jaket",
+      "image": "/assets/images/portfolio/WhatsApp-Image-2023-12-29-at-10.51.36.jpeg",
+      "thumbnail": "/assets/images/portfolio/WhatsApp-Image-2023-12-29-at-10.51.36.jpeg",
+      "description": "PMM 3 UNAIR - Portfolio Level Garment",
+      "year": "2024"
+    },
+    {
+      "id": "universitas_airlangga_4",
+      "name": "Universitas Airlangga",
+      "slug": "universitas-airlangga-4",
+      "category": "kemeja",
+      "image": "/assets/images/portfolio/Full-view.jpg",
+      "thumbnail": "/assets/images/portfolio/Full-view.jpg",
+      "description": "Universitas Airlangga - Portfolio Level Garment",
+      "year": "2024"
+    },
+    {
+      "id": "institut_teknologi_sepuluh_nopember_2",
+      "name": "Institut Teknologi Sepuluh Nopember",
+      "slug": "institut-teknologi-sepuluh-nopember-2",
+      "category": "kaos",
+      "image": "/assets/images/portfolio/Banner-bawah.jpg",
+      "thumbnail": "/assets/images/portfolio/Banner-bawah.jpg",
+      "description": "Institut Teknologi Sepuluh Nopember - Portfolio Level Garment",
+      "year": "2024"
+    },
+    {
+      "id": "tech_explorer_its",
+      "name": "TECH EXPLORER ITS",
+      "slug": "tech-explorer-its",
+      "category": "kaos",
+      "image": "/assets/images/portfolio/Banner.jpg",
+      "thumbnail": "/assets/images/portfolio/Banner.jpg",
+      "description": "TECH EXPLORER ITS - Portfolio Level Garment",
+      "year": "2024"
+    },
+    {
+      "id": "aiesec_kaos",
+      "name": "AIESEC",
+      "slug": "aiesec-kaos",
+      "category": "kaos",
+      "image": "/assets/images/portfolio/142.jpg",
+      "thumbnail": "/assets/images/portfolio/142.jpg",
+      "description": "AIESEC - Portfolio Level Garment",
+      "year": "2024"
+    },
+    {
+      "id": "kedokteran_gigi_universitas_hang_tuah",
+      "name": "Kedokteran Gigi Universitas Hang Tuah",
+      "slug": "kedokteran-gigi-universitas-hang-tuah",
+      "category": "kemeja",
+      "image": "/assets/images/portfolio/Full-view.jpg",
+      "thumbnail": "/assets/images/portfolio/Full-view.jpg",
+      "description": "Kedokteran Gigi Universitas Hang Tuah - Portfolio Level Garment",
+      "year": "2024"
+    },
+    {
+      "id": "universitas_airlangga_2",
+      "name": "Universitas Airlangga",
+      "slug": "universitas-airlangga-2",
+      "category": "kemeja",
+      "image": "/assets/images/portfolio/Banner.jpg",
+      "thumbnail": "/assets/images/portfolio/Banner.jpg",
+      "description": "Universitas Airlangga - Portfolio Level Garment",
+      "year": "2024"
+    },
+    {
+      "id": "ubaya_choir",
+      "name": "UBAYA CHOIR",
+      "slug": "ubaya-choir",
+      "category": "kemeja",
+      "image": "/assets/images/portfolio/Banner.jpg",
+      "thumbnail": "/assets/images/portfolio/Banner.jpg",
+      "description": "UBAYA CHOIR - Portfolio Level Garment",
+      "year": "2024"
+    },
+    {
+      "id": "universitas_airlangga_3",
+      "name": "Universitas Airlangga",
+      "slug": "universitas-airlangga-3",
+      "category": "jaket",
+      "image": "/assets/images/portfolio/Banner.jpg",
+      "thumbnail": "/assets/images/portfolio/Banner.jpg",
+      "description": "Universitas Airlangga - Portfolio Level Garment",
+      "year": "2024"
+    },
+    {
+      "id": "institut_teknologi_sepuluh_nopember",
+      "name": "Institut Teknologi Sepuluh Nopember",
+      "slug": "institut-teknologi-sepuluh-nopember",
+      "category": "kemeja",
+      "image": "/assets/images/portfolio/WhatsApp-Image-2023-12-29-at-11.03.31-4.jpeg",
+      "thumbnail": "/assets/images/portfolio/WhatsApp-Image-2023-12-29-at-11.03.31-4.jpeg",
+      "description": "Institut Teknologi Sepuluh Nopember - Portfolio Level Garment",
+      "year": "2024"
+    },
+    {
+      "id": "scetch",
+      "name": "SCETCH",
+      "slug": "scetch",
+      "category": "kaos",
+      "image": "/assets/images/portfolio/Full-view.jpg",
+      "thumbnail": "/assets/images/portfolio/Full-view.jpg",
+      "description": "SCETCH - Portfolio Level Garment",
+      "year": "2024"
+    },
+    {
+      "id": "ubaya",
+      "name": "UBAYA",
+      "slug": "ubaya",
+      "category": "kemeja",
+      "image": "/assets/images/portfolio/Banner.jpg",
+      "thumbnail": "/assets/images/portfolio/Banner.jpg",
+      "description": "UBAYA - Portfolio Level Garment",
+      "year": "2024"
+    },
+    {
+      "id": "perpajakan_unair",
+      "name": "Perpajakan Unair",
+      "slug": "perpajakan-unair",
+      "category": "kemeja",
+      "image": "/assets/images/portfolio/Baner.jpg",
+      "thumbnail": "/assets/images/portfolio/Baner.jpg",
+      "description": "Perpajakan Unair - Portfolio Level Garment",
+      "year": "2024"
+    },
+    {
+      "id": "barunastra_its",
+      "name": "Barunastra ITS",
+      "slug": "barunastra-its",
+      "category": "kaos",
+      "image": "/assets/images/portfolio/Banner.jpg",
+      "thumbnail": "/assets/images/portfolio/Banner.jpg",
+      "description": "Barunastra ITS - Portfolio Level Garment",
+      "year": "2024"
+    },
+    {
+      "id": "universitas_airlangga",
+      "name": "Universitas Airlangga",
+      "slug": "universitas-airlangga",
+      "category": "jaket",
+      "image": "/assets/images/portfolio/Banner_1_11zon.jpg",
+      "thumbnail": "/assets/images/portfolio/Banner_1_11zon.jpg",
+      "description": "Universitas Airlangga - Portfolio Level Garment",
+      "year": "2024"
+    },
+    {
+      "id": "tenis_meja_universitas_airlangga",
+      "name": "Tenis Meja Universitas Airlangga",
+      "slug": "tenis-meja-universitas-airlangga",
+      "category": "jaket",
+      "image": "/assets/images/portfolio/Banner_1_11zon.jpg",
+      "thumbnail": "/assets/images/portfolio/Banner_1_11zon.jpg",
+      "description": "Tenis Meja Universitas Airlangga - Portfolio Level Garment",
+      "year": "2024"
+    },
+    {
+      "id": "mbi_amanatul_ummah",
+      "name": "MBI Amanatul Ummah",
+      "slug": "mbi-amanatul-ummah",
+      "category": "jaket",
+      "image": "/assets/images/portfolio/Banner_1_11zon.jpg",
+      "thumbnail": "/assets/images/portfolio/Banner_1_11zon.jpg",
+      "description": "MBI Amanatul Ummah - Portfolio Level Garment",
+      "year": "2024"
+    },
+    {
+      "id": "ftmm_universitas_airlangga",
+      "name": "FTMM Universitas Airlangga",
+      "slug": "ftmm-universitas-airlangga",
+      "category": "jaket",
+      "image": "/assets/images/portfolio/Banner_1_11zon.jpg",
+      "thumbnail": "/assets/images/portfolio/Banner_1_11zon.jpg",
+      "description": "FTMM Universitas Airlangga - Portfolio Level Garment",
+      "year": "2024"
+    },
+    {
+      "id": "aiesec",
+      "name": "AIESEC",
+      "slug": "aiesec",
+      "category": "jaket",
+      "image": "/assets/images/portfolio/Banner_1_11zon.jpg",
+      "thumbnail": "/assets/images/portfolio/Banner_1_11zon.jpg",
+      "description": "AIESEC - Portfolio Level Garment",
+      "year": "2024"
+    },
+    {
+      "id": "universitas_narotama",
+      "name": "Universitas Narotama",
+      "slug": "universitas-narotama",
+      "category": "kemeja",
+      "image": "/assets/images/portfolio/Banner_4_11zon.jpg",
+      "thumbnail": "/assets/images/portfolio/Banner_4_11zon.jpg",
+      "description": "Universitas Narotama - Portfolio Level Garment",
+      "year": "2024"
+    },
+    {
+      "id": "upn_arsitektur",
+      "name": "UPN Arsitektur",
+      "slug": "upn-arsitektur",
+      "category": "jaket",
+      "image": "/assets/images/portfolio/Banner.webp",
+      "thumbnail": "/assets/images/portfolio/Banner.webp",
+      "description": "UPN Arsitektur - Portfolio Level Garment",
+      "year": "2024"
+    },
+    {
+      "id": "robotics_its",
+      "name": "ITS Robotics",
+      "slug": "robotics-its",
+      "category": "jaket",
+      "image": "/assets/images/portfolio/Banner-2.webp",
+      "thumbnail": "/assets/images/portfolio/Banner-2.webp",
+      "description": "ITS Robotics - Portfolio Level Garment",
+      "year": "2024"
+    },
+    {
+      "id": "sma_mumammadiyah_2_sidoarjo",
+      "name": "SMA Mumammadiyah 2 Sidoarjo",
+      "slug": "sma-mumammadiyah-2-sidoarjo",
+      "category": "jaket",
+      "image": "/assets/images/portfolio/Bordir.webp",
+      "thumbnail": "/assets/images/portfolio/Bordir.webp",
+      "description": "SMA Mumammadiyah 2 Sidoarjo - Portfolio Level Garment",
+      "year": "2024"
+    },
+    {
+      "id": "boarschar",
+      "name": "AR Rohmah Islamic Boarding School",
+      "slug": "boarschar",
+      "category": "jaket",
+      "image": "/assets/images/portfolio/Banner.webp",
+      "thumbnail": "/assets/images/portfolio/Banner.webp",
+      "description": "AR Rohmah Islamic Boarding School - Portfolio Level Garment",
+      "year": "2024"
+    },
+    {
+      "id": "politeknik_pelayaran_topi",
+      "name": "Politeknik Pelayaran",
+      "slug": "politeknik-pelayaran-topi",
+      "category": "jaket",
+      "image": "/assets/images/portfolio/ezgif.com-gif-maker.webp",
+      "thumbnail": "/assets/images/portfolio/ezgif.com-gif-maker.webp",
+      "description": "Politeknik Pelayaran - Portfolio Level Garment",
+      "year": "2024"
+    }
+  ]
+}
