@@ -72,11 +72,9 @@ const pageType = type === 'article' ? 'article' : 'website';
   <meta name="twitter:description" content={description}>
   <meta name="twitter:image" content={new URL(image, siteConfig.siteUrl)}>
 
-  <!-- Favicon - from levelgarment.com -->
+  <!-- Favicon -->
   <link rel="icon" type="image/png" sizes="196x196" href="/favicon.png">
-  <link rel="icon" type="image/png" sizes="196x196" href="/07062024-lg-favicon.png">
   <link rel="apple-touch-icon" sizes="196x196" href="/favicon.png">
-  <link rel="apple-touch-icon" sizes="196x196" href="/07062024-lg-favicon.png">
 
   <!-- Fonts - matches live site levelgarment.com (Poppins, Inter, Montserrat, Roboto) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -96,7 +94,7 @@ const pageType = type === 'article' ? 'article' : 'website';
       "url": siteConfig.siteUrl,
       "logo": {
         "@type": "ImageObject",
-        "url": new URL('/assets/images/logo.png', siteConfig.siteUrl)
+        "url": new URL('/assets/images/logo/lg-logo.png', siteConfig.siteUrl)
       },
       "sameAs": [
         siteConfig.social.instagram,
