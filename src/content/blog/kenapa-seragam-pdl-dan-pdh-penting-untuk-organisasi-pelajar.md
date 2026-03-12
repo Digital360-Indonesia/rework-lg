@@ -3,7 +3,7 @@ title: "Kenapa Seragam PDL dan PDH Penting untuk Organisasi Pelajar?"
 titleEn: "Kenapa Seragam PDL dan PDH Penting untuk Organisasi Pelajar?"
 description: "Tingkatkan kekompakan organisasi pelajar Anda dengan seragam PDL dan PDH! Pelajari pentingnya seragam ini untuk organisasi Anda di sini."
 descriptionEn: "Tingkatkan kekompakan organisasi pelajar Anda dengan seragam PDL dan PDH! Pelajari pentingnya seragam ini untuk organisasi Anda di sini."
-pubDate: 2025-05-15
+pubDate: 2026-02-17
 author: "Level Garment Team"
 image: "/assets/images/blog/2025-01-17-Kenapa-Seragam-PDL-dan-PDH-Penting-untuk-Organisasi-Pelajar.jpg"
 tags: ['seragam']

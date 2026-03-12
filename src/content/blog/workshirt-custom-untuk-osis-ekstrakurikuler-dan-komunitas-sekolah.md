@@ -3,7 +3,7 @@ title: "Workshirt Custom untuk OSIS, Ekstrakurikuler, dan Komunitas Sekolah"
 titleEn: "Workshirt Custom untuk OSIS, Ekstrakurikuler, dan Komunitas Sekolah"
 description: "Buat workshirt custom keren dan seragam untuk OSIS, ekstrakurikuler, dan komunitas sekolah di Level Garment. Desain bebas, bahan premium, dan harga terjangkau!"
 descriptionEn: "Buat workshirt custom keren dan seragam untuk OSIS, ekstrakurikuler, dan komunitas sekolah di Level Garment. Desain bebas, bahan premium, dan harga terjangkau!"
-pubDate: 2025-06-14
+pubDate: 2026-03-09
 author: "Level Garment Team"
 image: "/assets/images/blog/3.png"
 tags: ['custom', 'workshirt']

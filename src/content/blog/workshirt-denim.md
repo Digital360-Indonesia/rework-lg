@@ -3,7 +3,7 @@ title: "Workshirt Denim: Keunggulan, Cara Memilih, dan Tips Perawatan yang Tepat
 titleEn: "Workshirt Denim: Keunggulan, Cara Memilih, dan Tips Perawatan yang Tepat"
 description: "Temukan keunggulan workshirt denim untuk gaya kasual dan profesional. Pelajari cara memilih, merawat, serta memadukan workshirt denim agar tetap stylish."
 descriptionEn: "Temukan keunggulan workshirt denim untuk gaya kasual dan profesional. Pelajari cara memilih, merawat, serta memadukan workshirt denim agar tetap stylish."
-pubDate: 2025-05-15
+pubDate: 2026-03-10
 author: "Level Garment Team"
 image: "/assets/images/blog/2025-02-20-Workshirt-Denim-Panduan-Lengkap-Memilih-dan-Merawat-Kemeja-Denim-yang-Stylish.jpg"
 tags: ['tips', 'workshirt']

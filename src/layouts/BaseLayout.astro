@@ -109,7 +109,7 @@ const pageType = type === 'article' ? 'article' : 'website';
   })} type="application/ld+json"></script>
 </head>
 
-<body class="min-h-screen flex flex-col">
+<body class="min-h-screen flex flex-col overflow-x-hidden">
   <!-- Skip to main content for accessibility -->
   <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 bg-primary text-white px-4 py-2 rounded-lg z-50">
     Skip to main content
@@ -130,9 +130,9 @@ const pageType = type === 'article' ? 'article' : 'website';
   <button
     id="back-to-top"
     aria-label="Back to top"
-    class="fixed bottom-8 right-8 bg-primary text-white p-3 rounded-full shadow-lg opacity-0 invisible transition-all duration-300 hover:bg-primary-dark z-40"
+    class="fixed bottom-20 right-4 sm:bottom-8 sm:right-8 bg-primary text-white p-2.5 sm:p-3 rounded-full shadow-lg opacity-0 invisible transition-all duration-300 hover:bg-primary-dark z-40"
   >
-    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 sm:h-6 sm:w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18" />
     </svg>
   </button>

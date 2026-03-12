@@ -3,7 +3,7 @@ title: "Kenapa Pelajar dan Mahasiswa Pilih Level Garment untuk Outfit Komunitasn
 titleEn: "Kenapa Pelajar dan Mahasiswa Pilih Level Garment untuk Outfit Komunitasnya?"
 description: "Level Garment jadi pilihan utama pelajar dan mahasiswa untuk outfit komunitas karena kualitas produk, desain kreatif, serta pelayanan personal. Temukan alasannya di sini."
 descriptionEn: "Level Garment jadi pilihan utama pelajar dan mahasiswa untuk outfit komunitas karena kualitas produk, desain kreatif, serta pelayanan personal. Temukan alasannya di sini."
-pubDate: 2025-06-17
+pubDate: 2026-02-15
 author: "Level Garment Team"
 image: "/assets/images/blog/4.png"
 tags: ['artikel']

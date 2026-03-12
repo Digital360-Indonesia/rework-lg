@@ -3,7 +3,7 @@ title: "Konveksi Jersey Pelajar: Cocok untuk Futsal, Basket, dan E-Sport"
 titleEn: "Konveksi Jersey Pelajar: Cocok untuk Futsal, Basket, dan E-Sport"
 description: "Level Garment solusi konveksi jersey pelajar custom untuk futsal, basket, dan e-sport. Bahan premium, desain bebas, dan pemesanan satuan."
 descriptionEn: "Level Garment solusi konveksi jersey pelajar custom untuk futsal, basket, dan e-sport. Bahan premium, desain bebas, dan pemesanan satuan."
-pubDate: 2025-06-16
+pubDate: 2026-02-20
 author: "Level Garment Team"
 image: "/assets/images/blog/5.png"
 tags: ['jersey', 'konveksi']

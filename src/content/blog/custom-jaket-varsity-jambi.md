@@ -3,7 +3,7 @@ title: "Custom Jaket Varsity Jambi: Pilihan Terbaik untuk Tampil Beda di Jambi"
 titleEn: "Custom Jaket Varsity Jambi: Pilihan Terbaik untuk Tampil Beda di Jambi"
 description: "Buat jaket kelas atau jaket angkatan dengan model varsity di Jambi. Tampilkan identitas dan kebersamaan dengan custom jaket varsity yang sesuai gaya Anda."
 descriptionEn: "Buat jaket kelas atau jaket angkatan dengan model varsity di Jambi. Tampilkan identitas dan kebersamaan dengan custom jaket varsity yang sesuai gaya Anda."
-pubDate: 2024-06-13
+pubDate: 2025-12-02
 author: "Level Garment Team"
 image: "/assets/images/blog/17-05-2024-levg-slide.png"
 tags: ['jaket', 'varsity', 'custom']

@@ -3,7 +3,7 @@ title: "Pakaian Casual untuk Hangout Pilihan Tepat untuk Remaja"
 titleEn: "Pakaian Casual untuk Hangout Pilihan Tepat untuk Remaja"
 description: "Pakaian Casual untuk Hangout Pilihan Tepat untuk Remaja"
 descriptionEn: "Pakaian Casual untuk Hangout Pilihan Tepat untuk Remaja"
-pubDate: 2024-09-23
+pubDate: 2026-02-25
 author: "Level Garment Team"
 image: "/assets/images/blog/casual-outfits-for-teens.jpg"
 tags: ['artikel']

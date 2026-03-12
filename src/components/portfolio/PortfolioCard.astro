@@ -99,4 +99,28 @@ const categoryDisplay = category.charAt(0).toUpperCase() + category.slice(1);
     -webkit-box-orient: vertical;
     overflow: hidden;
   }
+
+  /* Mobile responsive adjustments */
+  @media (max-width: 639px) {
+    .portfolio-card .p-6 {
+      padding: 1rem;
+    }
+
+    .portfolio-card h3 {
+      font-size: 1rem;
+    }
+
+    .portfolio-card .text-gray-600 {
+      font-size: 0.8125rem;
+    }
+
+    .portfolio-card .absolute.top-4 {
+      top: 0.75rem;
+    }
+
+    .portfolio-card .px-3.py-1 {
+      padding: 0.25rem 0.625rem;
+      font-size: 0.6875rem;
+    }
+  }
 </style>

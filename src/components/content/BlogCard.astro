@@ -139,4 +139,23 @@ const getCategoryColor = (cat: string) => {
     flex: 1;
     margin-bottom: 1rem;
   }
+
+  /* Mobile responsive adjustments */
+  @media (max-width: 639px) {
+    .blog-card-content {
+      padding: 1rem !important;
+    }
+
+    .blog-card-content h3 {
+      font-size: 1rem !important;
+    }
+
+    .blog-card-content .text-gray-600 {
+      font-size: 0.8125rem;
+    }
+
+    .blog-card-content .text-sm {
+      font-size: 0.6875rem;
+    }
+  }
 </style>

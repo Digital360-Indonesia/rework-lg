@@ -3,7 +3,7 @@ title: "Streetwear vs Casual Wear: Mana yang Lebih Diminati Anak Muda?"
 titleEn: "Streetwear vs Casual Wear: Mana yang Lebih Diminati Anak Muda?"
 description: "Streetwear atau casual wear, mana yang lebih digemari anak muda? Simak perbedaannya dan bagaimana brand garment bisa memanfaatkan tren ini untuk sukses di pasar fashion!"
 descriptionEn: "Streetwear atau casual wear, mana yang lebih digemari anak muda? Simak perbedaannya dan bagaimana brand garment bisa memanfaatkan tren ini untuk sukses di pasar fashion!"
-pubDate: 2025-05-15
+pubDate: 2026-03-03
 author: "Level Garment Team"
 image: "/assets/images/blog/2025-03-19-Streetwear-vs-Casual-Wear-Mana-yang-Lebih-Diminati-Anak-Muda.jpg"
 tags: ['artikel']

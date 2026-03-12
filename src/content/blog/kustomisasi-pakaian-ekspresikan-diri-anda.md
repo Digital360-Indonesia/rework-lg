@@ -3,7 +3,7 @@ title: "Kustomisasi Pakaian: Ekspresikan Diri Anda dengan Gaya Sendiri"
 titleEn: "Kustomisasi Pakaian: Ekspresikan Diri Anda dengan Gaya Sendiri"
 description: "Kustomisasi Pakaian: Ekspresikan Diri Anda dengan Gaya Sendiri"
 descriptionEn: "Kustomisasi Pakaian: Ekspresikan Diri Anda dengan Gaya Sendiri"
-pubDate: 2024-09-23
+pubDate: 2026-02-22
 author: "Level Garment Team"
 image: "/assets/images/blog/Kustomisasi-Pakaian-Ekspresikan-Diri-Anda-dengan-Gaya-Sendiri.jpg"
 tags: ['artikel']

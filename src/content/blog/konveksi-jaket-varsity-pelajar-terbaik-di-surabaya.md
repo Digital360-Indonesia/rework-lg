@@ -3,7 +3,7 @@ title: "Konveksi Jaket Varsity Pelajar Terbaik di Surabaya"
 titleEn: "Konveksi Jaket Varsity Pelajar Terbaik di Surabaya"
 description: "Cari seragam komunitas pelajar custom satuan di Surabaya? Level Garment: layanan profesional, bebas desain, tanpa minimal order, dan kualitas premium."
 descriptionEn: "Cari seragam komunitas pelajar custom satuan di Surabaya? Level Garment: layanan profesional, bebas desain, tanpa minimal order, dan kualitas premium."
-pubDate: 2025-06-13
+pubDate: 2026-02-19
 author: "Level Garment Team"
 image: "/assets/images/blog/11.png"
 tags: ['jaket', 'varsity', 'konveksi', 'surabaya']

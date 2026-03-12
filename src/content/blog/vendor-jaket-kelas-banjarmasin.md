@@ -3,7 +3,7 @@ title: "Vendor Jaket Kelas di Banjarmasin: Kenapa Level Garment Adalah Pilihan U
 titleEn: "Vendor Jaket Kelas di Banjarmasin: Kenapa Level Garment Adalah Pilihan Utama untuk Jaket Sekolah Anda"
 description: "Temukan vendor jaket kelas terbaik di Banjarmasin dengan Level Garment! mulai dari jaket varsity dan jaket coach, dengan desain modern."
 descriptionEn: "Temukan vendor jaket kelas terbaik di Banjarmasin dengan Level Garment! mulai dari jaket varsity dan jaket coach, dengan desain modern."
-pubDate: 2024-07-30
+pubDate: 2026-01-03
 author: "Level Garment Team"
 image: "/assets/images/blog/17-05-2024-levg-slide.png"
 tags: ['jaket', 'kelas']

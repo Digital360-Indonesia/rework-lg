@@ -3,7 +3,7 @@ title: "Proses Produksi Jaket Angkatan Berkualitas di Level Garment"
 titleEn: "Proses Produksi Jaket Angkatan Berkualitas di Level Garment"
 description: "Ketahui proses produksi jaket angkatan berkualitas di Level Garment, dari desain hingga pengiriman. Dapatkan jaket angkatan keren dan nyaman sekarang"
 descriptionEn: "Ketahui proses produksi jaket angkatan berkualitas di Level Garment, dari desain hingga pengiriman. Dapatkan jaket angkatan keren dan nyaman sekarang"
-pubDate: 2024-10-14
+pubDate: 2026-03-01
 author: "Level Garment Team"
 image: "/assets/images/blog/Proses-Produksi-Jaket-Angkatan-Berkualitas-di-Level-Garment.jpg"
 tags: ['jaket', 'angkatan']

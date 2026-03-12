@@ -3,7 +3,7 @@ title: "Memilih Jaket Kelas, Jaket Angkatan, dan Jaket Himpunan yang Tepat untuk
 titleEn: "Memilih Jaket Kelas, Jaket Angkatan, dan Jaket Himpunan yang Tepat untuk Anak SMA dan Mahasiswa"
 description: "Memilih Jaket Kelas, Jaket Angkatan, dan Jaket Himpunan yang Tepat untuk Anak SMA dan Mahasiswa"
 descriptionEn: "Memilih Jaket Kelas, Jaket Angkatan, dan Jaket Himpunan yang Tepat untuk Anak SMA dan Mahasiswa"
-pubDate: 2024-06-13
+pubDate: 2026-02-24
 author: "Level Garment Team"
 image: "/assets/images/blog/28-05-2024-lg-Produk-lainnya.jpg"
 tags: ['jaket', 'kelas', 'angkatan']

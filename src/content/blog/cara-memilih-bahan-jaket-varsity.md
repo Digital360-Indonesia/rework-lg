@@ -3,7 +3,7 @@ title: "Cara Memilih Bahan Jaket Varsity yang Nyaman dan Tahan Lama"
 titleEn: "Cara Memilih Bahan Jaket Varsity yang Nyaman dan Tahan Lama"
 description: "Pelajari cara memilih bahan jaket varsity terbaik yang nyaman dan tahan lama. Panduan lengkap untuk pelajar dan komunitas yang ingin tampil keren dan awet."
 descriptionEn: "Pelajari cara memilih bahan jaket varsity terbaik yang nyaman dan tahan lama. Panduan lengkap untuk pelajar dan komunitas yang ingin tampil keren dan awet."
-pubDate: 2025-05-15
+pubDate: 2026-02-11
 author: "Level Garment Team"
 image: "/assets/images/blog/20250425-Perbedaan-varsity-bomber-untuk-pelajar.jpg"
 tags: ['jaket', 'varsity']

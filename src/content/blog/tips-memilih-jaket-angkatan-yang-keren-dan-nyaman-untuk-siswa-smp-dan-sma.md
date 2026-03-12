@@ -3,7 +3,7 @@ title: "Tips Memilih Jaket Angkatan yang Keren dan Nyaman untuk Siswa SMP dan SM
 titleEn: "Tips Memilih Jaket Angkatan yang Keren dan Nyaman untuk Siswa SMP dan SMA"
 description: "Temukan tips memilih jaket angkatan yang keren dan nyaman untuk siswa SMP dan SMA. Dari desain hingga bahan, dapatkan jaket yang pas untuk angkatanmu!"
 descriptionEn: "Temukan tips memilih jaket angkatan yang keren dan nyaman untuk siswa SMP dan SMA. Dari desain hingga bahan, dapatkan jaket yang pas untuk angkatanmu!"
-pubDate: 2024-10-14
+pubDate: 2026-03-05
 author: "Level Garment Team"
 image: "/assets/images/blog/17-05-2024-levg-slide.png"
 tags: ['jaket', 'angkatan', 'tips']

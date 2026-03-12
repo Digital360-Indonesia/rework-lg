@@ -3,7 +3,7 @@ title: "Workshirt Lengan Panjang: Pilihan Tepat untuk Gaya Profesional dan Kasua
 titleEn: "Workshirt Lengan Panjang: Pilihan Tepat untuk Gaya Profesional dan Kasual"
 description: "Temukan keunggulan workshirt lengan panjang untuk tampilan profesional dan kasual. Pelajari cara memilih, merawat, serta memadukan workshirt ini agar tetap stylish."
 descriptionEn: "Temukan keunggulan workshirt lengan panjang untuk tampilan profesional dan kasual. Pelajari cara memilih, merawat, serta memadukan workshirt ini agar tetap stylish."
-pubDate: 2025-05-15
+pubDate: 2026-03-11
 author: "Level Garment Team"
 image: "/assets/images/blog/2025-02-20-Workshirt-Lengan-Panjang-Panduan-Lengkap-Memilih-dan-Merawat-Kemeja-Kerja-yang-Stylish.jpg"
 tags: ['workshirt']

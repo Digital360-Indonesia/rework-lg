@@ -3,7 +3,7 @@ title: "Custom Jaket Varsity Semarang: Pilihan Terbaik untuk Tampil Beda di Sema
 titleEn: "Custom Jaket Varsity Semarang: Pilihan Terbaik untuk Tampil Beda di Semarang"
 description: "Buat jaket kelas atau jaket angkatan dengan model varsity di Semarang. Tampilkan identitas dan kebersamaan dengan custom jaket varsity yang sesuai gaya Anda."
 descriptionEn: "Buat jaket kelas atau jaket angkatan dengan model varsity di Semarang. Tampilkan identitas dan kebersamaan dengan custom jaket varsity yang sesuai gaya Anda."
-pubDate: 2024-06-13
+pubDate: 2025-12-20
 author: "Level Garment Team"
 image: "/assets/images/blog/17-05-2024-levg-slide.png"
 tags: ['jaket', 'varsity', 'custom', 'semarang']

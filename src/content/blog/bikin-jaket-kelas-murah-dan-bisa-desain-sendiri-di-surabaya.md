@@ -3,7 +3,7 @@ title: "Bikin Jaket Kelas Murah dan Bisa Desain Sendiri di Surabaya"
 titleEn: "Bikin Jaket Kelas Murah dan Bisa Desain Sendiri di Surabaya"
 description: "Bikin Jaket Kelas Murah dan Bisa Desain Sendiri di Surabaya"
 descriptionEn: "Bikin Jaket Kelas Murah dan Bisa Desain Sendiri di Surabaya"
-pubDate: 2024-06-10
+pubDate: 2026-02-10
 author: "Level Garment Team"
 image: "/assets/images/blog/28-05-2024-lg-banner.jpg"
 tags: ['jaket', 'kelas', 'surabaya']

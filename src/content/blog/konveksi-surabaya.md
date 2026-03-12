@@ -3,7 +3,7 @@ title: "Mencari Konveksi Surabaya? Ini Rekomendasi Terpercaya Sesuai Kebutuhan A
 titleEn: "Mencari Konveksi Surabaya? Ini Rekomendasi Terpercaya Sesuai Kebutuhan Anda"
 description: "Cari konveksi Surabaya? Cek 10 rekomendasi terbaik dan temukan Level Garment—spesialis jaket pelajar, varsity, workshirt & jersey angkatan dari Surabaya."
 descriptionEn: "Cari konveksi Surabaya? Cek 10 rekomendasi terbaik dan temukan Level Garment—spesialis jaket pelajar, varsity, workshirt & jersey angkatan dari Surabaya."
-pubDate: 2025-05-28
+pubDate: 2026-02-21
 author: "Level Garment Team"
 image: "/assets/images/blog/20250423-Rekomendasi-Konveksi-Surabaya_.jpg"
 tags: ['konveksi', 'surabaya']

@@ -3,7 +3,7 @@ title: "Workshirt Pria: Panduan Lengkap Memilih dan Merawat Workshirt yang Tepat
 titleEn: "Workshirt Pria: Panduan Lengkap Memilih dan Merawat Workshirt yang Tepat"
 description: "Temukan rekomendasi workshirt pria terbaik dengan desain stylish dan nyaman. Panduan lengkap memilih bahan, model, dan cara merawat workshirt agar tahan lama."
 descriptionEn: "Temukan rekomendasi workshirt pria terbaik dengan desain stylish dan nyaman. Panduan lengkap memilih bahan, model, dan cara merawat workshirt agar tahan lama."
-pubDate: 2025-05-15
+pubDate: 2026-03-12
 author: "Level Garment Team"
 image: "/assets/images/blog/2025-02-20-Workshirt-Pria-Panduan-Lengkap-Memilih-dan-Merawat-Workshirt-yang-Tepat.jpg"
 tags: ['panduan', 'workshirt']

@@ -3,7 +3,7 @@ title: "Koleksi Spesial Seragam Sekolah dengan Sentuhan Kreatif"
 titleEn: "Koleksi Spesial Seragam Sekolah dengan Sentuhan Kreatif"
 description: "Koleksi Spesial Seragam Sekolah dengan Sentuhan Kreatif"
 descriptionEn: "Koleksi Spesial Seragam Sekolah dengan Sentuhan Kreatif"
-pubDate: 2024-09-23
+pubDate: 2026-02-18
 author: "Level Garment Team"
 image: "/assets/images/blog/creative-school-uniforms.jpg"
 tags: ['seragam']

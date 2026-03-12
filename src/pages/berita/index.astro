@@ -105,11 +105,12 @@ const featuredPosts = blogPosts.filter(post => post.data.featured);
         </h2>
 
         <!-- Mobile: Vertical Stack -->
-        <div class="md:hidden space-y-6">
+        <div class="md:hidden space-y-6" id="mobile-posts">
           {blogPosts.map((post) => (
             <a
               href={`/berita/${post.slug}`}
-              class="group block bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300"
+              class="blog-post-item group block bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300"
+              data-category={post.data.category}
             >
               <div class="relative aspect-video overflow-hidden">
                 <img
@@ -129,19 +130,12 @@ const featuredPosts = blogPosts.filter(post => post.data.featured);
                 <p class="text-sm text-gray-600 mb-3 line-clamp-2">
                   {post.data.description}
                 </p>
-                <div class="flex items-center justify-between pt-3 border-t border-gray-100">
-                  <div class="flex items-center gap-2 text-xs text-gray-500">
-                    <span>{post.data.author}</span>
-                    <span>•</span>
-                    <time datetime={post.data.pubDate.toISOString()}>
-                      {post.data.pubDate.toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' })}
-                    </time>
-                  </div>
-                  <div class="flex gap-2">
-                    {post.data.tags.slice(0, 2).map(tag => (
-                      <span class="text-xs text-gray-400">#{tag}</span>
-                    ))}
-                  </div>
+                <div class="flex items-center gap-2 pt-3 border-t border-gray-100 text-xs text-gray-500">
+                  <span>{post.data.author}</span>
+                  <span>•</span>
+                  <time datetime={post.data.pubDate.toISOString()}>
+                    {post.data.pubDate.toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' })}
+                  </time>
                 </div>
               </div>
             </a>
@@ -149,11 +143,12 @@ const featuredPosts = blogPosts.filter(post => post.data.featured);
         </div>
 
         <!-- Desktop: Grid -->
-        <div class="hidden md:grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div class="hidden md:grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="desktop-posts">
           {blogPosts.map((post) => (
             <a
               href={`/berita/${post.slug}`}
-              class="group bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300"
+              class="blog-post-item group bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300"
+              data-category={post.data.category}
             >
               <div class="relative aspect-video overflow-hidden">
                 <img
@@ -173,19 +168,12 @@ const featuredPosts = blogPosts.filter(post => post.data.featured);
                 <p class="text-sm text-gray-600 mb-3 line-clamp-2">
                   {post.data.description}
                 </p>
-                <div class="flex items-center justify-between pt-3 border-t border-gray-100">
-                  <div class="flex items-center gap-2 text-xs text-gray-500">
-                    <span>{post.data.author}</span>
-                    <span>•</span>
-                    <time datetime={post.data.pubDate.toISOString()}>
-                      {post.data.pubDate.toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' })}
-                    </time>
-                  </div>
-                  <div class="flex gap-2">
-                    {post.data.tags.slice(0, 2).map(tag => (
-                      <span class="text-xs text-gray-400">#{tag}</span>
-                    ))}
-                  </div>
+                <div class="flex items-center gap-2 pt-3 border-t border-gray-100 text-xs text-gray-500">
+                  <span>{post.data.author}</span>
+                  <span>•</span>
+                  <time datetime={post.data.pubDate.toISOString()}>
+                    {post.data.pubDate.toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' })}
+                  </time>
                 </div>
               </div>
             </a>
@@ -223,6 +211,10 @@ const featuredPosts = blogPosts.filter(post => post.data.featured);
 </PageLayout>
 
 <style>
+  .berita-page {
+    overflow-x: hidden;
+  }
+
   .category-btn {
     padding: 0.5rem 1.25rem;
     border: 2px solid #e5e7eb;
@@ -267,12 +259,27 @@ const featuredPosts = blogPosts.filter(post => post.data.featured);
 <script>
   // Category filter functionality
   const categoryButtons = document.querySelectorAll('.category-btn');
+  const mobilePosts = document.querySelectorAll('#mobile-posts .blog-post-item');
+  const desktopPosts = document.querySelectorAll('#desktop-posts .blog-post-item');
 
   categoryButtons.forEach(button => {
     button.addEventListener('click', () => {
+      const category = button.getAttribute('data-category');
+
       // Update active state
       categoryButtons.forEach(btn => btn.classList.remove('active'));
       button.classList.add('active');
+
+      // Filter posts
+      const allPosts = [...mobilePosts, ...desktopPosts];
+      allPosts.forEach(post => {
+        const postCategory = post.getAttribute('data-category');
+        if (category === 'all' || postCategory === category) {
+          (post as HTMLElement).style.display = '';
+        } else {
+          (post as HTMLElement).style.display = 'none';
+        }
+      });
     });
   });
 </script>

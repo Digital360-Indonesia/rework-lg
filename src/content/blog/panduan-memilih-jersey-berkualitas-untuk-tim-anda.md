@@ -3,7 +3,7 @@ title: "Panduan Memilih Jersey Berkualitas untuk Tim Anda"
 titleEn: "Panduan Memilih Jersey Berkualitas untuk Tim Anda"
 description: "Bingung memilih jersey untuk tim olahraga? Yuk, simak panduan memilih jersey berkualitas, nyaman, dan pas untuk meningkatkan kekompakan tim!"
 descriptionEn: "Bingung memilih jersey untuk tim olahraga? Yuk, simak panduan memilih jersey berkualitas, nyaman, dan pas untuk meningkatkan kekompakan tim!"
-pubDate: 2024-11-23
+pubDate: 2026-02-27
 author: "Level Garment Team"
 image: "/assets/images/blog/Panduan-Memilih-Jersey-Berkualitas-untuk-Tim-Anda.jpg"
 tags: ['jersey', 'panduan']

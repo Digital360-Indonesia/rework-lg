@@ -3,7 +3,7 @@ title: "Tempat Bikin Seragam Komunitas Pelajar Custom Satuan"
 titleEn: "Tempat Bikin Seragam Komunitas Pelajar Custom Satuan"
 description: "Bingung tempat konveksi terbaik di surabaya Level Garment hadir dengan layanan profesional, desain bebas, dan hasil berkualitas."
 descriptionEn: "Bingung tempat konveksi terbaik di surabaya Level Garment hadir dengan layanan profesional, desain bebas, dan hasil berkualitas."
-pubDate: 2025-06-12
+pubDate: 2026-03-04
 author: "Level Garment Team"
 image: "/assets/images/blog/15.png"
 tags: ['custom', 'seragam']

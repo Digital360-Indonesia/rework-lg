@@ -3,7 +3,7 @@ title: "Inspirasi Desain Jersey Baseball untuk Komunitas dan Kegiatan Sekolah"
 titleEn: "Inspirasi Desain Jersey Baseball untuk Komunitas dan Kegiatan Sekolah"
 description: "Cari desain jersey baseball untuk komunitas atau sekolah? Temukan 5 inspirasi desain menarik dari Level Garment yang bisa Anda jadikan referensi."
 descriptionEn: "Cari desain jersey baseball untuk komunitas atau sekolah? Temukan 5 inspirasi desain menarik dari Level Garment yang bisa Anda jadikan referensi."
-pubDate: 2025-05-15
+pubDate: 2026-02-13
 author: "Level Garment Team"
 image: "/assets/images/blog/2025-01-17-Inspirasi-Desain-Jersey-Baseball-untuk-Komunitas-dan-Kegiatan-Sekolah.jpg"
 tags: ['jersey']

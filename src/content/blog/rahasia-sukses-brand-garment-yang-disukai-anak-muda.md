@@ -3,7 +3,7 @@ title: "Rahasia Sukses Brand Garment yang Disukai Anak Muda"
 titleEn: "Rahasia Sukses Brand Garment yang Disukai Anak Muda"
 description: "Ingin tahu rahasia sukses brand garment yang disukai anak muda? Temukan strategi desain, pemasaran media sosial, dan kolaborasi yang efektif dalam artikel ini!"
 descriptionEn: "Ingin tahu rahasia sukses brand garment yang disukai anak muda? Temukan strategi desain, pemasaran media sosial, dan kolaborasi yang efektif dalam artikel ini!"
-pubDate: 2025-05-15
+pubDate: 2026-03-02
 author: "Level Garment Team"
 image: "/assets/images/blog/2025-03-19-Rahasia-Sukses-Brand-Garment-yang-Disukai-Anak-Muda.jpg"
 tags: ['artikel']

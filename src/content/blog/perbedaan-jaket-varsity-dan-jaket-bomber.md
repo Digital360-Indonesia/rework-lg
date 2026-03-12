@@ -3,7 +3,7 @@ title: "Perbedaan Jaket Varsity dan Jaket Bomber: Mana yang Cocok untuk Pelajar?
 titleEn: "Perbedaan Jaket Varsity dan Jaket Bomber: Mana yang Cocok untuk Pelajar?"
 description: "Cari tahu perbedaan jaket varsity dan jaket bomber, serta tips memilih jaket yang cocok untuk pelajar SMP & SMA. Cek rekomendasi jaket kekinian!"
 descriptionEn: "Cari tahu perbedaan jaket varsity dan jaket bomber, serta tips memilih jaket yang cocok untuk pelajar SMP & SMA. Cek rekomendasi jaket kekinian!"
-pubDate: 2025-05-15
+pubDate: 2026-02-28
 author: "Level Garment Team"
 image: "/assets/images/blog/20250425-Cara-memilih-bahan-jaket-varsity-yang-nyaman-dan-tahan-lama.jpg"
 tags: ['jaket', 'varsity']

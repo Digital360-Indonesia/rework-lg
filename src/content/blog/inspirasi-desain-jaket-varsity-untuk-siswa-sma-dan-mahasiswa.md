@@ -3,7 +3,7 @@ title: "Inspirasi Desain Jaket Varsity untuk Siswa SMA dan Mahasiswa"
 titleEn: "Inspirasi Desain Jaket Varsity untuk Siswa SMA dan Mahasiswa"
 description: "Temukan ide-ide desain jaket varsity unik dan kekinian untuk siswa SMA dan mahasiswa. Cocok untuk organisasi, kelas, dan komunitas kampus!"
 descriptionEn: "Temukan ide-ide desain jaket varsity unik dan kekinian untuk siswa SMA dan mahasiswa. Cocok untuk organisasi, kelas, dan komunitas kampus!"
-pubDate: 2025-06-18
+pubDate: 2026-02-12
 author: "Level Garment Team"
 image: "/assets/images/blog/6.png"
 tags: ['jaket', 'varsity']

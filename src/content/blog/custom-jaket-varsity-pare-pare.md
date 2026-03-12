@@ -3,7 +3,7 @@ title: "Custom Jaket Varsity Pare Pare: Pilihan Terbaik untuk Tampil Beda di Par
 titleEn: "Custom Jaket Varsity Pare Pare: Pilihan Terbaik untuk Tampil Beda di Pare Pare"
 description: "Custom Jaket Varsity Pare Pare: Pilihan Terbaik untuk Tampil Beda di Pare Pare"
 descriptionEn: "Custom Jaket Varsity Pare Pare: Pilihan Terbaik untuk Tampil Beda di Pare Pare"
-pubDate: 2024-06-13
+pubDate: 2025-12-16
 author: "Level Garment Team"
 image: "/assets/images/blog/17-05-2024-levg-slide.png"
 tags: ['jaket', 'varsity', 'custom']

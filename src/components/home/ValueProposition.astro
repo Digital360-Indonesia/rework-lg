@@ -3,12 +3,13 @@
  * Value Proposition Section Component - Level Garment Homepage
  *
  * Features:
- * - "Wujudkan Kebersamaan & Kreatifitas" heading (left-aligned, full width no wrap)
+ * - "Wujudkan Kebersamaan & Kreatifitas" heading (left-aligned)
  * - Auto-sliding video carousel (7 videos, loops continuously)
  * - Smooth horizontal sliding animation
  * - Autoplay with no controls
+ * - Mobile responsive
  *
- * @version 1.0.0
+ * @version 1.1.0
  */
 
 // Video data - 7 videos from project folder
@@ -58,25 +59,25 @@ const sectionSubheading = "Mulai dari kaos, jaket, jersey, workshirt, topi semua
 <!-- Value Proposition Section -->
 <section
   id="value-proposition"
-  class="value-proposition-section py-16 lg:py-24 bg-white"
+  class="value-proposition-section py-12 lg:py-24 bg-white overflow-hidden"
 >
   <!-- Section Header - Left Aligned -->
   <div class="container mx-auto px-4">
-    <div class="text-left max-w-none mb-12 lg:mb-16">
-      <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-6 whitespace-nowrap">
+    <div class="text-center sm:text-left max-w-none mb-6 lg:mb-16">
+      <h2 class="text-xl sm:text-2xl lg:text-4xl xl:text-5xl font-bold text-gray-900 mb-3 lg:mb-6">
         {sectionHeading}
       </h2>
-      <p class="text-lg sm:text-xl text-gray-600">
+      <p class="text-sm sm:text-base lg:text-xl text-gray-600">
         {sectionSubheading}
       </p>
     </div>
   </div>
 
   <!-- Auto-Sliding Video Carousel - Full Width -->
-  <div class="video-carousel-container overflow-hidden -mx-4 lg:-mx-0">
-    <div class="video-carousel-track flex gap-3 lg:gap-4 px-4 lg:px-0" id="videoTrack">
+  <div class="video-carousel-container w-full overflow-hidden">
+    <div class="video-carousel-track flex gap-2 sm:gap-3 lg:gap-4 will-change-transform" id="videoTrack">
       {videos.map((video) => (
-        <div class="video-card flex-shrink-0 w-[60vw] sm:w-[45vw] lg:w-[18vw] aspect-[9/16] rounded-xl overflow-hidden shadow-lg">
+        <div class="video-card flex-shrink-0 w-[40vw] sm:w-[32vw] md:w-[25vw] lg:w-[18vw] aspect-[9/16] rounded-lg sm:rounded-xl overflow-hidden shadow-lg first:ml-4 lg:first:ml-0">
           <video
             src={video.src}
             alt={video.alt}
@@ -98,6 +99,15 @@ const sectionSubheading = "Mulai dari kaos, jaket, jersey, workshirt, topi semua
   /* Video carousel smooth sliding animation */
   .video-carousel-track {
     animation: slideRight 20s linear infinite;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  @media (min-width: 1024px) {
+    .video-carousel-track {
+      padding-left: 0;
+      padding-right: 0;
+    }
   }
 
   @keyframes slideRight {
@@ -124,6 +134,17 @@ const sectionSubheading = "Mulai dari kaos, jaket, jersey, workshirt, topi semua
     pointer-events: none;
     user-select: none;
     -webkit-user-drag: none;
+  }
+
+  /* Mobile responsive adjustments */
+  @media (max-width: 767px) {
+    .video-carousel-track {
+      animation-duration: 15s;
+    }
+
+    .video-card {
+      border-radius: 0.75rem;
+    }
   }
 </style>
 

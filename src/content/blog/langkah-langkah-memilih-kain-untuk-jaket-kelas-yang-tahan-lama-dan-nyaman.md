@@ -3,7 +3,7 @@ title: "Langkah-langkah Memilih Kain untuk Jaket Kelas yang Tahan Lama dan Nyama
 titleEn: "Langkah-langkah Memilih Kain untuk Jaket Kelas yang Tahan Lama dan Nyaman"
 description: "Pelajari langkah-langkah memilih kain untuk jaket kelas yang tahan lama dan nyaman. Temukan kain terbaik di Nego Kain, hubungi 0851 8335 1799."
 descriptionEn: "Pelajari langkah-langkah memilih kain untuk jaket kelas yang tahan lama dan nyaman. Temukan kain terbaik di Nego Kain, hubungi 0851 8335 1799."
-pubDate: 2024-11-23
+pubDate: 2026-02-23
 author: "Level Garment Team"
 image: "/assets/images/blog/Langkah-langkah-Memilih-Kain-untuk-Jaket-Kelas-yang-Tahan-Lama-dan-Nyaman.jpg"
 tags: ['jaket', 'kelas']

@@ -3,7 +3,7 @@ title: "Tren Fashion Anak Muda 2025: Gaya Kekinian untuk SMP dan SMA"
 titleEn: "Tren Fashion Anak Muda 2025: Gaya Kekinian untuk SMP dan SMA"
 description: "Tren Fashion Anak Muda 2025: Gaya Kekinian untuk SMP dan SMA"
 descriptionEn: "Tren Fashion Anak Muda 2025: Gaya Kekinian untuk SMP dan SMA"
-pubDate: 2024-09-23
+pubDate: 2026-03-07
 author: "Level Garment Team"
 image: "/assets/images/blog/Tren-Fashion-Anak-Muda-2025-Gaya-Kekinian-untuk-SMP-dan-SMA.jpg"
 tags: ['fashion', 'tren']

@@ -3,7 +3,7 @@ title: "Kenapa Jaket Varsity Menjadi Pilihan Favorit untuk Jaket Angkatan?"
 titleEn: "Kenapa Jaket Varsity Menjadi Pilihan Favorit untuk Jaket Angkatan?"
 description: "Temukan alasan mengapa jaket varsity menjadi pilihan favorit untuk jaket angkatan. Dari desain stylish hingga kenyamanan, jadikan jaket varsity pilihan utama kalian!"
 descriptionEn: "Temukan alasan mengapa jaket varsity menjadi pilihan favorit untuk jaket angkatan. Dari desain stylish hingga kenyamanan, jadikan jaket varsity pilihan utama kalian!"
-pubDate: 2024-10-14
+pubDate: 2026-02-14
 author: "Level Garment Team"
 image: "/assets/images/blog/Kenapa-Jaket-Varsity-Menjadi-Pilihan-Favorit-untuk-Jaket-Angkatan.jpeg"
 tags: ['jaket', 'varsity', 'angkatan']

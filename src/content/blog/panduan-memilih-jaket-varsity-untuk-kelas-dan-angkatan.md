@@ -3,7 +3,7 @@ title: "Panduan Memilih Jaket Varsity untuk Kelas dan Angkatan"
 titleEn: "Panduan Memilih Jaket Varsity untuk Kelas dan Angkatan"
 description: "Cari jaket varsity untuk kelas atau angkatan? Simak panduan memilih jaket varsity berkualitas dari Level Garment, spesialis seragam custom Surabaya."
 descriptionEn: "Cari jaket varsity untuk kelas atau angkatan? Simak panduan memilih jaket varsity berkualitas dari Level Garment, spesialis seragam custom Surabaya."
-pubDate: 2025-05-15
+pubDate: 2026-02-26
 author: "Level Garment Team"
 image: "/assets/images/blog/2025-01-17-Panduan-Memilih-Jaket-Varsity-untuk-Kelas-dan-Angkatan.jpg"
 tags: ['jaket', 'varsity', 'kelas', 'angkatan', 'panduan']

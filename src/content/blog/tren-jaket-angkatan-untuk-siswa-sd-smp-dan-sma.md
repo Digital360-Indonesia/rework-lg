@@ -3,7 +3,7 @@ title: "Tren Jaket Angkatan untuk Siswa SD, SMP, dan SMA di Tahun 2024"
 titleEn: "Tren Jaket Angkatan untuk Siswa SD, SMP, dan SMA di Tahun 2024"
 description: "Temukan tren terbaru jaket angkatan untuk siswa SD, SMP, dan SMA di tahun 2024. Dari desain minimalis hingga personalisasi, Level Garment siap memenuhi kebutuhan gaya angkatan kalian!"
 descriptionEn: "Temukan tren terbaru jaket angkatan untuk siswa SD, SMP, dan SMA di tahun 2024. Dari desain minimalis hingga personalisasi, Level Garment siap memenuhi kebutuhan gaya angkatan kalian!"
-pubDate: 2024-10-14
+pubDate: 2026-03-08
 author: "Level Garment Team"
 image: "/assets/images/blog/28-05-2024-lg-Produk-lainnya.jpg"
 tags: ['jaket', 'angkatan', 'tren']

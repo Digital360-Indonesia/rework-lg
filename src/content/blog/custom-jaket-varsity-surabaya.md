@@ -3,7 +3,7 @@ title: "Custom Jaket Varsity Surabaya: Pilihan Terbaik untuk Tampil Beda di Sura
 titleEn: "Custom Jaket Varsity Surabaya: Pilihan Terbaik untuk Tampil Beda di Surabaya"
 description: "Buat jaket kelas atau jaket angkatan dengan model varsity di Surabaya. Tampilkan identitas dan kebersamaan dengan custom jaket varsity yang sesuai gaya Anda."
 descriptionEn: "Buat jaket kelas atau jaket angkatan dengan model varsity di Surabaya. Tampilkan identitas dan kebersamaan dengan custom jaket varsity yang sesuai gaya Anda."
-pubDate: 2024-06-13
+pubDate: 2025-12-23
 author: "Level Garment Team"
 image: "/assets/images/blog/17-05-2024-levg-slide.png"
 tags: ['jaket', 'varsity', 'custom', 'surabaya']
