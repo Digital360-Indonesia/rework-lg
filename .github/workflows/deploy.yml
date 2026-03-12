@@ -18,6 +18,6 @@ jobs:
           key: ${{ secrets.PROD_VPS_SSH_KEY }}
           port: ${{ secrets.PROD_VPS_PORT }}
           script: |
-            cd /home/levelgarment/web/levelgarment.com/public_html
+            cd /home/fabrikgroup/web/levelgarment.com/public_html
             chmod +x deploy.sh
             ./deploy.sh
