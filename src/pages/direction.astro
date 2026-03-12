@@ -1,0 +1,72 @@
+---
+/**
+ * Direction Page - Level Garment
+ *
+ * Redirect otomatis ke Google Maps directions menuju Marketing Gallery Level Garment
+ */
+
+const googleMapsUrl = 'https://www.google.com/maps/dir/-7.308401,112.7551348/Konveksi+Pelajar+Indonesia+|+Level+Garment';
+---
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Direction Level Garment</title>
+    <meta charset="UTF-8" />
+    <meta property="og:title" content="Direction Level Garment" />
+    <meta property="og:description" content="Temukan jalan tercepat menuju Marketing Gallery Level Garment" />
+    <meta property="og:image" content="https://lh3.googleusercontent.com/p/AF1QipNFQo9SvPO7vv1yFye-aBVJXAEodm_Jvvg1qWvQ=s0" />
+    <meta http-equiv="refresh" content="1; url={googleMapsUrl}" />
+
+    <style>
+        body {
+            background-color: #af7ad5;
+            color: white;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            padding: 20px;
+        }
+
+        img {
+            max-width: 700px;
+            width: 100%;
+            height: auto;
+            margin-bottom: 30px;
+        }
+
+        p {
+            font-size: 36px;
+            padding: 30px;
+            margin: 0;
+        }
+
+        a {
+            color: white;
+            text-decoration: underline;
+            margin-top: 20px;
+            font-size: 18px;
+        }
+    </style>
+
+    <!-- Google tag (gtag.js) -->
+    <script is:inline async src="https://www.googletagmanager.com/gtag/js?id=G-E689TNMR1Q"></script>
+    <script is:inline>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-E689TNMR1Q');
+    </script>
+</head>
+<body>
+    <img src="https://lh3.googleusercontent.com/p/AF1QipNFQo9SvPO7vv1yFye-aBVJXAEodm_Jvvg1qWvQ=s0" alt="Level Garment Location" />
+    <p>Anda sedang diarahkan menuju alamat Marketing Gallery Level Garment dalam beberapa detik.</p>
+    <a href={googleMapsUrl}>Klik di sini jika tidak redirect otomatis</a>
+</body>
+</html>

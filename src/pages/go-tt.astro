@@ -1,0 +1,113 @@
+---
+/**
+ * Link in Bio - TikTok
+ *
+ * Halaman link in bio untuk traffic dari TikTok
+ */
+
+const whatsappText = 'Saya%20dapat%20informasi%20Level%20dari%20tiktok.%20Mohon%20informasi%20lebih%20lengkap,%20ya.%20Terima%20kasih.';
+---
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Level Garment | Link in Bio</title>
+    <style>
+        @font-face {
+          font-family: 'SF Pro Display';
+          font-style: normal;
+          font-weight: 400;
+          src: url('https://levelgarment.com/wp-content/uploads/2025/05/SF-Pro-Display-Semibold.woff2') format('woff2');
+        }
+
+        @font-face {
+          font-family: 'SF Pro Display';
+          font-style: normal;
+          font-weight: 600;
+          src: url('https://levelgarment.com/wp-content/uploads/2025/05/SF-Pro-Display-Semibold.woff2') format('woff2');
+        }
+
+        body {
+          margin: 0;
+          font-family: 'SF Pro Display', sans-serif;
+          background-color: #af7ad5;
+          color: #ffffff;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          padding: 40px 20px;
+        }
+
+        .logo {
+          width: 100px;
+          margin-bottom: 20px;
+        }
+
+        h1 {
+          margin: 0 0 30px;
+          font-size: 24px;
+        }
+
+        .link-button {
+          display: block;
+          width: 100%;
+          max-width: 400px;
+          margin: 10px;
+          padding: 14px 0px;
+          background-color: #ffffff;
+          color: #af7ad5;
+          text-align: center;
+          border-radius: 12px;
+          text-decoration: none;
+          font-weight: 600;
+          transition: all 0.3s ease;
+        }
+
+        .link-button:hover {
+          background-color: #f1ddff;
+        }
+
+        .footer {
+          margin-top: 40px;
+          font-size: 14px;
+          color: #fff;
+          opacity: 0.6;
+        }
+     </style>
+
+  <!-- Google tag (gtag.js) -->
+  <script is:inline async src="https://www.googletagmanager.com/gtag/js?id=G-Y6F1B63N48"></script>
+  <script is:inline>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-Y6F1B63N48');
+  </script>
+
+  <!-- Google Tag Manager -->
+  <script is:inline>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-TRWBR2PB');</script>
+  <!-- End Google Tag Manager -->
+
+</head>
+<body>
+
+  <img src="https://levelgarment.com/wp-content/uploads/2025/05/07062024-lg-favicon.png" alt="Level Garment Logo" class="logo" style="border-radius:10px;">
+  <h1>Level Garment</h1>
+
+  <a href="https://levelgarment.com" class="link-button" target="_blank">🌐 Website Resmi</a>
+  <a href={`https://wa.me/6285183091599/?text=${whatsappText}&utm_source=tiktok&utm_medium=referral`} class="link-button" target="_blank">💬 WhatsApp Admin</a>
+  <a href="https://g.co/kgs/twFxDzW" class="link-button" target="_blank">📍 Lokasi di Google Maps</a>
+  <a href="https://levelgarment.com/berita" class="link-button" target="_blank">📰 Artikel Terbaru</a>
+  <a href="https://www.instagram.com/levelgarment/" class="link-button" target="_blank">📸 Instagram</a>
+  <a href="https://www.tiktok.com/@levelgarment" class="link-button" target="_blank">🎥 TikTok</a>
+
+  <div class="footer">© 2025 Level Garment</div>
+</body>
+</html>
