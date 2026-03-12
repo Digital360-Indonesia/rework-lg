@@ -42,16 +42,15 @@ const slideshowImages = [
 <!-- Hero Section - Full Screen with White Background -->
 <section
   id="hero"
-  class="hero-section relative w-full bg-white min-h-screen lg:min-h-0 overflow-x-hidden"
-  style=""
+  class="hero-section relative w-full bg-white"
 >
-  <div class="container mx-auto px-4 py-8 lg:py-0 lg:h-full">
+  <div class="container mx-auto px-4 pt-16 pb-8 lg:pt-20 lg:pb-8">
     <!-- Two Column Layout: 40% Image / 60% Content -->
-    <div class="grid grid-cols-1 lg:grid-cols-5 gap-6 lg:gap-8 lg:h-full items-center">
+    <div class="grid grid-cols-1 lg:grid-cols-5 gap-6 lg:gap-8 items-center">
       <!-- Left Column - Card Stack Slideshow (40% width = 2/5 columns) -->
       <div class="lg:col-span-2 order-2 lg:order-1">
         {variant === 'default' && (
-          <div class="relative w-full h-[35vh] sm:h-[45vh] lg:h-[70vh] rounded-xl sm:rounded-2xl">
+          <div class="relative w-full h-[400px] sm:h-[450px] lg:h-[500px] rounded-xl sm:rounded-2xl">
             <!-- Card Stack Container -->
             <div class="card-stack-container absolute inset-0">
               {slideshowImages.map((img, index) => (
@@ -121,14 +120,6 @@ const slideshowImages = [
     </div>
   </div>
 
-  <!-- Scroll Indicator - Hidden on mobile -->
-  <div class="hidden lg:block absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
-    <a href="#value-proposition" class="text-gray-400 hover:text-gray-600 transition-colors" aria-label="Scroll down">
-      <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"/>
-      </svg>
-    </a>
-  </div>
 </section>
 
 <style>
