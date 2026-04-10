@@ -2,53 +2,65 @@
 /**
  * Blog Post Detail Page - Level Garment
  *
- * Displays individual blog post from markdown content collection
+ * Displays individual blog post fetched from marketing.vidogarment API
  */
 import BlogLayout from '../../layouts/BlogLayout.astro';
-import { getCollection } from 'astro:content';
+import { getAllBlogPosts } from '../../lib/blog';
 import siteConfig from '../../data/site-config.json';
 
 // Generate static paths for all blog posts
 export async function getStaticPaths() {
-  const blogPosts = await getCollection('blog');
+  const blogPosts = await getAllBlogPosts();
   return blogPosts.map(post => ({
     params: { slug: post.slug },
-    props: { post },
+    props: {
+      post,
+      allPosts: blogPosts,
+    },
   }));
 }
 
-const { post } = Astro.props;
-const { Content } = await post.render();
+const { post, allPosts } = Astro.props;
+
+// Render markdown body ke HTML
+let renderedBody = post.body;
+if (post.body && !post.body.startsWith('<')) {
+  try {
+    const { marked } = await import('marked');
+    renderedBody = await marked(post.body);
+  } catch {
+    renderedBody = post.body.replace(/\n/g, '<br>');
+  }
+}
 
 // Calculate read time (approx. 200 words per minute)
 const wordCount = post.body?.split(/\s+/).length || 0;
 const readTime = Math.ceil(wordCount / 200);
 
-// Get related posts (same category, exclude current)
-const allPosts = await getCollection('blog');
+// Get related posts (same category, exclude current) - use allPosts from props
 const relatedPosts = allPosts
-  .filter(p => p.data.category === post.data.category && p.slug !== post.slug)
+  .filter(p => p.category === post.category && p.slug !== post.slug)
   .slice(0, 3);
 ---
 
 <BlogLayout
-  title={post.data.title}
-  description={post.data.description}
-  image={post.data.image}
-  publishDate={post.data.pubDate.toISOString()}
-  category={post.data.category}
+  title={post.title}
+  description={post.excerpt}
+  image={post.image}
+  publishDate={new Date(post.pubDate).toISOString()}
+  category={post.category}
   readTime={readTime}
-  author={post.data.author}
+  author={post.author}
 >
   <!-- Render Markdown Content -->
-  <Content />
+  <Fragment set:html={renderedBody} />
 
   <!-- Tags Section -->
-  {post.data.tags && post.data.tags.length > 0 && (
+  {post.tags && post.tags.length > 0 && (
     <div class="mt-12 pt-8 border-t border-gray-200">
       <span class="text-gray-600 font-semibold mr-3">Tags:</span>
       <div class="flex flex-wrap gap-2 mt-2 inline">
-        {post.data.tags.map(tag => (
+        {post.tags.map(tag => (
           <span class="bg-gray-100 text-gray-700 text-sm px-4 py-1.5 rounded-full font-medium hover:bg-gray-200 transition-colors">
             #{tag}
           </span>
@@ -62,7 +74,7 @@ const relatedPosts = allPosts
     <h3 class="text-lg font-semibold text-gray-900 mb-4">Bagikan artikel ini:</h3>
     <div class="flex flex-wrap gap-3">
       <a
-        href={`https://wa.me/?text=${encodeURIComponent(post.data.title + ' - ' + Astro.url.href)}`}
+        href={`https://wa.me/?text=${encodeURIComponent(post.title + ' - ' + Astro.url.href)}`}
         target="_blank"
         rel="noopener noreferrer"
         class="inline-flex items-center gap-2 bg-primary hover:bg-primary-dark text-white px-5 py-2.5 rounded-lg transition-colors"
@@ -97,16 +109,16 @@ const relatedPosts = allPosts
           <article class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow">
             <div class="aspect-video overflow-hidden">
               <img
-                src={related.data.image}
-                alt={related.data.title}
+                src={related.image}
+                alt={related.title}
                 class="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
                 loading="lazy"
               />
             </div>
             <div class="p-6">
-              <span class="text-sm text-gray-500 font-semibold">{related.data.category}</span>
-              <h3 class="text-lg font-bold mt-2 mb-3 line-clamp-2">{related.data.title}</h3>
-              <p class="text-gray-600 text-sm mb-4 line-clamp-2">{related.data.description}</p>
+              <span class="text-sm text-gray-500 font-semibold">{related.category}</span>
+              <h3 class="text-lg font-bold mt-2 mb-3 line-clamp-2">{related.title}</h3>
+              <p class="text-gray-600 text-sm mb-4 line-clamp-2">{related.excerpt}</p>
               <a href={`/berita/${related.slug}`} class="text-gray-900 font-semibold hover:text-primary transition-colors">
                 Baca Selengkapnya →
               </a>

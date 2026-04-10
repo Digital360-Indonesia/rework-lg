@@ -2,26 +2,29 @@
 /**
  * Berita (Blog) Index Page - Level Garment
  *
- * Displays all blog posts from markdown content collections
+ * Displays all blog posts fetched from marketing.vidogarment API at build time.
  */
 import PageLayout from '../../layouts/PageLayout.astro';
-import BlogCard from '../../components/content/BlogCard.astro';
-import { getCollection } from 'astro:content';
+import { getAllBlogPosts, getBlogCategories, BlogApiError } from '../../lib/blog';
 import siteConfig from '../../data/site-config.json';
 
-// Get all blog posts from content collection
-const blogPosts = await getCollection('blog', ({ data }) => {
-  return data.pubDate <= new Date();
-});
+let error: string | null = null;
+let blogPosts: any[] = [];
+let categories: string[] = [];
+let featuredPosts: any[] = [];
 
-// Sort by date (newest first)
-blogPosts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
-
-// Get unique categories
-const categories = [...new Set(blogPosts.map(post => post.data.category))];
-
-// Featured posts
-const featuredPosts = blogPosts.filter(post => post.data.featured);
+try {
+  blogPosts = await getAllBlogPosts();
+  categories = await getBlogCategories();
+  featuredPosts = blogPosts.filter(post => post.featured);
+} catch (err) {
+  if (err instanceof BlogApiError) {
+    error = err.message;
+  } else {
+    error = 'Terjadi kesalahan saat memuat artikel. Silakan coba lagi nanti.';
+  }
+  console.error('[berita/index] Error:', err);
+}
 ---
 
 <PageLayout
@@ -32,6 +35,48 @@ const featuredPosts = blogPosts.filter(post => post.data.featured);
   heroSubtitle="Informasi menarik seputar konveksi dan tips pemesanan"
 >
   <div class="berita-page">
+    {error ? (
+      <!-- Error State -->
+      <section class="py-24">
+        <div class="container">
+          <div class="error-state">
+            <div class="error-icon">
+              <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L4.082 16.5c-.77.833.192 2.5 1.732 2.5z" />
+              </svg>
+            </div>
+            <h2 class="error-title">Gagal Memuat Artikel</h2>
+            <p class="error-message">{error}</p>
+            <div class="error-actions">
+              <button onclick="location.reload()" class="btn-retry">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                </svg>
+                Coba Lagi
+              </button>
+              <a href="/" class="btn-home">Kembali ke Beranda</a>
+            </div>
+          </div>
+        </div>
+      </section>
+    ) : blogPosts.length === 0 ? (
+      <!-- Empty State -->
+      <section class="py-24">
+        <div class="container">
+          <div class="error-state">
+            <div class="empty-icon">
+              <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z" />
+              </svg>
+            </div>
+            <h2 class="error-title">Belum Ada Artikel</h2>
+            <p class="error-message">Artikel sedang disiapkan. Silakan kunjungi kembali nanti.</p>
+            <a href="/" class="btn-retry">Kembali ke Beranda</a>
+          </div>
+        </div>
+      </section>
+    ) : (
+    <>
     <!-- Featured Posts -->
     {featuredPosts.length > 0 && (
       <section class="featured-posts py-12 bg-gray-50">
@@ -48,27 +93,27 @@ const featuredPosts = blogPosts.filter(post => post.data.featured);
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-0">
                   <div class="relative aspect-square md:aspect-auto overflow-hidden">
                     <img
-                      src={post.data.image}
-                      alt={post.data.title}
+                      src={post.image}
+                      alt={post.title}
                       class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                       loading="lazy"
                     />
                   </div>
                   <div class="p-6 flex flex-col justify-center">
                     <span class="inline-block bg-primary/10 text-primary text-xs font-semibold px-3 py-1 rounded-full mb-3 w-fit">
-                      {post.data.category}
+                      {post.category}
                     </span>
                     <h3 class="font-bold text-xl text-gray-900 mb-2 group-hover:text-primary transition-colors">
-                      {post.data.title}
+                      {post.title}
                     </h3>
                     <p class="text-sm text-gray-600 mb-4 line-clamp-2">
-                      {post.data.description}
+                      {post.excerpt}
                     </p>
                     <div class="flex items-center gap-2 text-xs text-gray-500">
-                      <span>{post.data.author}</span>
+                      <span>{post.author}</span>
                       <span>•</span>
-                      <time datetime={post.data.pubDate.toISOString()}>
-                        {post.data.pubDate.toLocaleDateString('id-ID', { year: 'numeric', month: 'long', day: 'numeric' })}
+                      <time datetime={post.pubDate}>
+                        {new Date(post.pubDate).toLocaleDateString('id-ID', { year: 'numeric', month: 'long', day: 'numeric' })}
                       </time>
                     </div>
                   </div>
@@ -110,31 +155,31 @@ const featuredPosts = blogPosts.filter(post => post.data.featured);
             <a
               href={`/berita/${post.slug}`}
               class="blog-post-item group block bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300"
-              data-category={post.data.category}
+              data-category={post.category}
             >
               <div class="relative aspect-video overflow-hidden">
                 <img
-                  src={post.data.image}
-                  alt={post.data.title}
+                  src={post.image}
+                  alt={post.title}
                   class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                   loading="lazy"
                 />
               </div>
               <div class="p-5">
                 <span class="inline-block bg-primary/10 text-primary text-xs font-semibold px-3 py-1 rounded-full mb-3">
-                  {post.data.category}
+                  {post.category}
                 </span>
                 <h3 class="font-bold text-lg text-gray-900 mb-2 group-hover:text-primary transition-colors">
-                  {post.data.title}
+                  {post.title}
                 </h3>
                 <p class="text-sm text-gray-600 mb-3 line-clamp-2">
-                  {post.data.description}
+                  {post.excerpt}
                 </p>
                 <div class="flex items-center gap-2 pt-3 border-t border-gray-100 text-xs text-gray-500">
-                  <span>{post.data.author}</span>
+                  <span>{post.author}</span>
                   <span>•</span>
-                  <time datetime={post.data.pubDate.toISOString()}>
-                    {post.data.pubDate.toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' })}
+                  <time datetime={post.pubDate}>
+                    {new Date(post.pubDate).toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' })}
                   </time>
                 </div>
               </div>
@@ -148,31 +193,31 @@ const featuredPosts = blogPosts.filter(post => post.data.featured);
             <a
               href={`/berita/${post.slug}`}
               class="blog-post-item group bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300"
-              data-category={post.data.category}
+              data-category={post.category}
             >
               <div class="relative aspect-video overflow-hidden">
                 <img
-                  src={post.data.image}
-                  alt={post.data.title}
+                  src={post.image}
+                  alt={post.title}
                   class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                   loading="lazy"
                 />
               </div>
               <div class="p-5">
                 <span class="inline-block bg-primary/10 text-primary text-xs font-semibold px-3 py-1 rounded-full mb-3">
-                  {post.data.category}
+                  {post.category}
                 </span>
                 <h3 class="font-bold text-lg text-gray-900 mb-2 group-hover:text-primary transition-colors">
-                  {post.data.title}
+                  {post.title}
                 </h3>
                 <p class="text-sm text-gray-600 mb-3 line-clamp-2">
-                  {post.data.description}
+                  {post.excerpt}
                 </p>
                 <div class="flex items-center gap-2 pt-3 border-t border-gray-100 text-xs text-gray-500">
-                  <span>{post.data.author}</span>
+                  <span>{post.author}</span>
                   <span>•</span>
-                  <time datetime={post.data.pubDate.toISOString()}>
-                    {post.data.pubDate.toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' })}
+                  <time datetime={post.pubDate}>
+                    {new Date(post.pubDate).toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' })}
                   </time>
                 </div>
               </div>
@@ -207,6 +252,8 @@ const featuredPosts = blogPosts.filter(post => post.data.featured);
         </a>
       </div>
     </section>
+    </>
+    )}
   </div>
 </PageLayout>
 
@@ -235,6 +282,96 @@ const featuredPosts = blogPosts.filter(post => post.data.featured);
     background: #AF7AD5;
     border-color: #AF7AD5;
     color: white;
+  }
+
+  /* Error & Empty State */
+  .error-state {
+    text-align: center;
+    padding: 40px 20px;
+  }
+
+  .error-icon, .empty-icon {
+    width: 96px;
+    height: 96px;
+    margin: 0 auto 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .error-icon {
+    background: #fef2f2;
+    color: #f87171;
+  }
+
+  .empty-icon {
+    background: #eff6ff;
+    color: #60a5fa;
+  }
+
+  .error-title {
+    font-size: 28px;
+    font-weight: 700;
+    color: #111827;
+    margin-bottom: 12px;
+  }
+
+  .error-message {
+    font-size: 16px;
+    color: #6b7280;
+    max-width: 400px;
+    margin: 0 auto 32px;
+    line-height: 1.6;
+  }
+
+  .error-actions {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .btn-retry {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 24px;
+    background: #AF7AD5;
+    color: #fff;
+    font-size: 15px;
+    font-weight: 600;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+  }
+
+  .btn-retry:hover {
+    background: #9b5fc4;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(175, 122, 213, 0.3);
+  }
+
+  .btn-home {
+    display: inline-flex;
+    align-items: center;
+    padding: 12px 24px;
+    background: transparent;
+    color: #374151;
+    font-size: 15px;
+    font-weight: 600;
+    border: 2px solid #e5e7eb;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+  }
+
+  .btn-home:hover {
+    border-color: #374151;
+    background: #f9fafb;
   }
 
   .line-clamp-2 {
