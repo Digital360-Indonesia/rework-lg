@@ -1,0 +1,54 @@
+---
+/**
+ * Announcement ticker — slim bar above the header. Text fades/rotates (not a
+ * sliding marquee like KG). Vans-style top strip. Brand purple, low height.
+ */
+const messages = [
+  'Gratis desain dari tim kami',
+  'Tanpa minimal order',
+  'Nama kelas & angkatan bebas',
+  'Kirim ke seluruh Indonesia',
+];
+---
+<div class="lg-ticker" role="status" aria-label="Pengumuman">
+  <div class="lg-ticker-track" data-ticker>
+    {messages.map((m, i) => (
+      <span class:list={['lg-ticker-item', { 'is-active': i === 0 }]}>{m}</span>
+    ))}
+  </div>
+</div>
+
+<style>
+  .lg-ticker {
+    position: fixed; top: 0; inset-inline: 0; z-index: 60;
+    height: 1.9rem;
+    background: var(--lg-primary, #AF7AD5);
+    color: #fff;
+    display: grid; place-items: center; overflow: hidden;
+  }
+  .lg-ticker-track { position: relative; width: 100%; height: 1.1rem; }
+  .lg-ticker-item {
+    position: absolute; inset: 0;
+    display: grid; place-items: center;
+    font-family: 'Inter', sans-serif; font-size: 0.72rem; font-weight: 600;
+    letter-spacing: 0.06em; text-transform: uppercase; white-space: nowrap;
+    opacity: 0; transform: translateY(60%);
+    transition: opacity 0.45s ease, transform 0.55s cubic-bezier(0.19,1,0.22,1);
+  }
+  .lg-ticker-item.is-active { opacity: 1; transform: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .lg-ticker-item { transition: opacity 0.3s ease; transform: none; }
+  }
+</style>
+
+<script>
+  const items = Array.from(document.querySelectorAll<HTMLElement>('.lg-ticker-item'));
+  if (items.length > 1 && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    let i = 0;
+    setInterval(() => {
+      items[i].classList.remove('is-active');
+      i = (i + 1) % items.length;
+      items[i].classList.add('is-active');
+    }, 2800);
+  }
+</script>

@@ -1,0 +1,61 @@
+---
+/**
+ * Video banner — full-width (NOT full-screen) banner with a background video and
+ * centered text. Desktop + optional mobile video: if the mobile video is empty,
+ * the desktop video is used on every size (mirrors KG's mobile-media fallback).
+ *
+ * CMS NOTE (Sveltia, later): expose `videoDesktop` (required) + `videoMobile`
+ * (optional) + the copy fields. When `videoMobile` is blank, omit the mobile
+ * <source> so the desktop video fits all screens — same pattern as KG's images.
+ */
+const videoDesktop = '/assets/videos/Polo_Countries_Video_DSK.mp4';
+const videoMobile = '/assets/videos/Polo_Countries_Video_MOB.mp4'; // optional — set '' to fall back to desktop
+
+// placeholder copy (centered)
+const title = 'Judul Banner di Sini';
+const subtitle = 'Deskripsi singkat banner — teks placeholder yang nanti bisa diganti lewat CMS.';
+const ctaLabel = 'Selengkapnya';
+const ctaHref = '#';
+---
+<section id="banner" class="lg-banner" aria-label="Banner">
+  <video class="lg-banner-video" autoplay loop muted playsinline preload="metadata">
+    {videoMobile && <source src={videoMobile} media="(max-width: 1023px)" type="video/mp4" />}
+    <source src={videoDesktop} type="video/mp4" />
+  </video>
+  <div class="lg-banner-scrim" aria-hidden="true"></div>
+
+  <div class="lg-banner-copy">
+    <h2 class="lg-banner-title">{title}</h2>
+    <p class="lg-banner-sub">{subtitle}</p>
+    <a class="lg-banner-cta" href={ctaHref}>{ctaLabel}</a>
+  </div>
+</section>
+
+<style>
+  .lg-banner {
+    position: relative; width: 100%;
+    height: clamp(32rem, 92vh, 56rem);
+    margin: clamp(1.75rem, 4vw, 3.25rem) 0;   /* the "break" above & below */
+    overflow: hidden; background: #1A1A2E; isolation: isolate;
+  }
+  .lg-banner-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; display: block; }
+  .lg-banner-scrim { position: absolute; inset: 0; z-index: 1;
+    background: linear-gradient(to top, rgba(0,0,0,.5) 0%, rgba(0,0,0,.18) 26%, rgba(0,0,0,0) 52%); }
+
+  .lg-banner-copy { position: absolute; inset: 0; z-index: 2; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; text-align: center; padding: 2rem 2rem clamp(2.5rem, 6vh, 4.5rem); color: #fff; }
+  .lg-banner-title { color:#fff; font-family:'Inter',sans-serif; font-weight:800; font-size:clamp(2.2rem,5vw,4rem); line-height:1.02; letter-spacing:-.03em; margin:0 0 1rem; text-shadow:0 2px 26px rgba(0,0,0,.45); }
+  .lg-banner-sub { font-family:'Inter',sans-serif; font-weight:500; font-size:clamp(1rem,1.4vw,1.2rem); line-height:1.55; max-width:36rem; margin:0 0 1.7rem; color:rgba(255,255,255,.94); text-shadow:0 1px 14px rgba(0,0,0,.4); }
+  .lg-banner-cta { font-family:'Inter',sans-serif; font-weight:700; font-size:.92rem; letter-spacing:.06em; text-transform:uppercase; color:#fff; text-decoration:none; position:relative; padding-bottom:.35rem; }
+  .lg-banner-cta::after { content:''; position:absolute; left:0; right:0; bottom:0; height:1.5px; background:#fff; transform-origin:center; transition:transform .4s cubic-bezier(.19,1,.22,1); }
+  @media (hover:hover){ .lg-banner-cta:hover::after { transform:scaleX(0); } }
+</style>
+
+<script>
+  const v = document.querySelector<HTMLVideoElement>('.lg-banner-video');
+  if (v) {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((e) => { e.isIntersecting ? v.play().catch(() => {}) : v.pause(); });
+    }, { threshold: 0.1 });
+    io.observe(v);
+  }
+</script>

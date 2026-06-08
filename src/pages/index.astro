@@ -14,8 +14,11 @@
 
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Hero from '../components/home/Hero.astro';
-import ValueProposition from '../components/home/ValueProposition.astro';
-import CTASection from '../components/home/CTASection.astro';
+import ProductCategories from '../components/home/ProductCategories.astro';
+import VideoBanner from '../components/home/VideoBanner.astro';
+import SplitBanner from '../components/home/SplitBanner.astro';
+import SponsorshipShowcase from '../components/home/SponsorshipShowcase.astro';
+import EndCTA from '../components/home/EndCTA.astro';
 import siteConfig from '../data/site-config.json';
 
 // Page metadata
@@ -32,11 +35,20 @@ const ogImage = '/assets/images/logo/logo-colored.webp';
   <!-- Hero Section -->
   <Hero variant="default" />
 
-  <!-- Value Proposition & Video Gallery Section -->
-  <ValueProposition />
+  <!-- Product categories -->
+  <ProductCategories />
 
-  <!-- CTA Section -->
-  <CTASection variant="default" />
+  <!-- Video banner -->
+  <VideoBanner />
+
+  <!-- Split banner (static left + sliding right) -->
+  <SplitBanner />
+
+  <!-- Sponsorship showcase -->
+  <SponsorshipShowcase />
+
+  <!-- End CTA -->
+  <EndCTA />
 </BaseLayout>
 
 <style>

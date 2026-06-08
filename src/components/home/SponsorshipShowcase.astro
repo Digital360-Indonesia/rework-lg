@@ -1,0 +1,146 @@
+---
+/**
+ * Sponsorship showcase — past sponsored events. Top: LG white logo (centered) + a
+ * bold tracked tag over a soft-purple gradient. Center: big image with left/right
+ * peek (KG section-3 style), INFINITE LOOP (clones so a peek always shows, even at
+ * the start). Manual only (no auto-advance) — arrows or swipe; slide-count bar +
+ * 1-line event name. No CTA.
+ */
+const tag = 'Sponsorship Solutions';
+
+const ph = (f: string) => `/assets/images/placeholder/${f.replace(/ /g, '%20')}`;
+const slides = [
+  { img: ph('event1-glastonbury.jpg'),      name: 'Glastonbury 2025' },
+  { img: ph('event2-coachella.webp'),       name: 'Coachella 2025' },
+  { img: ph('event3-tomorrowland.jpg.webp'), name: 'Tomorrowland 2026' },
+  { img: ph('event4-dwp.webp'),             name: 'DWP 2026' },
+];
+const N = slides.length;
+// clone last at front + first at back so a peek always shows + it loops
+const rendered = [
+  { ...slides[N - 1], real: N - 1 },
+  ...slides.map((s, i) => ({ ...s, real: i })),
+  { ...slides[0], real: 0 },
+];
+---
+<section class="lg-spon" aria-label="Sponsorship">
+  <div class="lg-spon-grad" aria-hidden="true"></div>
+
+  <div class="lg-spon-head">
+    <img class="lg-spon-logo" src="/assets/images/logo/logo-white.webp" alt="Level Garment" width="260" height="78" />
+    <span class="lg-spon-tag">{tag}</span>
+  </div>
+
+  <div class="lg-spon-carousel">
+    <button class="lg-spon-arrow lg-spon-prev" data-prev aria-label="Sebelumnya">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+    </button>
+    <div class="lg-spon-track" data-track>
+      {rendered.map((s, i) => (
+        <div class="lg-spon-slide" data-r={i} data-real={s.real} data-desc={s.name}>
+          <img src={s.img} alt={s.name} loading="lazy" />
+        </div>
+      ))}
+    </div>
+    <button class="lg-spon-arrow lg-spon-next" data-next aria-label="Berikutnya">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+    </button>
+  </div>
+
+  <div class="lg-spon-footer">
+    <div class="lg-spon-bar" data-bar>
+      {slides.map((_, i) => (<span class:list={['lg-spon-seg', { 'is-active': i === 0 }]} data-i={i}></span>))}
+    </div>
+    <p class="lg-spon-desc" data-desc>{slides[0].name}</p>
+  </div>
+</section>
+
+<style>
+  :root { --lg-primary: #AF7AD5; --lg-ink: #1A1A2E; }
+
+  .lg-spon { position: relative; padding: clamp(2rem, 4vw, 3.5rem) 0 clamp(2.5rem, 5vw, 4rem); background: #fff; overflow: hidden; isolation: isolate; }
+  .lg-spon-grad { position: absolute; top: 0; left: 0; right: 0; height: 62%; z-index: 0;
+    background: linear-gradient(to bottom, #A87CD0 0%, #C6A4E6 32%, #E4D3F4 56%, rgba(255,255,255,0) 82%); }
+
+  .lg-spon-head { position: relative; z-index: 2; text-align: center; padding: clamp(1.25rem, 3vw, 2.5rem) 1rem clamp(1.75rem, 4vw, 3rem); }
+  .lg-spon-logo { display: block; margin: 0 auto; width: clamp(8.5rem, 12vw, 12rem); height: auto; filter: drop-shadow(0 2px 14px rgba(70,35,110,.35)); }
+  .lg-spon-tag { display: block; margin-top: .95rem; font-family: 'Montserrat', 'Inter', sans-serif; font-weight: 600; font-size: clamp(.78rem, 1.25vw, 1.02rem); letter-spacing: .3em; text-transform: uppercase; color: #fff; padding-left: .3em;
+    text-shadow: 0 1px 1px rgba(35,15,60,.4), 0 2px 6px rgba(45,20,80,.45), 0 6px 22px rgba(60,30,100,.5); }
+
+  .lg-spon-carousel { position: relative; z-index: 1; }
+  .lg-spon-track { display: flex; gap: clamp(6rem, 9vw, 9.5rem); overflow-x: auto; scroll-snap-type: x mandatory; scroll-behavior: smooth; -webkit-overflow-scrolling: touch; scrollbar-width: none; padding: 0 13%; }
+  .lg-spon-track::-webkit-scrollbar { display: none; }
+  .lg-spon-slide { flex: 0 0 74%; scroll-snap-align: center; aspect-ratio: 2 / 1; border-radius: .25rem; overflow: hidden; background: #ece6f3; }
+  .lg-spon-slide img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+  .lg-spon-arrow { position: absolute; top: 50%; transform: translateY(-50%); z-index: 4; width: 2.8rem; height: 2.8rem; border-radius: 999px; background: rgba(255,255,255,.92); border: 1px solid rgba(26,26,46,.08); color: var(--lg-ink); display: grid; place-items: center; cursor: pointer; box-shadow: 0 8px 22px -10px rgba(26,26,46,.35); transition: transform .2s ease; }
+  .lg-spon-arrow svg { width: 1.2rem; height: 1.2rem; }
+  .lg-spon-prev { left: clamp(.5rem, 3vw, 2.5rem); }
+  .lg-spon-next { right: clamp(.5rem, 3vw, 2.5rem); }
+  @media (hover: hover) { .lg-spon-arrow:hover { transform: translateY(-50%) scale(1.06); } }
+
+  .lg-spon-footer { text-align: center; margin-top: clamp(1.5rem, 3vw, 2.25rem); }
+  .lg-spon-bar { display: flex; gap: 6px; justify-content: center; width: clamp(7rem, 16vw, 11rem); margin: 0 auto .95rem; }
+  .lg-spon-seg { flex: 1; height: 2px; background: rgba(26,26,46,.16); border-radius: 999px; transition: background .3s ease; }
+  .lg-spon-seg.is-active { background: var(--lg-primary); }
+  .lg-spon-desc { font-family: 'Inter', sans-serif; font-weight: 600; font-size: clamp(.82rem, 1.3vw, 1rem); letter-spacing: .16em; text-transform: uppercase; color: var(--lg-ink); margin: 0; transition: opacity .3s ease; }
+
+  @media (max-width: 768px) {
+    .lg-spon-slide { flex-basis: 78%; }
+    .lg-spon-track { padding: 0 11%; gap: 1.1rem; }
+    .lg-spon-arrow { display: none; }
+  }
+</style>
+
+<script>
+  document.querySelectorAll<HTMLElement>('.lg-spon').forEach((root) => {
+    const track = root.querySelector<HTMLElement>('[data-track]');
+    const rSlides = Array.from(root.querySelectorAll<HTMLElement>('.lg-spon-slide'));
+    const segs = Array.from(root.querySelectorAll<HTMLElement>('.lg-spon-seg'));
+    const desc = root.querySelector<HTMLElement>('.lg-spon-desc[data-desc]');
+    const prev = root.querySelector<HTMLButtonElement>('[data-prev]');
+    const next = root.querySelector<HTMLButtonElement>('[data-next]');
+    if (!track || rSlides.length < 3) return;
+    const N = segs.length;            // real slide count
+    const LAST = rSlides.length - 1;  // index of the trailing clone
+
+    const centerOf = (el: HTMLElement) => el.offsetLeft + el.offsetWidth / 2;
+    const setScroll = (r: number, smooth: boolean) =>
+      track.scrollTo({ left: centerOf(rSlides[r]) - track.clientWidth / 2, behavior: smooth ? 'smooth' : 'auto' });
+
+    let curR = 1; // current rendered index (start on first real slide)
+
+    const paint = () => {
+      const c = track.scrollLeft + track.clientWidth / 2;
+      let best = 0, bestD = Infinity;
+      rSlides.forEach((s, i) => { const d = Math.abs(centerOf(s) - c); if (d < bestD) { bestD = d; best = i; } });
+      curR = best;
+      const real = Number(rSlides[best].dataset.real);
+      segs.forEach((seg, i) => seg.classList.toggle('is-active', i === real));
+      const name = rSlides[best].dataset.desc || '';
+      if (desc && desc.textContent !== name) {
+        desc.style.opacity = '0';
+        setTimeout(() => { desc.textContent = name; desc.style.opacity = '1'; }, 180);
+      }
+    };
+
+    // when settled on a clone, jump instantly to the matching real slide (seamless loop)
+    const settleLoop = () => {
+      if (curR === 0) { curR = N; setScroll(N, false); }
+      else if (curR === LAST) { curR = 1; setScroll(1, false); }
+    };
+
+    let raf = 0, stop = 0;
+    track.addEventListener('scroll', () => {
+      cancelAnimationFrame(raf); raf = requestAnimationFrame(paint);
+      clearTimeout(stop); stop = window.setTimeout(settleLoop, 140);
+    }, { passive: true });
+
+    prev?.addEventListener('click', () => setScroll(curR - 1, true));
+    next?.addEventListener('click', () => setScroll(curR + 1, true));
+    window.addEventListener('resize', () => setScroll(curR, false));
+
+    // start centered on the first real slide (left peek = trailing clone of last)
+    requestAnimationFrame(() => { setScroll(1, false); paint(); });
+  });
+</script>

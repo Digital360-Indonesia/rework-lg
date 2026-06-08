@@ -22,3 +22,14 @@ pnpm-debug.log*
 
 # jetbrains setting folder
 .idea/
+
+# --- rework-lg: keep heavy/unused migration assets out of git (used subset force-added) ---
+/public/assets/images/portfolio/
+/public/wp-content/
+# migration scratch / dumps
+/main-page-full.html
+/levelgarment-copied-web
+/notes-portfolio
+/all-portfolio-urls.txt
+/section1-hero.png
+/scripts/scrape-all-portfolio.sh

@@ -1,122 +1,119 @@
 ---
 /**
- * Footer Component - Level Garment
- * Single footer component with no duplication
+ * Footer — light/white, Hugo-Boss style. Two feature columns (Sponsorship Solutions
+ * + Partnerships) with image + desc, then Kontak (WhatsApp + jam kerja + lokasi),
+ * Layanan, and Perusahaan. Bottom bar with logo + socials. Only LG-relevant links.
  */
+import siteConfig from '../../data/site-config.json';
+const c: any = siteConfig;
+const contact = c.contact || {};
+const social = c.social || {};
+const year = 2026;
+const ph = (f: string) => `/assets/images/placeholder/${f.replace(/ /g, '%20')}`;
+const mapsUrl = 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(contact.address || 'Level Garment Surabaya');
 
-const footerLogo = "/assets/images/logo/07062024-lg-logo.png";
-
-const socialLinks = [
-  { name: 'Instagram', url: 'https://www.instagram.com/levelgarment/', icon: 'instagram' },
-  { name: 'TikTok', url: 'https://www.tiktok.com/@levelgarment', icon: 'tiktok' },
-  { name: 'Facebook', url: '#', icon: 'facebook' },
-  { name: 'YouTube', url: '#', icon: 'youtube' },
+const features = [
+  { title: 'Sponsorship Solutions', img: ph('event1-glastonbury.jpg'), desc: 'Dari jaket panitia sampai merchandise acara — kami bantu wujudkan kebutuhan sponsorship event sekolah & kampusmu.' },
+  { title: 'Partnerships', img: ph('image copy 6.png'), desc: 'Kerja sama jangka panjang dengan sekolah, organisasi, dan komunitas pelajar di seluruh Indonesia.' },
 ];
-
-const additionalLinks = [
-  { name: 'Product', url: '/product/' },
-  { name: 'Promo', url: '/promo/' },
-  { name: 'Portfolio', url: 'https://portfolio.levelgarment.com' },
-  { name: 'Katalog Jersey', url: '/katalog-jersey-baseball' },
+const layanan = [
+  { label: 'Katalog Produk', href: '/product/' },
+  { label: 'Custom Order', href: '/product/' },
+  { label: 'Portfolio', href: '/portfolio/' },
+  { label: 'Promo', href: '/promo/' },
 ];
-
-const fomoLinks = [
-  { name: 'Fomo News', url: '/berita' },
-  { name: 'Marketing Gallery', url: '#' },
-  { name: 'Sponsor & Partnership', url: '#' },
+const perusahaan = [
+  { label: 'Tentang Kami', href: '/kontak/' },
+  { label: 'Berita', href: '/berita/' },
+  { label: 'Kontak', href: '/kontak/' },
 ];
+const socials = [
+  { name: 'Instagram', url: social.instagram, d: 'M12 2.2c3.2 0 3.6 0 4.85.07 1.17.05 1.8.25 2.23.41.56.22.96.48 1.38.9.42.42.68.82.9 1.38.16.42.36 1.06.41 2.23.06 1.27.07 1.65.07 4.85s0 3.58-.07 4.85c-.05 1.17-.25 1.8-.41 2.23-.22.56-.48.96-.9 1.38-.42.42-.82.68-1.38.9-.42.16-1.06.36-2.23.41-1.27.06-1.65.07-4.85.07s-3.58 0-4.85-.07c-1.17-.05-1.8-.25-2.23-.41a3.7 3.7 0 0 1-1.38-.9 3.7 3.7 0 0 1-.9-1.38c-.16-.42-.36-1.06-.41-2.23C2.2 15.58 2.2 15.2 2.2 12s0-3.58.07-4.85c.05-1.17.25-1.8.41-2.23.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.42-.16 1.06-.36 2.23-.41C8.42 2.2 8.8 2.2 12 2.2Zm0 3.05A6.75 6.75 0 1 0 18.75 12 6.75 6.75 0 0 0 12 5.25Zm0 11.13A4.38 4.38 0 1 1 16.38 12 4.38 4.38 0 0 1 12 16.38Zm6.95-11.4a1.58 1.58 0 1 1-1.58-1.57 1.58 1.58 0 0 1 1.58 1.57Z' },
+  { name: 'TikTok', url: social.tiktok, d: 'M16.5 3c.3 2.1 1.5 3.6 3.5 3.8v2.5c-1.3.1-2.5-.3-3.5-1v6.4c0 3.4-2.7 5.8-5.9 5.3-2.4-.4-4.1-2.4-4.1-4.9 0-3.1 2.9-5.4 6-4.7v2.7c-.4-.1-.9-.2-1.4-.1-1.1.1-2 1-2 2.2 0 1.3 1.1 2.3 2.4 2.1 1.1-.2 1.9-1.2 1.9-2.4V3h2.6Z' },
+  { name: 'Facebook', url: social.facebook, d: 'M22 12a10 10 0 1 0-11.56 9.88v-6.99H7.9V12h2.54V9.8c0-2.5 1.49-3.89 3.78-3.89 1.09 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56V12h2.78l-.44 2.89h-2.34v6.99A10 10 0 0 0 22 12Z' },
+  { name: 'YouTube', url: social.youtube, d: 'M23 12s0-3.2-.4-4.7a2.5 2.5 0 0 0-1.77-1.77C19.32 5.1 12 5.1 12 5.1s-7.32 0-8.83.43A2.5 2.5 0 0 0 1.4 7.3C1 8.8 1 12 1 12s0 3.2.4 4.7a2.5 2.5 0 0 0 1.77 1.77C4.68 18.9 12 18.9 12 18.9s7.32 0 8.83-.43a2.5 2.5 0 0 0 1.77-1.77C23 15.2 23 12 23 12Zm-13.2 3.02V8.98L15.5 12l-5.7 3.02Z' },
+].filter((s) => s.url);
 ---
+<footer class="lgf">
+  <div class="lgf-inner">
+    <div class="lgf-grid">
+      {features.map((f) => (
+        <div class="lgf-feat">
+          <h3 class="lgf-feat-h">{f.title}</h3>
+          <div class="lgf-feat-img"><img src={f.img} alt={f.title} loading="lazy" /></div>
+          <p class="lgf-feat-desc">{f.desc}</p>
+        </div>
+      ))}
 
-<footer id="footer" class="bg-primary text-white">
+      <div class="lgf-col">
+        <h3 class="lgf-h">Kontak</h3>
+        <p class="lgf-contact-line"><strong>WhatsApp</strong><br />
+          <a href={`https://wa.me/${contact.whatsapp}`} target="_blank" rel="noopener noreferrer">{contact.phoneFormatted}</a><br />
+          <span class="lgf-muted">Senin–Sabtu · 08.00–17.00 WIB</span></p>
+        <p class="lgf-contact-line"><a href={mapsUrl} target="_blank" rel="noopener noreferrer">Lihat Lokasi</a></p>
+      </div>
 
-  <!-- Stay In Touch -->
-  <div class="bg-white py-8">
-    <div class="container mx-auto px-4">
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-        <div>
-          <h2 class="text-3xl lg:text-4xl font-bold mb-2 text-primary">Stay In Touch</h2>
-          <p class="text-gray-600 mb-4">Langsung chat whatsapp official Level Garment & dapetin spesial cashback!</p>
-          <a href="https://wa.me/6285183091599" target="_blank" rel="noopener noreferrer" class="inline-block px-8 py-3 bg-primary text-white font-bold rounded-full">Get Cashback Now!</a>
-        </div>
-        <div>
-          <ul class="space-y-2">
-            {additionalLinks.map(link => <li><a href={link.url} class="text-gray-600 hover:text-primary">{link.name}</a></li>)}
-          </ul>
-        </div>
-        <div>
-          <ul class="space-y-2">
-            {fomoLinks.map(link => <li><a href={link.url} class="text-gray-600 hover:text-primary">{link.name}</a></li>)}
-          </ul>
-        </div>
+      <div class="lgf-col">
+        <h3 class="lgf-h">Layanan</h3>
+        <ul>{layanan.map((l) => (<li><a href={l.href}>{l.label}</a></li>))}</ul>
+      </div>
+
+      <div class="lgf-col">
+        <h3 class="lgf-h">Perusahaan</h3>
+        <ul>{perusahaan.map((l) => (<li><a href={l.href}>{l.label}</a></li>))}</ul>
       </div>
     </div>
-  </div>
 
-  <!-- Bottom Section -->
-  <div class="py-8 border-t border-gray-200 bg-white">
-    <div class="container mx-auto px-4">
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <div class="text-sm text-gray-600 space-y-1">
-          <p>Jl. Sidosermo IV Gg. III No. 37 (Raya Prapen), Sidosermo, Surabaya</p>
-          <p>0851 8309 1599</p>
-          <p>marketing@levelgarment.com</p>
-        </div>
-        <div class="flex flex-col md:items-end gap-3">
-          <img src={footerLogo} alt="Level Garment" class="h-14 w-auto" />
-          <div class="flex gap-2">
-            {socialLinks.map(link => (
-              <a href={link.url} target="_blank" rel="noopener noreferrer" class="social-icon group flex items-center justify-center" aria-label={link.name}>
-                {link.icon === 'instagram' && (
-                  <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 448 512"><path d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z"></path></svg>
-                )}
-                {link.icon === 'tiktok' && (
-                  <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 448 512"><path d="M448,209.91a210.06,210.06,0,0,1-122.77-39.25V349.38A162.55,162.55,0,1,1,185,188.31V278.2a74.62,74.62,0,1,0,52.23,71.18V0l88,0a121.18,121.18,0,0,0,1.86,22.17h0A122.18,122.18,0,0,0,381,102.39a121.43,121.43,0,0,0,67,20.14Z"></path></svg>
-                )}
-                {link.icon === 'facebook' && (
-                  <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 320 512"><path d="M80 299.3V512H196V299.3h86.5l18-97.8H196V166.9c0-51.7 20.3-71.5 72.7-71.5c16.3 0 29.4 .4 37 1.2V7.9C291.4 4 256.4 0 236.7 0C129.3 0 80 50.3 80 159.4v42.1H14v97.8H80z"></path></svg>
-                )}
-                {link.icon === 'youtube' && (
-                  <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 576 512"><path d="M549.7 124.1c-6.3-23.7-24.8-42.3-48.3-48.6C458.8 64 288 64 288 64s-170.8 0-213.4 11.5c-23.6 6.3-42.1 24.9-48.3 48.6C11.5 177.1 11.5 256 11.5 256s0 78.9 14.8 131.9c6.3 23.7 24.8 42.3 48.3 48.6c42.7 11.5 213.4 11.5 213.4 11.5s170.8 0 213.4-11.5c23.6-6.3 42.1-24.9 48.3-48.6c14.8-53 14.8-131.9 14.8-131.9s0-78.9-14.8-131.9zm-317.5 213.5V175.2l142.7 81.2-142.7 81.2z"></path></svg>
-                )}
-              </a>
-            ))}
-          </div>
-        </div>
+    <div class="lgf-bottom">
+      <div class="lgf-bottom-l">
+        <span>© {year} Level Garment · The one-and-only for students' apparel needs</span>
+      </div>
+      <div class="lgf-socials">
+        {socials.map((s) => (
+          <a href={s.url} target="_blank" rel="noopener noreferrer" aria-label={s.name} class="lgf-social">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d={s.d} /></svg>
+          </a>
+        ))}
       </div>
     </div>
-  </div>
-
-  <!-- Copyright -->
-  <div class="py-4 border-t border-white/10 text-center">
-    <p class="text-sm text-white">© 2025 Level Garment. All Rights Reserved. Made with Passion by <a href="https://digital360.id" target="_blank" rel="noopener noreferrer" class="text-white hover:text-gray-200">Digital360</a></p>
   </div>
 </footer>
 
 <style>
-  footer a {
-    transition: all 0.3s ease;
-  }
+  :root { --lgf-ink: #1A1A2E; --lgf-primary: #9A66C2; }
+  .lgf { background: #fff; border-top: 1px solid #ece8f1; color: var(--lgf-ink); padding: clamp(2.75rem, 5vw, 4.5rem) clamp(1.5rem, 5vw, 4rem) 1.75rem; }
+  .lgf-inner { max-width: 84rem; margin: 0 auto; }
+  .lgf-grid { display: grid; grid-template-columns: 1.25fr 1.25fr 1fr .85fr .85fr; gap: clamp(1.75rem, 3vw, 3rem); padding-bottom: clamp(2rem, 4vw, 3rem); }
 
-  /* Social icon styles */
-  .social-icon {
-    width: 2.5rem;
-    height: 2.5rem;
-    border-radius: 50%;
-    background-color: #AF7AD5;
-    color: white;
-    transition: all 0.3s ease;
-  }
+  .lgf-feat-h { font-family:'Inter',sans-serif; font-weight:800; font-size:1.02rem; letter-spacing:-.01em; margin:0 0 1rem; }
+  .lgf-feat-img { aspect-ratio: 16/10; border-radius: .35rem; overflow: hidden; background:#f1ecf6; margin-bottom: 1rem; }
+  .lgf-feat-img img { width:100%; height:100%; object-fit:cover; display:block; transition: transform .5s cubic-bezier(.19,1,.22,1); }
+  @media (hover:hover){ .lgf-feat:hover .lgf-feat-img img { transform: scale(1.04); } }
+  .lgf-feat-desc { font-family:'Inter',sans-serif; font-size:.88rem; line-height:1.6; color:#5b5670; margin:0; }
 
-  .social-icon:hover {
-    transform: scale(1.15) rotate(5deg);
-    background-color: #9A66C2;
-  }
+  .lgf-h { font-family:'Inter',sans-serif; font-weight:800; font-size:.82rem; letter-spacing:.1em; text-transform:uppercase; margin:.1rem 0 1.1rem; }
+  .lgf-col ul { list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:.75rem; }
+  .lgf-col a { font-family:'Inter',sans-serif; font-size:.9rem; color:#3a3650; text-decoration:none; transition:color .2s ease; }
+  @media (hover:hover){ .lgf-col a:hover { color: var(--lgf-primary); } }
+  .lgf-contact-line { font-family:'Inter',sans-serif; font-size:.9rem; line-height:1.6; color:#3a3650; margin:0 0 1.1rem; }
+  .lgf-contact-line strong { font-weight:700; }
+  .lgf-contact-line a { color:#3a3650; text-decoration:none; }
+  @media (hover:hover){ .lgf-contact-line a:hover { color: var(--lgf-primary); } }
+  .lgf-muted { color:#8a86a0; font-size:.84rem; }
 
-  .social-icon svg {
-    transition: all 0.3s ease;
-  }
+  .lgf-bottom { display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem; padding-top:1.5rem; border-top:1px solid #ece8f1; }
+  .lgf-bottom-l { display:flex; align-items:center; gap:1rem; flex-wrap:wrap; font-family:'Inter',sans-serif; font-size:.82rem; color:#8a86a0; }
+  .lgf-logo { height:1.9rem; width:auto; }
+  .lgf-socials { display:flex; gap:.5rem; }
+  .lgf-social { width:2.2rem; height:2.2rem; border-radius:999px; display:grid; place-items:center; background:#f4f0f9; color:#6a6580; transition:background .2s ease, color .2s ease, transform .2s ease; }
+  .lgf-social svg { width:1.05rem; height:1.05rem; }
+  @media (hover:hover){ .lgf-social:hover { background: var(--lgf-primary); color:#fff; transform: translateY(-2px); } }
 
-  .social-icon:hover svg {
-    transform: scale(1.1);
+  @media (max-width: 900px) {
+    .lgf-grid { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 560px) {
+    .lgf-grid { grid-template-columns: 1fr; }
+    .lgf-bottom { flex-direction: column; align-items: flex-start; }
   }
 </style>
