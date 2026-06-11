@@ -1,0 +1,434 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex" />
+  <link rel="icon" type="image/png" href="/images/logos/favicon-kg.png" />
+  <title>Rework Checklist — Level Garment</title>
+  <style>
+    :root { --orange:#ff4c00; --ink:#1a1a1a; --dim:#6b7280; --line:#ececec; --bg:#fafafa; }
+    * { box-sizing:border-box; }
+    body { margin:0; background:var(--bg); color:var(--ink);
+      font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",Roboto,sans-serif; }
+    .wrap { max-width:62rem; margin:0 auto; padding:1.5rem 1.25rem 5rem; }
+    header.top { position:sticky; top:0; background:rgba(250,250,250,.94); backdrop-filter:blur(8px);
+      border-bottom:1px solid var(--line); z-index:10; }
+    .top-in { max-width:62rem; margin:0 auto; padding:.9rem 1.25rem; display:flex; align-items:center; justify-content:space-between; gap:1rem; flex-wrap:wrap; }
+    .brand { font-weight:700; letter-spacing:-.02em; } .brand b { color:var(--orange); }
+    .tabs { display:flex; gap:.4rem; }
+    .tab { font-weight:700; font-size:.85rem; padding:.45rem .9rem; border-radius:999px; border:1px solid var(--line);
+      background:#fff; color:var(--dim); cursor:pointer; }
+    .tab.active { background:var(--ink); color:#fff; border-color:var(--ink); }
+    .tab.active[data-t="design"] { background:var(--orange); border-color:var(--orange); }
+    .bar { height:6px; background:#e5e5e5; } .bar-fill { height:100%; width:0%; background:var(--orange); transition:width .3s; }
+    h1 { font-size:clamp(1.7rem,4vw,2.4rem); letter-spacing:-.03em; margin:0 0 .4rem; }
+    .lede { color:var(--dim); font-weight:600; max-width:46rem; line-height:1.5; margin:0 0 .8rem; }
+    .openrow { display:flex; gap:.6rem; flex-wrap:wrap; align-items:center; margin-bottom:.4rem; }
+    .open-cms { display:inline-flex; gap:.4rem; font-weight:700; color:#fff; background:var(--ink);
+      text-decoration:none; padding:.55rem 1rem; border-radius:999px; font-size:.88rem; }
+    .open-cms:hover { background:var(--orange); }
+    .repo-state { font-size:.8rem; font-weight:600; color:var(--dim); }
+    .repo-state b { color:var(--orange); }
+    h2 { font-size:1.05rem; letter-spacing:.02em; text-transform:uppercase; color:var(--orange); margin:2.2rem 0 1rem; }
+    .item { background:#fff; border:1px solid var(--line); border-radius:1rem; margin-bottom:.7rem; overflow:hidden; }
+    .item.done { opacity:.6; }
+    .row { display:grid; grid-template-columns:auto 4.5rem 1fr auto; gap:1rem; align-items:center; padding:.85rem 1.1rem; }
+    .chk { width:1.4rem; height:1.4rem; accent-color:var(--orange); cursor:pointer; }
+    .thumb { width:4.5rem; height:3.6rem; border-radius:.55rem; object-fit:cover; background:#f0f0f0; border:1px solid var(--line); cursor:pointer; }
+    .thumb.txt { display:grid; place-items:center; font-size:1.1rem; font-weight:800; color:#cbd5e1; }
+    .meta { cursor:pointer; }
+    .meta .name { font-weight:700; letter-spacing:-.01em; }
+    .meta .where { font-size:.82rem; color:var(--dim); font-weight:600; }
+    .meta .size { font-size:.78rem; color:var(--orange); font-weight:700; margin-top:.15rem; }
+    .meta .toggle { font-size:.74rem; color:var(--dim); font-weight:700; margin-top:.25rem; }
+    .actions { display:flex; flex-direction:column; gap:.45rem; align-items:flex-end; white-space:nowrap; }
+    .lnk { font-weight:700; font-size:.82rem; text-decoration:none; border-bottom:2px solid var(--orange); padding-bottom:1px; cursor:pointer; background:none; border-left:0; border-top:0; border-right:0; }
+    .lnk.cms { color:var(--ink); } .lnk.cms:hover { color:var(--orange); } .lnk.web { color:var(--orange); }
+    .detail { display:none; padding:0 1.1rem 1.2rem; border-top:1px solid var(--line); }
+    .item.open .detail { display:block; }
+    .detail-in { display:grid; grid-template-columns:1fr; gap:1rem; padding-top:1rem; }
+    @media(min-width:720px){ .detail-in.has-img { grid-template-columns:14rem 1fr; } }
+    .detail > .detail-in > img.sample { width:100%; border-radius:.6rem; border:1px solid var(--line); align-self:start; }
+    .brief-wrap { min-width:0; }
+    .brief-host { min-width:0; }
+    /* toolbar */
+    .ed-bar { display:flex; gap:.35rem; flex-wrap:wrap; margin-bottom:.5rem; }
+    .ed-bar button { font-size:.8rem; font-weight:700; color:var(--ink); background:#fff; border:1px solid var(--line); border-radius:.45rem; padding:.3rem .55rem; cursor:pointer; line-height:1; }
+    .ed-bar button:hover { border-color:var(--orange); color:var(--orange); }
+    .ed-bar .ed-img { background:var(--ink); color:#fff; border-color:var(--ink); }
+    .ed-bar .ed-img:hover { background:var(--orange); border-color:var(--orange); color:#fff; }
+    /* editing surface */
+    .ed-area { border:1px solid var(--line); border-radius:.6rem; padding:.7rem .9rem; min-height:150px; font-size:.92rem; line-height:1.65; color:#374151; outline:none; }
+    .ed-area:focus { border-color:var(--orange); }
+    .ed-area.drag { border-color:var(--orange); background:#fff7f3; }
+    .ed-area:empty:before { content:attr(data-ph); color:#9ca3af; font-style:italic; }
+    .ed-area h2 { font-size:1.2rem; margin:.6rem 0 .3rem; letter-spacing:-.01em; color:var(--ink); }
+    .ed-area h3 { font-size:1.05rem; margin:.5rem 0 .3rem; letter-spacing:-.01em; color:var(--ink); }
+    .ed-area p { margin:.4rem 0; } .ed-area ul,.ed-area ol { margin:.4rem 0; padding-left:1.2rem; }
+    /* drag-resizable image: 8 handles (corners scale, edges stretch one axis) */
+    .ed-area .rz { position:relative; display:inline-block; max-width:100%; width:55%; margin:.4rem .4rem .4rem 0; vertical-align:top; line-height:0; }
+    .ed-area .rz img { width:100%; height:100%; object-fit:fill; display:block; border-radius:.5rem; border:1px solid var(--line); pointer-events:none; }
+    .ed-area .rz:hover img { border-color:var(--orange); }
+    .rz-h { position:absolute; background:var(--orange); border:1.5px solid #fff; box-shadow:0 0 0 1px rgba(0,0,0,.12); opacity:0; transition:opacity .12s; z-index:4; }
+    .ed-area .rz:hover .rz-h { opacity:1; }
+    .rz-h.c { width:13px; height:13px; border-radius:3px; }
+    .rz-h.c-nw{ top:-7px; left:-7px; cursor:nwse-resize; } .rz-h.c-ne{ top:-7px; right:-7px; cursor:nesw-resize; }
+    .rz-h.c-sw{ bottom:-7px; left:-7px; cursor:nesw-resize; } .rz-h.c-se{ bottom:-7px; right:-7px; cursor:nwse-resize; }
+    .rz-h.edge.e-n{ top:-4px; left:30%; right:30%; height:8px; border-radius:4px; cursor:ns-resize; }
+    .rz-h.edge.e-s{ bottom:-4px; left:30%; right:30%; height:8px; border-radius:4px; cursor:ns-resize; }
+    .rz-h.edge.e-w{ left:-4px; top:30%; bottom:30%; width:8px; border-radius:4px; cursor:ew-resize; }
+    .rz-h.edge.e-e{ right:-4px; top:30%; bottom:30%; width:8px; border-radius:4px; cursor:ew-resize; }
+    /* table: fixed layout so column widths stick, plus drag-resize + add/remove */
+    .tbl-wrap { position:relative; display:block; margin:.5rem 0; }
+    .ed-tbl { border-collapse:collapse; table-layout:fixed; width:auto; font-size:.85rem; }
+    .ed-tbl td,.ed-tbl th { border:1px solid var(--line); padding:.4rem .55rem; min-width:3rem; vertical-align:top; word-break:break-word; }
+    .col-rsz { position:absolute; top:0; width:9px; margin-left:-4px; cursor:col-resize; z-index:3; }
+    .col-rsz:hover { background:rgba(255,76,0,.28); }
+    /* add/remove controls — appear only on table hover; cols on the right, rows on the bottom */
+    .tbl-col, .tbl-row { position:absolute; display:flex; gap:3px; opacity:0; pointer-events:none; transition:opacity .12s; z-index:3; }
+    .tbl-col { flex-direction:column; } .tbl-row { flex-direction:row; }
+    .tbl-wrap:hover .tbl-col, .tbl-wrap:hover .tbl-row { opacity:1; pointer-events:auto; }
+    .tbl-col button, .tbl-row button { width:22px; height:22px; padding:0; font-size:.95rem; font-weight:700; line-height:1; color:var(--ink); background:#fff; border:1px solid var(--line); border-radius:.4rem; cursor:pointer; display:flex; align-items:center; justify-content:center; }
+    .tbl-col button:hover, .tbl-row button:hover { border-color:var(--orange); color:var(--orange); background:#fff7f3; }
+    .brief-saved { display:inline-block; margin-top:.4rem; font-size:.75rem; font-weight:600; color:var(--dim); }
+    @media (max-width:640px){ .row{ grid-template-columns:auto 1fr; } .thumb{display:none;} .actions{grid-column:2; flex-direction:row; gap:1rem;} }
+  </style>
+</head>
+<body>
+  <header class="top">
+    <div class="top-in">
+      <span class="brand">Rework Checklist · <b>Level Garment</b></span>
+      <div class="tabs">
+        <button class="tab active" data-t="all" id="tab-all">Semua</button>
+        <button class="tab" data-t="design" id="tab-design">🎨 Design</button>
+        <button class="tab" data-t="copy" id="tab-copy">✍️ Copywriting</button>
+      </div>
+    </div>
+    <div class="bar"><div class="bar-fill" id="barfill"></div></div>
+  </header>
+
+  <div class="wrap">
+    <h1>Checklist rework media & konten — Level Garment</h1>
+    <p class="lede">Klik baris untuk buka <b>brief</b> — langsung bisa ditulis &amp; diedit di sana (teks, tabel, gambar), <b>tersimpan otomatis</b>. Tiap slot ada ukuran, <b>Preview web</b>, dan checkbox.</p>
+    <div class="openrow">
+      <a class="open-cms" href="/admin/index.html" target="_blank">Buka CMS (Sveltia) →</a>
+      <span class="repo-state">Brief tersimpan otomatis &amp; dibagikan ke tim. (Offline? tersimpan lokal dulu, lalu sinkron.)</span>
+    </div>
+    <div id="list"></div>
+  </div>
+
+  <script>
+    const CMS = {
+      site:'/admin/index.html#/collections/settings/entries/site',
+      products:'/admin/index.html#/collections/products/entries/products',
+    };
+    const W = { home:'/', product:'/product/', berita:'/berita/', kontak:'/kontak/' };
+
+    const items = [
+      { type:'copy', g:'Global (Header & Footer)', id:'g-nav', name:'Navigasi header', where:'Header', size:'Teks', web:W.home },
+      { type:'copy', g:'Global (Header & Footer)', id:'g-contact', name:'Kontak (telepon, WhatsApp, email, alamat)', where:'Header + Footer', size:'Teks', web:W.home },
+      { type:'copy', g:'Global (Header & Footer)', id:'g-social', name:'Link sosial media', where:'Footer', size:'URL', web:W.home },
+      { type:'copy', g:'Global (Header & Footer)', id:'g-footer', name:'Footer (tagline, info links, kontak)', where:'Footer', size:'Teks', web:W.home },
+      { type:'design', g:'Global (Header & Footer)', id:'g-logo', name:'Logo Level Garment (putih & warna)', where:'Header + Footer', size:'PNG transparan', web:W.home },
+
+      { type:'design', g:'Homepage', id:'h-hero', name:'Hero — 8 gambar slide (story)', where:'Section 1', size:'Full-screen · webp', web:W.home },
+      { type:'copy', g:'Homepage', id:'h-hero-copy', name:'Hero — judul & deskripsi per slide + link', where:'Section 1', size:'Teks', web:W.home },
+      { type:'design', g:'Homepage', id:'h-cats', name:'Pilih Kategori — 6 gambar kartu', where:'Section 2', size:'4:5 · webp', web:W.home },
+      { type:'copy', g:'Homepage', id:'h-cats-copy', name:'Pilih Kategori — label & link 6 kartu', where:'Section 2', size:'Teks', web:W.home },
+      { type:'design', g:'Homepage', id:'h-video', name:'Video Banner — video desktop & mobile', where:'Section 3', size:'MP4 (faststart)', web:W.home },
+      { type:'copy', g:'Homepage', id:'h-video-copy', name:'Video Banner — judul & deskripsi', where:'Section 3', size:'Teks', web:W.home },
+      { type:'design', g:'Homepage', id:'h-split', name:'Split Banner — gambar kiri + 4 slide kanan', where:'Section 4', size:'webp', web:W.home },
+      { type:'copy', g:'Homepage', id:'h-split-copy', name:'Split Banner — judul, desc, caption per slide', where:'Section 4', size:'Teks', web:W.home },
+      { type:'design', g:'Homepage', id:'h-sponsor', name:'Sponsorship Showcase — 4 gambar event', where:'Section 5', size:'2:1 · webp/jpg', web:W.home },
+      { type:'copy', g:'Homepage', id:'h-sponsor-copy', name:'Sponsorship — nama event + tahun (1 baris)', where:'Section 5', size:'Teks', web:W.home },
+      { type:'copy', g:'Homepage', id:'h-endcta-copy', name:'End CTA — judul, sub, nomor WhatsApp', where:'Section 6 (sebelum footer)', size:'Teks', web:W.home },
+
+      { type:'design', g:'Produk (Landing)', id:'p-hero', name:'Hero banner produk (full-width, media only)', where:'/product — banner atas', size:'Banner lebar ~72vh · webp/png', web:W.product },
+      { type:'design', g:'Produk (Landing)', id:'p-cats', name:'Gambar 12 jenis produk (kategori)', where:'/product — Pilih Kategori', size:'1:1 · webp', web:W.product },
+      { type:'copy', g:'Produk (Landing)', id:'p-cats-copy', name:'Nama & link 12 jenis produk', where:'/product', size:'Teks', web:W.product },
+      { type:'design', g:'Produk (Landing)', id:'p-banners', name:'2 promo banner (full 60vh + banner lagi)', where:'/product — setelah kategori', size:'Banner lebar · webp', web:W.product },
+    ];
+
+    const KEY='lg-rework-checklist';
+    const saved=JSON.parse(localStorage.getItem(KEY)||'{}');
+    const listEl=document.getElementById('list');
+    let active='all';
+
+    // ---------- brief: always-editable inline editor, auto-saves ----------
+    const briefKey=(id)=>'kg-brief-'+id;
+
+    // strip interactive controls so only clean content is stored
+    function cleanHTML(area){
+      const c=area.cloneNode(true);
+      c.querySelectorAll('.ed-ctl').forEach(n=>n.remove());
+      c.querySelectorAll('.tbl-wrap').forEach(w=>{ const t=w.querySelector('table'); t?w.replaceWith(t):w.remove(); });
+      c.querySelectorAll('[data-enh]').forEach(n=>n.removeAttribute('data-enh'));
+      return c.innerHTML;
+    }
+
+    // ---------- shared storage: PocketBase on the VPS (same-origin via nginx /pb/) ----------
+    // Briefs are shared with anyone who opens this page. Falls back to localStorage when PB is
+    // unreachable (local dev, server down) so edits are never lost.
+    const PB='/pb'; // nginx reverse-proxy → PocketBase :8090 (set up by Lord-Shipwright)
+    const recCache={}, saveQueue={};
+    async function pbLoad(id){
+      const url=`${PB}/api/collections/briefs/records?perPage=1&filter=`+encodeURIComponent(`item="${id}"`);
+      const res=await fetch(url,{headers:{Accept:'application/json'}}); if(!res.ok) throw new Error('pb '+res.status);
+      const d=await res.json(); if(d.items&&d.items[0]){ recCache[id]=d.items[0].id; return d.items[0].html||''; } return '';
+    }
+    async function pbSave(id, html){
+      if(!recCache[id]){ try{ await pbLoad(id); }catch(e){} }
+      if(recCache[id]){
+        const res=await fetch(`${PB}/api/collections/briefs/records/${recCache[id]}`,{method:'PATCH',headers:{'Content-Type':'application/json'},body:JSON.stringify({html})});
+        if(!res.ok) throw new Error('pb patch '+res.status);
+      } else {
+        const res=await fetch(`${PB}/api/collections/briefs/records`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({item:id,html})});
+        if(!res.ok) throw new Error('pb post '+res.status); recCache[id]=(await res.json()).id;
+      }
+    }
+    // serialize saves per item so a fast double-save can't create two records
+    function pbSaveQueued(id, html){ const prev=saveQueue[id]||Promise.resolve(); const next=prev.catch(()=>{}).then(()=>pbSave(id,html)); saveQueue[id]=next; return next; }
+    async function pbUpload(file){
+      const fd=new FormData(); fd.append('file',file);
+      const res=await fetch(`${PB}/api/collections/uploads/records`,{method:'POST',body:fd}); if(!res.ok) throw new Error('pb upload '+res.status);
+      const rec=await res.json(); return `${PB}/api/files/uploads/${rec.id}/${rec.file}`;
+    }
+    function setStatus(hint,s){ if(!hint)return; hint.dataset.s=s;
+      hint.textContent = s==='saving'?'menyimpan…' : s==='saved'?'tersimpan ✓' : s==='local'?'⚠ offline — tersimpan di browser' : s==='offline'?'⚠ offline — pakai salinan lokal' : '';
+      if(s==='saved') setTimeout(()=>{ if(hint.dataset.s==='saved') hint.textContent=''; },1500);
+    }
+
+    // ---- image: 8 drag handles (corners scale w/ aspect, edges stretch one axis) ----
+    function enhanceImg(rz, save){
+      if(rz.dataset.enh) return; rz.dataset.enh='1';
+      const img=rz.querySelector('img'); if(!img) return;
+      const init=()=>{ if(rz.style.width&&rz.style.height) return;
+        const r=(img.naturalWidth/img.naturalHeight)||1.5;
+        const host=rz.closest('.ed-area'); let w=Math.min(img.naturalWidth||360,(host?host.clientWidth:520)*0.6,520);
+        if(!w||w<60) w=300; rz.style.width=Math.round(w)+'px'; rz.style.height=Math.round(w/r)+'px'; };
+      img.complete?init():img.addEventListener('load',init,{once:true});
+      ['c-nw','c-ne','c-sw','c-se','e-n','e-s','e-w','e-e'].forEach(d=>{
+        const h=document.createElement('span'); h.className='rz-h ed-ctl '+(d[0]==='c'?'c '+d:'edge '+d);
+        h.addEventListener('pointerdown',e=>startImgDrag(e,rz,d,save)); rz.appendChild(h);
+      });
+    }
+    function startImgDrag(e,rz,dir,save){
+      e.preventDefault(); e.stopPropagation();
+      const sx=e.clientX, sy=e.clientY, sw=rz.offsetWidth, sh=rz.offsetHeight, ratio=sw/sh||1.5, corner=dir[0]==='c';
+      const move=(ev)=>{ const dx=ev.clientX-sx, dy=ev.clientY-sy; let w=sw, h=sh;
+        if(corner){ const sgn=dir.includes('e')?1:-1; w=Math.max(60,sw+sgn*dx); h=Math.max(40,w/ratio); }
+        else if(dir==='e-e') w=Math.max(60,sw+dx);
+        else if(dir==='e-w') w=Math.max(60,sw-dx);
+        else if(dir==='e-s') h=Math.max(40,sh+dy);
+        else if(dir==='e-n') h=Math.max(40,sh-dy);
+        rz.style.width=Math.round(w)+'px'; rz.style.height=Math.round(h)+'px'; };
+      const up=()=>{ document.removeEventListener('pointermove',move); document.removeEventListener('pointerup',up); save(); };
+      document.addEventListener('pointermove',move); document.addEventListener('pointerup',up);
+    }
+
+    // ---- table: column drag-resize + add/remove rows & columns ----
+    function ensureColgroup(table){
+      const cols=table.rows[0]?table.rows[0].cells.length:0;
+      let cg=table.querySelector('colgroup');
+      if(!cg){ cg=document.createElement('colgroup'); table.insertBefore(cg,table.firstChild); }
+      while(cg.children.length<cols){ const c=document.createElement('col'); c.style.width='140px'; cg.appendChild(c); }
+      while(cg.children.length>cols){ cg.lastChild.remove(); }
+    }
+    function layoutResizers(table){
+      const wrap=table.closest('.tbl-wrap'); if(!wrap) return;
+      const wr=wrap.getBoundingClientRect(), row=table.rows[0]; if(!row) return; const th=table.offsetHeight;
+      wrap.querySelectorAll('.col-rsz').forEach(h=>{ const cell=row.cells[+h.dataset.col];
+        if(!cell){ h.style.display='none'; return; } h.style.display='block';
+        const cr=cell.getBoundingClientRect(); h.style.left=(cr.right-wr.left)+'px'; h.style.height=th+'px'; });
+      const tw=table.offsetWidth, tl=table.offsetLeft, tt=table.offsetTop;
+      const colCtl=wrap.querySelector('.tbl-col');
+      if(colCtl){ colCtl.style.left=(tl+tw+6)+'px'; colCtl.style.top=(tt+th/2-colCtl.offsetHeight/2)+'px'; }
+      const rowCtl=wrap.querySelector('.tbl-row');
+      if(rowCtl){ rowCtl.style.top=(tt+th+6)+'px'; rowCtl.style.left=(tl+tw/2-rowCtl.offsetWidth/2)+'px'; }
+    }
+    function buildResizers(table, save){
+      const wrap=table.closest('.tbl-wrap'); wrap.querySelectorAll('.col-rsz').forEach(n=>n.remove());
+      const n=table.querySelector('colgroup').children.length;
+      for(let i=0;i<n;i++){ const h=document.createElement('span'); h.className='col-rsz ed-ctl'; h.dataset.col=i;
+        h.addEventListener('pointerdown',e=>startColDrag(e,table,i,save)); wrap.appendChild(h); }
+      layoutResizers(table);
+    }
+    function startColDrag(e,table,i,save){
+      e.preventDefault(); e.stopPropagation();
+      const col=table.querySelector('colgroup').children[i], sx=e.clientX, sw=table.rows[0].cells[i].getBoundingClientRect().width;
+      const move=(ev)=>{ col.style.width=Math.max(40,sw+(ev.clientX-sx))+'px'; layoutResizers(table); };
+      const up=()=>{ document.removeEventListener('pointermove',move); document.removeEventListener('pointerup',up); save(); };
+      document.addEventListener('pointermove',move); document.addEventListener('pointerup',up);
+    }
+    function enhanceTable(table, save){
+      if(table.dataset.enh) return; table.dataset.enh='1';
+      let wrap=table.closest('.tbl-wrap');
+      if(!wrap){ wrap=document.createElement('div'); wrap.className='tbl-wrap'; table.replaceWith(wrap); wrap.appendChild(table); }
+      ensureColgroup(table);
+      const colCtl=document.createElement('div'); colCtl.className='tbl-col ed-ctl'; colCtl.contentEditable='false';
+      colCtl.innerHTML='<button data-t="col+" title="Tambah kolom">+</button><button data-t="col-" title="Hapus kolom">−</button>';
+      const rowCtl=document.createElement('div'); rowCtl.className='tbl-row ed-ctl'; rowCtl.contentEditable='false';
+      rowCtl.innerHTML='<button data-t="row+" title="Tambah baris">+</button><button data-t="row-" title="Hapus baris">−</button>';
+      wrap.appendChild(colCtl); wrap.appendChild(rowCtl);
+      const onCtl=ev=>{ const b=ev.target.closest('button'); if(!b)return; ev.preventDefault();
+        const tb=table.tBodies[0]||table, n=table.rows[0]?table.rows[0].cells.length:2;
+        if(b.dataset.t==='row+'){ const tr=document.createElement('tr'); for(let i=0;i<n;i++){const td=document.createElement('td');td.innerHTML='&nbsp;';tr.appendChild(td);} tb.appendChild(tr); }
+        else if(b.dataset.t==='col+'){ [...table.rows].forEach(r=>{const td=document.createElement('td');td.innerHTML='&nbsp;';r.appendChild(td);}); ensureColgroup(table); buildResizers(table,save); }
+        else if(b.dataset.t==='row-'){ if(table.rows.length>1) tb.deleteRow(-1); }
+        else if(b.dataset.t==='col-'){ if(n>1){ [...table.rows].forEach(r=>r.deleteCell(-1)); ensureColgroup(table); buildResizers(table,save); } }
+        layoutResizers(table); save();
+      };
+      colCtl.addEventListener('click',onCtl); rowCtl.addEventListener('click',onCtl);
+      buildResizers(table, save);
+      new ResizeObserver(()=>layoutResizers(table)).observe(wrap);
+    }
+
+    function mountEditor(item){
+      const host=item.querySelector('.brief-host');
+      if(host.dataset.mounted) return; host.dataset.mounted='1';
+      const id=host.dataset.briefId;
+      const hint=item.querySelector('.brief-saved');
+      host.innerHTML=`
+        <div class="ed-bar">
+          <button data-cmd="bold" title="Tebal"><b>B</b></button>
+          <button data-cmd="h2" title="Judul">H2</button>
+          <button data-cmd="h3" title="Sub-judul">H3</button>
+          <button data-cmd="ul" title="List">• List</button>
+          <button data-cmd="table" title="Tabel">▦ Tabel</button>
+          <button data-cmd="img" class="ed-img" title="Tambah gambar">📷 Gambar</button>
+        </div>
+        <div class="ed-area" contenteditable="true" data-ph="Tulis brief di sini… teks, tabel, atau seret gambar ke sini. Hover gambar lalu tarik sisi/pojok untuk ubah lebar, tinggi, atau skala."></div>
+        <input type="file" accept="image/*" class="ed-file" multiple hidden />`;
+      const area=host.querySelector('.ed-area');
+      const fileInput=host.querySelector('.ed-file');
+      const cacheKey=briefKey(id);
+      let dirty=false;
+      area.innerHTML=localStorage.getItem(cacheKey)||''; // instant paint from local cache
+      let t; const save=()=>{ dirty=true; clearTimeout(t); setStatus(hint,'saving');
+        t=setTimeout(()=>{ const html=cleanHTML(area); localStorage.setItem(cacheKey, html);
+          pbSaveQueued(id, html).then(()=>setStatus(hint,'saved')).catch(()=>setStatus(hint,'local')); },500); };
+      const enhance=()=>{ area.querySelectorAll('.rz').forEach(rz=>enhanceImg(rz,save)); area.querySelectorAll('table.ed-tbl').forEach(tb=>enhanceTable(tb,save)); };
+      area.addEventListener('input', save);
+      const insert=(html)=>{ area.focus(); document.execCommand('insertHTML',false,html); enhance(); save(); };
+      const addImg=(file)=>{ setStatus(hint,'saving');
+        pbUpload(file)
+          .then(url=>insert(`<span class="rz" contenteditable="false"><img src="${url}" alt=""></span>&#8203;`))
+          .catch(()=>{ const r=new FileReader(); r.onload=()=>insert(`<span class="rz" contenteditable="false"><img src="${r.result}" alt=""></span>&#8203;`); r.readAsDataURL(file); }); };
+      host.querySelector('.ed-bar').addEventListener('click',(e)=>{
+        const b=e.target.closest('button'); if(!b)return; e.preventDefault(); area.focus();
+        const c=b.dataset.cmd;
+        if(c==='bold') document.execCommand('bold');
+        else if(c==='h2') document.execCommand('formatBlock',false,'h2');
+        else if(c==='h3') document.execCommand('formatBlock',false,'h3');
+        else if(c==='ul') document.execCommand('insertUnorderedList');
+        else if(c==='img') fileInput.click();
+        else if(c==='table') insert('<table class="ed-tbl"><tbody><tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr></tbody></table><p><br></p>');
+        save();
+      });
+      fileInput.addEventListener('change',()=>{ [...fileInput.files].forEach(addImg); fileInput.value=''; });
+      area.addEventListener('paste',(e)=>{ const im=[...(e.clipboardData?.items||[])].filter(i=>i.type.startsWith('image/')); if(im.length){ e.preventDefault(); im.forEach(i=>addImg(i.getAsFile())); } });
+      ['dragover','dragenter'].forEach(ev=>area.addEventListener(ev,(e)=>{ e.preventDefault(); area.classList.add('drag'); }));
+      ['dragleave','drop'].forEach(ev=>area.addEventListener(ev,()=>area.classList.remove('drag')));
+      area.addEventListener('drop',(e)=>{ const fs=[...(e.dataTransfer?.files||[])].filter(f=>f.type.startsWith('image/')); if(fs.length){ e.preventDefault(); fs.forEach(addImg); } });
+      enhance(); // wire controls onto cached content
+      // reconcile with the server: server copy wins; if server has none but we have a
+      // local-only draft (written before PB went live), push it up so others can see it.
+      (async()=>{ try{ const remote=await pbLoad(id); const local=localStorage.getItem(cacheKey)||'';
+          if(remote){ if(!dirty && remote!==cleanHTML(area)){ area.innerHTML=remote; localStorage.setItem(cacheKey, remote); enhance(); } }
+          else if(local.trim()){ pbSaveQueued(id, local).catch(()=>{}); }
+          if(hint && hint.dataset.s!=='saving' && hint.dataset.s!=='local') setStatus(hint,'idle');
+        }catch(e){ setStatus(hint,'offline'); } })();
+    }
+    function unmountEditor(){ /* content auto-saves; editor stays mounted (hidden) */ }
+
+    function render(){
+      listEl.innerHTML='';
+      const shown=items.filter(it=>active==='all'||it.type===active);
+      let lastG='';
+      shown.forEach((it)=>{
+        if(it.g!==lastG){ const h=document.createElement('h2'); h.textContent=it.g; listEl.appendChild(h); lastG=it.g; }
+        const wrap=document.createElement('div'); wrap.className='item'+(saved[it.id]?' done':''); wrap.dataset.id=it.id;
+        const thumb=it.sample?`<img class="thumb js-exp" src="${it.sample}" alt="" />`:`<div class="thumb txt js-exp">${it.type==='copy'?'T':'—'}</div>`;
+        const web=it.web?`<a class="lnk web" href="${it.web}" target="_blank">Preview web ↗</a>`:'';
+        wrap.innerHTML=`
+          <div class="row">
+            <input type="checkbox" class="chk" ${saved[it.id]?'checked':''} data-id="${it.id}" />
+            ${thumb}
+            <div class="meta js-exp">
+              <div class="name">${it.name}</div>
+              <div class="where">${it.where}</div>
+              <div class="size">${it.size}</div>
+              <div class="toggle">Brief ▾</div>
+            </div>
+            <div class="actions">${web}</div>
+          </div>
+          <div class="detail"><div class="detail-in ${it.sample?'has-img':''}">
+            ${it.sample?`<img class="sample" src="${it.sample}" alt="" />`:''}
+            <div class="brief-wrap">
+              <div class="brief-host" data-brief-id="${it.id}"></div>
+              <span class="brief-saved" aria-hidden="true"></span>
+            </div>
+          </div></div>`;
+        listEl.appendChild(wrap);
+      });
+      refreshBar();
+    }
+    function refreshBar(){
+      const shown=items.filter(it=>active==='all'||it.type===active);
+      const done=shown.filter(it=>saved[it.id]).length;
+      document.getElementById('barfill').style.width=(shown.length?done/shown.length*100:0)+'%';
+      ['all','design','copy'].forEach(t=>{ const set=items.filter(it=>t==='all'||it.type===t); const d=set.filter(it=>saved[it.id]).length;
+        const base=t==='all'?'Semua':(t==='design'?'🎨 Design':'✍️ Copywriting');
+        document.getElementById('tab-'+t).textContent=`${base} (${d}/${set.length})`; });
+    }
+    document.querySelector('.tabs').addEventListener('click',(e)=>{ const b=e.target.closest('.tab'); if(!b)return;
+      active=b.dataset.t; document.querySelectorAll('.tab').forEach(t=>t.classList.toggle('active',t===b)); render(); });
+    listEl.addEventListener('click',(e)=>{
+      if(e.target.closest('.brief-wrap')) return; // editing area — never toggles
+      if(e.target.classList.contains('js-exp')||e.target.closest('.js-exp')){
+        const item=e.target.closest('.item');
+        const opening=!item.classList.contains('open');
+        item.classList.toggle('open');
+        if(opening) mountEditor(item); else unmountEditor(item);
+      }
+    });
+    listEl.addEventListener('change',(e)=>{ const cb=e.target; if(!cb.classList.contains('chk'))return;
+      saved[cb.dataset.id]=cb.checked;
+      cb.closest('.item').classList.toggle('done',cb.checked); refreshBar(); saveChecks(); });
+
+    // ---- shared checklist progress (the ✓ done state) via PocketBase ('__checks' record) ----
+    const CHECKS_ID='__checks';
+    let checksTimer;
+    function saveChecks(){
+      localStorage.setItem(KEY,JSON.stringify(saved)); // instant local
+      clearTimeout(checksTimer);
+      checksTimer=setTimeout(async()=>{ try{
+        let remote={}; try{ const raw=await pbLoad(CHECKS_ID); remote=JSON.parse(raw||'{}'); }catch(e){}
+        Object.assign(saved, {...remote, ...saved}); // keep other devices' keys, local wins on conflict
+        localStorage.setItem(KEY,JSON.stringify(saved));
+        await pbSaveQueued(CHECKS_ID, JSON.stringify(saved));
+      }catch(e){} },400);
+    }
+    async function loadChecks(){ try{ const raw=await pbLoad(CHECKS_ID); if(!raw) return;
+      Object.assign(saved, JSON.parse(raw||'{}')); // apply shared progress (incl. unchecks) over local
+      localStorage.setItem(KEY,JSON.stringify(saved));
+      document.querySelectorAll('.item').forEach(el=>{ const cb=el.querySelector('.chk'); if(cb){ cb.checked=!!saved[el.dataset.id]; el.classList.toggle('done',cb.checked); } });
+      refreshBar();
+    }catch(e){} }
+    // one-time: push briefs written before PB went live (local-only) up to the server
+    async function migrateLocalBriefs(){ if(localStorage.getItem('kg-brief-migrated')) return;
+      for(const it of items){ const local=localStorage.getItem(briefKey(it.id));
+        if(local && local.trim()){ try{ const remote=await pbLoad(it.id); if(!remote) await pbSave(it.id, local); }catch(e){ return; } } }
+      localStorage.setItem('kg-brief-migrated','1');
+    }
+
+    render();
+    // pull shared progress, then push this device's existing local marks up (one merged state)
+    (async()=>{ await loadChecks(); if(Object.keys(saved).length) saveChecks(); })();
+    migrateLocalBriefs();
+    // re-pull shared progress when returning to this tab (e.g. after editing on another device)
+    document.addEventListener('visibilitychange',()=>{ if(!document.hidden) loadChecks(); });
+  </script>
+</body>
+</html>

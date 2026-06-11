@@ -1,6 +1,6 @@
 ---
 /**
- * End CTA — Vans "Join the list" model, re-skinned to a purple checkerboard.
+ * End CTA — Vans "Join the list" model, re-skinned to a soft purple checkerboard.
  * Simple 2-field form (WhatsApp number + kebutuhan) that opens WhatsApp prefilled
  * on submit, plus an "atau langsung WhatsApp" link with the WA icon below.
  */
@@ -8,6 +8,7 @@ const waNumber = '6285183091599';
 const waDirect = `https://wa.me/${waNumber}?text=` + encodeURIComponent('Halo Level Garment, aku mau konsultasi & pesan custom buat acara/kelas.');
 ---
 <section class="lg-cta" aria-labelledby="lg-cta-title">
+  <div class="lg-cta-checker" aria-hidden="true"></div>
   <div class="lg-cta-inner">
     <h2 id="lg-cta-title" class="lg-cta-title">Mulai Pesananmu</h2>
     <p class="lg-cta-sub">Isi sebentar, langsung terhubung ke tim kami di WhatsApp.</p>
@@ -34,19 +35,32 @@ const waDirect = `https://wa.me/${waNumber}?text=` + encodeURIComponent('Halo Le
   .lg-cta {
     position: relative; overflow: hidden; isolation: isolate;
     padding: clamp(3rem, 6vw, 5rem) clamp(1.5rem, 5vw, 4rem); text-align: center;
-    background-color: #9a67c9;
+    background-color: #b189db;
+  }
+  /* checkerboard on its own oversized layer — gentle diagonal drift (GPU transform) */
+  .lg-cta-checker {
+    position:absolute; inset:-120px; z-index:0; pointer-events:none;
+    background-color: #b189db;
     background-image:
-      linear-gradient(45deg, #a575d2 25%, transparent 25%),
-      linear-gradient(-45deg, #a575d2 25%, transparent 25%),
-      linear-gradient(45deg, transparent 75%, #a575d2 75%),
-      linear-gradient(-45deg, transparent 75%, #a575d2 75%);
+      linear-gradient(45deg, #bd9ce3 25%, transparent 25%),
+      linear-gradient(-45deg, #bd9ce3 25%, transparent 25%),
+      linear-gradient(45deg, transparent 75%, #bd9ce3 75%),
+      linear-gradient(-45deg, transparent 75%, #bd9ce3 75%);
     background-size: 96px 96px;
     background-position: 0 0, 0 48px, 48px -48px, -48px 0;
+    animation: lg-checker-drift 26s linear infinite; will-change: transform;
+  }
+  @keyframes lg-checker-drift { to { transform: translate3d(96px, 96px, 0); } }
+  @media (prefers-reduced-motion: reduce) { .lg-cta-checker { animation: none; } }
+  /* soft center scrim so the white text/form reads on the lighter checker — kept subtle */
+  .lg-cta::before {
+    content:''; position:absolute; inset:0; z-index:1; pointer-events:none;
+    background: radial-gradient(ellipse 80% 70% at 50% 48%, rgba(48,18,82,.32), rgba(48,18,82,0) 72%);
   }
 
-  .lg-cta-inner { position: relative; z-index: 1; max-width: 46rem; margin: 0 auto; }
+  .lg-cta-inner { position: relative; z-index: 2; max-width: 46rem; margin: 0 auto; }
   .lg-cta-title { color:#fff; font-family:'Inter',sans-serif; font-weight:800; font-size:clamp(2.2rem,5.5vw,3.75rem); line-height:1.02; letter-spacing:-.03em; margin:0 0 .7rem; text-shadow:0 3px 24px rgba(30,10,60,.35); }
-  .lg-cta-sub { font-family:'Inter',sans-serif; font-weight:500; font-size:clamp(1rem,1.4vw,1.2rem); color:rgba(255,255,255,.9); margin:0 0 2.1rem; }
+  .lg-cta-sub { font-family:'Inter',sans-serif; font-weight:500; font-size:clamp(1rem,1.4vw,1.2rem); color:rgba(255,255,255,.92); margin:0 0 2.1rem; text-shadow:0 1px 10px rgba(30,10,60,.3); }
 
   .lg-cta-form { display:flex; align-items:stretch; gap:.25rem; max-width:38rem; margin:0 auto; background:rgba(255,255,255,.1); border:1.5px solid rgba(255,255,255,.6); border-radius:.6rem; padding:.4rem; backdrop-filter: blur(4px); }
   .lg-cta-form input { flex:1; min-width:0; background:transparent; border:0; color:#fff; font:inherit; font-size:1rem; padding:.7rem .9rem; }
@@ -60,7 +74,7 @@ const waDirect = `https://wa.me/${waNumber}?text=` + encodeURIComponent('Halo Le
 
   .lg-cta-consent { font-family:'Inter',sans-serif; font-size:.82rem; color:rgba(255,255,255,.68); margin:1.1rem auto 0; max-width:30rem; line-height:1.5; }
 
-  .lg-cta-wa { display:inline-flex; align-items:center; gap:.55rem; margin-top:2.2rem; font-family:'Inter',sans-serif; font-weight:600; font-size:.95rem; color:#fff; text-decoration:none; opacity:.92; transition: opacity .2s ease; }
+  .lg-cta-wa { display:inline-flex; align-items:center; gap:.55rem; margin-top:2.2rem; font-family:'Inter',sans-serif; font-weight:600; font-size:.95rem; color:#fff; text-decoration:none; opacity:.92; transition: opacity .2s ease; text-shadow:0 1px 10px rgba(30,10,60,.32); }
   .lg-cta-wa svg { width:1.3rem; height:1.3rem; }
   @media (hover:hover){ .lg-cta-wa:hover { opacity:1; } }
 

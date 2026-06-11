@@ -1,0 +1,82 @@
+# Level Garment — Sveltia CMS config.
+# Admins edit at /admin. Saving commits to the repo → site rebuilds.
+# Online login uses base_url (the sveltia-cms-auth Cloudflare Worker). On localhost,
+# local_backend lets you edit the repo files directly (no login) via the FS Access API.
+#
+# TODO (Araya): authorize repo `rework-lg` in the GitHub OAuth app behind the worker
+# (same worker KG uses). Until then, use local editing on localhost.
+
+backend:
+  name: github
+  repo: Digital360-Indonesia/rework-lg
+  branch: bobthebuilder
+  base_url: https://sveltia-cms-auth.arayassuryanto.workers.dev   # OAuth relay (reuse KG's worker)
+
+local_backend: true
+
+media_folder: "public/assets/images/uploads"
+public_folder: "/assets/images/uploads"
+
+collections:
+  # ---------------- GLOBAL (brand, contact, social, nav) ----------------
+  - name: settings
+    label: "Pengaturan Situs"
+    delete: false
+    files:
+      - name: site
+        label: "Global — brand, kontak, sosial, navigasi"
+        file: "src/data/site-config.json"
+        fields:
+          - { name: siteName, label: "Nama Situs", widget: string }
+          - { name: tagline, label: "Tagline", widget: string, required: false }
+          - { name: description, label: "Deskripsi (SEO)", widget: text, required: false }
+          - name: contact
+            label: "Kontak"
+            widget: object
+            fields:
+              - { name: phoneFormatted, label: "Telepon (tampil)", widget: string, required: false }
+              - { name: phone, label: "Telepon (angka)", widget: string, required: false }
+              - { name: whatsappUrl, label: "WhatsApp URL", widget: string, required: false }
+              - { name: whatsapp, label: "WhatsApp (angka)", widget: string, required: false }
+              - { name: email, label: "Email", widget: string, required: false }
+              - { name: address, label: "Alamat", widget: text, required: false }
+              - { name: city, label: "Kota", widget: string, required: false }
+              - { name: province, label: "Provinsi", widget: string, required: false }
+          - name: social
+            label: "Sosial Media"
+            widget: object
+            fields:
+              - { name: instagram, label: "Instagram URL", widget: string, required: false }
+              - { name: tiktok, label: "TikTok URL", widget: string, required: false }
+              - { name: facebook, label: "Facebook URL", widget: string, required: false }
+              - { name: twitter, label: "Twitter/X URL", widget: string, required: false }
+              - { name: youtube, label: "YouTube URL", widget: string, required: false }
+          - name: navigation
+            label: "Navigasi Header"
+            widget: list
+            fields:
+              - { name: name, label: "Label", widget: string }
+              - { name: path, label: "Link", widget: string }
+          - name: company
+            label: "Perusahaan"
+            widget: object
+            fields:
+              - { name: name, label: "Nama perusahaan", widget: string, required: false }
+              - { name: slogan, label: "Slogan", widget: string, required: false }
+              - { name: establishedYear, label: "Tahun berdiri", widget: string, required: false }
+
+  # ---------------- PRODUCTS (category = product type) ----------------
+  - name: products
+    label: "Produk — Jenis / Kategori"
+    delete: false
+    files:
+      - name: products
+        label: "Jenis produk (T-Shirt, Jersey, Workshirt, Jacket, …)"
+        file: "src/data/products.json"
+        fields:
+          - name: categories
+            label: "Jenis produk"
+            widget: list
+            fields:
+              - { name: name, label: "Nama jenis", widget: string }
+              - { name: anchor, label: "Anchor / slug", widget: string, required: false }
