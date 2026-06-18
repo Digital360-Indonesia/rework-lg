@@ -10,24 +10,23 @@ const { variant = 'default' } = Astro.props;
 
 const wa = 'https://wa.me/6285183091599?text=' + encodeURIComponent('Halo Level Garment, aku mau bikin custom buat acara/kelas. Boleh info?');
 
-// per-slide copy (draft — refine later)
-const slides = [
-  { img: '/assets/images/homepage/slideshow/20250424-slide_lg_3.webp', title: 'Level Up Acara-mu',          desc: 'Jaket kelas, jersey & kaos custom — desain bebas, tanpa minimal order.', href: wa },
-  { img: '/assets/images/homepage/slideshow/20250424-slide_lg_4.webp', title: 'Jaket Angkatan Anti Pasaran', desc: 'Varsity full-patch sampai bomber — bahan tebal, jahitan rapi.',           href: '/product/' },
-  { img: '/assets/images/homepage/slideshow/20250424-slide_lg_5.webp', title: 'Jersey Baseball Squad-mu',    desc: 'Dryfit adem, nama & nomor tiap member, desain bebas.',                    href: '/product/' },
-  { img: '/assets/images/homepage/slideshow/20250424-slide_lg_6.webp', title: 'Kaos Kelas yang Beda',        desc: 'Sablon, bordir, atau DTF — cotton combed premium.',                       href: '/product/' },
-  { img: '/assets/images/homepage/slideshow/20250424-slide_lg_8.webp', title: 'Seragam Organisasi Kampus',   desc: 'Workshirt & kemeja rapi buat himpunan dan panitia.',                      href: '/product/' },
-  { img: '/assets/images/homepage/slideshow/20250424-slide_lg_7.webp', title: 'Gratis Dibantu Desain',       desc: 'Tim desain kami bantu dari nol sampai jadi, tanpa biaya.',                href: wa },
-  { img: '/assets/images/homepage/slideshow/20250424-slide_lg_1.webp', title: 'Tanpa Minimal Order',         desc: 'Bikin satu pun oke — cocok buat kelas kecil maupun angkatan.',            href: wa },
-  { img: '/assets/images/homepage/slideshow/20250424-slide_lg_2.webp', title: 'Dari Surabaya, Se-Indonesia', desc: 'Konveksi pelajar terpercaya, kirim ke seluruh Indonesia.',                href: wa },
+// 5 slides — first is a video, the rest images. (Text + indicators hidden for now — kept in markup.)
+const slides: { img?: string; video?: string; title: string; desc: string; href: string }[] = [
+  { video: '/assets/videos/WhatsApp%20Video%202026-06-13%20at%2012.06.28.mp4', title: 'Level Up Acara-mu',    desc: 'Jaket kelas, jersey & kaos custom — desain bebas, tanpa minimal order.', href: wa },
+  { img: '/assets/images/homepage/slideshow/20250424-slide_lg_3.webp', title: 'Jaket Angkatan Anti Pasaran', desc: 'Varsity full-patch sampai bomber — bahan tebal, jahitan rapi.',           href: '/product/' },
+  { img: '/assets/images/homepage/slideshow/20250424-slide_lg_4.webp', title: 'Jersey Baseball Squad-mu',    desc: 'Dryfit adem, nama & nomor tiap member, desain bebas.',                    href: '/product/' },
+  { img: '/assets/images/homepage/slideshow/20250424-slide_lg_5.webp', title: 'Kaos Kelas yang Beda',        desc: 'Sablon, bordir, atau DTF — cotton combed premium.',                       href: '/product/' },
+  { img: '/assets/images/homepage/slideshow/20250424-slide_lg_6.webp', title: 'Seragam Organisasi Kampus',   desc: 'Workshirt & kemeja rapi buat himpunan dan panitia.',                      href: '/product/' },
 ];
 ---
 <section id="hero" class="lg-hero" data-slides={slides.length}>
   <div class="lg-hero-slides">
     {slides.map((s, i) => (
-      <div class:list={['lg-hero-slide', { 'is-active': i === 0 }]} data-i={i}
+      <div class:list={['lg-hero-slide', { 'is-active': i === 0, 'is-init': i === 0 }]} data-i={i}
            data-title={s.title} data-desc={s.desc} data-href={s.href}>
-        <img src={s.img} alt="" loading={i === 0 ? 'eager' : 'lazy'} fetchpriority={i === 0 ? 'high' : undefined} />
+        {s.video
+          ? <video src={s.video} autoplay loop muted playsinline preload="metadata"></video>
+          : <img src={s.img} alt="" loading={i === 0 ? 'eager' : 'lazy'} fetchpriority={i === 0 ? 'high' : undefined} />}
       </div>
     ))}
     <div class="lg-hero-scrim" aria-hidden="true"></div>
@@ -57,11 +56,22 @@ const slides = [
   .lg-hero { position: relative; height: 95svh; min-height: 33rem; overflow: hidden; background: #1A1A2E; isolation: isolate; }
 
   .lg-hero-slides { position: absolute; inset: 0; z-index: 0; }
-  .lg-hero-slide { position: absolute; inset: 0; opacity: 0; transition: opacity 1s ease; }
-  .lg-hero-slide.is-active { opacity: 1; }
-  .lg-hero-slide img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .lg-hero-slide { position: absolute; inset: 0; opacity: 0; z-index: 0; will-change: transform, filter; }
+  /* TikTok whip-pan — direction-aware: forward (next) swipes right, backward (prev) swipes left */
+  .lg-hero-slide.is-active  { opacity: 1; z-index: 1; animation: lg-whip-in-l  .58s cubic-bezier(.5,0,.18,1) both; }
+  .lg-hero-slide.is-leaving { opacity: 1; z-index: 2; animation: lg-whip-out-l .58s cubic-bezier(.5,0,.18,1) both; }
+  .lg-hero-slide.is-active.is-back  { animation-name: lg-whip-in-r; }
+  .lg-hero-slide.is-leaving.is-back { animation-name: lg-whip-out-r; }
+  .lg-hero-slide.is-init { animation: none; }   /* first slide on load — no whip intro */
+  @keyframes lg-whip-in-r  { from { transform: translate3d(-100%,0,0); filter: blur(6px); } to { transform: translate3d(0,0,0); filter: blur(0); } }
+  @keyframes lg-whip-out-r { from { transform: translate3d(0,0,0); filter: blur(0); } to { transform: translate3d(100%,0,0); filter: blur(6px); } }
+  @keyframes lg-whip-in-l  { from { transform: translate3d(100%,0,0); filter: blur(6px); } to { transform: translate3d(0,0,0); filter: blur(0); } }
+  @keyframes lg-whip-out-l { from { transform: translate3d(0,0,0); filter: blur(0); } to { transform: translate3d(-100%,0,0); filter: blur(6px); } }
+  .lg-hero-slide img, .lg-hero-slide video { width: 100%; height: 100%; object-fit: cover; display: block; }
   .lg-hero-scrim { position: absolute; inset: 0; background:
     linear-gradient(to top, rgba(18,18,30,.92) 0%, rgba(18,18,30,.66) 22%, rgba(18,18,30,.30) 46%, rgba(18,18,30,0) 72%); }
+  /* hidden for now (kept in markup) — no overlay, no text. (dots = .lg-hero-progress shown) */
+  .lg-hero-scrim, .lg-hero-bottom { display: none; }
 
   .lg-hero-bottom { position: absolute; z-index: 3; bottom: clamp(2.4rem, 7vh, 4rem); left: clamp(1.5rem, 5vw, 4rem); right: clamp(1.5rem, 5vw, 4rem); color: #fff; }
   .lg-hero-copy { max-width: 38rem; transition: opacity .4s ease, transform .4s ease; }
@@ -86,7 +96,7 @@ const slides = [
   .lg-hp.is-active { width: 2.4rem; background: rgba(255,255,255,.35); }
   .lg-hp.is-active i { width: 100%; transition: width var(--dur, 4.2s) linear; }
 
-  @media (prefers-reduced-motion: reduce){ .lg-hero-slide{ transition:none; } .lg-hp.is-active i{ transition:none; width:100%; } }
+  @media (prefers-reduced-motion: reduce){ .lg-hero-slide.is-active{ animation:none; } .lg-hero-slide.is-leaving{ animation:none; opacity:0; } .lg-hp.is-active i{ transition:none; width:100%; } }
 </style>
 
 <script>
@@ -112,25 +122,52 @@ const slides = [
       }, 280);
     };
 
-    const show = (n: number) => {
-      slides[cur].classList.remove('is-active');
-      bars[cur].classList.remove('is-active'); bars[cur].classList.add('is-done');
+    const show = (n: number, dir: number = 1) => {
+      const prev = cur;
+      slides.forEach((s) => s.classList.remove('is-leaving', 'is-back', 'is-init'));
+      slides[prev].classList.remove('is-active');
+      slides[prev].classList.add('is-leaving');
+      if (dir < 0) slides[prev].classList.add('is-back');
+      bars[prev].classList.remove('is-active'); bars[prev].classList.add('is-done');
       cur = (n + slides.length) % slides.length;
       if (cur === 0) bars.forEach((b) => b.classList.remove('is-done'));
       slides[cur].classList.add('is-active');
+      if (dir < 0) slides[cur].classList.add('is-back');
       swapCopy(slides[cur]);
-      bars[cur].style.setProperty('--dur', DUR + 'ms');
-      void bars[cur].offsetWidth;
-      bars[cur].classList.add('is-active');
-      if (!reduce) { if (timer) clearTimeout(timer); timer = setTimeout(() => show(cur + 1), DUR); }
+      scheduleNext();
     };
-    // activate slide 0's bar via JS (not in markup) so its fill animates like the rest
-    bars[0].style.setProperty('--dur', DUR + 'ms');
-    requestAnimationFrame(() => { void bars[0].offsetWidth; bars[0].classList.add('is-active'); });
-    if (!reduce) timer = setTimeout(() => show(1), DUR);
+
+    // Light up the current dot and run its fill over `durMs` (matches the slide's real dwell time).
+    const activateBar = (durMs: number) => {
+      bars[cur].style.setProperty('--dur', durMs + 'ms');
+      void bars[cur].offsetWidth;        // restart the fill transition
+      bars[cur].classList.add('is-active');
+    };
+
+    // Image slides dwell for DUR; the video slide dwells for its FULL duration —
+    // and the loading dot's fill follows whichever it is.
+    function scheduleNext() {
+      if (timer) { clearTimeout(timer); timer = null; }
+      const vid = slides[cur].querySelector('video') as HTMLVideoElement | null;
+      if (vid) {
+        const go = () => {
+          try { vid.currentTime = 0; vid.play().catch(() => {}); } catch {}
+          const dur = (isFinite(vid.duration) && vid.duration > 0) ? vid.duration : 8;
+          activateBar(dur * 1000);
+          if (!reduce) timer = setTimeout(() => show(cur + 1), dur * 1000);
+        };
+        if (isFinite(vid.duration) && vid.duration > 0) go();
+        else vid.addEventListener('loadedmetadata', go, { once: true });
+        return;
+      }
+      activateBar(DUR);
+      if (!reduce) timer = setTimeout(() => show(cur + 1), DUR);
+    }
+    // kick off slide 0 — fills its dot over the video's real duration, then advances
+    scheduleNext();
 
     // hover-reveal prev/next
-    hero.querySelector('[data-prev]')?.addEventListener('click', () => show(cur - 1));
-    hero.querySelector('[data-next]')?.addEventListener('click', () => show(cur + 1));
+    hero.querySelector('[data-prev]')?.addEventListener('click', () => show(cur - 1, -1));
+    hero.querySelector('[data-next]')?.addEventListener('click', () => show(cur + 1, 1));
   }
 </script>

@@ -1,0 +1,76 @@
+---
+/**
+ * End CTA — MEDIA variant (homepage). Full-width media background (~60vh) with the
+ * WhatsApp CTA centered on top (RL "Fashion Essentials" model).
+ * The checkerboard variant lives in EndCTA.astro and can be swapped back anytime.
+ */
+const waNumber = '6285183091599';
+const waDirect = `https://wa.me/${waNumber}?text=` + encodeURIComponent('Halo Level Garment, aku mau konsultasi & pesan custom buat acara/kelas.');
+const bg = '/assets/images/placeholder/0324_m_rlx_lp_c10_img.avif';
+---
+<section class="lg-mcta" aria-labelledby="lg-mcta-title">
+  <img class="lg-mcta-bg" src={bg} alt="" />
+  <div class="lg-mcta-inner">
+    <h2 id="lg-mcta-title" class="lg-mcta-title">Mulai Pesananmu</h2>
+    <p class="lg-mcta-sub">Custom buat angkatan, kelas, atau komunitas — isi sebentar, langsung terhubung ke tim kami di WhatsApp.</p>
+
+    <form class="lg-mcta-form" data-waform data-wa={waNumber}>
+      <input type="tel" name="phone" inputmode="tel" placeholder="Nomor WhatsApp" aria-label="Nomor WhatsApp" required />
+      <span class="lg-mcta-div" aria-hidden="true"></span>
+      <input type="text" name="need" placeholder="Kebutuhanmu (cth: jaket angkatan 40 pcs)" aria-label="Kebutuhan" />
+      <button type="submit" aria-label="Kirim ke WhatsApp">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </button>
+    </form>
+
+    <a class="lg-mcta-wa" href={waDirect} target="_blank" rel="noopener noreferrer">
+      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M.06 24l1.69-6.16a11.86 11.86 0 0 1-1.59-5.95C.16 5.34 5.5 0 12.06 0a11.82 11.82 0 0 1 8.41 3.49 11.82 11.82 0 0 1 3.48 8.42c0 6.55-5.34 11.89-11.9 11.89a11.9 11.9 0 0 1-5.68-1.45L.06 24Zm6.6-3.8c1.68.99 3.28 1.59 5.4 1.59 5.45 0 9.89-4.43 9.89-9.88a9.86 9.86 0 0 0-9.88-9.89C6.6 2.02 2.16 6.45 2.16 11.9c0 2.23.65 3.9 1.74 5.65l-1 3.65 3.76-.99ZM17.42 14.5c-.07-.12-.27-.2-.56-.34-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.64.07-.3-.15-1.25-.46-2.38-1.47-.88-.78-1.47-1.76-1.64-2.06-.17-.3-.02-.46.13-.6.13-.14.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.67-1.62-.92-2.21-.24-.58-.49-.5-.67-.51l-.57-.01c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48 0 1.46 1.07 2.88 1.22 3.08.15.2 2.1 3.2 5.08 4.49.71.3 1.26.49 1.69.63.71.22 1.36.19 1.87.12.57-.09 1.76-.72 2-1.42.25-.69.25-1.29.18-1.41Z"/></svg>
+      atau langsung WhatsApp
+    </a>
+  </div>
+</section>
+
+<style>
+  .lg-mcta { position: relative; overflow: hidden; isolation: isolate; width: 100%; min-height: clamp(30rem, 88vh, 64rem); display: grid; place-items: center; padding: clamp(3rem,7vw,5rem) clamp(1.5rem,5vw,4rem); text-align: center; background: #F6F3FB; }
+  .lg-mcta-bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; z-index: 0; }
+  .lg-mcta-inner { position: relative; z-index: 2; max-width: 42rem; }
+  .lg-mcta-title { color:#1A1A2E; font-family:'Inter',sans-serif; font-weight:800; font-size:clamp(2rem,5vw,3.4rem); line-height:1.03; letter-spacing:-.02em; margin:0 0 .8rem; text-shadow:0 1px 14px rgba(255,255,255,.6); }
+  .lg-mcta-sub { font-family:'Inter',sans-serif; font-weight:500; font-size:clamp(1rem,1.4vw,1.15rem); color:#2c2c3c; margin:0 auto 2rem; max-width:36rem; line-height:1.5; text-shadow:0 1px 10px rgba(255,255,255,.6); }
+
+  .lg-mcta-form { display:flex; align-items:stretch; gap:.25rem; max-width:38rem; margin:0 auto; background:rgba(255,255,255,.7); border:1.5px solid rgba(26,26,46,.18); border-radius:.6rem; padding:.4rem; backdrop-filter: blur(6px); }
+  .lg-mcta-form input { flex:1; min-width:0; background:transparent; border:0; color:#1A1A2E; font:inherit; font-size:1rem; padding:.7rem .9rem; }
+  .lg-mcta-form input::placeholder { color:rgba(26,26,46,.5); }
+  .lg-mcta-form input:focus { outline:none; }
+  .lg-mcta-form input[name=phone] { flex:0 0 38%; }
+  .lg-mcta-div { width:1px; background:rgba(26,26,46,.2); margin:.4rem 0; }
+  .lg-mcta-form button { flex:0 0 auto; width:3rem; border:0; border-radius:.4rem; background:#9A66C2; color:#fff; cursor:pointer; display:grid; place-items:center; transition: transform .15s ease, background .15s ease; }
+  .lg-mcta-form button svg { width:1.25rem; height:1.25rem; }
+  @media (hover:hover){ .lg-mcta-form button:hover { transform: translateX(2px); background:#8a56b2; } }
+
+  .lg-mcta-wa { display:inline-flex; align-items:center; gap:.55rem; margin-top:1.6rem; font-family:'Inter',sans-serif; font-weight:700; font-size:.95rem; color:#1A1A2E; text-decoration:none; opacity:.92; transition: opacity .2s ease, color .2s ease; text-shadow:0 1px 8px rgba(255,255,255,.55); }
+  .lg-mcta-wa svg { width:1.3rem; height:1.3rem; }
+  @media (hover:hover){ .lg-mcta-wa:hover { opacity:1; color:#9A66C2; } }
+
+  @media (max-width:600px){
+    .lg-mcta-form { flex-wrap:wrap; }
+    .lg-mcta-form input[name=phone] { flex:1 1 100%; }
+    .lg-mcta-div { display:none; }
+    .lg-mcta-form input[name=need] { flex:1 1 calc(100% - 3.3rem); }
+  }
+</style>
+
+<script>
+  document.querySelectorAll<HTMLFormElement>('[data-waform]').forEach((form) => {
+    if ((form as any)._wabound) return; (form as any)._wabound = true;
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const wa = form.dataset.wa || '';
+      const phone = (form.elements.namedItem('phone') as HTMLInputElement)?.value.trim();
+      const need = (form.elements.namedItem('need') as HTMLInputElement)?.value.trim();
+      let msg = 'Halo Level Garment, aku mau pesan custom.';
+      if (need) msg += ` Kebutuhan: ${need}.`;
+      if (phone) msg += ` Nomor WhatsApp-ku: ${phone}.`;
+      window.open(`https://wa.me/${wa}?text=` + encodeURIComponent(msg), '_blank', 'noopener');
+    });
+  });
+</script>
