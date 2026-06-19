@@ -14,7 +14,8 @@
 
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Hero from '../components/home/Hero.astro';
-import ProductCategories from '../components/home/ProductCategories.astro';
+// import ProductCategories from '../components/home/ProductCategories.astro'; // saved (old section-2 carousel) — superseded by ProductRail
+import ProductRail from '../components/home/ProductRail.astro';
 import VideoBanner from '../components/home/VideoBanner.astro';
 import SplitBanner from '../components/home/SplitBanner.astro';
 import SponsorshipShowcase from '../components/home/SponsorshipShowcase.astro';
@@ -35,8 +36,8 @@ const ogImage = '/assets/images/logo/logo-colored.webp';
   <!-- Hero Section -->
   <Hero variant="default" />
 
-  <!-- Product categories -->
-  <ProductCategories />
+  <!-- Section 2 — editorial product rail (replaces old ProductCategories carousel) -->
+  <ProductRail />
 
   <!-- Video banner -->
   <VideoBanner />
@@ -44,14 +45,25 @@ const ogImage = '/assets/images/logo/logo-colored.webp';
   <!-- Split banner (static left + sliding right) -->
   <SplitBanner />
 
-  <!-- Sponsorship showcase -->
-  <SponsorshipShowcase />
-
-  <!-- End CTA -->
-  <EndCtaMedia />
+  <!-- Sponsorship + End CTA share ONE continuous background (sky on top → rooftop/models on bottom) -->
+  <div class="lg-duo">
+    <SponsorshipShowcase />
+    <EndCtaMedia />
+  </div>
 </BaseLayout>
 
 <style>
+  /* Sponsorship + End CTA: one shared background image spanning both (sky → rooftop).
+     full-width so the models at the edges stay in frame; bottom-anchored to keep them. */
+  .lg-duo {
+    position: relative;
+    background-image: url('/assets/images/WhatsApp%20Image%202026-06-18%20at%2011.03.26.jpeg');
+    background-size: cover;
+    background-position: center bottom;
+    background-repeat: no-repeat;
+    background-color: #C6A4E6;
+  }
+
   /* Smooth scrolling for anchor links */
   html {
     scroll-behavior: smooth;

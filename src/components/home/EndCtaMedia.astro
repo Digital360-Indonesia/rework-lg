@@ -6,10 +6,9 @@
  */
 const waNumber = '6285183091599';
 const waDirect = `https://wa.me/${waNumber}?text=` + encodeURIComponent('Halo Level Garment, aku mau konsultasi & pesan custom buat acara/kelas.');
-const bg = '/assets/images/placeholder/0324_m_rlx_lp_c10_img.avif';
+// background now comes from the shared .lg-duo wrapper (spans Sponsorship + this section)
 ---
 <section class="lg-mcta" aria-labelledby="lg-mcta-title">
-  <img class="lg-mcta-bg" src={bg} alt="" />
   <div class="lg-mcta-inner">
     <h2 id="lg-mcta-title" class="lg-mcta-title">Mulai Pesananmu</h2>
     <p class="lg-mcta-sub">Custom buat angkatan, kelas, atau komunitas — isi sebentar, langsung terhubung ke tim kami di WhatsApp.</p>
@@ -31,8 +30,7 @@ const bg = '/assets/images/placeholder/0324_m_rlx_lp_c10_img.avif';
 </section>
 
 <style>
-  .lg-mcta { position: relative; overflow: hidden; isolation: isolate; width: 100%; min-height: clamp(30rem, 88vh, 64rem); display: grid; place-items: center; padding: clamp(3rem,7vw,5rem) clamp(1.5rem,5vw,4rem); text-align: center; background: #F6F3FB; }
-  .lg-mcta-bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; z-index: 0; }
+  .lg-mcta { position: relative; width: 100%; min-height: clamp(26rem, 62vh, 42rem); display: grid; place-items: center; padding: clamp(3rem,7vw,5rem) clamp(1.5rem,5vw,4rem); text-align: center; background: transparent; }
   .lg-mcta-inner { position: relative; z-index: 2; max-width: 42rem; }
   .lg-mcta-title { color:#1A1A2E; font-family:'Inter',sans-serif; font-weight:800; font-size:clamp(2rem,5vw,3.4rem); line-height:1.03; letter-spacing:-.02em; margin:0 0 .8rem; text-shadow:0 1px 14px rgba(255,255,255,.6); }
   .lg-mcta-sub { font-family:'Inter',sans-serif; font-weight:500; font-size:clamp(1rem,1.4vw,1.15rem); color:#2c2c3c; margin:0 auto 2rem; max-width:36rem; line-height:1.5; text-shadow:0 1px 10px rgba(255,255,255,.6); }

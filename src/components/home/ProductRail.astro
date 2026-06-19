@@ -1,0 +1,66 @@
+---
+/**
+ * Section 2 — editorial product rail (PUMA "New & Trending" model).
+ * Tall vertical media, edge-to-edge (no gaps), small left-aligned caption below
+ * each, ~3 across with the next peeking on the right, free horizontal scroll.
+ * Replaces the old ProductCategories carousel (kept on disk, unrendered).
+ */
+import products from '../../data/products.json';
+const real = (products.categories || []);
+const ph = (n: number) => `/assets/images/placeholder/${['image.png','image copy.png','image copy 2.png','image copy 3.png','image copy 4.png','image copy 5.png'][n].replace(/ /g, '%20')}`;
+
+// 6 cards = 4 real categories + 2 stand-ins (rename later)
+const cards = [
+  ...real.slice(0, 4).map((c: any, i: number) => ({ name: c.name, href: `/product/${c.anchor || ''}`, img: ph(i) })),
+  { name: 'Hoodie', href: '/product/', img: ph(4) },
+  { name: 'Topi',   href: '/product/', img: ph(5) },
+];
+---
+<section class="lg-rail" aria-labelledby="lg-rail-title">
+  <div class="lg-rail-head">
+    <h2 id="lg-rail-title" class="lg-rail-title">Pilih Kategori</h2>
+  </div>
+
+  <div class="lg-rail-track" data-track>
+    {cards.map((c) => (
+      <a class="lg-rail-item" href={c.href}>
+        <div class="lg-rail-img"><img src={c.img} alt={c.name} loading="lazy" /></div>
+        <span class="lg-rail-label">{c.name}</span>
+      </a>
+    ))}
+  </div>
+</section>
+
+<style>
+  :root { --lg-primary: #AF7AD5; --lg-primary-dark: #9A66C2; --lg-ink: #1A1A2E; }
+
+  .lg-rail { padding: 5.6svh 0 clamp(2.5rem, 6vw, 4.5rem); background: transparent; }
+
+  /* heading aligns to the first card's left edge */
+  .lg-rail-head { padding: 0 clamp(1.25rem, 4vw, 3rem); margin: 0 0 clamp(1.25rem, 3vw, 2rem); }
+  .lg-rail-title { font-family:'Inter',sans-serif; font-weight:800; font-size:clamp(1.4rem,2.6vw,2.1rem); line-height:1.05; letter-spacing:-.02em; color:var(--lg-ink); margin:0; }
+
+  /* flush, free-scroll rail — next card peeks on the right */
+  .lg-rail-track {
+    display: flex; gap: 0;
+    overflow-x: auto; scroll-snap-type: x proximity; scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch; scrollbar-width: none;
+    padding: 0 clamp(1.25rem, 4vw, 3rem) 0 0;
+    scroll-padding-left: 0;
+  }
+  .lg-rail-track::-webkit-scrollbar { display: none; }
+
+  .lg-rail-item { flex: 0 0 clamp(15rem, 31vw, 26rem); scroll-snap-align: start; text-decoration: none; display: block; }
+  .lg-rail-img { aspect-ratio: 5 / 7; overflow: hidden; background: #f1ecf6; }   /* tall vertical, sharp corners */
+  .lg-rail-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+  /* small caption, left-aligned under the media */
+  .lg-rail-label {
+    display: block; margin-top: clamp(.55rem, 1.1vw, .8rem); padding: 0 1rem 0 1.5rem;
+    font-family:'Inter',sans-serif; font-weight:600; font-size:.85rem; line-height:1.3;
+    color:var(--lg-ink); transition: color .25s ease;
+  }
+  @media (hover: hover) { .lg-rail-item:hover .lg-rail-label { color: var(--lg-primary-dark); } }
+
+  @media (max-width: 720px) { .lg-rail-item { flex-basis: 72vw; } }
+</style>

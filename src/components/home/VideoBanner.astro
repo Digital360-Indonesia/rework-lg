@@ -8,8 +8,10 @@
  * (optional) + the copy fields. When `videoMobile` is blank, omit the mobile
  * <source> so the desktop video fits all screens — same pattern as KG's images.
  */
-const videoDesktop = '/assets/videos/WhatsApp%20Video%202026-06-15%20at%2011.09.42.mp4';
-const videoMobile = '/assets/videos/Polo_Countries_Video_MOB.mp4'; // mobile unchanged (swap later in Sveltia)
+// ⚠️ TEMP DEMO: RL's seamless-loop clip (their branded Polo content) — to SEE the seamless loop.
+// Replace both with a loop-edited LG video before going live.
+const videoDesktop = '/assets/videos/Polo_Countries_Video_DSK.mp4';
+const videoMobile = '/assets/videos/Polo_Countries_Video_MOB.mp4';
 
 // placeholder copy (centered)
 const title = 'Judul Banner di Sini';
@@ -51,6 +53,7 @@ const ctaHref = '#';
 </style>
 
 <script>
+  // Plain loop — just pause when off-screen.
   const v = document.querySelector<HTMLVideoElement>('.lg-banner-video');
   if (v) {
     const io = new IntersectionObserver((entries) => {

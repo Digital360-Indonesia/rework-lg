@@ -58,9 +58,8 @@ const rendered = [
 <style>
   :root { --lg-primary: #AF7AD5; --lg-ink: #1A1A2E; }
 
-  .lg-spon { position: relative; padding: clamp(2rem, 4vw, 3.5rem) 0 clamp(2.5rem, 5vw, 4rem); background: #fff; overflow: hidden; isolation: isolate; }
-  .lg-spon-grad { position: absolute; top: 0; left: 0; right: 0; height: 62%; z-index: 0;
-    background: linear-gradient(to bottom, #A87CD0 0%, #C6A4E6 32%, #E4D3F4 56%, rgba(255,255,255,0) 82%); }
+  .lg-spon { position: relative; padding: clamp(2rem, 4vw, 3.5rem) 0 clamp(2.5rem, 5vw, 4rem); background: transparent; overflow: hidden; isolation: isolate; }
+  .lg-spon-grad { display: none; }   /* replaced by the shared duo background (image's sky) */
 
   .lg-spon-head { position: relative; z-index: 2; text-align: center; padding: clamp(1.25rem, 3vw, 2.5rem) 1rem clamp(1.75rem, 4vw, 3rem); }
   .lg-spon-logo { display: block; margin: 0 auto; width: clamp(8.5rem, 12vw, 12rem); height: auto; filter: drop-shadow(0 2px 14px rgba(70,35,110,.35)); }
