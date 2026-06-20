@@ -19,7 +19,10 @@ const slides = home.hero.slides;
            data-title={s.title} data-desc={s.desc} data-href={s.href}>
         {s.video
           ? <video src={s.video} autoplay loop muted playsinline preload="metadata"></video>
-          : <img src={s.image} alt="" loading={i === 0 ? 'eager' : 'lazy'} fetchpriority={i === 0 ? 'high' : undefined} />}
+          : <picture>
+              {(s as any).imageMobile && <source srcset={(s as any).imageMobile} media="(max-width: 1023px)" />}
+              <img src={s.image} alt="" loading={i === 0 ? 'eager' : 'lazy'} fetchpriority={i === 0 ? 'high' : undefined} />
+            </picture>}
       </div>
     ))}
     <div class="lg-hero-scrim" aria-hidden="true"></div>
@@ -46,7 +49,9 @@ const slides = home.hero.slides;
 
 <style>
   :root { --lg-primary: #AF7AD5; --lg-amber: #FFC107; --lg-ink: #1A1A2E; }
-  .lg-hero { position: relative; height: 95svh; min-height: 33rem; overflow: hidden; background: #1A1A2E; isolation: isolate; }
+  /* FIXED aspect-ratio (KG approach) so the crop is consistent across devices, not viewport-dependent */
+  .lg-hero { position: relative; width: 100%; aspect-ratio: 16 / 9; min-height: 30rem; overflow: hidden; background: #1A1A2E; isolation: isolate; }
+  @media (max-width: 1023px) { .lg-hero { aspect-ratio: 4 / 5; } }
 
   .lg-hero-slides { position: absolute; inset: 0; z-index: 0; }
   .lg-hero-slide { position: absolute; inset: 0; opacity: 0; z-index: 0; will-change: transform, filter; }

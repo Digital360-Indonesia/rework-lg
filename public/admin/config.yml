@@ -99,7 +99,8 @@ collections:
                 widget: list
                 fields:
                   - { name: video, label: "Video (isi kalau slide ini video)", widget: file, required: false }
-                  - { name: image, label: "Gambar (kalau bukan video)", widget: image, required: false }
+                  - { name: image, label: "Gambar desktop (16:9 lebar)", widget: image, required: false }
+                  - { name: imageMobile, label: "Gambar mobile (4:5 portrait, opsional)", widget: image, required: false }
                   - { name: title, label: "Judul", widget: string }
                   - { name: desc, label: "Deskripsi", widget: text }
                   - { name: href, label: "Link", widget: string }
