@@ -143,7 +143,12 @@
   "endCta": {
     "title": "Mulai Pesananmu",
     "subtitle": "Custom buat angkatan, kelas, atau komunitas — isi sebentar, langsung terhubung ke tim kami di WhatsApp.",
-    "waNumber": "6285183091599"
+    "waNumber": "6285183091599",
+    "address": "Jl. Sidosermo IV Gg. III No. 37 (Raya Prapen), Sidosermo, Surabaya",
+    "hours": [
+      { "day": "Senin – Sabtu", "time": "08.00 – 17.00 WIB" },
+      { "day": "Minggu & Libur Nasional", "time": "Tutup" }
+    ]
   },
   "duoBackground": "/assets/images/uploads/WhatsApp Image 2026-06-19 at 16.27.30.jpeg",
   "_note": "CMS-editable homepage content for Level Garment (Sveltia /admin → 'Homepage'). Each section maps to a component in src/components/home/. Images/videos use image/file widgets."

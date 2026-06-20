@@ -161,4 +161,12 @@ collections:
               - { name: title, label: "Judul", widget: string }
               - { name: subtitle, label: "Subjudul", widget: text }
               - { name: waNumber, label: "Nomor WhatsApp (angka, cth 6285…)", widget: string }
+              - { name: address, label: "Alamat (kartu Lokasi mobile)", widget: text, required: false }
+              - name: hours
+                label: "Jam Operasional (kartu mobile)"
+                widget: list
+                required: false
+                fields:
+                  - { name: day, label: "Hari", widget: string }
+                  - { name: time, label: "Jam", widget: string }
           - { name: duoBackground, label: "Background gabungan Sponsorship + End CTA (~1:1)", widget: image }
