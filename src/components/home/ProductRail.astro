@@ -2,15 +2,23 @@
 /**
  * Section 2 — product categories.
  *  • Desktop: editorial rail (PUMA "New & Trending" model) — tall vertical media,
- *    edge-to-edge, small left caption, free horizontal scroll.
+ *    edge-to-edge, small left caption, free horizontal scroll. (Clones hidden.)
  *  • Mobile (≤767px): full-screen "IG Edits" panel — bold head + lighter subhead,
- *    big portrait rounded card with left/right peek + center emphasis, each card
- *    carries an icon-circle + name (+ star badge for featured types), over a
- *    blurred, purple-tinted backdrop that follows the centered card.
+ *    big portrait rounded card with left/right peek + center emphasis, INFINITE
+ *    LOOP (clone of last before first + clone of first after last → wraps both
+ *    ways), each card carries an icon-circle + name (+ star badge for featured),
+ *    over a blurred purple-tinted backdrop that follows the centered card.
  */
 import home from '../../data/home.json';
 const rail = home.rail;          // CMS-managed: src/data/home.json → rail (title, subtitle, cards[])
 const cards = rail.cards;
+const N = cards.length;
+// clone last at front + first at back so a peek always shows on BOTH ends and it loops
+const rendered = [
+  { ...cards[N - 1], _clone: true },
+  ...cards.map((c) => ({ ...c, _clone: false })),
+  { ...cards[0], _clone: true },
+];
 
 // simple apparel glyphs per category (currentColor → inherits the icon-circle's white)
 const ICONS: Record<string, string> = {
@@ -39,8 +47,10 @@ const STAR = '<path fill="currentColor" d="M12 2.6l2.85 5.78 6.38.93-4.62 4.5 1.
   </div>
 
   <div class="lg-rail-track" data-track>
-    {cards.map((c) => (
-      <a class="lg-rail-item" href={c.href} data-img={c.image}>
+    {rendered.map((c) => (
+      <a class="lg-rail-item" href={c.href} data-img={c.image}
+         data-clone={c._clone ? 'true' : 'false'}
+         aria-hidden={c._clone ? 'true' : undefined} tabindex={c._clone ? -1 : undefined}>
         <div class="lg-rail-img"><img src={c.image} alt={c.name} loading="lazy" /></div>
         <div class="lg-rail-meta">
           <span class="lg-rail-ico" set:html={`<svg viewBox="0 0 24 24" width="100%" height="100%">${iconFor(c.name)}</svg>`}></span>
@@ -59,9 +69,10 @@ const STAR = '<path fill="currentColor" d="M12 2.6l2.85 5.78 6.38.93-4.62 4.5 1.
 
   .lg-rail { padding: 5.6svh 0 clamp(2.5rem, 6vw, 4.5rem); background: transparent; }
 
-  /* blurred backdrop + star/icon are mobile-only — off by default (desktop editorial rail) */
+  /* blurred backdrop, star/icon, and the loop clones are mobile-only — off by default */
   .lg-rail-bg { display: none; }
   .lg-rail-ico, .lg-rail-badge { display: none; }
+  .lg-rail-item[data-clone="true"] { display: none; }   /* desktop: no clones, plain editorial rail */
 
   /* heading aligns to the first card's left edge */
   .lg-rail-head { padding: 0 clamp(1.25rem, 4vw, 3rem); margin: 0 0 clamp(1.25rem, 3vw, 2rem); }
@@ -90,7 +101,7 @@ const STAR = '<path fill="currentColor" d="M12 2.6l2.85 5.78 6.38.93-4.62 4.5 1.
   }
   @media (hover: hover) { .lg-rail-item:hover .lg-rail-label { color: var(--lg-primary-dark); } }
 
-  /* ============ MOBILE reels panel (≤767px): full-screen "IG Edits" card carousel ============ */
+  /* ============ MOBILE reels panel (≤767px): full-screen "IG Edits" looping carousel ============ */
   @media (max-width: 767px) {
     .lg-rail { padding: 0; position: relative; display: flex; flex-direction: column;
       background: #19122b; overflow: hidden; }
@@ -111,7 +122,8 @@ const STAR = '<path fill="currentColor" d="M12 2.6l2.85 5.78 6.38.93-4.62 4.5 1.
       font-family:'Inter',sans-serif; font-weight: 400; font-size: .95rem; line-height: 1.45;
       text-shadow: 0 1px 10px rgba(0,0,0,.35); }
 
-    /* carousel fills the rest, cards centered with peek */
+    /* carousel fills the rest, cards centered with peek; clones visible for the loop */
+    .lg-rail-item[data-clone="true"] { display: block; }
     .lg-rail-track { position: relative; z-index: 1; flex: 1 1 auto; align-items: center;
       gap: clamp(.5rem, 2.5vw, 1rem); padding: 0 0 calc(4.6rem + env(safe-area-inset-bottom, 0px));
       scroll-snap-type: x mandatory; scroll-padding: 0; }
@@ -121,8 +133,6 @@ const STAR = '<path fill="currentColor" d="M12 2.6l2.85 5.78 6.38.93-4.62 4.5 1.
       border-radius: clamp(1rem, 4.5vw, 1.5rem); overflow: hidden;
       scroll-snap-align: center;
       transform: scale(.87); opacity: .5; transition: transform .4s cubic-bezier(.19,1,.22,1), opacity .4s ease; }
-    .lg-rail-item:first-child { margin-left: 15vw; }
-    .lg-rail-item:last-child  { margin-right: 15vw; }
     .lg-rail-item.is-center { transform: scale(1); opacity: 1; }
     /* legibility scrim for the meta row */
     .lg-rail-item::after { content: ''; position: absolute; inset: 0; border-radius: inherit; z-index: 1; pointer-events: none;
@@ -150,10 +160,17 @@ const STAR = '<path fill="currentColor" d="M12 2.6l2.85 5.78 6.38.93-4.62 4.5 1.
     const items = Array.from(root.querySelectorAll<HTMLElement>('.lg-rail-item'));
     let bgCur = root.querySelector<HTMLElement>('[data-bg-a]');
     let bgNext = root.querySelector<HTMLElement>('[data-bg-b]');
-    if (!track || !items.length) return;
-    // only drive the center/blur behaviour on the mobile panel
+    if (!track || items.length < 3) return;
+    // only drive the looping/blur behaviour on the mobile panel
     if (!window.matchMedia('(max-width: 767px)').matches) return;
 
+    const N = items.length - 2;       // real card count (excludes 2 clones)
+    const LAST = items.length - 1;    // trailing clone index
+    const centerOf = (el: HTMLElement) => el.offsetLeft + el.offsetWidth / 2;
+    const setScroll = (r: number, smooth: boolean) =>
+      track.scrollTo({ left: centerOf(items[r]) - track.clientWidth / 2, behavior: smooth ? 'smooth' : 'auto' });
+
+    let curR = 1;        // current rendered index (start on first real card)
     let lastImg = '';
     const setBg = (img?: string) => {
       if (!img || img === lastImg || !bgCur || !bgNext) return;
@@ -164,20 +181,29 @@ const STAR = '<path fill="currentColor" d="M12 2.6l2.85 5.78 6.38.93-4.62 4.5 1.
       [bgCur, bgNext] = [bgNext, bgCur];
     };
 
-    const update = () => {
+    const paint = () => {
       const c = track.scrollLeft + track.clientWidth / 2;
-      let best = items[0], bestD = Infinity;
-      for (const it of items) {
-        const center = it.offsetLeft + it.offsetWidth / 2;
-        const d = Math.abs(center - c);
-        if (d < bestD) { bestD = d; best = it; }
-      }
-      items.forEach((it) => it.classList.toggle('is-center', it === best));
-      setBg(best.dataset.img);
+      let best = 1, bestD = Infinity;
+      items.forEach((it, i) => { const d = Math.abs(centerOf(it) - c); if (d < bestD) { bestD = d; best = i; } });
+      curR = best;
+      items.forEach((it, i) => it.classList.toggle('is-center', i === best));
+      setBg(items[best].dataset.img);
     };
 
-    let raf = 0;
-    track.addEventListener('scroll', () => { cancelAnimationFrame(raf); raf = requestAnimationFrame(update); }, { passive: true });
-    requestAnimationFrame(update);
+    // when settled on a clone, jump instantly to the matching real card (seamless wrap)
+    const settleLoop = () => {
+      if (curR === 0) { curR = N; setScroll(N, false); }
+      else if (curR === LAST) { curR = 1; setScroll(1, false); }
+    };
+
+    let raf = 0, stop = 0;
+    track.addEventListener('scroll', () => {
+      cancelAnimationFrame(raf); raf = requestAnimationFrame(paint);
+      clearTimeout(stop); stop = window.setTimeout(settleLoop, 140);
+    }, { passive: true });
+
+    // start centered on the first real card (left peek = clone of last)
+    requestAnimationFrame(() => { setScroll(1, false); paint(); });
+    window.addEventListener('resize', () => setScroll(curR, false));
   });
 </script>
