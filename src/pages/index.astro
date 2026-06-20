@@ -99,8 +99,8 @@ const ogImage = '/assets/images/logo/logo-colored.webp';
     :global(.lg-banner),
     :global(.lg-spon),
     :global(.lg-mcta) {
-      height: 100svh !important;
-      min-height: 100svh !important;
+      height: 100dvh !important;   /* dynamic viewport — fills exactly on iPhone/Android, no peek of the next section */
+      min-height: 100dvh !important;
       margin: 0 !important;
       scroll-snap-align: start;
       scroll-snap-stop: always;

@@ -95,6 +95,13 @@ const slides = home.hero.slides;
   .lg-hp.is-active i { width: 100%; transition: width var(--dur, 4.2s) linear; }
 
   @media (prefers-reduced-motion: reduce){ .lg-hero-slide.is-active{ animation:none; } .lg-hero-slide.is-leaving{ animation:none; opacity:0; } .lg-hp.is-active i{ transition:none; width:100%; } }
+
+  /* MOBILE reels: story dots → a full-width "duration" bar at the very bottom (TikTok-style), fills per slide */
+  @media (max-width: 767px) {
+    .lg-hero-progress { left: 0; right: 0; transform: none; bottom: clamp(1.1rem, 3.5vh, 1.8rem); padding: 0 .8rem; gap: 4px; }
+    .lg-hp, .lg-hp.is-active, .lg-hp.is-done { flex: 1 1 0; width: auto; height: 3px; border-radius: 999px; background: rgba(255,255,255,.4); }
+    .lg-hp i { background: #fff; }
+  }
 </style>
 
 <script>
