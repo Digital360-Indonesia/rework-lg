@@ -108,19 +108,23 @@
     "events": [
       {
         "image": "/assets/images/placeholder/event1-glastonbury.jpg",
-        "name": "Glastonbury 2025"
+        "name": "EFESTAPHORIA 2025"
       },
       {
         "image": "/assets/images/placeholder/event2-coachella.webp",
-        "name": "Coachella 2025"
+        "name": "PORSENI 2025"
       },
       {
         "image": "/assets/images/placeholder/event3-tomorrowland.jpg.webp",
-        "name": "Tomorrowland 2026"
+        "name": "NOUVEAU 2025"
       },
       {
         "image": "/assets/images/placeholder/event4-dwp.webp",
-        "name": "DWP 2026"
+        "name": "CONCERTA 2025"
+      },
+      {
+        "image": "/assets/images/uploads/Foto 8.jpeg",
+        "name": "UNIVERSITAS NASIONAL JAKARTA"
       }
     ]
   },
