@@ -14,10 +14,9 @@ const { videoDesktop, videoMobile, title, subtitle, href } = home.videoBanner as
 const link = href || '/product/';
 ---
 <section id="banner" class="lg-banner" aria-label="Banner">
-  <video class="lg-banner-video" autoplay loop muted playsinline preload="metadata">
-    {videoMobile && <source src={videoMobile} media="(max-width: 1023px)" type="video/mp4" />}
-    <source src={videoDesktop} type="video/mp4" />
-  </video>
+  <!-- no <source media> (unreliable on <video>) — JS picks ds/mb via matchMedia below -->
+  <video class="lg-banner-video" autoplay loop muted playsinline preload="metadata"
+         data-ds={videoDesktop} data-mb={videoMobile || videoDesktop}></video>
   <div class="lg-banner-scrim" aria-hidden="true"></div>
 
   <div class="lg-banner-copy">
@@ -57,9 +56,19 @@ const link = href || '/product/';
 </style>
 
 <script>
-  // Plain loop — pause when off-screen to save battery.
   const v = document.querySelector<HTMLVideoElement>('.lg-banner-video');
   if (v) {
+    // pick mobile vs desktop source ourselves (reliable, unlike <source media> on video)
+    const mq = window.matchMedia('(max-width: 1023px)');
+    const apply = () => {
+      const want = (mq.matches ? v.dataset.mb : v.dataset.ds) || v.dataset.ds || '';
+      if (v.getAttribute('src') === want || !want) return;
+      v.src = want; v.load(); v.play().catch(() => {});
+    };
+    apply();
+    mq.addEventListener('change', apply);   // re-pick on rotate/resize across the breakpoint
+
+    // plain loop — pause when off-screen to save battery
     const io = new IntersectionObserver((entries) => {
       entries.forEach((e) => { e.isIntersecting ? v.play().catch(() => {}) : v.pause(); });
     }, { threshold: 0.1 });
