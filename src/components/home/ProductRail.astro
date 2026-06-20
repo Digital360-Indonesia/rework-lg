@@ -166,11 +166,14 @@ const STAR = '<path fill="currentColor" d="M12 2.6l2.85 5.78 6.38.93-4.62 4.5 1.
 
     const N = items.length - 2;       // real card count (excludes 2 clones)
     const LAST = items.length - 1;    // trailing clone index
-    const centerOf = (el: HTMLElement) => el.offsetLeft + el.offsetWidth / 2;
+
+    // cache each card's center once (cards are fixed-size) — avoids per-frame layout reads = smoother scroll
+    let centers: number[] = [];
+    const measure = () => { centers = items.map((it) => it.offsetLeft + it.offsetWidth / 2); };
     const setScroll = (r: number, smooth: boolean) =>
       // 'instant' (not 'auto') — 'auto' falls back to CSS scroll-behavior:smooth and would
       // animate the wrap-jump across the whole track. The loop jump must be invisible.
-      track.scrollTo({ left: centerOf(items[r]) - track.clientWidth / 2, behavior: smooth ? 'smooth' : 'instant' });
+      track.scrollTo({ left: centers[r] - track.clientWidth / 2, behavior: smooth ? 'smooth' : 'instant' });
 
     let curR = 1;        // current rendered index (start on first real card)
     let lastImg = '';
@@ -186,7 +189,7 @@ const STAR = '<path fill="currentColor" d="M12 2.6l2.85 5.78 6.38.93-4.62 4.5 1.
     const paint = () => {
       const c = track.scrollLeft + track.clientWidth / 2;
       let best = 1, bestD = Infinity;
-      items.forEach((it, i) => { const d = Math.abs(centerOf(it) - c); if (d < bestD) { bestD = d; best = i; } });
+      for (let i = 0; i < centers.length; i++) { const d = Math.abs(centers[i] - c); if (d < bestD) { bestD = d; best = i; } }
       curR = best;
       items.forEach((it, i) => it.classList.toggle('is-center', i === best));
       setBg(items[best].dataset.img);
@@ -199,13 +202,16 @@ const STAR = '<path fill="currentColor" d="M12 2.6l2.85 5.78 6.38.93-4.62 4.5 1.
     };
 
     let raf = 0, stop = 0;
-    track.addEventListener('scroll', () => {
-      cancelAnimationFrame(raf); raf = requestAnimationFrame(paint);
-      clearTimeout(stop); stop = window.setTimeout(settleLoop, 140);
-    }, { passive: true });
+    track.addEventListener('scroll', () => { cancelAnimationFrame(raf); raf = requestAnimationFrame(paint); }, { passive: true });
+    // settle the loop the INSTANT scrolling stops (no artificial delay). scrollend where supported, else a short timeout.
+    if ('onscrollend' in window) {
+      track.addEventListener('scrollend', settleLoop, { passive: true });
+    } else {
+      track.addEventListener('scroll', () => { clearTimeout(stop); stop = window.setTimeout(settleLoop, 80); }, { passive: true });
+    }
 
     // start centered on the first real card (left peek = clone of last)
-    requestAnimationFrame(() => { setScroll(1, false); paint(); });
-    window.addEventListener('resize', () => setScroll(curR, false));
+    requestAnimationFrame(() => { measure(); setScroll(1, false); paint(); });
+    window.addEventListener('resize', () => { measure(); setScroll(curR, false); });
   });
 </script>
