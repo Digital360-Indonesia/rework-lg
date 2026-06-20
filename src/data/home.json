@@ -111,26 +111,32 @@
   },
   "sponsorship": {
     "tag": "Sponsorship Solutions",
+    "account": "Level Garment",
     "events": [
       {
         "image": "/assets/images/placeholder/event1-glastonbury.jpg",
-        "name": "EFESTAPHORIA 2025"
+        "name": "EFESTAPHORIA 2025",
+        "info": "Festival musik & seni tahunan dengan ribuan pengunjung. Level Garment dipercaya garap jersey panitia, kaos crew, sampai merch eksklusif buat peserta — semua custom, rapi, dan tepat waktu."
       },
       {
         "image": "/assets/images/placeholder/event2-coachella.webp",
-        "name": "PORSENI 2025"
+        "name": "PORSENI 2025",
+        "info": "Pekan Olahraga & Seni antar sekolah se-kota. Kami suplai jersey tiap cabang, seragam panitia, sampai merch juara dengan bahan adem dan jahitan rapi."
       },
       {
         "image": "/assets/images/placeholder/event3-tomorrowland.jpg.webp",
-        "name": "NOUVEAU 2025"
+        "name": "NOUVEAU 2025",
+        "info": "Gelaran kreatif tahunan yang ramai dikunjungi pelajar. Level Garment jadi partner apparel resmi buat panitia, tenant, sampai volunteer acara."
       },
       {
         "image": "/assets/images/placeholder/event4-dwp.webp",
-        "name": "CONCERTA 2025"
+        "name": "CONCERTA 2025",
+        "info": "Konser kampus bertabur bintang tamu. Kami kerjain kaos crew, jaket panitia, sampai bundle merch eksklusif buat penonton — desain bebas, hasil maksimal."
       },
       {
         "image": "/assets/images/uploads/Foto 8.jpeg",
-        "name": "UNIVERSITAS NASIONAL JAKARTA"
+        "name": "UNIVERSITAS NASIONAL JAKARTA",
+        "info": "Partner apparel resmi berbagai acara kampus UNAS — mulai dari jaket angkatan, jersey UKM, sampai seragam wisuda. Satu tim buat semua kebutuhan apparel kalian."
       }
     ]
   },

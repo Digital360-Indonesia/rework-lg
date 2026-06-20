@@ -145,13 +145,15 @@ collections:
             label: "Section 5 — Sponsorship"
             widget: object
             fields:
-              - { name: tag, label: "Tag", widget: string }
+              - { name: tag, label: "Tag (chip atas)", widget: string }
+              - { name: account, label: "Nama akun (caption mobile)", widget: string, required: false, default: "Level Garment" }
               - name: events
-                label: "Event (gambar 2:1 + nama)"
+                label: "Event (gambar 2:1 + nama + info)"
                 widget: list
                 fields:
                   - { name: image, label: "Gambar event (2:1)", widget: image }
-                  - { name: name, label: "Nama event", widget: string }
+                  - { name: name, label: "Nama event (judul caption)", widget: string }
+                  - { name: info, label: "Info event (subjudul — bisa di-expand di mobile)", widget: text, required: false }
           - name: endCta
             label: "Section 6 — End CTA"
             widget: object
