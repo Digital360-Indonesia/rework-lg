@@ -96,10 +96,13 @@ const slides = home.hero.slides;
 
   @media (prefers-reduced-motion: reduce){ .lg-hero-slide.is-active{ animation:none; } .lg-hero-slide.is-leaving{ animation:none; opacity:0; } .lg-hp.is-active i{ transition:none; width:100%; } }
 
-  /* MOBILE reels: story dots → a full-width "duration" bar at the very bottom (TikTok-style), fills per slide */
+  /* MOBILE reels: Instagram-Stories progress — pinned to the TOP. Segments fill left→right
+     and STAY filled: done = solid white, active = dim track filling, ahead = dim. */
   @media (max-width: 767px) {
-    .lg-hero-progress { left: 0; right: 0; transform: none; bottom: calc(4.9rem + env(safe-area-inset-bottom, 0px)); padding: 0 .8rem; gap: 4px; }
-    .lg-hp, .lg-hp.is-active, .lg-hp.is-done { flex: 1 1 0; width: auto; height: 3px; border-radius: 999px; background: rgba(255,255,255,.4); }
+    .lg-hero-progress { top: calc(.6rem + env(safe-area-inset-top, 0px)); bottom: auto; left: 0; right: 0; transform: none; padding: 0 .7rem; gap: 4px; }
+    .lg-hp { flex: 1 1 0; width: auto; height: 3px; border-radius: 999px; background: rgba(255,255,255,.4); }
+    .lg-hp.is-active { width: auto; background: rgba(255,255,255,.4); }   /* dim track; <i> fills white over the slide's duration */
+    .lg-hp.is-done { width: auto; background: #fff; }                     /* completed → solid white, stays filled */
     .lg-hp i { background: #fff; }
   }
 </style>
