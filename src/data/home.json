@@ -2,29 +2,32 @@
   "hero": {
     "slides": [
       {
-        "video": "/assets/videos/WhatsApp%20Video%202026-06-13%20at%2012.06.28.mp4",
-        "image": "",
+        "video": "",
+        "image": "/assets/images/uploads/4.jpg",
+        "imageMobile": "/assets/images/uploads/mobile3.jpg",
         "title": "Level Up Acara-mu",
         "desc": "Jaket kelas, jersey & kaos custom — desain bebas, tanpa minimal order.",
         "href": "https://wa.me/6285183091599?text=Halo%20Level%20Garment%2C%20aku%20mau%20bikin%20custom%20buat%20acara%2Fkelas.%20Boleh%20info%3F"
       },
       {
-        "video": "",
-        "image": "/assets/images/uploads/WhatsApp Image 2026-06-19 at 14.35.42.jpeg",
+        "video": "/assets/images/uploads/hero-2.mov",
+        "image": "",
         "title": "Jaket Angkatan Anti Pasaran",
         "desc": "Varsity full-patch sampai bomber — bahan tebal, jahitan rapi.",
         "href": "/product/"
       },
       {
         "video": "",
-        "image": "/assets/images/uploads/hero-1.jpeg",
+        "image": "/assets/images/uploads/3.jpg",
+        "imageMobile": "/assets/images/uploads/mobile2.jpg",
         "title": "Jersey Baseball Squad-mu",
         "desc": "Dryfit adem, nama & nomor tiap member, desain bebas.",
         "href": "/product/"
       },
       {
         "video": "",
-        "image": "/assets/images/uploads/WhatsApp Image 2026-06-20 at 11.07.14.jpeg",
+        "image": "/assets/images/uploads/2.jpg",
+        "imageMobile": "/assets/images/uploads/mobile1.jpg",
         "title": "Kaos Kelas yang Beda",
         "desc": "Sablon, bordir, atau DTF — cotton combed premium.",
         "href": "/product/"
