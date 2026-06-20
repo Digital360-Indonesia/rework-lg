@@ -83,7 +83,9 @@ const ogImage = '/assets/images/logo/logo-colored.webp';
   /* ============ MOBILE (phones ≤767px): TikTok / Reels-style full-screen swipe feed ============
      Native CSS scroll-snap — each section is a full-screen panel; swipe up/down snaps one at a time. */
   @media (max-width: 767px) {
-    :global(html) { scroll-snap-type: y mandatory; }
+    /* TikTok-feel: mandatory one-at-a-time snap, no rubber-band chaining, direct snap */
+    :global(html) { scroll-snap-type: y mandatory; overscroll-behavior-y: contain; scroll-behavior: auto; }
+    :global(body) { overscroll-behavior-y: contain; }
     :global(.lg-hero),
     :global(.lg-rail),
     :global(.lg-banner),
