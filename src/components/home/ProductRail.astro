@@ -126,7 +126,7 @@ const STAR = '<path fill="currentColor" d="M12 2.6l2.85 5.78 6.38.93-4.62 4.5 1.
     .lg-rail-item[data-clone="true"] { display: block; }
     .lg-rail-track { position: relative; z-index: 1; flex: 1 1 auto; align-items: center;
       gap: clamp(.5rem, 2.5vw, 1rem); padding: 0 0 calc(4.6rem + env(safe-area-inset-bottom, 0px));
-      scroll-snap-type: x mandatory; scroll-padding: 0; }
+      scroll-snap-type: x mandatory; scroll-padding: 0; scroll-behavior: auto; }   /* belt-and-suspenders: never smooth on mobile (loop jump must be instant) */
 
     .lg-rail-item { position: relative; flex: 0 0 auto; display: block;
       height: clamp(19rem, 53vh, 31rem); aspect-ratio: 9 / 14;
@@ -168,7 +168,9 @@ const STAR = '<path fill="currentColor" d="M12 2.6l2.85 5.78 6.38.93-4.62 4.5 1.
     const LAST = items.length - 1;    // trailing clone index
     const centerOf = (el: HTMLElement) => el.offsetLeft + el.offsetWidth / 2;
     const setScroll = (r: number, smooth: boolean) =>
-      track.scrollTo({ left: centerOf(items[r]) - track.clientWidth / 2, behavior: smooth ? 'smooth' : 'auto' });
+      // 'instant' (not 'auto') — 'auto' falls back to CSS scroll-behavior:smooth and would
+      // animate the wrap-jump across the whole track. The loop jump must be invisible.
+      track.scrollTo({ left: centerOf(items[r]) - track.clientWidth / 2, behavior: smooth ? 'smooth' : 'instant' });
 
     let curR = 1;        // current rendered index (start on first real card)
     let lastImg = '';
