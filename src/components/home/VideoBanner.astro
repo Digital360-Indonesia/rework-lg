@@ -8,16 +8,10 @@
  * (optional) + the copy fields. When `videoMobile` is blank, omit the mobile
  * <source> so the desktop video fits all screens — same pattern as KG's images.
  */
-// ⚠️ TEMP DEMO: RL's seamless-loop clip (their branded Polo content) — to SEE the seamless loop.
-// Replace both with a loop-edited LG video before going live.
-const videoDesktop = '/assets/videos/Polo_Countries_Video_DSK.mp4';
-const videoMobile = '/assets/videos/Polo_Countries_Video_MOB.mp4';
-
-// placeholder copy (centered)
-const title = 'Judul Banner di Sini';
-const subtitle = 'Deskripsi singkat banner — teks placeholder yang nanti bisa diganti lewat CMS.';
-const ctaLabel = 'Selengkapnya';
-const ctaHref = '#';
+// Section-3 video banner — CMS-managed via src/data/home.json → videoBanner.
+// (TEMP: videoDesktop is still RL's Polo demo clip — swap it for a loop-edited LG video in the CMS.)
+import home from '../../data/home.json';
+const { videoDesktop, videoMobile, title, subtitle, ctaLabel, ctaHref } = home.videoBanner;
 ---
 <section id="banner" class="lg-banner" aria-label="Banner">
   <video class="lg-banner-video" autoplay loop muted playsinline preload="metadata">

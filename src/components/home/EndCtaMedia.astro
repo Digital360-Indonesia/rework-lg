@@ -4,14 +4,15 @@
  * WhatsApp CTA centered on top (RL "Fashion Essentials" model).
  * The checkerboard variant lives in EndCTA.astro and can be swapped back anytime.
  */
-const waNumber = '6285183091599';
+import home from '../../data/home.json';
+const { title, subtitle, waNumber } = home.endCta;   // CMS-managed: src/data/home.json → endCta
 const waDirect = `https://wa.me/${waNumber}?text=` + encodeURIComponent('Halo Level Garment, aku mau konsultasi & pesan custom buat acara/kelas.');
 // background now comes from the shared .lg-duo wrapper (spans Sponsorship + this section)
 ---
 <section class="lg-mcta" aria-labelledby="lg-mcta-title">
   <div class="lg-mcta-inner">
-    <h2 id="lg-mcta-title" class="lg-mcta-title">Mulai Pesananmu</h2>
-    <p class="lg-mcta-sub">Custom buat angkatan, kelas, atau komunitas — isi sebentar, langsung terhubung ke tim kami di WhatsApp.</p>
+    <h2 id="lg-mcta-title" class="lg-mcta-title">{title}</h2>
+    <p class="lg-mcta-sub">{subtitle}</p>
 
     <form class="lg-mcta-form" data-waform data-wa={waNumber}>
       <input type="tel" name="phone" inputmode="tel" placeholder="Nomor WhatsApp" aria-label="Nomor WhatsApp" required />

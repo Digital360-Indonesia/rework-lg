@@ -5,17 +5,12 @@
  * short KG-style caption bottom-left, a small load bar bottom-center, and prev/next
  * arrows that reveal only on left/right edge hover. Same height as the video banner.
  */
-const leftBg = '/assets/images/placeholder/secleft.png';
-const leftDesc = 'Wujudkan kebersamaan angkatanmu lewat custom apparel yang bener-bener kalian banget.';
-const leftCta = { label: 'Selengkapnya', href: '#' };
-
-const ph = (f: string) => `/assets/images/placeholder/${f.replace(/ /g, '%20')}`;
-const rightSlides = [
-  { img: ph('image copy 2.png'), title: 'Jaket Angkatan' },
-  { img: ph('image copy 3.png'), title: 'Jersey Baseball' },
-  { img: ph('image copy 4.png'), title: 'Kaos Kelas' },
-  { img: ph('image copy 5.png'), title: 'Seragam Organisasi' },
-];
+import home from '../../data/home.json';
+const sb = home.splitBanner;     // CMS-managed: src/data/home.json → splitBanner
+const leftBg = sb.leftImage;
+const leftDesc = sb.leftDesc;
+const leftCta = { label: sb.leftCtaLabel, href: sb.leftCtaHref };
+const rightSlides = sb.rightSlides;   // [{ image, title }]
 ---
 <section class="lg-split" aria-label="Sorotan">
   <!-- LEFT — static -->
@@ -32,7 +27,7 @@ const rightSlides = [
   <div class="lg-split-right" data-slider>
     {rightSlides.map((s, i) => (
       <div class:list={['lg-split-slide', { 'is-active': i === 0 }]} data-i={i} data-title={s.title}>
-        <img src={s.img} alt="" loading="lazy" />
+        <img src={s.image} alt="" loading="lazy" />
       </div>
     ))}
     <div class="lg-split-right-scrim" aria-hidden="true"></div>

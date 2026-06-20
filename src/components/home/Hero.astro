@@ -8,16 +8,9 @@
 interface Props { variant?: 'default' | 'simple'; }
 const { variant = 'default' } = Astro.props;
 
-const wa = 'https://wa.me/6285183091599?text=' + encodeURIComponent('Halo Level Garment, aku mau bikin custom buat acara/kelas. Boleh info?');
-
-// 5 slides — first is a video, the rest images. (Text + indicators hidden for now — kept in markup.)
-const slides: { img?: string; video?: string; title: string; desc: string; href: string }[] = [
-  { video: '/assets/videos/WhatsApp%20Video%202026-06-13%20at%2012.06.28.mp4', title: 'Level Up Acara-mu',    desc: 'Jaket kelas, jersey & kaos custom — desain bebas, tanpa minimal order.', href: wa },
-  { img: '/assets/images/homepage/slideshow/20250424-slide_lg_3.webp', title: 'Jaket Angkatan Anti Pasaran', desc: 'Varsity full-patch sampai bomber — bahan tebal, jahitan rapi.',           href: '/product/' },
-  { img: '/assets/images/homepage/slideshow/20250424-slide_lg_4.webp', title: 'Jersey Baseball Squad-mu',    desc: 'Dryfit adem, nama & nomor tiap member, desain bebas.',                    href: '/product/' },
-  { img: '/assets/images/homepage/slideshow/20250424-slide_lg_5.webp', title: 'Kaos Kelas yang Beda',        desc: 'Sablon, bordir, atau DTF — cotton combed premium.',                       href: '/product/' },
-  { img: '/assets/images/homepage/slideshow/20250424-slide_lg_6.webp', title: 'Seragam Organisasi Kampus',   desc: 'Workshirt & kemeja rapi buat himpunan dan panitia.',                      href: '/product/' },
-];
+import home from '../../data/home.json';
+// 5 slides — first is a video, the rest images (CMS-managed via src/data/home.json → hero.slides).
+const slides = home.hero.slides;
 ---
 <section id="hero" class="lg-hero" data-slides={slides.length}>
   <div class="lg-hero-slides">
@@ -26,7 +19,7 @@ const slides: { img?: string; video?: string; title: string; desc: string; href:
            data-title={s.title} data-desc={s.desc} data-href={s.href}>
         {s.video
           ? <video src={s.video} autoplay loop muted playsinline preload="metadata"></video>
-          : <img src={s.img} alt="" loading={i === 0 ? 'eager' : 'lazy'} fetchpriority={i === 0 ? 'high' : undefined} />}
+          : <img src={s.image} alt="" loading={i === 0 ? 'eager' : 'lazy'} fetchpriority={i === 0 ? 'high' : undefined} />}
       </div>
     ))}
     <div class="lg-hero-scrim" aria-hidden="true"></div>

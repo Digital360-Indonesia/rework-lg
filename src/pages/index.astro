@@ -21,6 +21,7 @@ import SplitBanner from '../components/home/SplitBanner.astro';
 import SponsorshipShowcase from '../components/home/SponsorshipShowcase.astro';
 import EndCtaMedia from '../components/home/EndCtaMedia.astro';
 import siteConfig from '../data/site-config.json';
+import home from '../data/home.json';
 
 // Page metadata
 const pageTitle = siteConfig.seo.defaultTitle;
@@ -46,7 +47,7 @@ const ogImage = '/assets/images/logo/logo-colored.webp';
   <SplitBanner />
 
   <!-- Sponsorship + End CTA share ONE continuous background (sky on top → rooftop/models on bottom) -->
-  <div class="lg-duo">
+  <div class="lg-duo" style={`background-image: url('${home.duoBackground}')`}>
     <SponsorshipShowcase />
     <EndCtaMedia />
   </div>
@@ -57,7 +58,7 @@ const ogImage = '/assets/images/logo/logo-colored.webp';
      full-width so the models at the edges stay in frame; bottom-anchored to keep them. */
   .lg-duo {
     position: relative;
-    background-image: url('/assets/images/WhatsApp%20Image%202026-06-18%20at%2011.03.26.jpeg');
+    /* background-image set inline from home.json → duoBackground (CMS-editable) */
     background-size: cover;
     background-position: center bottom;
     background-repeat: no-repeat;

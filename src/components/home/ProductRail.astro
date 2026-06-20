@@ -5,26 +5,19 @@
  * each, ~3 across with the next peeking on the right, free horizontal scroll.
  * Replaces the old ProductCategories carousel (kept on disk, unrendered).
  */
-import products from '../../data/products.json';
-const real = (products.categories || []);
-const ph = (n: number) => `/assets/images/placeholder/${['image.png','image copy.png','image copy 2.png','image copy 3.png','image copy 4.png','image copy 5.png'][n].replace(/ /g, '%20')}`;
-
-// 6 cards = 4 real categories + 2 stand-ins (rename later)
-const cards = [
-  ...real.slice(0, 4).map((c: any, i: number) => ({ name: c.name, href: `/product/${c.anchor || ''}`, img: ph(i) })),
-  { name: 'Hoodie', href: '/product/', img: ph(4) },
-  { name: 'Topi',   href: '/product/', img: ph(5) },
-];
+import home from '../../data/home.json';
+const rail = home.rail;          // CMS-managed: src/data/home.json → rail (title + 6 cards)
+const cards = rail.cards;
 ---
 <section class="lg-rail" aria-labelledby="lg-rail-title">
   <div class="lg-rail-head">
-    <h2 id="lg-rail-title" class="lg-rail-title">Pilih Kategori</h2>
+    <h2 id="lg-rail-title" class="lg-rail-title">{rail.title}</h2>
   </div>
 
   <div class="lg-rail-track" data-track>
     {cards.map((c) => (
       <a class="lg-rail-item" href={c.href}>
-        <div class="lg-rail-img"><img src={c.img} alt={c.name} loading="lazy" /></div>
+        <div class="lg-rail-img"><img src={c.image} alt={c.name} loading="lazy" /></div>
         <span class="lg-rail-label">{c.name}</span>
       </a>
     ))}

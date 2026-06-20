@@ -6,15 +6,10 @@
  * the start). Manual only (no auto-advance) — arrows or swipe; slide-count bar +
  * 1-line event name. No CTA.
  */
-const tag = 'Sponsorship Solutions';
-
-const ph = (f: string) => `/assets/images/placeholder/${f.replace(/ /g, '%20')}`;
-const slides = [
-  { img: ph('event1-glastonbury.jpg'),      name: 'Glastonbury 2025' },
-  { img: ph('event2-coachella.webp'),       name: 'Coachella 2025' },
-  { img: ph('event3-tomorrowland.jpg.webp'), name: 'Tomorrowland 2026' },
-  { img: ph('event4-dwp.webp'),             name: 'DWP 2026' },
-];
+import home from '../../data/home.json';
+const spon = home.sponsorship;   // CMS-managed: src/data/home.json → sponsorship (tag + events)
+const tag = spon.tag;
+const slides = spon.events;      // [{ image, name }]
 const N = slides.length;
 // clone last at front + first at back so a peek always shows + it loops
 const rendered = [
@@ -38,7 +33,7 @@ const rendered = [
     <div class="lg-spon-track" data-track>
       {rendered.map((s, i) => (
         <div class="lg-spon-slide" data-r={i} data-real={s.real} data-desc={s.name}>
-          <img src={s.img} alt={s.name} loading="lazy" />
+          <img src={s.image} alt={s.name} loading="lazy" />
         </div>
       ))}
     </div>
