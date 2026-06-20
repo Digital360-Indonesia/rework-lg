@@ -1,27 +1,80 @@
 {
-  "_note": "CMS-editable homepage content for Level Garment (Sveltia /admin → 'Homepage'). Each section maps to a component in src/components/home/. Images/videos use image/file widgets.",
   "hero": {
     "slides": [
-      { "video": "/assets/videos/WhatsApp%20Video%202026-06-13%20at%2012.06.28.mp4", "image": "", "title": "Level Up Acara-mu", "desc": "Jaket kelas, jersey & kaos custom — desain bebas, tanpa minimal order.", "href": "https://wa.me/6285183091599?text=Halo%20Level%20Garment%2C%20aku%20mau%20bikin%20custom%20buat%20acara%2Fkelas.%20Boleh%20info%3F" },
-      { "video": "", "image": "/assets/images/homepage/slideshow/20250424-slide_lg_3.webp", "title": "Jaket Angkatan Anti Pasaran", "desc": "Varsity full-patch sampai bomber — bahan tebal, jahitan rapi.", "href": "/product/" },
-      { "video": "", "image": "/assets/images/homepage/slideshow/20250424-slide_lg_4.webp", "title": "Jersey Baseball Squad-mu", "desc": "Dryfit adem, nama & nomor tiap member, desain bebas.", "href": "/product/" },
-      { "video": "", "image": "/assets/images/homepage/slideshow/20250424-slide_lg_5.webp", "title": "Kaos Kelas yang Beda", "desc": "Sablon, bordir, atau DTF — cotton combed premium.", "href": "/product/" },
-      { "video": "", "image": "/assets/images/homepage/slideshow/20250424-slide_lg_6.webp", "title": "Seragam Organisasi Kampus", "desc": "Workshirt & kemeja rapi buat himpunan dan panitia.", "href": "/product/" }
+      {
+        "video": "/assets/videos/WhatsApp%20Video%202026-06-13%20at%2012.06.28.mp4",
+        "image": "",
+        "title": "Level Up Acara-mu",
+        "desc": "Jaket kelas, jersey & kaos custom — desain bebas, tanpa minimal order.",
+        "href": "https://wa.me/6285183091599?text=Halo%20Level%20Garment%2C%20aku%20mau%20bikin%20custom%20buat%20acara%2Fkelas.%20Boleh%20info%3F"
+      },
+      {
+        "video": "",
+        "image": "/assets/images/uploads/WhatsApp Image 2026-06-19 at 14.35.42.jpeg",
+        "title": "Jaket Angkatan Anti Pasaran",
+        "desc": "Varsity full-patch sampai bomber — bahan tebal, jahitan rapi.",
+        "href": "/product/"
+      },
+      {
+        "video": "",
+        "image": "/assets/images/uploads/WhatsApp Image 2026-06-19 at 16.38.13.jpeg",
+        "title": "Jersey Baseball Squad-mu",
+        "desc": "Dryfit adem, nama & nomor tiap member, desain bebas.",
+        "href": "/product/"
+      },
+      {
+        "video": "",
+        "image": "/assets/images/homepage/slideshow/20250424-slide_lg_5.webp",
+        "title": "Kaos Kelas yang Beda",
+        "desc": "Sablon, bordir, atau DTF — cotton combed premium.",
+        "href": "/product/"
+      },
+      {
+        "video": "",
+        "image": "/assets/images/homepage/slideshow/20250424-slide_lg_6.webp",
+        "title": "Seragam Organisasi Kampus",
+        "desc": "Workshirt & kemeja rapi buat himpunan dan panitia.",
+        "href": "/product/"
+      }
     ]
   },
   "rail": {
     "title": "Pilih Kategori",
     "cards": [
-      { "name": "T-Shirt",   "image": "/assets/images/placeholder/image.png",          "href": "/product/#tshirt" },
-      { "name": "Jersey",    "image": "/assets/images/placeholder/image%20copy.png",   "href": "/product/#jersey" },
-      { "name": "Workshirt", "image": "/assets/images/placeholder/image%20copy%202.png","href": "/product/#workshirt" },
-      { "name": "Jacket",    "image": "/assets/images/placeholder/image%20copy%203.png","href": "/product/#jacket" },
-      { "name": "Hoodie",    "image": "/assets/images/placeholder/image%20copy%204.png","href": "/product/" },
-      { "name": "Topi",      "image": "/assets/images/placeholder/image%20copy%205.png","href": "/product/" }
+      {
+        "name": "T-Shirt",
+        "image": "/assets/images/placeholder/image.png",
+        "href": "/product/#tshirt"
+      },
+      {
+        "name": "Jersey",
+        "image": "/assets/images/placeholder/image%20copy.png",
+        "href": "/product/#jersey"
+      },
+      {
+        "name": "Workshirt",
+        "image": "/assets/images/placeholder/image%20copy%202.png",
+        "href": "/product/#workshirt"
+      },
+      {
+        "name": "Jacket",
+        "image": "/assets/images/placeholder/image%20copy%203.png",
+        "href": "/product/#jacket"
+      },
+      {
+        "name": "Hoodie",
+        "image": "/assets/images/placeholder/image%20copy%204.png",
+        "href": "/product/"
+      },
+      {
+        "name": "Topi",
+        "image": "/assets/images/placeholder/image%20copy%205.png",
+        "href": "/product/"
+      }
     ]
   },
   "videoBanner": {
-    "videoDesktop": "/assets/videos/Polo_Countries_Video_DSK.mp4",
+    "videoDesktop": "/assets/images/uploads/WhatsApp Video 2026-06-19 at 17.06.06.mp4",
     "videoMobile": "/assets/videos/Polo_Countries_Video_MOB.mp4",
     "title": "Judul Banner di Sini",
     "subtitle": "Deskripsi singkat banner — teks placeholder yang nanti bisa diganti lewat CMS.",
@@ -34,19 +87,43 @@
     "leftCtaLabel": "Selengkapnya",
     "leftCtaHref": "#",
     "rightSlides": [
-      { "image": "/assets/images/placeholder/image%20copy%202.png", "title": "Jaket Angkatan" },
-      { "image": "/assets/images/placeholder/image%20copy%203.png", "title": "Jersey Baseball" },
-      { "image": "/assets/images/placeholder/image%20copy%204.png", "title": "Kaos Kelas" },
-      { "image": "/assets/images/placeholder/image%20copy%205.png", "title": "Seragam Organisasi" }
+      {
+        "image": "/assets/images/placeholder/image%20copy%202.png",
+        "title": "Jaket Angkatan"
+      },
+      {
+        "image": "/assets/images/placeholder/image%20copy%203.png",
+        "title": "Jersey Baseball"
+      },
+      {
+        "image": "/assets/images/placeholder/image%20copy%204.png",
+        "title": "Kaos Kelas"
+      },
+      {
+        "image": "/assets/images/placeholder/image%20copy%205.png",
+        "title": "Seragam Organisasi"
+      }
     ]
   },
   "sponsorship": {
     "tag": "Sponsorship Solutions",
     "events": [
-      { "image": "/assets/images/placeholder/event1-glastonbury.jpg",      "name": "Glastonbury 2025" },
-      { "image": "/assets/images/placeholder/event2-coachella.webp",       "name": "Coachella 2025" },
-      { "image": "/assets/images/placeholder/event3-tomorrowland.jpg.webp", "name": "Tomorrowland 2026" },
-      { "image": "/assets/images/placeholder/event4-dwp.webp",             "name": "DWP 2026" }
+      {
+        "image": "/assets/images/placeholder/event1-glastonbury.jpg",
+        "name": "Glastonbury 2025"
+      },
+      {
+        "image": "/assets/images/placeholder/event2-coachella.webp",
+        "name": "Coachella 2025"
+      },
+      {
+        "image": "/assets/images/placeholder/event3-tomorrowland.jpg.webp",
+        "name": "Tomorrowland 2026"
+      },
+      {
+        "image": "/assets/images/placeholder/event4-dwp.webp",
+        "name": "DWP 2026"
+      }
     ]
   },
   "endCta": {
@@ -54,5 +131,6 @@
     "subtitle": "Custom buat angkatan, kelas, atau komunitas — isi sebentar, langsung terhubung ke tim kami di WhatsApp.",
     "waNumber": "6285183091599"
   },
-  "duoBackground": "/assets/images/WhatsApp%20Image%202026-06-18%20at%2011.03.26.jpeg"
+  "duoBackground": "/assets/images/uploads/WhatsApp Image 2026-06-19 at 16.27.30.jpeg",
+  "_note": "CMS-editable homepage content for Level Garment (Sveltia /admin → 'Homepage'). Each section maps to a component in src/components/home/. Images/videos use image/file widgets."
 }
