@@ -136,9 +136,10 @@ const slides = home.hero.slides;
       slides[prev].classList.remove('is-active');
       slides[prev].classList.add('is-leaving');
       if (dir < 0) slides[prev].classList.add('is-back');
-      bars[prev].classList.remove('is-active'); bars[prev].classList.add('is-done');
       cur = (n + slides.length) % slides.length;
-      if (cur === 0) bars.forEach((b) => b.classList.remove('is-done'));
+      // Stories progress, declarative by position (works forward AND backward):
+      // segments before cur = full, cur = filling (set by activateBar), ahead = empty.
+      bars.forEach((b, i) => { b.classList.remove('is-active'); b.classList.toggle('is-done', i < cur); });
       slides[cur].classList.add('is-active');
       if (dir < 0) slides[cur].classList.add('is-back');
       swapCopy(slides[cur]);
