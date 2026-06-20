@@ -79,12 +79,11 @@
     ]
   },
   "videoBanner": {
-    "videoDesktop": "/assets/images/uploads/WhatsApp Video 2026-06-19 at 17.06.06.mp4",
-    "videoMobile": "/assets/videos/Polo_Countries_Video_MOB.mp4",
-    "title": "Judul Banner di Sini",
-    "subtitle": "Deskripsi singkat banner — teks placeholder yang nanti bisa diganti lewat CMS.",
-    "ctaLabel": "Selengkapnya",
-    "ctaHref": "#"
+    "videoDesktop": "/assets/videos/section3-ds.mp4",
+    "videoMobile": "/assets/videos/section3-mb.mp4",
+    "title": "Dukung Setiap Kreasi Kalian",
+    "subtitle": "Buat tim, kelas, organisasi, atau angkatan — apa pun produknya, kami wujudkan.",
+    "href": "/product/"
   },
   "splitBanner": {
     "leftImage": "/assets/images/placeholder/secleft.png",

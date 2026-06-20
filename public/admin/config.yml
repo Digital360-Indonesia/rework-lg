@@ -124,10 +124,9 @@ collections:
             fields:
               - { name: videoDesktop, label: "Video desktop (loop seamless: frame awal = frame akhir)", widget: file }
               - { name: videoMobile, label: "Video mobile (opsional)", widget: file, required: false }
-              - { name: title, label: "Judul", widget: string, required: false }
+              - { name: title, label: "Judul (jadi link — underline saat hover)", widget: string, required: false }
               - { name: subtitle, label: "Subjudul", widget: text, required: false }
-              - { name: ctaLabel, label: "Label tombol", widget: string, required: false }
-              - { name: ctaHref, label: "Link tombol", widget: string, required: false }
+              - { name: href, label: "Link judul (mis. /product/)", widget: string, required: false, default: "/product/" }
           - name: splitBanner
             label: "Section 4 — Split Banner"
             widget: object

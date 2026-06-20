@@ -1,17 +1,17 @@
 ---
 /**
- * Video banner — full-width (NOT full-screen) banner with a background video and
- * centered text. Desktop + optional mobile video: if the mobile video is empty,
- * the desktop video is used on every size (mirrors KG's mobile-media fallback).
- *
- * CMS NOTE (Sveltia, later): expose `videoDesktop` (required) + `videoMobile`
- * (optional) + the copy fields. When `videoMobile` is blank, omit the mobile
- * <source> so the desktop video fits all screens — same pattern as KG's images.
+ * Section 3 — video banner.
+ *  • Desktop: full-width video, centered copy at the bottom. No CTA button — the
+ *    heading itself is the link (underline draws in on hover, clickable).
+ *  • Mobile (≤767px): full-screen panel (height from index.astro), bold head +
+ *    lighter subhead in the lower third over the video. Loop-edited clip → plain
+ *    <video loop> is seamless.
+ * CMS-managed via src/data/home.json → videoBanner (videoDesktop, videoMobile,
+ * title, subtitle, href). When videoMobile is blank the desktop clip fits all sizes.
  */
-// Section-3 video banner — CMS-managed via src/data/home.json → videoBanner.
-// (TEMP: videoDesktop is still RL's Polo demo clip — swap it for a loop-edited LG video in the CMS.)
 import home from '../../data/home.json';
-const { videoDesktop, videoMobile, title, subtitle, ctaLabel, ctaHref } = home.videoBanner;
+const { videoDesktop, videoMobile, title, subtitle, href } = home.videoBanner as any;
+const link = href || '/product/';
 ---
 <section id="banner" class="lg-banner" aria-label="Banner">
   <video class="lg-banner-video" autoplay loop muted playsinline preload="metadata">
@@ -21,9 +21,8 @@ const { videoDesktop, videoMobile, title, subtitle, ctaLabel, ctaHref } = home.v
   <div class="lg-banner-scrim" aria-hidden="true"></div>
 
   <div class="lg-banner-copy">
-    <h2 class="lg-banner-title">{title}</h2>
+    <h2 class="lg-banner-title"><a class="lg-banner-link" href={link}>{title}</a></h2>
     <p class="lg-banner-sub">{subtitle}</p>
-    <a class="lg-banner-cta" href={ctaHref}>{ctaLabel}</a>
   </div>
 </section>
 
@@ -31,7 +30,7 @@ const { videoDesktop, videoMobile, title, subtitle, ctaLabel, ctaHref } = home.v
   .lg-banner {
     position: relative; width: 100%;
     height: clamp(32rem, 92vh, 56rem);
-    margin: clamp(1.75rem, 4vw, 3.25rem) 0;   /* the "break" above & below */
+    margin: clamp(1.75rem, 4vw, 3.25rem) 0;   /* the "break" above & below (desktop only) */
     overflow: hidden; background: #1A1A2E; isolation: isolate;
   }
   .lg-banner-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; display: block; }
@@ -39,15 +38,26 @@ const { videoDesktop, videoMobile, title, subtitle, ctaLabel, ctaHref } = home.v
     background: linear-gradient(to top, rgba(0,0,0,.5) 0%, rgba(0,0,0,.18) 26%, rgba(0,0,0,0) 52%); }
 
   .lg-banner-copy { position: absolute; inset: 0; z-index: 2; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; text-align: center; padding: 2rem 2rem clamp(2.5rem, 6vh, 4.5rem); color: #fff; }
-  .lg-banner-title { color:#fff; font-family:'Inter',sans-serif; font-weight:800; font-size:clamp(2.2rem,5vw,4rem); line-height:1.02; letter-spacing:-.03em; margin:0 0 1rem; text-shadow:0 2px 26px rgba(0,0,0,.45); }
-  .lg-banner-sub { font-family:'Inter',sans-serif; font-weight:500; font-size:clamp(1rem,1.4vw,1.2rem); line-height:1.55; max-width:36rem; margin:0 0 1.7rem; color:rgba(255,255,255,.94); text-shadow:0 1px 14px rgba(0,0,0,.4); }
-  .lg-banner-cta { font-family:'Inter',sans-serif; font-weight:700; font-size:.92rem; letter-spacing:.06em; text-transform:uppercase; color:#fff; text-decoration:none; position:relative; padding-bottom:.35rem; }
-  .lg-banner-cta::after { content:''; position:absolute; left:0; right:0; bottom:0; height:1.5px; background:#fff; transform-origin:center; transition:transform .4s cubic-bezier(.19,1,.22,1); }
-  @media (hover:hover){ .lg-banner-cta:hover::after { transform:scaleX(0); } }
+  .lg-banner-title { color:#fff; font-family:'Inter',sans-serif; font-weight:800; font-size:clamp(2.2rem,5vw,4rem); line-height:1.04; letter-spacing:-.03em; margin:0 0 1rem; text-shadow:0 2px 26px rgba(0,0,0,.45); }
+  /* heading = the CTA: underline draws IN on hover (hero pattern), clickable */
+  .lg-banner-link { color: inherit; text-decoration: none; position: relative; display: inline-block; }
+  .lg-banner-link::after { content:''; position:absolute; left:0; right:0; bottom:.02em; height:.05em; background:currentColor;
+    transform: scaleX(0); transform-origin: left center; transition: transform .45s cubic-bezier(.19,1,.22,1); }
+  @media (hover:hover){ .lg-banner-link:hover::after { transform: scaleX(1); } }
+  .lg-banner-sub { font-family:'Inter',sans-serif; font-weight:500; font-size:clamp(1rem,1.4vw,1.2rem); line-height:1.55; max-width:38rem; margin:0; color:rgba(255,255,255,.94); text-shadow:0 1px 14px rgba(0,0,0,.4); }
+
+  /* ============ MOBILE reels panel (≤767px): full-screen video, copy in the lower third ============ */
+  @media (max-width: 767px) {
+    /* height + margin:0 come from index.astro panel rule */
+    .lg-banner-scrim { background: linear-gradient(to top, rgba(0,0,0,.66) 0%, rgba(0,0,0,.28) 30%, rgba(0,0,0,0) 60%); }
+    .lg-banner-copy { padding: 2rem 1.4rem calc(5.8rem + env(safe-area-inset-bottom, 0px)); }
+    .lg-banner-title { font-size: clamp(1.95rem, 8.5vw, 2.7rem); margin: 0 0 .7rem; }
+    .lg-banner-sub { font-weight: 400; font-size: 1rem; max-width: 23rem; color: rgba(255,255,255,.9); }
+  }
 </style>
 
 <script>
-  // Plain loop — just pause when off-screen.
+  // Plain loop — pause when off-screen to save battery.
   const v = document.querySelector<HTMLVideoElement>('.lg-banner-video');
   if (v) {
     const io = new IntersectionObserver((entries) => {
