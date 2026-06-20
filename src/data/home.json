@@ -79,8 +79,8 @@
     ]
   },
   "videoBanner": {
-    "videoDesktop": "/assets/videos/section3-ds-st.mp4",
-    "videoMobile": "/assets/videos/section3-mb-st.mp4",
+    "videoDesktop": "/assets/videos/section3-ds-smooth.mp4",
+    "videoMobile": "/assets/videos/section3-mb-smooth.mp4",
     "title": "Dukung Setiap Kreasi Kalian",
     "subtitle": "Buat tim, kelas, organisasi, atau angkatan — apa pun produknya, kami wujudkan.",
     "href": "/product/"
