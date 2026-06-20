@@ -63,8 +63,9 @@ const centerActive = isActive('/');
       flex: 1 1 0; display: flex; flex-direction: column; align-items: center; gap: 3px;
       text-decoration: none; color: #fff; min-width: 0;
     }
-    .lg-botnav-ico svg { width: 1.5rem; height: 1.5rem; display: block; fill: none; stroke: #fff; stroke-width: 1.7; stroke-linejoin: round; stroke-linecap: round; }
-    .lg-botnav-item.is-active .lg-botnav-ico svg { fill: #fff; stroke: #fff; }
+    /* :global — the <svg> is injected via set:html, so it never gets Astro's scoped attribute */
+    :global(.lg-botnav-ico svg) { width: 1.5rem; height: 1.5rem; display: block; fill: none; stroke: #fff; stroke-width: 1.7; stroke-linejoin: round; stroke-linecap: round; }
+    :global(.lg-botnav-item.is-active .lg-botnav-ico svg) { fill: #fff; stroke: #fff; }
     .lg-botnav-label { font-family: 'Inter', sans-serif; font-size: .58rem; font-weight: 600; letter-spacing: .01em; opacity: .85; }
     .lg-botnav-item.is-active .lg-botnav-label { opacity: 1; }
 
