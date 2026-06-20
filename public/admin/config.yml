@@ -108,14 +108,16 @@ collections:
             label: "Section 2 — Rail Kategori"
             widget: object
             fields:
-              - { name: title, label: "Judul section", widget: string }
+              - { name: title, label: "Judul (bold)", widget: string }
+              - { name: subtitle, label: "Subjudul (lebih tipis — tampil di mobile)", widget: text, required: false }
               - name: cards
-                label: "Kartu (6 — gambar 5:7 vertikal)"
+                label: "Kartu (gambar 5:7 vertikal)"
                 widget: list
                 fields:
                   - { name: name, label: "Nama", widget: string }
                   - { name: image, label: "Gambar (5:7)", widget: image }
                   - { name: href, label: "Link", widget: string }
+                  - { name: featured, label: "Unggulan (badge bintang)", widget: boolean, default: false, required: false }
           - name: videoBanner
             label: "Section 3 — Video Banner"
             widget: object
