@@ -51,6 +51,8 @@ const ogImage = '/assets/images/logo/logo-colored.webp';
     <SponsorshipShowcase />
     <EndCtaMedia />
   </div>
+
+  <script is:inline>document.documentElement.classList.add('lg-home');</script>
 </BaseLayout>
 
 <style>
@@ -86,6 +88,12 @@ const ogImage = '/assets/images/logo/logo-colored.webp';
     /* TikTok-feel: mandatory one-at-a-time snap, no rubber-band chaining, direct snap */
     :global(html) { scroll-snap-type: y mandatory; overscroll-behavior-y: contain; scroll-behavior: auto; }
     :global(body) { overscroll-behavior-y: contain; }
+    /* header stays transparent (white) over the full-screen panels — never goes solid on the feed */
+    :global(html.lg-home .lg-header.is-solid) { background: transparent !important; box-shadow: none !important; top: 1.9rem !important; }
+    :global(html.lg-home .lg-header.is-solid .lg-logo-w) { display: block !important; }
+    :global(html.lg-home .lg-header.is-solid .lg-logo-c) { display: none !important; }
+    :global(html.lg-home .lg-header.is-solid .lg-burger span) { background: #fff !important; }
+    :global(html.lg-home .lg-header.is-solid .lg-icon) { color: #fff !important; }
     :global(.lg-hero),
     :global(.lg-rail),
     :global(.lg-banner),

@@ -84,6 +84,21 @@ const rendered = [
     .lg-spon-track { padding: 0 11%; gap: 1.1rem; }
     .lg-spon-arrow { display: none; }
   }
+
+  /* MOBILE reels (≤767px): event image full-bleed; only the top tag + the event name, no logo */
+  @media (max-width: 767px) {
+    .lg-spon { padding: 0; position: relative; }
+    .lg-spon-logo { display: none; }
+    .lg-spon-head { position: absolute; top: 0; left: 0; right: 0; z-index: 3; padding: 5rem 1rem 0; pointer-events: none; }
+    .lg-spon-tag { text-shadow: 0 1px 14px rgba(0,0,0,.55); }
+    .lg-spon-carousel { position: absolute; inset: 0; z-index: 1; }
+    .lg-spon-track { padding: 0; gap: 0; height: 100%; scroll-snap-type: x mandatory; }
+    .lg-spon-slide { flex: 0 0 100vw; aspect-ratio: auto; height: 100%; border-radius: 0; scroll-snap-align: center; }
+    .lg-spon-footer { position: absolute; left: 0; right: 0; bottom: 8%; z-index: 3; margin: 0; pointer-events: none; }
+    .lg-spon-seg { background: rgba(255,255,255,.45); }
+    .lg-spon-seg.is-active { background: #fff; }
+    .lg-spon-desc { color: #fff; font-size: 1.15rem; text-shadow: 0 1px 14px rgba(0,0,0,.5); }
+  }
 </style>
 
 <script>
