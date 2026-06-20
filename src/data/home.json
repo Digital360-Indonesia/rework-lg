@@ -17,7 +17,7 @@
       },
       {
         "video": "",
-        "image": "/assets/images/uploads/WhatsApp Image 2026-06-19 at 16.38.13.jpeg",
+        "image": "/assets/images/uploads/hero-1.jpeg",
         "title": "Jersey Baseball Squad-mu",
         "desc": "Dryfit adem, nama & nomor tiap member, desain bebas.",
         "href": "/product/"
@@ -36,32 +36,37 @@
     "cards": [
       {
         "name": "T-Shirt",
-        "image": "/assets/images/placeholder/image.png",
+        "image": "/assets/images/uploads/section2-t-shirt.jpeg",
         "href": "/product/#tshirt"
       },
       {
         "name": "Jersey",
-        "image": "/assets/images/placeholder/image%20copy.png",
+        "image": "/assets/images/uploads/section2-jersey.jpeg",
         "href": "/product/#jersey"
       },
       {
         "name": "Workshirt",
-        "image": "/assets/images/placeholder/image%20copy%202.png",
+        "image": "/assets/images/uploads/section2-workshirt.jpeg",
         "href": "/product/#workshirt"
       },
       {
         "name": "Jacket",
-        "image": "/assets/images/placeholder/image%20copy%203.png",
+        "image": "/assets/images/uploads/section2-jacket.jpeg",
         "href": "/product/#jacket"
       },
       {
-        "name": "Hoodie",
-        "image": "/assets/images/placeholder/image%20copy%204.png",
+        "name": "Rompi",
+        "image": "/assets/images/uploads/section2-rompi.jpeg",
         "href": "/product/"
       },
       {
-        "name": "Topi",
-        "image": "/assets/images/placeholder/image%20copy%205.png",
+        "name": "Jas",
+        "image": "/assets/images/uploads/section2-jas.jpeg",
+        "href": "/product/"
+      },
+      {
+        "name": "Merchandise",
+        "image": "/assets/images/uploads/section2-merch.jpeg",
         "href": "/product/"
       }
     ]
