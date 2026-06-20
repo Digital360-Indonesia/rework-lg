@@ -88,17 +88,7 @@ const ogImage = '/assets/images/logo/logo-colored.webp';
     /* TikTok-feel: mandatory one-at-a-time snap, no rubber-band chaining, direct snap */
     :global(html) { scroll-snap-type: y mandatory; overscroll-behavior-y: contain; scroll-behavior: auto; }
     :global(body) { overscroll-behavior-y: contain; }
-    /* header → bottom nav bar over the feed (Instagram-reels style), always transparent/white */
-    :global(html.lg-home .lg-header),
-    :global(html.lg-home .lg-header.is-solid) {
-      top: auto !important; bottom: 0 !important;
-      background: transparent !important; box-shadow: none !important;
-      padding-bottom: env(safe-area-inset-bottom, 0);
-    }
-    :global(html.lg-home .lg-header.is-solid .lg-logo-w) { display: block !important; }
-    :global(html.lg-home .lg-header.is-solid .lg-logo-c) { display: none !important; }
-    :global(html.lg-home .lg-header.is-solid .lg-burger span) { background: #fff !important; }
-    :global(html.lg-home .lg-header.is-solid .lg-icon) { color: #fff !important; }
+    /* Top header + announcement are hidden on mobile (BaseLayout) — the purple bottom nav (MobileNav) is the navigator. */
     :global(.lg-hero),
     :global(.lg-rail),
     :global(.lg-banner),

@@ -6,6 +6,7 @@
 import AnnouncementBar from '../components/layout/AnnouncementBar.astro';
 import Header from '../components/layout/Header.astro';
 import Footer from '../components/layout/Footer.astro';
+import MobileNav from '../components/layout/MobileNav.astro';
 import siteConfig from '../data/site-config.json';
 import '../styles/global.css';
 
@@ -129,6 +130,9 @@ const pageType = type === 'article' ? 'article' : 'website';
 
   <!-- Footer -->
   <Footer />
+
+  <!-- Mobile bottom navigation (phones only) — replaces the top header/hamburger on mobile -->
+  <MobileNav />
 </body>
 </html>
 
@@ -155,5 +159,15 @@ const pageType = type === 'article' ? 'article' : 'website';
     overflow: visible;
     clip: auto;
     white-space: normal;
+  }
+
+  /* ===== MOBILE (≤767px): top header + announcement give way to the bottom nav bar ===== */
+  @media (max-width: 767px) {
+    :global(.lg-header),
+    :global(.lg-ticker) { display: none !important; }
+    /* normal (non-homepage) pages: clear the fixed bottom nav so last content isn't hidden.
+       The homepage reels feed is full-screen behind the nav, so it opts out via html.lg-home. */
+    main { padding-bottom: calc(3.9rem + env(safe-area-inset-bottom, 0px)); }
+    :global(html.lg-home) main { padding-bottom: 0; }
   }
 </style>
