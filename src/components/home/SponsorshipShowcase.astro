@@ -145,10 +145,10 @@ const first = slides[0];
       color: #fff; font-family: 'Inter', sans-serif; font-weight: 600; font-size: .72rem; letter-spacing: .14em; text-transform: uppercase; white-space: nowrap; }
     .lg-spon-chip-logo { width: 1.05rem; height: 1.05rem; object-fit: contain; display: block; }
 
-    /* dots under the chip */
-    .lg-spon-dots { display: flex; gap: 5px; position: absolute; z-index: 4; left: 50%; transform: translateX(-50%);
-      top: calc(env(safe-area-inset-top, 0px) + 5.1rem); width: 6.5rem; }
-    .lg-spon-dots .lg-spon-seg { height: 2.5px; background: rgba(255,255,255,.4); }
+    /* story-bar at the very top (section-1 style): full-width segments, active = solid white */
+    .lg-spon-dots { display: flex; gap: 4px; position: absolute; z-index: 5; left: 0; right: 0;
+      top: calc(env(safe-area-inset-top, 0px) + .6rem); padding: 0 .7rem; }
+    .lg-spon-dots .lg-spon-seg { flex: 1 1 0; height: 3px; border-radius: 999px; background: rgba(255,255,255,.4); }
     .lg-spon-dots .lg-spon-seg.is-active { background: #fff; }
 
     /* bottom-left TikTok caption */

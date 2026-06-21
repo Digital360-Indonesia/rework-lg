@@ -156,11 +156,11 @@ const hrs = (hours && hours.length) ? hours : [{ day: 'Senin – Sabtu', time: '
       box-shadow:0 8px 22px -8px rgba(0,0,0,.5); }
     .lg-mcta-btn svg { width:1.15rem; height:1.15rem; }
 
-    /* dots */
-    .lg-mcta-dots { display:flex; gap:6px; position:absolute; z-index:4; left:50%; transform:translateX(-50%);
-      bottom: calc(4.4rem + env(safe-area-inset-bottom,0px)); }
-    .lg-mcta-dots span { width:6px; height:6px; border-radius:999px; background:rgba(255,255,255,.4); transition: width .3s ease, background .3s ease; }
-    .lg-mcta-dots span.is-active { width:18px; background:#fff; }
+    /* story-bar at the very top (section-1 style): full-width segments, active = solid white */
+    .lg-mcta-dots { display:flex; gap:4px; position:absolute; z-index:5; left:0; right:0;
+      top: calc(env(safe-area-inset-top,0px) + .6rem); padding:0 .7rem; }
+    .lg-mcta-dots span { flex:1 1 0; height:3px; border-radius:999px; background:rgba(255,255,255,.4); transition: background .3s ease; }
+    .lg-mcta-dots span.is-active { background:#fff; }
   }
 </style>
 
