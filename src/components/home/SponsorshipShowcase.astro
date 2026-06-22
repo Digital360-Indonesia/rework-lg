@@ -45,10 +45,10 @@ const first = slides[0];
         return (
           <div class="lg-spon-slide" data-r={i} data-real={s.real} data-desc={s.name} data-info={(s as any).info || ''} data-has-mb={hasMb ? 'true' : 'false'}>
             {dsVideo
-              ? <video class="lg-spon-media lg-spon-ds" src={dsVideo} muted loop playsinline preload="metadata"></video>
+              ? <video class="lg-spon-media lg-spon-ds" src={dsVideo} autoplay muted loop playsinline preload="metadata"></video>
               : <img class="lg-spon-media lg-spon-ds" src={s.image} alt={s.name} loading="lazy" />}
             {hasMb && (mbVideo
-              ? <video class="lg-spon-media lg-spon-mb" src={mbVideo} muted loop playsinline preload="metadata"></video>
+              ? <video class="lg-spon-media lg-spon-mb" src={mbVideo} autoplay muted loop playsinline preload="metadata"></video>
               : <img class="lg-spon-media lg-spon-mb" src={mbImage} alt={s.name} loading="lazy" />)}
           </div>
         );
@@ -237,9 +237,6 @@ const first = slides[0];
         if (capHead && capHead.textContent !== name) { capHead.style.opacity = '0'; setTimeout(() => { if (capHead) { capHead.textContent = name; capHead.style.opacity = '1'; } }, 160); }
         if (capSub) capSub.textContent = info;
         collapse();   // each new slide starts collapsed
-        // play only the centered slide's video (pause the rest)
-        rSlides.forEach((s) => s.querySelectorAll('video').forEach((v) => (v as HTMLVideoElement).pause()));
-        rSlides[best].querySelectorAll('video').forEach((v) => { const vid = v as HTMLVideoElement; vid.currentTime = 0; vid.play().catch(() => {}); });
       }
     };
 
