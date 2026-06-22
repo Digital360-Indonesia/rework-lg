@@ -114,8 +114,10 @@ const first = slides[0];
   .lg-spon-carousel { position: relative; z-index: 1; }
   .lg-spon-track { display: flex; gap: clamp(6rem, 9vw, 9.5rem); overflow-x: auto; scroll-snap-type: x mandatory; scroll-behavior: smooth; -webkit-overflow-scrolling: touch; scrollbar-width: none; padding: 0 13%; }
   .lg-spon-track::-webkit-scrollbar { display: none; }
-  .lg-spon-slide { flex: 0 0 74%; scroll-snap-align: center; aspect-ratio: 2 / 1; border-radius: .25rem; overflow: hidden; background: #ece6f3; }
-  .lg-spon-media { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .lg-spon-slide { position: relative; flex: 0 0 74%; scroll-snap-align: center; aspect-ratio: 2 / 1; border-radius: .25rem; overflow: hidden; background: #ece6f3; }
+  /* absolute-fill so the media fills the aspect-ratio slide reliably (percentage height
+     doesn't resolve on a flex item whose height comes from aspect-ratio) */
+  .lg-spon-media { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
   .lg-spon-mb { display: none; }   /* desktop: the mobile (mb) media is hidden */
 
   .lg-spon-arrow { position: absolute; top: 50%; transform: translateY(-50%); z-index: 4; width: 2.8rem; height: 2.8rem; border-radius: 999px; background: rgba(255,255,255,.92); border: 1px solid rgba(26,26,46,.08); color: var(--lg-ink); display: grid; place-items: center; cursor: pointer; box-shadow: 0 8px 22px -10px rgba(26,26,46,.35); transition: transform .2s ease; }
