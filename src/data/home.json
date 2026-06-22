@@ -115,27 +115,29 @@
     "events": [
       {
         "name": "EFESTAPHORIA 2025",
-        "image": "/assets/images/uploads/section2-jacket.jpeg",
+        "image": "/assets/images/sponsorship/efestaphoria-ds.jpg",
+        "videoMobile": "/assets/videos/efestaphoria-mb.mp4",
         "info": "Festival musik & seni tahunan dengan ribuan pengunjung. Level Garment dipercaya garap jersey panitia, kaos crew, sampai merch eksklusif buat peserta — semua custom, rapi, dan tepat waktu."
       },
       {
         "name": "PORSENI 2025",
-        "image": "/assets/images/uploads/section2-jersey.jpeg",
+        "image": "/assets/images/sponsorship/porseni-ds.jpg",
         "info": "Pekan Olahraga & Seni antar sekolah se-kota. Kami suplai jersey tiap cabang, seragam panitia, sampai merch juara dengan bahan adem dan jahitan rapi."
       },
       {
         "name": "NOUVEAU 2025",
-        "info": "Gelaran kreatif tahunan yang ramai dikunjungi pelajar. Level Garment jadi partner apparel resmi buat panitia, tenant, sampai volunteer acara.",
-        "image": "/assets/images/uploads/section2-t-shirt.jpeg"
+        "video": "/assets/videos/nouveau-ds.mp4",
+        "info": "Gelaran kreatif tahunan yang ramai dikunjungi pelajar. Level Garment jadi partner apparel resmi buat panitia, tenant, sampai volunteer acara."
       },
       {
         "name": "CONCERTA 2025",
-        "image": "/assets/images/uploads/section2-workshirt.jpeg",
+        "image": "/assets/images/sponsorship/concerta-ds.jpg",
         "info": "Konser kampus bertabur bintang tamu. Kami kerjain kaos crew, jaket panitia, sampai bundle merch eksklusif buat penonton — desain bebas, hasil maksimal."
       },
       {
         "name": "Collaborative Research UNJ 2025",
-        "image": "/assets/images/uploads/section2-rompi.jpeg",
+        "image": "/assets/images/sponsorship/unj-ds.jpg",
+        "imageMobile": "/assets/images/sponsorship/unj-mb.jpg",
         "info": "Kolaborasi riset & apparel bareng Universitas Negeri Jakarta — dari jaket tim, jersey kegiatan, sampai merch acara kampus. Satu tim buat semua kebutuhan apparel kalian."
       }
     ]

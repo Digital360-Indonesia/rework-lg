@@ -44,12 +44,18 @@ const first = slides[0];
         const hasMb = !!(mbVideo || mbImage);
         return (
           <div class="lg-spon-slide" data-r={i} data-real={s.real} data-desc={s.name} data-info={(s as any).info || ''} data-has-mb={hasMb ? 'true' : 'false'}>
-            {dsVideo
-              ? <video class="lg-spon-media lg-spon-ds" src={dsVideo} autoplay muted loop playsinline preload="metadata"></video>
-              : <div class="lg-spon-media lg-spon-ds" role="img" aria-label={s.name} style={`background-image:url('${s.image}')`}></div>}
-            {hasMb && (mbVideo
-              ? <video class="lg-spon-media lg-spon-mb" src={mbVideo} autoplay muted loop playsinline preload="metadata"></video>
-              : <div class="lg-spon-media lg-spon-mb" role="img" aria-label={s.name} style={`background-image:url('${mbImage}')`}></div>)}
+            <div class="lg-spon-img lg-spon-ds">
+              {dsVideo
+                ? <video src={dsVideo} autoplay muted loop playsinline preload="metadata"></video>
+                : <img src={s.image} alt={s.name} />}
+            </div>
+            {hasMb && (
+              <div class="lg-spon-img lg-spon-mb">
+                {mbVideo
+                  ? <video src={mbVideo} autoplay muted loop playsinline preload="metadata"></video>
+                  : <img src={mbImage} alt={s.name} />}
+              </div>
+            )}
           </div>
         );
       })}
@@ -114,12 +120,11 @@ const first = slides[0];
   .lg-spon-carousel { position: relative; z-index: 1; }
   .lg-spon-track { display: flex; gap: clamp(6rem, 9vw, 9.5rem); overflow-x: auto; scroll-snap-type: x mandatory; scroll-behavior: smooth; -webkit-overflow-scrolling: touch; scrollbar-width: none; padding: 0 13%; }
   .lg-spon-track::-webkit-scrollbar { display: none; }
-  /* explicit slide height + absolute-fill media → paints reliably inside the flex carousel
-     (percentage height alone doesn't resolve on the flex item; absolute inset:0 does). */
-  .lg-spon-slide { position: relative; flex: 0 0 74%; scroll-snap-align: center; height: clamp(13rem, 23vw, 23rem);
-    border-radius: .25rem; overflow: hidden; background: #ece6f3; }
-  .lg-spon-media { position: absolute; inset: 0; display: block; object-fit: cover;
-    background-size: cover; background-position: center; background-repeat: no-repeat; }
+  /* EXACT product-rail pattern: aspect-ratio on the inner block box (.lg-spon-img),
+     the img/video fills it. (aspect-ratio on the flex slide itself doesn't work.) */
+  .lg-spon-slide { flex: 0 0 74%; scroll-snap-align: center; }
+  .lg-spon-img { aspect-ratio: 2 / 1; overflow: hidden; border-radius: .25rem; background: #ece6f3; }
+  .lg-spon-img img, .lg-spon-img video { width: 100%; height: 100%; object-fit: cover; display: block; }
   .lg-spon-mb { display: none; }   /* desktop: the mobile (mb) media is hidden */
 
   .lg-spon-arrow { position: absolute; top: 50%; transform: translateY(-50%); z-index: 4; width: 2.8rem; height: 2.8rem; border-radius: 999px; background: rgba(255,255,255,.92); border: 1px solid rgba(26,26,46,.08); color: var(--lg-ink); display: grid; place-items: center; cursor: pointer; box-shadow: 0 8px 22px -10px rgba(26,26,46,.35); transition: transform .2s ease; }
@@ -147,8 +152,8 @@ const first = slides[0];
 
     .lg-spon-carousel { position: absolute; inset: 0; z-index: 1; }
     .lg-spon-track { padding: 0; gap: 0; height: 100%; scroll-snap-type: x mandatory; scroll-behavior: auto; }
-    .lg-spon-slide { flex: 0 0 100vw; aspect-ratio: auto; height: 100%; border-radius: 0; scroll-snap-align: center; }
-    .lg-spon-media { aspect-ratio: auto; height: 100%; }   /* full-bleed on mobile, not 2/1 */
+    .lg-spon-slide { flex: 0 0 100vw; height: 100%; border-radius: 0; scroll-snap-align: center; }
+    .lg-spon-img { aspect-ratio: auto; height: 100%; border-radius: 0; }   /* full-bleed on mobile */
     /* slides that ship a mobile (mb) media → use it instead of the desktop one */
     .lg-spon-slide[data-has-mb="true"] .lg-spon-ds { display: none; }
     .lg-spon-slide[data-has-mb="true"] .lg-spon-mb { display: block; }
