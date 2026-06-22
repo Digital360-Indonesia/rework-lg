@@ -149,11 +149,15 @@
     "address": "Jl. Sidosermo IV Gg. III No. 37 (Raya Prapen), Sidosermo, Surabaya",
     "hours": [
       {
-        "day": "Senin – Sabtu",
+        "day": "Senin – Jumat",
         "time": "08.00 – 17.00 WIB"
       },
       {
-        "day": "Minggu & Libur Nasional",
+        "day": "Sabtu",
+        "time": "08.00 – 15.00 WIB"
+      },
+      {
+        "day": "Minggu & Libur",
         "time": "Tutup"
       }
     ]

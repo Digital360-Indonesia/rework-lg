@@ -1,159 +1,110 @@
 ---
 /**
- * Berita (Blog) Index Page - Level Garment
- *
- * Displays all blog posts in a card grid layout
+ * Tips & Trik (blog) index — editorial layout: branded header, featured latest post,
+ * filterable grid of article cards. Replaces the generic grid.
  */
 import PageLayout from '../../layouts/PageLayout.astro';
 import BlogCard from '../../components/content/BlogCard.astro';
 import blogPosts from '../../data/blog-posts.json';
-import siteConfig from '../../data/site-config.json';
 
-// Sort blog posts by date (newest first)
-const sortedPosts = (blogPosts as any[]).sort((a, b) =>
-  new Date(b.publishDate).getTime() - new Date(a.publishDate).getTime()
-);
-
-// Get unique categories
-const categories = [...new Set(sortedPosts.map(post => post.category))];
-
-// State for filtering (can be extended with JavaScript)
-const currentCategory = 'all';
+const posts = (blogPosts as any[]).slice().sort((a, b) => new Date(b.publishDate).getTime() - new Date(a.publishDate).getTime());
+const featured = posts[0];
+const rest = posts.slice(1);
+const categories = [...new Set(posts.map((p) => p.category))];
+const fmt = (d: string) => new Date(d).toLocaleDateString('id-ID', { year: 'numeric', month: 'long', day: 'numeric' });
+const readTime = (p: any) => Math.max(1, Math.ceil((p.content || '').split(' ').length / 200));
 ---
-
 <PageLayout
-  title="Berita - Level Garment"
-  description="Baca artikel menarik seputar konveksi, jersey, jaket, dan tips seputar pemesanan baju custom."
-  showHero={true}
-  heroTitle="Berita & Artikel"
-  heroSubtitle="Informasi menarik seputar konveksi dan tips pemesanan"
+  title="Tips & Trik - Level Garment"
+  description="Panduan, inspirasi, dan tips seputar jersey, jaket, dan kaos custom untuk tim, kelas, dan komunitas."
+  showHero={false}
 >
-  <div class="berita-page">
-    <!-- Blog Posts Grid -->
-    <section class="blog-posts section">
-      <div class="container">
-        <!-- Category Filter (Optional - can be enabled with JS) -->
-        {categories.length > 1 && (
-          <div class="category-filter mb-8">
-            <div class="flex flex-wrap gap-2 justify-center">
-              <button
-                class="category-btn active"
-                data-category="all"
-              >
-                Semua
-              </button>
-              {categories.map(cat => (
-                <button
-                  class="category-btn"
-                  data-category={cat}
-                >
-                  {cat}
-                </button>
-              ))}
-            </div>
+  <section class="lg-blog">
+    <div class="lg-blog-wrap">
+      <header class="lg-blog-head">
+        <span class="lg-blog-eyebrow">Tips &amp; Trik</span>
+        <h1 class="lg-blog-title">Tips &amp; Trik Custom Apparel</h1>
+        <p class="lg-blog-sub">Panduan, inspirasi &amp; tips seputar jersey, jaket, dan kaos custom buat tim, kelas, dan komunitasmu.</p>
+      </header>
+
+      {featured && (
+        <a class="lg-blog-feat" href={`/berita/${featured.slug}/`}>
+          <div class="lg-blog-feat-img">
+            {featured.image ? <img src={featured.image} alt={featured.title} /> : <div class="lg-blog-ph"></div>}
+            <span class="lg-blog-feat-tag">Terbaru</span>
           </div>
-        )}
-
-        <!-- Blog Cards Grid -->
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {sortedPosts.map(post => (
-            <BlogCard
-              title={post.title}
-              slug={post.slug}
-              excerpt={post.excerpt}
-              publishDate={post.publishDate}
-              category={post.category}
-              image={post.image}
-            />
-          ))}
-        </div>
-
-        <!-- Post Count -->
-        <div class="mt-12 text-center text-gray-500">
-          <p>Menampilkan {sortedPosts.length} artikel</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- CTA Section -->
-    <section class="section bg-primary-light/30">
-      <div class="container text-center">
-        <h2 class="text-3xl font-bold text-gray-900 mb-4">
-          Punya Pertanyaan?
-        </h2>
-        <p class="text-xl text-gray-600 mb-8">
-          Hubungi kami untuk konsultasi gratis!
-        </p>
-        <a
-          href={`${siteConfig.contact.whatsappUrl}?text=Hai%20kak!%20Ada%20yang%20ingin%20saya%20tanyakan%20tentang%20artikel%20di%20website%20Level%20Garment`}
-          class="btn btn-primary inline-flex"
-        >
-          <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
-            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
-          </svg>
-          Chat WhatsApp
+          <div class="lg-blog-feat-body">
+            <span class="lg-blog-chip">{featured.category}</span>
+            <h2 class="lg-blog-feat-title">{featured.title}</h2>
+            <p class="lg-blog-feat-ex">{featured.excerpt}</p>
+            <span class="lg-blog-meta">{fmt(featured.publishDate)} · {readTime(featured)} menit baca</span>
+          </div>
         </a>
+      )}
+
+      {categories.length > 1 && (
+        <div class="lg-blog-filter" data-filter>
+          <button class="is-active" data-cat="all">Semua</button>
+          {categories.map((c) => (<button data-cat={c}>{c}</button>))}
+        </div>
+      )}
+
+      <div class="lg-blog-grid" data-grid>
+        {rest.map((p) => (
+          <div class="lg-blog-item" data-category={p.category}>
+            <BlogCard title={p.title} slug={p.slug} excerpt={p.excerpt} publishDate={p.publishDate} category={p.category} image={p.image} />
+          </div>
+        ))}
       </div>
-    </section>
-  </div>
+    </div>
+  </section>
 </PageLayout>
 
 <style>
-  .category-filter {
-    padding: 1rem;
-    background: white;
-    border-radius: 1rem;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-  }
+  .lg-blog { background: #f7f4fb; padding: clamp(2.5rem, 6vw, 4.5rem) 0; }
+  .lg-blog-wrap { max-width: 70rem; margin: 0 auto; padding: 0 clamp(1.25rem, 5vw, 2rem); }
 
-  .category-btn {
-    padding: 0.5rem 1.25rem;
-    border: 2px solid #e5e7eb;
-    background: white;
-    border-radius: 2rem;
-    font-weight: 500;
-    color: #6b7280;
-    cursor: pointer;
-    transition: all 0.3s ease;
-  }
+  .lg-blog-head { text-align: center; margin-bottom: clamp(1.8rem, 4vw, 2.8rem); }
+  .lg-blog-eyebrow { display: inline-block; font-family:'Inter',sans-serif; font-weight:700; font-size:.72rem; letter-spacing:.22em; text-transform:uppercase; color:#9A66C2; padding:.32rem .85rem; border:1.5px solid rgba(175,122,213,.5); border-radius:999px; margin-bottom:1rem; }
+  .lg-blog-title { font-family:'Inter',sans-serif; font-weight:800; font-size:clamp(2rem,5vw,3rem); line-height:1.04; letter-spacing:-.02em; color:#1A1A2E; margin:0 0 .7rem; }
+  .lg-blog-sub { font-family:'Inter',sans-serif; font-size:clamp(1rem,1.4vw,1.15rem); line-height:1.55; color:#5a5a6e; max-width:40rem; margin:0 auto; }
 
-  .category-btn:hover {
-    border-color: #AF7AD5;
-    color: #AF7AD5;
-  }
+  /* featured */
+  .lg-blog-feat { display:grid; grid-template-columns: 1.15fr 1fr; gap:0; background:#fff; border:1px solid rgba(26,26,46,.08); border-radius:1.3rem; overflow:hidden; text-decoration:none; color:#1A1A2E;
+    box-shadow:0 22px 48px -30px rgba(26,26,46,.55); margin-bottom: clamp(2rem,4vw,3rem); transition: transform .25s ease, box-shadow .25s ease; }
+  @media (hover:hover){ .lg-blog-feat:hover { transform: translateY(-3px); box-shadow:0 30px 56px -30px rgba(70,35,110,.5); } }
+  @media (max-width: 720px){ .lg-blog-feat { grid-template-columns: 1fr; } }
+  .lg-blog-feat-img { position:relative; aspect-ratio: 16/11; overflow:hidden; background:#ece6f3; }
+  .lg-blog-feat-img img { width:100%; height:100%; object-fit:cover; display:block; transition: transform .5s ease; }
+  @media (hover:hover){ .lg-blog-feat:hover .lg-blog-feat-img img { transform: scale(1.04); } }
+  .lg-blog-feat-tag { position:absolute; top:1rem; left:1rem; background:#1A1A2E; color:#fff; font-family:'Inter',sans-serif; font-weight:700; font-size:.68rem; letter-spacing:.1em; text-transform:uppercase; padding:.34rem .7rem; border-radius:999px; }
+  .lg-blog-ph { width:100%; height:100%; background:linear-gradient(135deg,#d8c8ee,#ece6f3); }
+  .lg-blog-feat-body { padding: clamp(1.5rem,3vw,2.4rem); display:flex; flex-direction:column; justify-content:center; }
+  .lg-blog-chip { align-self:flex-start; font-family:'Inter',sans-serif; font-weight:700; font-size:.7rem; letter-spacing:.08em; text-transform:uppercase; color:#9A66C2; background:rgba(175,122,213,.13); padding:.3rem .7rem; border-radius:999px; margin-bottom:.9rem; }
+  .lg-blog-feat-title { font-family:'Inter',sans-serif; font-weight:800; font-size:clamp(1.3rem,2.4vw,1.8rem); line-height:1.18; letter-spacing:-.01em; margin:0 0 .7rem; color:#1A1A2E; }
+  .lg-blog-feat-ex { font-family:'Inter',sans-serif; font-size:.98rem; line-height:1.55; color:#5a5a6e; margin:0 0 1.1rem;
+    display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical; overflow:hidden; }
+  .lg-blog-meta { font-family:'Inter',sans-serif; font-size:.85rem; color:#8a8a9c; font-weight:500; }
 
-  .category-btn.active {
-    background: #AF7AD5;
-    border-color: #AF7AD5;
-    color: white;
-  }
+  /* filter */
+  .lg-blog-filter { display:flex; flex-wrap:wrap; gap:.5rem; justify-content:center; margin-bottom: clamp(1.5rem,3vw,2.2rem); }
+  .lg-blog-filter button { font-family:'Inter',sans-serif; font-weight:600; font-size:.88rem; color:#5a5a6e; background:#fff; border:1.5px solid rgba(26,26,46,.12); border-radius:999px; padding:.5rem 1.1rem; cursor:pointer; transition: all .2s ease; }
+  @media (hover:hover){ .lg-blog-filter button:hover { border-color:#AF7AD5; color:#9A66C2; } }
+  .lg-blog-filter button.is-active { background:#1A1A2E; border-color:#1A1A2E; color:#fff; }
 
-  @media (max-width: 640px) {
-    .category-filter {
-      padding: 0.75rem;
-    }
-
-    .category-btn {
-      padding: 0.375rem 0.875rem;
-      font-size: 0.875rem;
-    }
-  }
+  /* grid */
+  .lg-blog-grid { display:grid; grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr)); gap: clamp(1.1rem, 2vw, 1.6rem); }
+  .lg-blog-item.is-hidden { display:none; }
 </style>
 
 <script>
-  // Category filter functionality
-  const categoryButtons = document.querySelectorAll('.category-btn');
-
-  categoryButtons.forEach(button => {
-    button.addEventListener('click', () => {
-      const category = button.dataset.category;
-
-      // Update active state
-      categoryButtons.forEach(btn => btn.classList.remove('active'));
-      button.classList.add('active');
-
-      // Filter posts (this would require restructuring to work with static build)
-      // For now, the buttons are visual - actual filtering would need client-side data
-    });
+  const wrap = document.querySelector<HTMLElement>('[data-filter]');
+  const items = Array.from(document.querySelectorAll<HTMLElement>('.lg-blog-item'));
+  wrap?.addEventListener('click', (e) => {
+    const btn = (e.target as HTMLElement).closest('button');
+    if (!btn) return;
+    wrap.querySelectorAll('button').forEach((b) => b.classList.toggle('is-active', b === btn));
+    const cat = btn.dataset.cat;
+    items.forEach((it) => it.classList.toggle('is-hidden', cat !== 'all' && it.dataset.category !== cat));
   });
 </script>
