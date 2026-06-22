@@ -2,9 +2,9 @@
 /**
  * Sponsorship showcase — standalone (own background; NOT inside .lg-duo).
  *  • Desktop: Ralph-Lauren-style carousel — big centered slide + left/right peek,
- *    arrows, a progress bar + the centered event name below. Background is purple at
- *    the top fading to white toward the middle/bottom.
- *  • Mobile (≤767px): full-screen reels swipe with caption overlay + top story dots.
+ *    INFINITE LOOP (clones so first/last also peek both sides), arrows, progress bar
+ *    + centered event name. Background purple at top → white toward middle/bottom.
+ *  • Mobile (≤767px): full-screen reels swipe + caption overlay + top story dots.
  */
 import home from '../../data/home.json';
 const spon = home.sponsorship;
@@ -12,6 +12,13 @@ const tag = spon.tag;
 const account = (spon as any).account || 'Level Garment';
 const events = spon.events as { image?: string; video?: string; videoMobile?: string; imageMobile?: string; name: string; info?: string }[];
 const duoBg = home.duoBackground;
+const N = events.length;
+// clone last at front + first at back so a peek always shows on BOTH ends + it loops
+const rendered = [
+  { ...events[N - 1], _real: N - 1 },
+  ...events.map((e, i) => ({ ...e, _real: i })),
+  { ...events[0], _real: 0 },
+];
 const first = events[0];
 ---
 <section class="lg-spon" aria-label="Sponsorship">
@@ -28,23 +35,23 @@ const first = events[0];
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
     </button>
     <div class="lg-spon-track" data-track>
-      {events.map((e, i) => {
+      {rendered.map((e) => {
         const dsVideo = e.video;
-        const mbVideo = e.videoMobile;
-        const mbImage = e.imageMobile;
+        const mbVideo = (e as any).videoMobile;
+        const mbImage = (e as any).imageMobile;
         const hasMb = !!(mbVideo || mbImage);
         return (
-          <article class="lg-spon-card" data-i={i} data-name={e.name} data-info={e.info || ''} data-has-mb={hasMb ? 'true' : 'false'}>
+          <article class="lg-spon-card" data-real={e._real} data-name={e.name} data-info={e.info || ''} data-has-mb={hasMb ? 'true' : 'false'}>
             <div class="lg-spon-media lg-spon-ds">
               {dsVideo
                 ? <video src={dsVideo} autoplay muted loop playsinline preload="metadata"></video>
-                : <img src={e.image} alt={e.name} />}
+                : <img src={e.image} alt={e.name} loading="lazy" />}
             </div>
             {hasMb && (
               <div class="lg-spon-media lg-spon-mb">
                 {mbVideo
                   ? <video src={mbVideo} autoplay muted loop playsinline preload="metadata"></video>
-                  : <img src={mbImage} alt={e.name} />}
+                  : <img src={mbImage} alt={e.name} loading="lazy" />}
               </div>
             )}
             <div class="lg-spon-cap">
@@ -60,13 +67,11 @@ const first = events[0];
     </button>
   </div>
 
-  <!-- desktop: progress bar + centered event name -->
   <div class="lg-spon-foot">
     <div class="lg-spon-bar" data-bar>{events.map((_, i) => (<span class:list={['lg-spon-seg', { 'is-active': i === 0 }]}></span>))}</div>
     <p class="lg-spon-desc" data-desc>{first.name}</p>
   </div>
 
-  <!-- mobile: account + top story dots -->
   <div class="lg-spon-acct"><img src="/assets/images/logo/favicon-w128.webp" alt="" width="26" height="26" /><span>{account}</span></div>
   <div class="lg-spon-dots" aria-hidden="true">{events.map((_, i) => (<span class:list={['lg-spon-dot', { 'is-active': i === 0 }]}></span>))}</div>
 </section>
@@ -74,34 +79,33 @@ const first = events[0];
 <style>
   :root { --lg-primary: #AF7AD5; --lg-ink: #1A1A2E; }
 
-  /* white base; purple only at the top, fading out by ~the middle */
   .lg-spon { position: relative; padding: clamp(2.5rem, 6vw, 4.5rem) 0 clamp(2rem, 4vw, 3rem); overflow: hidden; background: #fff; isolation: isolate; }
-  .lg-spon-bg { position: absolute; top: 0; left: 0; right: 0; height: 60%; z-index: 0; background-size: cover; background-position: center top;
+  .lg-spon-bg { position: absolute; top: 0; left: 0; right: 0; height: 62%; z-index: 0; background-size: cover; background-position: center top;
     filter: blur(30px) brightness(.72) saturate(1.1); transform: scale(1.1);
     -webkit-mask-image: linear-gradient(to bottom, #000 45%, transparent 92%); mask-image: linear-gradient(to bottom, #000 45%, transparent 92%); }
-  .lg-spon-veil { position: absolute; top: 0; left: 0; right: 0; height: 60%; z-index: 0;
+  .lg-spon-veil { position: absolute; top: 0; left: 0; right: 0; height: 62%; z-index: 0;
     background: linear-gradient(to bottom, rgba(120,75,170,.62) 0%, rgba(140,95,190,.34) 45%, rgba(255,255,255,0) 92%); }
 
   .lg-spon-head { position: relative; z-index: 2; text-align: center; margin: 0 0 clamp(1.4rem, 3.5vw, 2.2rem); }
   .lg-spon-logo { display: block; margin: 0 auto; width: clamp(8rem, 11vw, 11rem); height: auto; filter: drop-shadow(0 2px 14px rgba(60,30,100,.4)); }
   .lg-spon-tag { display: block; margin-top: .75rem; font-family:'Montserrat','Inter',sans-serif; font-weight: 600; font-size: clamp(.74rem, 1.2vw, .95rem); letter-spacing: .3em; text-transform: uppercase; color: #fff; text-shadow: 0 1px 8px rgba(40,20,70,.4); }
 
-  /* carousel: big centered slide + peek */
+  /* carousel: wide centered slide + generous gap/peek on both sides */
   .lg-spon-carousel { position: relative; z-index: 1; }
-  .lg-spon-track { display: flex; gap: clamp(.8rem, 1.5vw, 1.4rem); overflow-x: auto; scroll-snap-type: x mandatory; scroll-behavior: smooth;
-    -webkit-overflow-scrolling: touch; scrollbar-width: none; padding: 0 19%; }
+  .lg-spon-track { display: flex; gap: clamp(1.4rem, 3vw, 2.6rem); overflow-x: auto; scroll-snap-type: x mandatory; scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch; scrollbar-width: none; padding: 0 14%; }
   .lg-spon-track::-webkit-scrollbar { display: none; }
-  .lg-spon-card { flex: 0 0 62%; scroll-snap-align: center; }
-  .lg-spon-media { aspect-ratio: 16 / 10; overflow: hidden; border-radius: .25rem; background: #ece6f3; box-shadow: 0 24px 50px -28px rgba(26,26,46,.55); }
+  .lg-spon-card { flex: 0 0 68%; scroll-snap-align: center; }
+  .lg-spon-media { aspect-ratio: 16 / 9; overflow: hidden; border-radius: .25rem; background: #ece6f3; box-shadow: 0 24px 50px -28px rgba(26,26,46,.55); }
   .lg-spon-media img, .lg-spon-media video { width: 100%; height: 100%; object-fit: cover; display: block; }
   .lg-spon-mb { display: none; }
-  .lg-spon-cap { display: none; }   /* desktop uses the foot name, not per-card caption */
+  .lg-spon-cap { display: none; }
 
   .lg-spon-arrow { position: absolute; top: 50%; transform: translateY(-50%); z-index: 4; width: 2.9rem; height: 2.9rem; border-radius: 999px;
     background: rgba(255,255,255,.95); border: 1px solid rgba(26,26,46,.07); color: var(--lg-ink); display: grid; place-items: center; cursor: pointer;
     box-shadow: 0 10px 26px -12px rgba(26,26,46,.4); transition: transform .2s ease; }
   .lg-spon-arrow svg { width: 1.2rem; height: 1.2rem; }
-  .lg-spon-prev { left: clamp(.5rem, 3vw, 2.5rem); } .lg-spon-next { right: clamp(.5rem, 3vw, 2.5rem); }
+  .lg-spon-prev { left: clamp(.5rem, 2.5vw, 2rem); } .lg-spon-next { right: clamp(.5rem, 2.5vw, 2rem); }
   @media (hover: hover) { .lg-spon-arrow:hover { transform: translateY(-50%) scale(1.07); } }
 
   .lg-spon-foot { position: relative; z-index: 2; text-align: center; margin-top: clamp(1.6rem, 3vw, 2.4rem); }
@@ -112,7 +116,7 @@ const first = events[0];
 
   .lg-spon-acct, .lg-spon-dots { display: none; }
 
-  /* ============ MOBILE reels (≤767px): full-screen swipe ============ */
+  /* ============ MOBILE reels (≤767px) ============ */
   @media (max-width: 767px) {
     .lg-spon { padding: 0; background: #19122b; }
     .lg-spon-bg { height: 100%; -webkit-mask-image: none; mask-image: none; filter: blur(34px) brightness(.6) saturate(1.1); }
@@ -154,27 +158,39 @@ const first = events[0];
     const desc = root.querySelector<HTMLElement>('[data-desc]');
     const prev = root.querySelector<HTMLButtonElement>('[data-prev]');
     const next = root.querySelector<HTMLButtonElement>('[data-next]');
-    if (!track || !cards.length) return;
+    if (!track || cards.length < 3) return;
+    const N = segs.length || dots.length;        // real count
+    const LAST = cards.length - 1;               // trailing clone index
+    const centerOf = (el: HTMLElement) => el.offsetLeft + el.offsetWidth / 2;
+    const setScroll = (r: number, smooth: boolean) =>
+      track.scrollTo({ left: centerOf(cards[r]) - track.clientWidth / 2, behavior: smooth ? 'smooth' : 'instant' as ScrollBehavior });
 
-    let cur = 0, raf = 0;
-    const centered = () => {
-      const c = track.scrollLeft + track.clientWidth / 2;
-      let best = 0, bestD = Infinity;
-      cards.forEach((card, i) => { const cc = card.offsetLeft + card.offsetWidth / 2; const d = Math.abs(cc - c); if (d < bestD) { bestD = d; best = i; } });
-      return best;
-    };
+    let curR = 1, lastReal = -1, raf = 0, stop = 0;
     const paint = () => {
-      const i = centered();
-      if (i === cur) return;
-      cur = i;
-      segs.forEach((s, k) => s.classList.toggle('is-active', k === i));
-      dots.forEach((d, k) => d.classList.toggle('is-active', k === i));
-      const name = cards[i].dataset.name || '';
-      if (desc && desc.textContent !== name) { desc.style.opacity = '0'; setTimeout(() => { desc.textContent = name; desc.style.opacity = '1'; }, 160); }
+      const c = track.scrollLeft + track.clientWidth / 2;
+      let best = 1, bestD = Infinity;
+      cards.forEach((card, i) => { const d = Math.abs(centerOf(card) - c); if (d < bestD) { bestD = d; best = i; } });
+      curR = best;
+      const real = Number(cards[best].dataset.real);
+      if (real !== lastReal) {
+        lastReal = real;
+        segs.forEach((s, k) => s.classList.toggle('is-active', k === real));
+        dots.forEach((d, k) => d.classList.toggle('is-active', k === real));
+        const name = cards[best].dataset.name || '';
+        if (desc && desc.textContent !== name) { desc.style.opacity = '0'; setTimeout(() => { desc.textContent = name; desc.style.opacity = '1'; }, 160); }
+      }
+    };
+    const settleLoop = () => {
+      if (curR === 0) { curR = N; setScroll(N, false); }
+      else if (curR === LAST) { curR = 1; setScroll(1, false); }
     };
     track.addEventListener('scroll', () => { cancelAnimationFrame(raf); raf = requestAnimationFrame(paint); }, { passive: true });
-    const step = () => Math.round(track.clientWidth * 0.62);
-    prev?.addEventListener('click', () => track.scrollBy({ left: -step(), behavior: 'smooth' }));
-    next?.addEventListener('click', () => track.scrollBy({ left: step(), behavior: 'smooth' }));
+    if ('onscrollend' in window) track.addEventListener('scrollend', settleLoop, { passive: true });
+    else track.addEventListener('scroll', () => { clearTimeout(stop); stop = window.setTimeout(settleLoop, 90); }, { passive: true });
+
+    prev?.addEventListener('click', () => setScroll(curR - 1, true));   // exactly one slide
+    next?.addEventListener('click', () => setScroll(curR + 1, true));
+    requestAnimationFrame(() => { setScroll(1, false); paint(); });
+    window.addEventListener('resize', () => setScroll(curR, false));
   });
 </script>
