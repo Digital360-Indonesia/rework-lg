@@ -1,7 +1,7 @@
 ---
 /**
- * Blog (Tips & Trik) article layout — clean editorial: light header (breadcrumb,
- * category, title, meta), a contained featured image, premium prose, share row, CTA.
+ * Blog (Tips & Trik) article — Gopuff-style: horizontal hero (image left + back/title/
+ * excerpt right), date + divider, then large readable prose, share row, branded CTA.
  */
 import BaseLayout from './BaseLayout.astro';
 
@@ -28,28 +28,29 @@ const WA = 'M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.
 ---
 <BaseLayout title={title} description={description} image={image} type="article" publishedTime={publishDate} modifiedTime={modifiedDate}>
   <article class="lg-art">
-    <header class="lg-art-head">
-      <nav class="lg-art-crumb" aria-label="Breadcrumb">
-        <a href="/">Beranda</a><span>/</span><a href="/berita/">Tips &amp; Trik</a><span>/</span><span class="lg-art-crumb-cur">{category}</span>
-      </nav>
-      <span class="lg-art-cat">{category}</span>
-      <h1 class="lg-art-title">{title}</h1>
-      <div class="lg-art-meta">
-        <span class="lg-art-author">{author}</span>
-        <span class="lg-art-dot">•</span>
-        <time datetime={publishDate}>{formatDate(publishDate)}</time>
-        <span class="lg-art-dot">•</span>
-        <span>{readTime} menit baca</span>
+    <!-- horizontal hero: image left, content right -->
+    <div class="lg-art-top">
+      {image && (
+        <div class="lg-art-top-img"><img src={image} alt={title} loading="eager" /></div>
+      )}
+      <div class="lg-art-top-body">
+        <a class="lg-art-back" href="/berita/">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+          {category}
+        </a>
+        <h1 class="lg-art-title">{title}</h1>
+        {description && <p class="lg-art-ex">{description}</p>}
       </div>
-    </header>
+    </div>
 
-    {image && (
-      <figure class="lg-art-hero">
-        <img src={image} alt={title} loading="eager" />
-      </figure>
-    )}
+    <div class="lg-art-dateline">
+      <time datetime={publishDate}>{formatDate(publishDate)}</time>
+      <span class="lg-art-dot">•</span>
+      <span>{readTime} menit baca</span>
+    </div>
+    <hr class="lg-art-rule" />
 
-    <div class="lg-art-wrap">
+    <div class="lg-art-body">
       <div class="blog-post-content">
         <slot />
       </div>
@@ -76,43 +77,45 @@ const WA = 'M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.
 </BaseLayout>
 
 <style>
-  .lg-art { background: #fff; }
-  .lg-art-head { max-width: 44rem; margin: 0 auto; padding: clamp(2.5rem, 6vw, 4rem) clamp(1.25rem, 5vw, 2rem) clamp(1.5rem, 3vw, 2rem); text-align: center; }
-  .lg-art-crumb { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: .5rem; font-family:'Inter',sans-serif; font-size: .8rem; color: #8a8a9c; margin-bottom: 1.3rem; }
-  .lg-art-crumb a { color: #8a8a9c; text-decoration: none; transition: color .2s ease; }
-  .lg-art-crumb a:hover { color: #9A66C2; }
-  .lg-art-crumb-cur { color: #1A1A2E; font-weight: 600; }
-  .lg-art-cat { display: inline-block; font-family:'Inter',sans-serif; font-weight: 700; font-size: .68rem; letter-spacing: .12em; text-transform: uppercase; color: #9A66C2; background: rgba(175,122,213,.13); padding: .35rem .8rem; border-radius: 999px; margin-bottom: 1.1rem; }
-  .lg-art-title { font-family:'Inter',sans-serif; font-weight: 800; font-size: clamp(1.8rem, 4.5vw, 2.9rem); line-height: 1.12; letter-spacing: -.02em; color: #1A1A2E; margin: 0 0 1.2rem; }
-  .lg-art-meta { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: .55rem; font-family:'Inter',sans-serif; font-size: .9rem; color: #6a6a7c; }
-  .lg-art-author { font-weight: 600; color: #1A1A2E; }
+  .lg-art { max-width: 62rem; margin: 0 auto; padding: clamp(2rem, 5vw, 3.5rem) clamp(1.25rem, 5vw, 2rem) 0; background: #fff; }
+
+  /* hero */
+  .lg-art-top { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(1.5rem, 4vw, 3rem); align-items: center; margin-bottom: clamp(1.6rem, 3vw, 2.4rem); }
+  @media (max-width: 768px) { .lg-art-top { grid-template-columns: 1fr; gap: 1.4rem; } }
+  .lg-art-top-img { aspect-ratio: 4/3; overflow: hidden; border-radius: 1.1rem; background: #eee9f3; }
+  .lg-art-top-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .lg-art-back { display: inline-flex; align-items: center; gap: .4rem; font-family:'Inter',sans-serif; font-weight: 800; font-size: .95rem; color: #1A1A2E; text-decoration: none; margin-bottom: 1.1rem; transition: color .2s ease; }
+  .lg-art-back svg { width: 1.05rem; height: 1.05rem; }
+  .lg-art-back:hover { color: #9A66C2; }
+  .lg-art-title { font-family:'Inter',sans-serif; font-weight: 800; font-size: clamp(1.8rem, 4vw, 2.8rem); line-height: 1.08; letter-spacing: -.02em; color: #1A1A2E; margin: 0 0 1.1rem; }
+  .lg-art-ex { font-family:'Inter',sans-serif; font-size: clamp(1.05rem, 1.5vw, 1.25rem); line-height: 1.55; color: #4a4a5a; margin: 0; }
+
+  .lg-art-dateline { display: flex; flex-wrap: wrap; align-items: center; gap: .55rem; font-family:'Inter',sans-serif; font-size: .92rem; color: #9a9aa8; }
   .lg-art-dot { color: #c7c7d2; }
+  .lg-art-rule { border: 0; border-top: 1px solid rgba(26,26,46,.14); margin: 1.1rem 0 clamp(1.8rem, 3.5vw, 2.6rem); }
 
-  .lg-art-hero { max-width: 56rem; margin: 0 auto clamp(2rem, 4vw, 3rem); padding: 0 clamp(1.25rem, 5vw, 2rem); }
-  .lg-art-hero img { width: 100%; aspect-ratio: 16/9; object-fit: cover; border-radius: 1.1rem; display: block; box-shadow: 0 28px 56px -34px rgba(26,26,46,.55); }
+  .lg-art-body { }
 
-  .lg-art-wrap { max-width: 44rem; margin: 0 auto; padding: 0 clamp(1.25rem, 5vw, 2rem); }
-
-  /* ---- premium prose ---- */
-  .blog-post-content { color: #2c2c3a; font-family:'Inter',sans-serif; font-size: clamp(1.02rem, 1.4vw, 1.13rem); line-height: 1.8; }
-  .blog-post-content :where(h2):not(:where([class~="not-prose"] *)) { font-family:'Inter',sans-serif; font-weight: 800; font-size: 1.6rem; line-height: 1.25; letter-spacing: -.01em; color: #1A1A2E; margin: 2.4rem 0 1rem; }
-  .blog-post-content :where(h3):not(:where([class~="not-prose"] *)) { font-family:'Inter',sans-serif; font-weight: 700; font-size: 1.3rem; line-height: 1.3; color: #1A1A2E; margin: 2rem 0 .8rem; }
-  .blog-post-content :where(h4):not(:where([class~="not-prose"] *)) { font-weight: 700; font-size: 1.12rem; color: #1A1A2E; margin: 1.6rem 0 .6rem; }
-  .blog-post-content :where(p):not(:where([class~="not-prose"] *)) { margin: 0 0 1.35rem; }
+  /* ---- premium, readable prose (Gopuff-size) ---- */
+  .blog-post-content { max-width: 44rem; color: #2c2c3a; font-family:'Inter',sans-serif; font-size: clamp(1.08rem, 1.5vw, 1.2rem); line-height: 1.75; letter-spacing: -.003em; }
+  .blog-post-content :where(h2):not(:where([class~="not-prose"] *)) { font-family:'Inter',sans-serif; font-weight: 800; font-size: clamp(1.5rem, 2.6vw, 1.85rem); line-height: 1.2; letter-spacing: -.015em; color: #1A1A2E; margin: 2.8rem 0 1.1rem; }
+  .blog-post-content :where(h3):not(:where([class~="not-prose"] *)) { font-family:'Inter',sans-serif; font-weight: 800; font-size: clamp(1.25rem, 2vw, 1.45rem); line-height: 1.28; letter-spacing: -.01em; color: #1A1A2E; margin: 2.2rem 0 .85rem; }
+  .blog-post-content :where(h4):not(:where([class~="not-prose"] *)) { font-weight: 700; font-size: 1.15rem; color: #1A1A2E; margin: 1.8rem 0 .65rem; }
+  .blog-post-content :where(p):not(:where([class~="not-prose"] *)) { margin: 0 0 1.5rem; }
   .blog-post-content :where(a):not(:where([class~="not-prose"] *)) { color: #9A66C2; text-decoration: underline; text-underline-offset: 2px; font-weight: 500; }
   .blog-post-content :where(strong):not(:where([class~="not-prose"] *)) { color: #1A1A2E; font-weight: 700; }
-  .blog-post-content :where(img):not(:where([class~="not-prose"] *)) { width: 100%; border-radius: .8rem; margin: 1.8rem 0; display: block; }
-  .blog-post-content :where(ul, ol):not(:where([class~="not-prose"] *)) { margin: 0 0 1.35rem; padding-left: 1.4rem; }
+  .blog-post-content :where(img):not(:where([class~="not-prose"] *)) { width: 100%; border-radius: .9rem; margin: 2rem 0; display: block; }
+  .blog-post-content :where(ul, ol):not(:where([class~="not-prose"] *)) { margin: 0 0 1.5rem; padding-left: 1.5rem; }
   .blog-post-content :where(ul):not(:where([class~="not-prose"] *)) { list-style: disc; }
   .blog-post-content :where(ol):not(:where([class~="not-prose"] *)) { list-style: decimal; }
-  .blog-post-content :where(li):not(:where([class~="not-prose"] *)) { margin: .45rem 0; padding-left: .2rem; }
+  .blog-post-content :where(li):not(:where([class~="not-prose"] *)) { margin: .55rem 0; padding-left: .25rem; }
   .blog-post-content :where(li)::marker { color: #AF7AD5; }
-  .blog-post-content :where(blockquote):not(:where([class~="not-prose"] *)) { border-left: 3px solid #AF7AD5; padding: .2rem 0 .2rem 1.3rem; margin: 1.8rem 0; color: #5a5a6e; font-style: italic; font-size: 1.1em; }
+  .blog-post-content :where(blockquote):not(:where([class~="not-prose"] *)) { border-left: 3px solid #AF7AD5; padding: .2rem 0 .2rem 1.4rem; margin: 2rem 0; color: #5a5a6e; font-style: italic; }
   .blog-post-content :where(h2, h3):first-child { margin-top: 0; }
 
   /* ---- share ---- */
-  .lg-art-share { display: flex; flex-wrap: wrap; align-items: center; gap: 1rem; margin: clamp(2rem, 4vw, 3rem) 0 0; padding-top: 1.6rem; border-top: 1px solid rgba(26,26,46,.1); }
-  .lg-art-share-label { font-family:'Inter',sans-serif; font-weight: 700; font-size: .95rem; color: #1A1A2E; }
+  .lg-art-share { display: flex; flex-wrap: wrap; align-items: center; gap: 1rem; margin: clamp(2.5rem, 5vw, 3.5rem) 0 0; padding-top: 1.7rem; border-top: 1px solid rgba(26,26,46,.1); }
+  .lg-art-share-label { font-family:'Inter',sans-serif; font-weight: 800; font-size: .98rem; color: #1A1A2E; }
   .lg-art-share-btns { display: flex; gap: .6rem; }
   .lg-art-share-btns a, .lg-art-share-btns button { width: 2.5rem; height: 2.5rem; border-radius: 999px; display: grid; place-items: center; background: #f2eef8; color: #6a4a8c; border: 0; cursor: pointer; transition: transform .2s ease, background .2s ease, color .2s ease; }
   .lg-art-share-btns a svg, .lg-art-share-btns button svg { width: 1.15rem; height: 1.15rem; }
@@ -120,16 +123,15 @@ const WA = 'M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.
   .lg-art-share-btns .is-wa:hover { background: #25d366; }
 
   /* ---- CTA ---- */
-  .lg-art-cta { max-width: 50rem; margin: clamp(3rem, 6vw, 4.5rem) auto 0; padding: clamp(2.2rem, 5vw, 3.2rem) clamp(1.5rem, 5vw, 2rem); text-align: center; background: linear-gradient(160deg, #2a1a45, #1A1A2E); border-radius: 1.4rem; }
-  @media (min-width: 768px) { .lg-art-cta { margin-bottom: 3rem; } }
+  .lg-art-cta { margin: clamp(3rem, 6vw, 4.5rem) 0; padding: clamp(2.2rem, 5vw, 3.2rem) clamp(1.5rem, 5vw, 2.5rem); text-align: center; background: linear-gradient(160deg, #2a1a45, #1A1A2E); border-radius: 1.4rem; }
   .lg-art-cta h2 { margin: 0 0 .7rem; font-family:'Inter',sans-serif; font-weight: 800; font-size: clamp(1.4rem, 2.6vw, 1.9rem); line-height: 1.2; color: #fff; }
   .lg-art-cta p { margin: 0 auto 1.6rem; max-width: 34rem; font-family:'Inter',sans-serif; font-size: 1rem; line-height: 1.5; color: rgba(255,255,255,.82); }
   .lg-art-cta-btn { display: inline-flex; align-items: center; gap: .55rem; padding: .95rem 1.7rem; border-radius: 999px; background: #25d366; color: #fff; font-family:'Inter',sans-serif; font-weight: 700; font-size: 1rem; text-decoration: none; box-shadow: 0 14px 30px -12px rgba(37,211,102,.55); transition: transform .2s ease, background .2s ease; }
   .lg-art-cta-btn svg { width: 1.3rem; height: 1.3rem; }
   .lg-art-cta-btn:hover { transform: translateY(-2px); background: #1fbe5b; }
 
-  /* related/back that [slug] injects after the content — give them room + max-width */
-  .lg-art-wrap :global(.related-posts), .lg-art-wrap :global(.back-to-blog) { margin-top: 2.5rem; }
+  /* related/back injected by [slug] after the content */
+  .lg-art-body :global(.related-posts), .lg-art-body :global(.back-to-blog) { margin-top: 2.5rem; }
 </style>
 
 <script>

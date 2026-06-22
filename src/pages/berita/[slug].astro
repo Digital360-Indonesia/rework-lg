@@ -39,7 +39,7 @@ const relatedPosts = posts
   <div set:html={content} />
 
   {relatedPosts.length > 0 && (
-    <section class="related-posts mt-16 pt-12 border-t border-gray-200">
+    <section class="related-posts not-prose mt-16 pt-12 border-t border-gray-200">
       <h2 class="text-2xl font-bold mb-8 text-gray-900">Tips &amp; Trik Lainnya</h2>
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
         {relatedPosts.map(post => (
@@ -83,7 +83,7 @@ const relatedPosts = posts
     </section>
   )}
 
-  <nav class="back-to-blog mt-12 pt-8 border-t border-gray-200">
+  <nav class="back-to-blog not-prose mt-12 pt-8 border-t border-gray-200">
     <a
       href="/berita/"
       class="inline-flex items-center gap-2 text-primary font-semibold hover:gap-3 transition-all group"
