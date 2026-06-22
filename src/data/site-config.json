@@ -39,7 +39,7 @@
       "path": "/promo/"
     },
     {
-      "name": "Berita",
+      "name": "Tips & Trik",
       "path": "/berita/"
     },
     {
@@ -66,21 +66,34 @@
         "name": "Jersey",
         "slug": "jersey",
         "description": "Jersey olahraga custom",
-        "subcategories": ["Basic", "Baseball", "Basket"]
+        "subcategories": [
+          "Basic",
+          "Baseball",
+          "Basket"
+        ]
       },
       {
         "id": "workshirt",
         "name": "Workshirt",
         "slug": "workshirt",
         "description": "Kemeja kerja dan PDH custom",
-        "subcategories": ["Basic", "PDH"]
+        "subcategories": [
+          "Basic",
+          "PDH"
+        ]
       },
       {
         "id": "jacket",
         "name": "Jaket",
         "slug": "jacket",
         "description": "Berbagai jenis jaket custom",
-        "subcategories": ["Bomber", "Coach", "Parka", "Trucker", "Varsity"]
+        "subcategories": [
+          "Bomber",
+          "Coach",
+          "Parka",
+          "Trucker",
+          "Varsity"
+        ]
       }
     ]
   },
