@@ -46,10 +46,10 @@ const first = slides[0];
           <div class="lg-spon-slide" data-r={i} data-real={s.real} data-desc={s.name} data-info={(s as any).info || ''} data-has-mb={hasMb ? 'true' : 'false'}>
             {dsVideo
               ? <video class="lg-spon-media lg-spon-ds" src={dsVideo} autoplay muted loop playsinline preload="metadata"></video>
-              : <img class="lg-spon-media lg-spon-ds" src={s.image} alt={s.name} loading="lazy" />}
+              : <img class="lg-spon-media lg-spon-ds" src={s.image} alt={s.name} />}
             {hasMb && (mbVideo
               ? <video class="lg-spon-media lg-spon-mb" src={mbVideo} autoplay muted loop playsinline preload="metadata"></video>
-              : <img class="lg-spon-media lg-spon-mb" src={mbImage} alt={s.name} loading="lazy" />)}
+              : <img class="lg-spon-media lg-spon-mb" src={mbImage} alt={s.name} />)}
           </div>
         );
       })}
