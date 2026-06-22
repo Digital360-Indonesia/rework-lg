@@ -114,11 +114,11 @@ const first = slides[0];
   .lg-spon-carousel { position: relative; z-index: 1; }
   .lg-spon-track { display: flex; gap: clamp(6rem, 9vw, 9.5rem); overflow-x: auto; scroll-snap-type: x mandatory; scroll-behavior: smooth; -webkit-overflow-scrolling: touch; scrollbar-width: none; padding: 0 13%; }
   .lg-spon-track::-webkit-scrollbar { display: none; }
-  /* explicit slide height → the media's height:100% resolves (aspect-ratio on a flex
-     item doesn't give children a usable height; explicit height does). */
-  .lg-spon-slide { flex: 0 0 74%; scroll-snap-align: center; height: clamp(13rem, 23vw, 23rem);
+  /* explicit slide height + absolute-fill media → paints reliably inside the flex carousel
+     (percentage height alone doesn't resolve on the flex item; absolute inset:0 does). */
+  .lg-spon-slide { position: relative; flex: 0 0 74%; scroll-snap-align: center; height: clamp(13rem, 23vw, 23rem);
     border-radius: .25rem; overflow: hidden; background: #ece6f3; }
-  .lg-spon-media { width: 100%; height: 100%; display: block; object-fit: cover;
+  .lg-spon-media { position: absolute; inset: 0; display: block; object-fit: cover;
     background-size: cover; background-position: center; background-repeat: no-repeat; }
   .lg-spon-mb { display: none; }   /* desktop: the mobile (mb) media is hidden */
 
