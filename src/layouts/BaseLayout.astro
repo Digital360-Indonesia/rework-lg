@@ -165,8 +165,8 @@ const pageType = type === 'article' ? 'article' : 'website';
   @media (max-width: 767px) {
     :global(.lg-header),
     :global(.lg-ticker) { display: none !important; }
-    /* homepage reels: the End-CTA panel + bottom nav ARE the footer — hide the usual web footer */
-    :global(html.lg-home .lgf) { display: none !important; }
+    /* mobile: the bottom nav is the site chrome everywhere — hide the old web footer site-wide */
+    :global(.lgf) { display: none !important; }
     /* normal (non-homepage) pages: clear the fixed bottom nav so last content isn't hidden.
        The homepage reels feed is full-screen behind the nav, so it opts out via html.lg-home. */
     main { padding-bottom: calc(3.9rem + env(safe-area-inset-bottom, 0px)); }
