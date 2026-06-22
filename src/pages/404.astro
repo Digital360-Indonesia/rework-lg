@@ -60,4 +60,6 @@ const description = 'Maaf, halaman yang Anda cari tidak dapat ditemukan.';
       </div>
     </div>
   </div>
+  {/* go-live safety: any URL with no page bounces to home (Araya) — brief, with CTAs above for instant action */}
+  <script is:inline>setTimeout(function(){ location.replace('/'); }, 4000);</script>
 </BaseLayout>
