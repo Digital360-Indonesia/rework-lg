@@ -41,7 +41,7 @@ const relatedPosts = posts
   {relatedPosts.length > 0 && (
     <section class="related-posts mt-16 pt-12 border-t border-gray-200">
       <h2 class="text-2xl font-bold mb-8 text-gray-900">Tips &amp; Trik Lainnya</h2>
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
         {relatedPosts.map(post => (
           <article class="group bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden">
             <a href={`/berita/${post.slug}/`} class="block">
