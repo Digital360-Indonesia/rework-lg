@@ -1,270 +1,131 @@
 ---
 /**
- * Sponsorship showcase — past sponsored events.
- *  • Desktop: centered logo + tag, big image carousel with peek + infinite loop,
- *    slide-count bar + 1-line event name.
- *  • Mobile (≤767px): TikTok "post" — full-bleed event photo, looping carousel;
- *    top a small logo + "Sponsorship Solutions" purple-outline chip; bottom-left a
- *    TikTok caption: Level Garment account row, then the event NAME (bold head) +
- *    event INFO (subhead) truncated to 2 lines with a tappable "…banyak" that
- *    smoothly expands/collapses. Updates per slide.
+ * Sponsorship showcase — REWORKED (standalone, own background; no .lg-duo wrapper,
+ * no clone/loop carousel).
+ *  • Desktop: header + a responsive GRID of event cards (image/video + name + info).
+ *  • Mobile (≤767px): full-screen reels panel — horizontal swipe of full-bleed event
+ *    cards with a caption overlay; top story-bar dots.
  */
 import home from '../../data/home.json';
-const spon = home.sponsorship;                 // CMS-managed: src/data/home.json → sponsorship
+const spon = home.sponsorship;            // CMS-managed: src/data/home.json → sponsorship
 const tag = spon.tag;
 const account = (spon as any).account || 'Level Garment';
-const slides = spon.events as { image: string; name: string; info?: string }[];
-const N = slides.length;
-// clone last at front + first at back so a peek always shows + it loops
-const rendered = [
-  { ...slides[N - 1], real: N - 1 },
-  ...slides.map((s, i) => ({ ...s, real: i })),
-  { ...slides[0], real: 0 },
-];
-const first = slides[0];
+const events = spon.events as { image?: string; video?: string; videoMobile?: string; imageMobile?: string; name: string; info?: string }[];
+const duoBg = home.duoBackground;
+const first = events[0];
 ---
 <section class="lg-spon" aria-label="Sponsorship">
-  <div class="lg-spon-grad" aria-hidden="true"></div>
+  <div class="lg-spon-bg" style={`background-image:url('${duoBg}')`} aria-hidden="true"></div>
+  <div class="lg-spon-veil" aria-hidden="true"></div>
 
-  <!-- DESKTOP head -->
   <div class="lg-spon-head">
-    <img class="lg-spon-logo" src="/assets/images/logo/logo-white.webp" alt="Level Garment" width="260" height="78" />
+    <img class="lg-spon-logo" src="/assets/images/logo/logo-white.webp" alt="Level Garment" width="220" height="66" />
     <span class="lg-spon-tag">{tag}</span>
   </div>
 
-  <div class="lg-spon-carousel">
-    <button class="lg-spon-arrow lg-spon-prev" data-prev aria-label="Sebelumnya">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
-    </button>
-    <div class="lg-spon-track" data-track>
-      {rendered.map((s, i) => {
-        const dsVideo = (s as any).video;
-        const mbVideo = (s as any).videoMobile;
-        const mbImage = (s as any).imageMobile;
-        const hasMb = !!(mbVideo || mbImage);
-        return (
-          <div class="lg-spon-slide" data-r={i} data-real={s.real} data-desc={s.name} data-info={(s as any).info || ''} data-has-mb={hasMb ? 'true' : 'false'}>
-            <div class="lg-spon-img lg-spon-ds">
-              {dsVideo
-                ? <video src={dsVideo} autoplay muted loop playsinline preload="metadata"></video>
-                : <img src={s.image} alt={s.name} />}
-            </div>
-            {hasMb && (
-              <div class="lg-spon-img lg-spon-mb">
-                {mbVideo
-                  ? <video src={mbVideo} autoplay muted loop playsinline preload="metadata"></video>
-                  : <img src={mbImage} alt={s.name} />}
-              </div>
-            )}
+  <div class="lg-spon-track" data-track>
+    {events.map((e, i) => {
+      const dsVideo = e.video;
+      const mbVideo = e.videoMobile;
+      const mbImage = e.imageMobile;
+      const hasMb = !!(mbVideo || mbImage);
+      return (
+        <article class="lg-spon-card" data-i={i} data-name={e.name} data-info={e.info || ''} data-has-mb={hasMb ? 'true' : 'false'}>
+          <div class="lg-spon-media lg-spon-ds">
+            {dsVideo
+              ? <video src={dsVideo} autoplay muted loop playsinline preload="metadata"></video>
+              : <img src={e.image} alt={e.name} />}
           </div>
-        );
-      })}
-    </div>
-    <button class="lg-spon-arrow lg-spon-next" data-next aria-label="Berikutnya">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
-    </button>
+          {hasMb && (
+            <div class="lg-spon-media lg-spon-mb">
+              {mbVideo
+                ? <video src={mbVideo} autoplay muted loop playsinline preload="metadata"></video>
+                : <img src={mbImage} alt={e.name} />}
+            </div>
+          )}
+          <div class="lg-spon-cap">
+            <h3 class="lg-spon-name">{e.name}</h3>
+            <p class="lg-spon-info">{e.info}</p>
+          </div>
+        </article>
+      );
+    })}
   </div>
 
-  <!-- MOBILE scrim (legibility for chip + caption over the photo) -->
-  <div class="lg-spon-scrim" aria-hidden="true"></div>
-
-  <!-- MOBILE top chip: small logo + tag, purple outline -->
-  <div class="lg-spon-chip">
-    <img class="lg-spon-chip-logo" src="/assets/images/logo/favicon-w64.webp" alt="" width="18" height="18" />
-    <span>{tag}</span>
-  </div>
-  <!-- MOBILE slide dots -->
-  <div class="lg-spon-dots" data-bar aria-hidden="true">
-    {slides.map((_, i) => (<span class:list={['lg-spon-seg', { 'is-active': i === 0 }]} data-i={i}></span>))}
-  </div>
-
-  <!-- DESKTOP footer -->
-  <div class="lg-spon-footer">
-    <div class="lg-spon-bar" data-bar>
-      {slides.map((_, i) => (<span class:list={['lg-spon-seg', { 'is-active': i === 0 }]} data-i={i}></span>))}
-    </div>
-    <p class="lg-spon-desc" data-desc>{first.name}</p>
-  </div>
-
-  <!-- MOBILE TikTok caption overlay (bottom-left) -->
-  <div class="lg-spon-tiktok">
-    <div class="lg-spon-acct">
-      <img class="lg-spon-ava" src="/assets/images/logo/favicon-w128.webp" alt="" width="30" height="30" />
-      <span class="lg-spon-acctname">{account}</span>
-      <svg class="lg-spon-verif" viewBox="0 0 24 24" aria-label="Terverifikasi"><circle cx="12" cy="12" r="10" fill="#AF7AD5"/><path d="M7.5 12.4l3 3 6-6.4" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-    </div>
-    <div class="lg-spon-cap" data-cap>
-      <h3 class="lg-spon-caphead" data-cap-head>{first.name}</h3>
-      <div class="lg-spon-capsub-wrap">
-        <p class="lg-spon-capsub" data-cap-sub>{first.info}</p>
-        <button class="lg-spon-more" data-more>…banyak</button>
-      </div>
-    </div>
-  </div>
+  <!-- mobile: account + top dots -->
+  <div class="lg-spon-acct"><img src="/assets/images/logo/favicon-w128.webp" alt="" width="26" height="26" /><span>{account}</span></div>
+  <div class="lg-spon-dots" aria-hidden="true">{events.map((_, i) => (<span class:list={{ 'is-active': i === 0 }}></span>))}</div>
 </section>
 
 <style>
   :root { --lg-primary: #AF7AD5; --lg-ink: #1A1A2E; }
 
-  .lg-spon { position: relative; padding: clamp(2rem, 4vw, 3.5rem) 0 clamp(2.5rem, 5vw, 4rem); background: transparent; overflow: hidden; isolation: isolate; }
-  .lg-spon-grad { display: none; }
+  .lg-spon { position: relative; padding: clamp(3rem, 7vw, 5rem) clamp(1.25rem, 5vw, 3rem); overflow: hidden; }
+  .lg-spon-bg { position: absolute; inset: 0; z-index: 0; background-size: cover; background-position: center; filter: blur(28px) brightness(.6) saturate(1.1); transform: scale(1.12); }
+  .lg-spon-veil { position: absolute; inset: 0; z-index: 0; background: linear-gradient(160deg, rgba(120,75,170,.55), rgba(30,18,48,.82)); }
 
-  /* mobile-only bits off by default */
-  .lg-spon-scrim, .lg-spon-chip, .lg-spon-dots, .lg-spon-tiktok { display: none; }
+  .lg-spon-head { position: relative; z-index: 2; text-align: center; margin: 0 0 clamp(1.5rem, 4vw, 2.5rem); }
+  .lg-spon-logo { display: block; margin: 0 auto; width: clamp(8rem, 11vw, 11rem); height: auto; filter: drop-shadow(0 2px 14px rgba(0,0,0,.4)); }
+  .lg-spon-tag { display: block; margin-top: .8rem; font-family:'Montserrat','Inter',sans-serif; font-weight: 600; font-size: clamp(.74rem, 1.2vw, .95rem); letter-spacing: .3em; text-transform: uppercase; color: #fff; text-shadow: 0 1px 10px rgba(0,0,0,.5); }
 
-  .lg-spon-head { position: relative; z-index: 2; text-align: center; padding: clamp(1.25rem, 3vw, 2.5rem) 1rem clamp(1.75rem, 4vw, 3rem); }
-  .lg-spon-logo { display: block; margin: 0 auto; width: clamp(8.5rem, 12vw, 12rem); height: auto; filter: drop-shadow(0 2px 14px rgba(70,35,110,.35)); }
-  .lg-spon-tag { display: block; margin-top: .95rem; font-family: 'Montserrat', 'Inter', sans-serif; font-weight: 600; font-size: clamp(.78rem, 1.25vw, 1.02rem); letter-spacing: .3em; text-transform: uppercase; color: #fff; padding-left: .3em;
-    text-shadow: 0 1px 1px rgba(35,15,60,.4), 0 2px 6px rgba(45,20,80,.45), 0 6px 22px rgba(60,30,100,.5); }
+  /* DESKTOP: responsive grid */
+  .lg-spon-track { position: relative; z-index: 1; display: grid; grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr)); gap: clamp(1rem, 2vw, 1.6rem); max-width: 72rem; margin: 0 auto; }
+  .lg-spon-card { display: block; }
+  .lg-spon-media { aspect-ratio: 16 / 11; overflow: hidden; border-radius: .6rem; background: rgba(255,255,255,.08); box-shadow: 0 16px 36px -22px rgba(0,0,0,.7); }
+  .lg-spon-media img, .lg-spon-media video { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .lg-spon-mb { display: none; }
+  .lg-spon-cap { padding: .85rem .2rem 0; }
+  .lg-spon-name { margin: 0 0 .25rem; font-family:'Inter',sans-serif; font-weight: 800; font-size: 1.02rem; color: #fff; letter-spacing: -.01em; }
+  .lg-spon-info { margin: 0; font-family:'Inter',sans-serif; font-weight: 400; font-size: .88rem; line-height: 1.5; color: rgba(255,255,255,.82); }
 
-  .lg-spon-carousel { position: relative; z-index: 1; }
-  .lg-spon-track { display: flex; gap: clamp(6rem, 9vw, 9.5rem); overflow-x: auto; scroll-snap-type: x mandatory; scroll-behavior: smooth; -webkit-overflow-scrolling: touch; scrollbar-width: none; padding: 0 13%; }
-  .lg-spon-track::-webkit-scrollbar { display: none; }
-  /* EXACT product-rail pattern: aspect-ratio on the inner block box (.lg-spon-img),
-     the img/video fills it. (aspect-ratio on the flex slide itself doesn't work.) */
-  .lg-spon-slide { flex: 0 0 74%; scroll-snap-align: center; }
-  .lg-spon-img { aspect-ratio: 2 / 1; overflow: hidden; border-radius: .25rem; background: #ece6f3; }
-  .lg-spon-img img, .lg-spon-img video { width: 100%; height: 100%; object-fit: cover; display: block; }
-  .lg-spon-mb { display: none; }   /* desktop: the mobile (mb) media is hidden */
+  .lg-spon-acct, .lg-spon-dots { display: none; }
 
-  .lg-spon-arrow { position: absolute; top: 50%; transform: translateY(-50%); z-index: 4; width: 2.8rem; height: 2.8rem; border-radius: 999px; background: rgba(255,255,255,.92); border: 1px solid rgba(26,26,46,.08); color: var(--lg-ink); display: grid; place-items: center; cursor: pointer; box-shadow: 0 8px 22px -10px rgba(26,26,46,.35); transition: transform .2s ease; }
-  .lg-spon-arrow svg { width: 1.2rem; height: 1.2rem; }
-  .lg-spon-prev { left: clamp(.5rem, 3vw, 2.5rem); }
-  .lg-spon-next { right: clamp(.5rem, 3vw, 2.5rem); }
-  @media (hover: hover) { .lg-spon-arrow:hover { transform: translateY(-50%) scale(1.06); } }
-
-  .lg-spon-footer { text-align: center; margin-top: clamp(1.5rem, 3vw, 2.25rem); }
-  .lg-spon-bar { display: flex; gap: 6px; justify-content: center; width: clamp(7rem, 16vw, 11rem); margin: 0 auto .95rem; }
-  .lg-spon-seg { flex: 1; height: 2px; background: rgba(26,26,46,.16); border-radius: 999px; transition: background .3s ease; }
-  .lg-spon-seg.is-active { background: var(--lg-primary); }
-  .lg-spon-desc { font-family: 'Inter', sans-serif; font-weight: 600; font-size: clamp(.82rem, 1.3vw, 1rem); letter-spacing: .16em; text-transform: uppercase; color: var(--lg-ink); margin: 0; transition: opacity .3s ease; }
-
-  @media (max-width: 768px) {
-    .lg-spon-slide { flex-basis: 78%; }
-    .lg-spon-track { padding: 0 11%; gap: 1.1rem; }
-    .lg-spon-arrow { display: none; }
-  }
-
-  /* ============ MOBILE reels (≤767px): TikTok post ============ */
+  /* ============ MOBILE reels (≤767px): full-screen swipe ============ */
   @media (max-width: 767px) {
-    .lg-spon { padding: 0; position: relative; }
-    .lg-spon-head, .lg-spon-footer { display: none; }
+    .lg-spon { padding: 0; }
+    .lg-spon-bg, .lg-spon-veil { z-index: 0; }
+    .lg-spon-head { position: absolute; top: calc(env(safe-area-inset-top,0px) + 2.4rem); left: 0; right: 0; z-index: 4; margin: 0; pointer-events: none; }
+    .lg-spon-logo { width: 7rem; }
+    .lg-spon-tag { font-size: .68rem; }
 
-    .lg-spon-carousel { position: absolute; inset: 0; z-index: 1; }
-    .lg-spon-track { padding: 0; gap: 0; height: 100%; scroll-snap-type: x mandatory; scroll-behavior: auto; }
-    .lg-spon-slide { flex: 0 0 100vw; height: 100%; border-radius: 0; scroll-snap-align: center; }
-    .lg-spon-img { aspect-ratio: auto; height: 100%; border-radius: 0; }   /* full-bleed on mobile */
-    /* slides that ship a mobile (mb) media → use it instead of the desktop one */
-    .lg-spon-slide[data-has-mb="true"] .lg-spon-ds { display: none; }
-    .lg-spon-slide[data-has-mb="true"] .lg-spon-mb { display: block; }
+    .lg-spon-track { position: absolute; inset: 0; z-index: 1; display: flex; grid-template-columns: none; max-width: none; margin: 0; gap: 0;
+      overflow-x: auto; scroll-snap-type: x mandatory; scroll-behavior: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
+    .lg-spon-track::-webkit-scrollbar { display: none; }
+    .lg-spon-card { flex: 0 0 100vw; position: relative; scroll-snap-align: center; }
+    .lg-spon-media { position: absolute; inset: 0; aspect-ratio: auto; border-radius: 0; box-shadow: none; }
+    .lg-spon-slide-scrim, .lg-spon-card::after { content: ''; position: absolute; inset: 0; z-index: 1; pointer-events: none;
+      background: linear-gradient(to top, rgba(8,5,16,.72) 0%, rgba(0,0,0,0) 42%); }
+    .lg-spon-slide[data-has-mb] { }
+    .lg-spon-card[data-has-mb="true"] .lg-spon-ds { display: none; }
+    .lg-spon-card[data-has-mb="true"] .lg-spon-mb { display: block; }
 
-    /* scrim: dark top + bottom for chip & caption legibility */
-    .lg-spon-scrim { display: block; position: absolute; inset: 0; z-index: 2; pointer-events: none;
-      background: linear-gradient(to bottom, rgba(15,10,25,.5) 0%, rgba(0,0,0,0) 20%, rgba(0,0,0,0) 42%, rgba(12,8,22,.72) 100%); }
+    .lg-spon-cap { position: absolute; z-index: 3; left: 1rem; right: 1rem; bottom: calc(5rem + env(safe-area-inset-bottom,0px)); padding: 0; }
+    .lg-spon-name { font-size: 1.3rem; text-shadow: 0 1px 12px rgba(0,0,0,.6); }
+    .lg-spon-info { font-size: .95rem; color: rgba(255,255,255,.9); text-shadow: 0 1px 10px rgba(0,0,0,.55);
+      display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
 
-    /* top chip */
-    .lg-spon-chip { display: inline-flex; align-items: center; gap: .45rem; position: absolute; z-index: 4;
-      top: calc(env(safe-area-inset-top, 0px) + 2.6rem); left: 50%; transform: translateX(-50%);
-      padding: .4rem .85rem; border-radius: 999px; border: 1.5px solid rgba(175,122,213,.95);
-      background: rgba(25,15,40,.42); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
-      color: #fff; font-family: 'Inter', sans-serif; font-weight: 600; font-size: .72rem; letter-spacing: .14em; text-transform: uppercase; white-space: nowrap; }
-    .lg-spon-chip-logo { width: 1.05rem; height: 1.05rem; object-fit: contain; display: block; }
+    .lg-spon-acct { display: flex; align-items: center; gap: .45rem; position: absolute; z-index: 3; left: 1rem; bottom: calc(8.6rem + env(safe-area-inset-bottom,0px)); }
+    .lg-spon-acct img { width: 1.7rem; height: 1.7rem; border-radius: 999px; background: #fff; padding: .2rem; }
+    .lg-spon-acct span { color: #fff; font-family:'Inter',sans-serif; font-weight: 700; font-size: .9rem; text-shadow: 0 1px 8px rgba(0,0,0,.55); }
 
-    /* story-bar at the very top (section-1 style): full-width segments, active = solid white */
-    .lg-spon-dots { display: flex; gap: 4px; position: absolute; z-index: 5; left: 0; right: 0;
-      top: calc(env(safe-area-inset-top, 0px) + .6rem); padding: 0 .7rem; }
-    .lg-spon-dots .lg-spon-seg { flex: 1 1 0; height: 3px; border-radius: 999px; background: rgba(255,255,255,.4); }
-    .lg-spon-dots .lg-spon-seg.is-active { background: #fff; }
-
-    /* bottom-left TikTok caption */
-    .lg-spon-tiktok { display: block; position: absolute; z-index: 4; left: 0; right: 0;
-      bottom: calc(4.9rem + env(safe-area-inset-bottom, 0px)); padding: 0 3.2rem 0 1rem; pointer-events: none; }
-    .lg-spon-acct { display: flex; align-items: center; gap: .5rem; margin-bottom: .55rem; }
-    .lg-spon-ava { width: 1.9rem; height: 1.9rem; border-radius: 999px; background: #fff; padding: .22rem; object-fit: contain;
-      box-shadow: 0 2px 8px rgba(0,0,0,.4); }
-    .lg-spon-acctname { color: #fff; font-family: 'Inter', sans-serif; font-weight: 700; font-size: .92rem; text-shadow: 0 1px 8px rgba(0,0,0,.55); }
-    .lg-spon-verif { width: 1rem; height: 1rem; flex: 0 0 auto; }
-
-    .lg-spon-cap { pointer-events: auto; cursor: pointer; }
-    .lg-spon-caphead { color: #fff; font-family: 'Inter', sans-serif; font-weight: 800; font-size: 1.18rem; line-height: 1.2;
-      letter-spacing: -.01em; margin: 0 0 .25rem; text-shadow: 0 1px 10px rgba(0,0,0,.6); transition: opacity .25s ease; }
-    .lg-spon-capsub-wrap { position: relative; }
-    .lg-spon-capsub { color: rgba(255,255,255,.92); font-family: 'Inter', sans-serif; font-weight: 400; font-size: .9rem;
-      line-height: 1.45; margin: 0; overflow: hidden; max-height: calc(.9rem * 1.45 * 2); /* 2 lines, JS animates */
-      transition: max-height .42s cubic-bezier(.19,1,.22,1); text-shadow: 0 1px 8px rgba(0,0,0,.55); }
-    /* "…banyak" affordance over the end of the clamped 2nd line */
-    .lg-spon-more { position: absolute; right: 0; bottom: 0; padding-left: 1.6rem; border: 0; background: none;
-      color: #fff; font-family: 'Inter', sans-serif; font-weight: 700; font-size: .9rem; cursor: pointer;
-      text-shadow: 0 1px 8px rgba(0,0,0,.7);
-      /* fade-mask so the cut-off word blends into the affordance */
-      background: linear-gradient(to right, rgba(12,8,22,0) 0%, rgba(12,8,22,.55) 42%); }
-    .lg-spon-cap.is-open .lg-spon-more { position: static; display: inline-block; padding-left: 0; margin-top: .3rem; background: none;
-      color: rgba(255,255,255,.8); font-weight: 600; }
+    .lg-spon-dots { display: flex; gap: 4px; position: absolute; z-index: 5; left: 0; right: 0; top: calc(env(safe-area-inset-top,0px) + .6rem); padding: 0 .7rem; }
+    .lg-spon-dots span { flex: 1 1 0; height: 3px; border-radius: 999px; background: rgba(255,255,255,.4); }
+    .lg-spon-dots span.is-active { background: #fff; }
   }
 </style>
 
 <script>
+  // mobile: update dots + caption per centered card (no loop/clones — just native snap)
   document.querySelectorAll<HTMLElement>('.lg-spon').forEach((root) => {
     const track = root.querySelector<HTMLElement>('[data-track]');
-    const rSlides = Array.from(root.querySelectorAll<HTMLElement>('.lg-spon-slide'));
-    const bars = Array.from(root.querySelectorAll<HTMLElement>('[data-bar]'));
-    const descs = Array.from(root.querySelectorAll<HTMLElement>('[data-desc]'));
-    const prev = root.querySelector<HTMLButtonElement>('[data-prev]');
-    const next = root.querySelector<HTMLButtonElement>('[data-next]');
-    if (!track || rSlides.length < 3) return;
-    const N = bars[0] ? bars[0].querySelectorAll('.lg-spon-seg').length : rSlides.length - 2;
-    const LAST = rSlides.length - 1;
-
-    // ---- mobile TikTok caption (head = event name, sub = info, tap to expand) ----
-    const cap = root.querySelector<HTMLElement>('[data-cap]');
-    const capHead = root.querySelector<HTMLElement>('[data-cap-head]');
-    const capSub = root.querySelector<HTMLElement>('[data-cap-sub]');
-    const moreBtn = root.querySelector<HTMLElement>('[data-more]');
-    let capOpen = false;
-    const twoLines = () => Math.ceil((parseFloat(getComputedStyle(capSub!).lineHeight) || 18) * 2);
-    const collapse = () => { capOpen = false; cap?.classList.remove('is-open'); if (capSub) capSub.style.maxHeight = twoLines() + 'px'; if (moreBtn) moreBtn.textContent = '…banyak'; };
-    const expand = () => { capOpen = true; cap?.classList.add('is-open'); if (capSub) capSub.style.maxHeight = capSub.scrollHeight + 'px'; if (moreBtn) moreBtn.textContent = 'tutup'; };
-    if (capSub) capSub.style.maxHeight = twoLines() + 'px';
-    cap?.addEventListener('click', () => { capOpen ? collapse() : expand(); });
-
-    const centerOf = (el: HTMLElement) => el.offsetLeft + el.offsetWidth / 2;
-    const setScroll = (r: number, smooth: boolean) =>
-      track.scrollTo({ left: centerOf(rSlides[r]) - track.clientWidth / 2, behavior: smooth ? 'smooth' : 'instant' });
-
-    let curR = 1, lastReal = -1;
+    const dots = Array.from(root.querySelectorAll<HTMLElement>('.lg-spon-dots span'));
+    if (!track || !dots.length) return;
+    if (!window.matchMedia('(max-width: 767px)').matches) return;
+    let raf = 0;
     const paint = () => {
-      const c = track.scrollLeft + track.clientWidth / 2;
-      let best = 0, bestD = Infinity;
-      rSlides.forEach((s, i) => { const d = Math.abs(centerOf(s) - c); if (d < bestD) { bestD = d; best = i; } });
-      curR = best;
-      const real = Number(rSlides[best].dataset.real);
-      bars.forEach((bar) => bar.querySelectorAll('.lg-spon-seg').forEach((seg, i) => seg.classList.toggle('is-active', i === real)));
-      if (real !== lastReal) {
-        lastReal = real;
-        const name = rSlides[best].dataset.desc || '';
-        const info = rSlides[best].dataset.info || '';
-        descs.forEach((d) => { if (d.textContent !== name) { d.style.opacity = '0'; setTimeout(() => { d.textContent = name; d.style.opacity = '1'; }, 160); } });
-        if (capHead && capHead.textContent !== name) { capHead.style.opacity = '0'; setTimeout(() => { if (capHead) { capHead.textContent = name; capHead.style.opacity = '1'; } }, 160); }
-        if (capSub) capSub.textContent = info;
-        collapse();   // each new slide starts collapsed
-      }
+      const i = Math.round(track.scrollLeft / track.clientWidth);
+      dots.forEach((d, k) => d.classList.toggle('is-active', k === i));
     };
-
-    // settle the loop the instant scrolling stops (instant jump = invisible)
-    const settleLoop = () => {
-      if (curR === 0) { curR = N; setScroll(N, false); }
-      else if (curR === LAST) { curR = 1; setScroll(1, false); }
-    };
-
-    let raf = 0, stop = 0;
     track.addEventListener('scroll', () => { cancelAnimationFrame(raf); raf = requestAnimationFrame(paint); }, { passive: true });
-    if ('onscrollend' in window) { track.addEventListener('scrollend', settleLoop, { passive: true }); }
-    else { track.addEventListener('scroll', () => { clearTimeout(stop); stop = window.setTimeout(settleLoop, 90); }, { passive: true }); }
-
-    prev?.addEventListener('click', () => setScroll(curR - 1, true));
-    next?.addEventListener('click', () => setScroll(curR + 1, true));
-    window.addEventListener('resize', () => { setScroll(curR, false); if (!capOpen) collapse(); });
-
-    requestAnimationFrame(() => { setScroll(1, false); paint(); });
   });
 </script>
