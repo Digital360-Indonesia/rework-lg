@@ -46,10 +46,10 @@ const first = slides[0];
           <div class="lg-spon-slide" data-r={i} data-real={s.real} data-desc={s.name} data-info={(s as any).info || ''} data-has-mb={hasMb ? 'true' : 'false'}>
             {dsVideo
               ? <video class="lg-spon-media lg-spon-ds" src={dsVideo} autoplay muted loop playsinline preload="metadata"></video>
-              : <img class="lg-spon-media lg-spon-ds" src={s.image} alt={s.name} />}
+              : <div class="lg-spon-media lg-spon-ds" role="img" aria-label={s.name} style={`background-image:url('${s.image}')`}></div>}
             {hasMb && (mbVideo
               ? <video class="lg-spon-media lg-spon-mb" src={mbVideo} autoplay muted loop playsinline preload="metadata"></video>
-              : <img class="lg-spon-media lg-spon-mb" src={mbImage} alt={s.name} />)}
+              : <div class="lg-spon-media lg-spon-mb" role="img" aria-label={s.name} style={`background-image:url('${mbImage}')`}></div>)}
           </div>
         );
       })}
@@ -114,9 +114,10 @@ const first = slides[0];
   .lg-spon-carousel { position: relative; z-index: 1; }
   .lg-spon-track { display: flex; gap: clamp(6rem, 9vw, 9.5rem); overflow-x: auto; scroll-snap-type: x mandatory; scroll-behavior: smooth; -webkit-overflow-scrolling: touch; scrollbar-width: none; padding: 0 13%; }
   .lg-spon-track::-webkit-scrollbar { display: none; }
-  .lg-spon-slide { flex: 0 0 74%; scroll-snap-align: center; aspect-ratio: 2 / 1; border-radius: .25rem; overflow: hidden; background: #ece6f3; }
-  /* size by element (the original working approach), not the .lg-spon-media class */
-  .lg-spon-slide img, .lg-spon-slide video { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .lg-spon-slide { position: relative; flex: 0 0 74%; scroll-snap-align: center; aspect-ratio: 2 / 1; border-radius: .25rem; overflow: hidden; background: #ece6f3; }
+  /* media (bg-image div OR video) absolute-fills the slide — bg-image can't show a "broken" state */
+  .lg-spon-media { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block;
+    background-size: cover; background-position: center; background-repeat: no-repeat; }
   .lg-spon-mb { display: none; }   /* desktop: the mobile (mb) media is hidden */
 
   .lg-spon-arrow { position: absolute; top: 50%; transform: translateY(-50%); z-index: 4; width: 2.8rem; height: 2.8rem; border-radius: 999px; background: rgba(255,255,255,.92); border: 1px solid rgba(26,26,46,.08); color: var(--lg-ink); display: grid; place-items: center; cursor: pointer; box-shadow: 0 8px 22px -10px rgba(26,26,46,.35); transition: transform .2s ease; }
