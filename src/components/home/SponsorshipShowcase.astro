@@ -1,13 +1,13 @@
 ---
 /**
- * Sponsorship showcase — REWORKED (standalone, own background; no .lg-duo wrapper,
- * no clone/loop carousel).
- *  • Desktop: header + a responsive GRID of event cards (image/video + name + info).
- *  • Mobile (≤767px): full-screen reels panel — horizontal swipe of full-bleed event
- *    cards with a caption overlay; top story-bar dots.
+ * Sponsorship showcase — standalone (own background; NOT inside .lg-duo).
+ *  • Desktop: Ralph-Lauren-style carousel — big centered slide + left/right peek,
+ *    arrows, a progress bar + the centered event name below. Background is purple at
+ *    the top fading to white toward the middle/bottom.
+ *  • Mobile (≤767px): full-screen reels swipe with caption overlay + top story dots.
  */
 import home from '../../data/home.json';
-const spon = home.sponsorship;            // CMS-managed: src/data/home.json → sponsorship
+const spon = home.sponsorship;
 const tag = spon.tag;
 const account = (spon as any).account || 'Level Garment';
 const events = spon.events as { image?: string; video?: string; videoMobile?: string; imageMobile?: string; name: string; info?: string }[];
@@ -23,109 +23,158 @@ const first = events[0];
     <span class="lg-spon-tag">{tag}</span>
   </div>
 
-  <div class="lg-spon-track" data-track>
-    {events.map((e, i) => {
-      const dsVideo = e.video;
-      const mbVideo = e.videoMobile;
-      const mbImage = e.imageMobile;
-      const hasMb = !!(mbVideo || mbImage);
-      return (
-        <article class="lg-spon-card" data-i={i} data-name={e.name} data-info={e.info || ''} data-has-mb={hasMb ? 'true' : 'false'}>
-          <div class="lg-spon-media lg-spon-ds">
-            {dsVideo
-              ? <video src={dsVideo} autoplay muted loop playsinline preload="metadata"></video>
-              : <img src={e.image} alt={e.name} />}
-          </div>
-          {hasMb && (
-            <div class="lg-spon-media lg-spon-mb">
-              {mbVideo
-                ? <video src={mbVideo} autoplay muted loop playsinline preload="metadata"></video>
-                : <img src={mbImage} alt={e.name} />}
+  <div class="lg-spon-carousel">
+    <button class="lg-spon-arrow lg-spon-prev" data-prev aria-label="Sebelumnya">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+    </button>
+    <div class="lg-spon-track" data-track>
+      {events.map((e, i) => {
+        const dsVideo = e.video;
+        const mbVideo = e.videoMobile;
+        const mbImage = e.imageMobile;
+        const hasMb = !!(mbVideo || mbImage);
+        return (
+          <article class="lg-spon-card" data-i={i} data-name={e.name} data-info={e.info || ''} data-has-mb={hasMb ? 'true' : 'false'}>
+            <div class="lg-spon-media lg-spon-ds">
+              {dsVideo
+                ? <video src={dsVideo} autoplay muted loop playsinline preload="metadata"></video>
+                : <img src={e.image} alt={e.name} />}
             </div>
-          )}
-          <div class="lg-spon-cap">
-            <h3 class="lg-spon-name">{e.name}</h3>
-            <p class="lg-spon-info">{e.info}</p>
-          </div>
-        </article>
-      );
-    })}
+            {hasMb && (
+              <div class="lg-spon-media lg-spon-mb">
+                {mbVideo
+                  ? <video src={mbVideo} autoplay muted loop playsinline preload="metadata"></video>
+                  : <img src={mbImage} alt={e.name} />}
+              </div>
+            )}
+            <div class="lg-spon-cap">
+              <h3 class="lg-spon-name">{e.name}</h3>
+              <p class="lg-spon-info">{e.info}</p>
+            </div>
+          </article>
+        );
+      })}
+    </div>
+    <button class="lg-spon-arrow lg-spon-next" data-next aria-label="Berikutnya">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+    </button>
   </div>
 
-  <!-- mobile: account + top dots -->
+  <!-- desktop: progress bar + centered event name -->
+  <div class="lg-spon-foot">
+    <div class="lg-spon-bar" data-bar>{events.map((_, i) => (<span class:list={['lg-spon-seg', { 'is-active': i === 0 }]}></span>))}</div>
+    <p class="lg-spon-desc" data-desc>{first.name}</p>
+  </div>
+
+  <!-- mobile: account + top story dots -->
   <div class="lg-spon-acct"><img src="/assets/images/logo/favicon-w128.webp" alt="" width="26" height="26" /><span>{account}</span></div>
-  <div class="lg-spon-dots" aria-hidden="true">{events.map((_, i) => (<span class:list={{ 'is-active': i === 0 }}></span>))}</div>
+  <div class="lg-spon-dots" aria-hidden="true">{events.map((_, i) => (<span class:list={['lg-spon-dot', { 'is-active': i === 0 }]}></span>))}</div>
 </section>
 
 <style>
   :root { --lg-primary: #AF7AD5; --lg-ink: #1A1A2E; }
 
-  .lg-spon { position: relative; padding: clamp(3rem, 7vw, 5rem) clamp(1.25rem, 5vw, 3rem); overflow: hidden; }
-  .lg-spon-bg { position: absolute; inset: 0; z-index: 0; background-size: cover; background-position: center; filter: blur(28px) brightness(.6) saturate(1.1); transform: scale(1.12); }
-  .lg-spon-veil { position: absolute; inset: 0; z-index: 0; background: linear-gradient(160deg, rgba(120,75,170,.55), rgba(30,18,48,.82)); }
+  /* white base; purple only at the top, fading out by ~the middle */
+  .lg-spon { position: relative; padding: clamp(2.5rem, 6vw, 4.5rem) 0 clamp(2rem, 4vw, 3rem); overflow: hidden; background: #fff; isolation: isolate; }
+  .lg-spon-bg { position: absolute; top: 0; left: 0; right: 0; height: 60%; z-index: 0; background-size: cover; background-position: center top;
+    filter: blur(30px) brightness(.72) saturate(1.1); transform: scale(1.1);
+    -webkit-mask-image: linear-gradient(to bottom, #000 45%, transparent 92%); mask-image: linear-gradient(to bottom, #000 45%, transparent 92%); }
+  .lg-spon-veil { position: absolute; top: 0; left: 0; right: 0; height: 60%; z-index: 0;
+    background: linear-gradient(to bottom, rgba(120,75,170,.62) 0%, rgba(140,95,190,.34) 45%, rgba(255,255,255,0) 92%); }
 
-  .lg-spon-head { position: relative; z-index: 2; text-align: center; margin: 0 0 clamp(1.5rem, 4vw, 2.5rem); }
-  .lg-spon-logo { display: block; margin: 0 auto; width: clamp(8rem, 11vw, 11rem); height: auto; filter: drop-shadow(0 2px 14px rgba(0,0,0,.4)); }
-  .lg-spon-tag { display: block; margin-top: .8rem; font-family:'Montserrat','Inter',sans-serif; font-weight: 600; font-size: clamp(.74rem, 1.2vw, .95rem); letter-spacing: .3em; text-transform: uppercase; color: #fff; text-shadow: 0 1px 10px rgba(0,0,0,.5); }
+  .lg-spon-head { position: relative; z-index: 2; text-align: center; margin: 0 0 clamp(1.4rem, 3.5vw, 2.2rem); }
+  .lg-spon-logo { display: block; margin: 0 auto; width: clamp(8rem, 11vw, 11rem); height: auto; filter: drop-shadow(0 2px 14px rgba(60,30,100,.4)); }
+  .lg-spon-tag { display: block; margin-top: .75rem; font-family:'Montserrat','Inter',sans-serif; font-weight: 600; font-size: clamp(.74rem, 1.2vw, .95rem); letter-spacing: .3em; text-transform: uppercase; color: #fff; text-shadow: 0 1px 8px rgba(40,20,70,.4); }
 
-  /* DESKTOP: responsive grid */
-  .lg-spon-track { position: relative; z-index: 1; display: grid; grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr)); gap: clamp(1rem, 2vw, 1.6rem); max-width: 72rem; margin: 0 auto; }
-  .lg-spon-card { display: block; }
-  .lg-spon-media { aspect-ratio: 16 / 11; overflow: hidden; border-radius: .6rem; background: rgba(255,255,255,.08); box-shadow: 0 16px 36px -22px rgba(0,0,0,.7); }
+  /* carousel: big centered slide + peek */
+  .lg-spon-carousel { position: relative; z-index: 1; }
+  .lg-spon-track { display: flex; gap: clamp(.8rem, 1.5vw, 1.4rem); overflow-x: auto; scroll-snap-type: x mandatory; scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch; scrollbar-width: none; padding: 0 19%; }
+  .lg-spon-track::-webkit-scrollbar { display: none; }
+  .lg-spon-card { flex: 0 0 62%; scroll-snap-align: center; }
+  .lg-spon-media { aspect-ratio: 16 / 10; overflow: hidden; border-radius: .25rem; background: #ece6f3; box-shadow: 0 24px 50px -28px rgba(26,26,46,.55); }
   .lg-spon-media img, .lg-spon-media video { width: 100%; height: 100%; object-fit: cover; display: block; }
   .lg-spon-mb { display: none; }
-  .lg-spon-cap { padding: .85rem .2rem 0; }
-  .lg-spon-name { margin: 0 0 .25rem; font-family:'Inter',sans-serif; font-weight: 800; font-size: 1.02rem; color: #fff; letter-spacing: -.01em; }
-  .lg-spon-info { margin: 0; font-family:'Inter',sans-serif; font-weight: 400; font-size: .88rem; line-height: 1.5; color: rgba(255,255,255,.82); }
+  .lg-spon-cap { display: none; }   /* desktop uses the foot name, not per-card caption */
+
+  .lg-spon-arrow { position: absolute; top: 50%; transform: translateY(-50%); z-index: 4; width: 2.9rem; height: 2.9rem; border-radius: 999px;
+    background: rgba(255,255,255,.95); border: 1px solid rgba(26,26,46,.07); color: var(--lg-ink); display: grid; place-items: center; cursor: pointer;
+    box-shadow: 0 10px 26px -12px rgba(26,26,46,.4); transition: transform .2s ease; }
+  .lg-spon-arrow svg { width: 1.2rem; height: 1.2rem; }
+  .lg-spon-prev { left: clamp(.5rem, 3vw, 2.5rem); } .lg-spon-next { right: clamp(.5rem, 3vw, 2.5rem); }
+  @media (hover: hover) { .lg-spon-arrow:hover { transform: translateY(-50%) scale(1.07); } }
+
+  .lg-spon-foot { position: relative; z-index: 2; text-align: center; margin-top: clamp(1.6rem, 3vw, 2.4rem); }
+  .lg-spon-bar { display: flex; gap: 6px; justify-content: center; width: clamp(8rem, 18vw, 12rem); margin: 0 auto 1rem; }
+  .lg-spon-seg { flex: 1; height: 2px; background: rgba(26,26,46,.16); border-radius: 999px; transition: background .3s ease; }
+  .lg-spon-seg.is-active { background: var(--lg-ink); }
+  .lg-spon-desc { margin: 0; font-family:'Inter',sans-serif; font-weight: 700; font-size: clamp(.85rem, 1.3vw, 1.05rem); letter-spacing: .14em; text-transform: uppercase; color: var(--lg-ink); transition: opacity .3s ease; }
 
   .lg-spon-acct, .lg-spon-dots { display: none; }
 
   /* ============ MOBILE reels (≤767px): full-screen swipe ============ */
   @media (max-width: 767px) {
-    .lg-spon { padding: 0; }
-    .lg-spon-bg, .lg-spon-veil { z-index: 0; }
-    .lg-spon-head { position: absolute; top: calc(env(safe-area-inset-top,0px) + 2.4rem); left: 0; right: 0; z-index: 4; margin: 0; pointer-events: none; }
-    .lg-spon-logo { width: 7rem; }
-    .lg-spon-tag { font-size: .68rem; }
+    .lg-spon { padding: 0; background: #19122b; }
+    .lg-spon-bg { height: 100%; -webkit-mask-image: none; mask-image: none; filter: blur(34px) brightness(.6) saturate(1.1); }
+    .lg-spon-veil { height: 100%; background: linear-gradient(160deg, rgba(120,75,170,.5), rgba(20,13,34,.66)); }
 
-    .lg-spon-track { position: absolute; inset: 0; z-index: 1; display: flex; grid-template-columns: none; max-width: none; margin: 0; gap: 0;
-      overflow-x: auto; scroll-snap-type: x mandatory; scroll-behavior: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
-    .lg-spon-track::-webkit-scrollbar { display: none; }
+    .lg-spon-head { position: absolute; top: calc(env(safe-area-inset-top,0px) + 2.4rem); left: 0; right: 0; z-index: 4; margin: 0; pointer-events: none; }
+    .lg-spon-logo { width: 7rem; } .lg-spon-tag { font-size: .68rem; }
+
+    .lg-spon-carousel { position: absolute; inset: 0; z-index: 1; }
+    .lg-spon-arrow, .lg-spon-foot { display: none; }
+    .lg-spon-track { position: absolute; inset: 0; padding: 0; gap: 0; height: 100%; scroll-behavior: auto; }
     .lg-spon-card { flex: 0 0 100vw; position: relative; scroll-snap-align: center; }
-    .lg-spon-media { position: absolute; inset: 0; aspect-ratio: auto; border-radius: 0; box-shadow: none; }
-    .lg-spon-slide-scrim, .lg-spon-card::after { content: ''; position: absolute; inset: 0; z-index: 1; pointer-events: none;
-      background: linear-gradient(to top, rgba(8,5,16,.72) 0%, rgba(0,0,0,0) 42%); }
-    .lg-spon-slide[data-has-mb] { }
+    .lg-spon-media { position: absolute; inset: 0; aspect-ratio: auto; height: 100%; border-radius: 0; box-shadow: none; }
+    .lg-spon-card::after { content: ''; position: absolute; inset: 0; z-index: 1; pointer-events: none; background: linear-gradient(to top, rgba(8,5,16,.72) 0%, rgba(0,0,0,0) 42%); }
     .lg-spon-card[data-has-mb="true"] .lg-spon-ds { display: none; }
     .lg-spon-card[data-has-mb="true"] .lg-spon-mb { display: block; }
 
-    .lg-spon-cap { position: absolute; z-index: 3; left: 1rem; right: 1rem; bottom: calc(5rem + env(safe-area-inset-bottom,0px)); padding: 0; }
-    .lg-spon-name { font-size: 1.3rem; text-shadow: 0 1px 12px rgba(0,0,0,.6); }
-    .lg-spon-info { font-size: .95rem; color: rgba(255,255,255,.9); text-shadow: 0 1px 10px rgba(0,0,0,.55);
+    .lg-spon-cap { display: block; position: absolute; z-index: 3; left: 1rem; right: 1rem; bottom: calc(5rem + env(safe-area-inset-bottom,0px)); padding: 0; }
+    .lg-spon-name { margin: 0 0 .3rem; font-family:'Inter',sans-serif; font-weight: 800; font-size: 1.3rem; color: #fff; text-shadow: 0 1px 12px rgba(0,0,0,.6); }
+    .lg-spon-info { margin: 0; font-family:'Inter',sans-serif; font-weight: 400; font-size: .95rem; line-height: 1.45; color: rgba(255,255,255,.9); text-shadow: 0 1px 10px rgba(0,0,0,.55);
       display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
 
-    .lg-spon-acct { display: flex; align-items: center; gap: .45rem; position: absolute; z-index: 3; left: 1rem; bottom: calc(8.6rem + env(safe-area-inset-bottom,0px)); }
+    .lg-spon-acct { display: flex; align-items: center; gap: .45rem; position: absolute; z-index: 3; left: 1rem; bottom: calc(8.7rem + env(safe-area-inset-bottom,0px)); }
     .lg-spon-acct img { width: 1.7rem; height: 1.7rem; border-radius: 999px; background: #fff; padding: .2rem; }
     .lg-spon-acct span { color: #fff; font-family:'Inter',sans-serif; font-weight: 700; font-size: .9rem; text-shadow: 0 1px 8px rgba(0,0,0,.55); }
 
     .lg-spon-dots { display: flex; gap: 4px; position: absolute; z-index: 5; left: 0; right: 0; top: calc(env(safe-area-inset-top,0px) + .6rem); padding: 0 .7rem; }
-    .lg-spon-dots span { flex: 1 1 0; height: 3px; border-radius: 999px; background: rgba(255,255,255,.4); }
-    .lg-spon-dots span.is-active { background: #fff; }
+    .lg-spon-dot { flex: 1 1 0; height: 3px; border-radius: 999px; background: rgba(255,255,255,.4); }
+    .lg-spon-dot.is-active { background: #fff; }
   }
 </style>
 
 <script>
-  // mobile: update dots + caption per centered card (no loop/clones — just native snap)
   document.querySelectorAll<HTMLElement>('.lg-spon').forEach((root) => {
     const track = root.querySelector<HTMLElement>('[data-track]');
-    const dots = Array.from(root.querySelectorAll<HTMLElement>('.lg-spon-dots span'));
-    if (!track || !dots.length) return;
-    if (!window.matchMedia('(max-width: 767px)').matches) return;
-    let raf = 0;
+    const cards = Array.from(root.querySelectorAll<HTMLElement>('.lg-spon-card'));
+    const segs = Array.from(root.querySelectorAll<HTMLElement>('.lg-spon-seg'));
+    const dots = Array.from(root.querySelectorAll<HTMLElement>('.lg-spon-dot'));
+    const desc = root.querySelector<HTMLElement>('[data-desc]');
+    const prev = root.querySelector<HTMLButtonElement>('[data-prev]');
+    const next = root.querySelector<HTMLButtonElement>('[data-next]');
+    if (!track || !cards.length) return;
+
+    let cur = 0, raf = 0;
+    const centered = () => {
+      const c = track.scrollLeft + track.clientWidth / 2;
+      let best = 0, bestD = Infinity;
+      cards.forEach((card, i) => { const cc = card.offsetLeft + card.offsetWidth / 2; const d = Math.abs(cc - c); if (d < bestD) { bestD = d; best = i; } });
+      return best;
+    };
     const paint = () => {
-      const i = Math.round(track.scrollLeft / track.clientWidth);
+      const i = centered();
+      if (i === cur) return;
+      cur = i;
+      segs.forEach((s, k) => s.classList.toggle('is-active', k === i));
       dots.forEach((d, k) => d.classList.toggle('is-active', k === i));
+      const name = cards[i].dataset.name || '';
+      if (desc && desc.textContent !== name) { desc.style.opacity = '0'; setTimeout(() => { desc.textContent = name; desc.style.opacity = '1'; }, 160); }
     };
     track.addEventListener('scroll', () => { cancelAnimationFrame(raf); raf = requestAnimationFrame(paint); }, { passive: true });
+    const step = () => Math.round(track.clientWidth * 0.62);
+    prev?.addEventListener('click', () => track.scrollBy({ left: -step(), behavior: 'smooth' }));
+    next?.addEventListener('click', () => track.scrollBy({ left: step(), behavior: 'smooth' }));
   });
 </script>
