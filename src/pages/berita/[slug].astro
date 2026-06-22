@@ -1,5 +1,6 @@
 ---
 import BlogLayout from '../../layouts/BlogLayout.astro';
+import BlogCard from '../../components/content/BlogCard.astro';
 import blogPosts from '../../data/blog-posts.json';
 
 export const getStaticPaths = () => {
@@ -14,17 +15,19 @@ export const getStaticPaths = () => {
       category: post.category,
       readTime: Math.ceil(post.content.split(' ').length / 200),
       image: post.image,
-      content: post.content
-    }
+      // strip the duplicate leading <h1> (same as the title already shown in the hero)
+      content: post.content.replace(/^\s*<h1\b[^>]*>[\s\S]*?<\/h1>\s*/i, ''),
+    },
   }));
-}
+};
 
 const { title, description, image, publishDate, modifiedDate, category, readTime, content } = Astro.props;
-
 const posts = blogPosts as any[];
-const relatedPosts = posts
-  .filter(post => post.category === category && post.title !== title)
-  .slice(0, 3);
+let related = posts.filter((p) => p.category === category && p.title !== title).slice(0, 3);
+if (related.length < 3) {
+  const more = posts.filter((p) => p.title !== title && !related.some((r) => r.slug === p.slug)).slice(0, 3 - related.length);
+  related = [...related, ...more];
+}
 ---
 
 <BlogLayout
@@ -38,69 +41,31 @@ const relatedPosts = posts
 >
   <div set:html={content} />
 
-  {relatedPosts.length > 0 && (
-    <section class="related-posts not-prose mt-16 pt-12 border-t border-gray-200">
-      <h2 class="text-2xl font-bold mb-8 text-gray-900">Tips &amp; Trik Lainnya</h2>
-      <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-        {relatedPosts.map(post => (
-          <article class="group bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden">
-            <a href={`/berita/${post.slug}/`} class="block">
-              <div class="aspect-video bg-gray-100 overflow-hidden">
-                {post.image ? (
-                  <img
-                    src={post.image}
-                    alt={post.title}
-                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                    loading="lazy"
-                  />
-                ) : (
-                  <div class="w-full h-full flex items-center justify-center">
-                    <span class="text-gray-400">Blog Image</span>
-                  </div>
-                )}
-              </div>
-            </a>
-            <div class="p-5">
-              <a href={`/berita/${post.slug}/`} class="block">
-                <span class="inline-block px-3 py-1 bg-primary/10 text-primary text-xs font-semibold rounded-full mb-3">
-                  {post.category}
-                </span>
-                <h3 class="text-lg font-semibold mb-2 text-gray-900 group-hover:text-primary transition-colors line-clamp-2">
-                  {post.title}
-                </h3>
-                <time datetime={post.publishDate} class="text-sm text-gray-500">
-                  {new Date(post.publishDate).toLocaleDateString('id-ID', {
-                    year: 'numeric',
-                    month: 'long',
-                    day: 'numeric'
-                  })}
-                </time>
-              </a>
-            </div>
-          </article>
+  {related.length > 0 && (
+    <section class="lg-rel not-prose">
+      <h2 class="lg-rel-h">Tips &amp; Trik Lainnya</h2>
+      <div class="lg-rel-grid">
+        {related.map((p) => (
+          <BlogCard title={p.title} slug={p.slug} publishDate={p.publishDate} category={p.category} image={p.image} />
         ))}
       </div>
     </section>
   )}
 
-  <nav class="back-to-blog not-prose mt-12 pt-8 border-t border-gray-200">
-    <a
-      href="/berita/"
-      class="inline-flex items-center gap-2 text-primary font-semibold hover:gap-3 transition-all group"
-    >
-      <svg class="w-5 h-5 group-hover:-translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
-      </svg>
+  <nav class="lg-back not-prose">
+    <a href="/berita/" class="lg-back-link">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
       Kembali ke Tips &amp; Trik
     </a>
   </nav>
 </BlogLayout>
 
 <style>
-  .line-clamp-2 {
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-  }
+  .lg-rel { margin-top: clamp(3rem, 6vw, 4.5rem); padding-top: clamp(2rem, 4vw, 2.8rem); border-top: 1px solid rgba(26,26,46,.1); }
+  .lg-rel-h { font-family:'Inter',sans-serif; font-weight: 800; font-size: clamp(1.35rem, 2.4vw, 1.7rem); letter-spacing: -.02em; color: #1A1A2E; margin: 0 0 1.5rem; }
+  .lg-rel-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(14.5rem, 1fr)); gap: clamp(1.2rem, 2.5vw, 1.8rem); }
+  .lg-back { margin: 2.5rem 0 1rem; }
+  .lg-back-link { display: inline-flex; align-items: center; gap: .5rem; font-family:'Inter',sans-serif; font-weight: 700; font-size: .95rem; color: #9A66C2; text-decoration: none; }
+  .lg-back-link svg { width: 1.1rem; height: 1.1rem; transition: transform .2s ease; }
+  .lg-back-link:hover svg { transform: translateX(-3px); }
 </style>
