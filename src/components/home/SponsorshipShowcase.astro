@@ -114,9 +114,10 @@ const first = slides[0];
   .lg-spon-carousel { position: relative; z-index: 1; }
   .lg-spon-track { display: flex; gap: clamp(6rem, 9vw, 9.5rem); overflow-x: auto; scroll-snap-type: x mandatory; scroll-behavior: smooth; -webkit-overflow-scrolling: touch; scrollbar-width: none; padding: 0 13%; }
   .lg-spon-track::-webkit-scrollbar { display: none; }
-  .lg-spon-slide { position: relative; flex: 0 0 74%; scroll-snap-align: center; aspect-ratio: 2 / 1; border-radius: .25rem; overflow: hidden; background: #ece6f3; }
-  /* media (bg-image div OR video) absolute-fills the slide — bg-image can't show a "broken" state */
-  .lg-spon-media { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block;
+  .lg-spon-slide { flex: 0 0 74%; scroll-snap-align: center; border-radius: .25rem; overflow: hidden; background: #ece6f3; }
+  /* aspect-ratio goes on the MEDIA box (like the working rail), NOT the flex item —
+     a flex item's aspect-ratio height doesn't resolve for its children → 0-height media. */
+  .lg-spon-media { width: 100%; aspect-ratio: 2 / 1; display: block; object-fit: cover;
     background-size: cover; background-position: center; background-repeat: no-repeat; }
   .lg-spon-mb { display: none; }   /* desktop: the mobile (mb) media is hidden */
 
@@ -146,6 +147,7 @@ const first = slides[0];
     .lg-spon-carousel { position: absolute; inset: 0; z-index: 1; }
     .lg-spon-track { padding: 0; gap: 0; height: 100%; scroll-snap-type: x mandatory; scroll-behavior: auto; }
     .lg-spon-slide { flex: 0 0 100vw; aspect-ratio: auto; height: 100%; border-radius: 0; scroll-snap-align: center; }
+    .lg-spon-media { aspect-ratio: auto; height: 100%; }   /* full-bleed on mobile, not 2/1 */
     /* slides that ship a mobile (mb) media → use it instead of the desktop one */
     .lg-spon-slide[data-has-mb="true"] .lg-spon-ds { display: none; }
     .lg-spon-slide[data-has-mb="true"] .lg-spon-mb { display: block; }
