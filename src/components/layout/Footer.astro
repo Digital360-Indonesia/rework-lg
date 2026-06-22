@@ -16,16 +16,19 @@ const features = [
   { title: 'Sponsorship Solutions', img: ph('event1-glastonbury.jpg'), desc: 'Dari jaket panitia sampai merchandise acara — kami bantu wujudkan kebutuhan sponsorship event sekolah & kampusmu.' },
   { title: 'Partnerships', img: ph('image copy 6.png'), desc: 'Kerja sama jangka panjang dengan sekolah, organisasi, dan komunitas pelajar di seluruh Indonesia.' },
 ];
+// Links with a real destination point there (live URLs that resolve before & after go-live);
+// anything still without a page → WhatsApp chat.
+const waChat = `https://wa.me/${contact.whatsapp}?text=` + encodeURIComponent('Halo Level Garment, aku mau tanya & pesan custom.');
 const layanan = [
-  { label: 'Katalog Produk', href: '/product/' },
-  { label: 'Custom Order', href: '/product/' },
-  { label: 'Portfolio', href: '/portfolio/' },
-  { label: 'Promo', href: '/promo/' },
+  { label: 'Katalog Produk', href: 'https://levelgarment.com/katalog-jersey-baseball', ext: true },
+  { label: 'Custom Order', href: waChat, ext: true },
+  { label: 'Portfolio', href: 'https://portfolio.levelgarment.com', ext: true },
+  { label: 'Promo', href: waChat, ext: true },
 ];
 const perusahaan = [
-  { label: 'Tentang Kami', href: '/kontak/' },
-  { label: 'Berita', href: '/berita/' },
-  { label: 'Kontak', href: '/kontak/' },
+  { label: 'Tentang Kami', href: waChat, ext: true },
+  { label: 'Berita', href: waChat, ext: true },
+  { label: 'Kontak', href: waChat, ext: true },
 ];
 const socials = [
   { name: 'Instagram', url: social.instagram, d: 'M12 2.2c3.2 0 3.6 0 4.85.07 1.17.05 1.8.25 2.23.41.56.22.96.48 1.38.9.42.42.68.82.9 1.38.16.42.36 1.06.41 2.23.06 1.27.07 1.65.07 4.85s0 3.58-.07 4.85c-.05 1.17-.25 1.8-.41 2.23-.22.56-.48.96-.9 1.38-.42.42-.82.68-1.38.9-.42.16-1.06.36-2.23.41-1.27.06-1.65.07-4.85.07s-3.58 0-4.85-.07c-1.17-.05-1.8-.25-2.23-.41a3.7 3.7 0 0 1-1.38-.9 3.7 3.7 0 0 1-.9-1.38c-.16-.42-.36-1.06-.41-2.23C2.2 15.58 2.2 15.2 2.2 12s0-3.58.07-4.85c.05-1.17.25-1.8.41-2.23.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.42-.16 1.06-.36 2.23-.41C8.42 2.2 8.8 2.2 12 2.2Zm0 3.05A6.75 6.75 0 1 0 18.75 12 6.75 6.75 0 0 0 12 5.25Zm0 11.13A4.38 4.38 0 1 1 16.38 12 4.38 4.38 0 0 1 12 16.38Zm6.95-11.4a1.58 1.58 0 1 1-1.58-1.57 1.58 1.58 0 0 1 1.58 1.57Z' },
@@ -55,12 +58,12 @@ const socials = [
 
       <div class="lgf-col">
         <h3 class="lgf-h">Layanan</h3>
-        <ul>{layanan.map((l) => (<li><a href={l.href}>{l.label}</a></li>))}</ul>
+        <ul>{layanan.map((l) => (<li><a href={l.href} target={(l as any).ext ? '_blank' : undefined} rel={(l as any).ext ? 'noopener noreferrer' : undefined}>{l.label}</a></li>))}</ul>
       </div>
 
       <div class="lgf-col">
         <h3 class="lgf-h">Perusahaan</h3>
-        <ul>{perusahaan.map((l) => (<li><a href={l.href}>{l.label}</a></li>))}</ul>
+        <ul>{perusahaan.map((l) => (<li><a href={l.href} target={(l as any).ext ? '_blank' : undefined} rel={(l as any).ext ? 'noopener noreferrer' : undefined}>{l.label}</a></li>))}</ul>
       </div>
     </div>
 
