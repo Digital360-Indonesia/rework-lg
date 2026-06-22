@@ -1,98 +1,24 @@
 ---
 /**
- * Product landing — Level Garment.
- * LG's concept: category = product type. This page is a browse-by-type entry:
- * a full-width hero banner (~60vh) + a grid of product types that route straight
- * to each type's products. (Uniqlo "Search by category" model, re-skinned to LG.)
+ * Product — temporarily redirects to WhatsApp. Our product/catalog pages aren't
+ * polished for go-live yet, so per Araya all /product traffic goes to WA chat for
+ * now; we'll build the real catalog later. (Old browse page kept in git history.)
  */
-import BaseLayout from '../../layouts/BaseLayout.astro';
-import EndCTA from '../../components/home/EndCTA.astro';
-
-const ph = (n: number) => `/assets/images/placeholder/${['image.png','image copy.png','image copy 2.png','image copy 3.png','image copy 4.png','image copy 5.png','image copy 6.png','image copy 7.png'][n % 8]}`;
-
-// Promo banners after the category grid (media only, clickable later). Swap for real banners.
-const banners = [
-  { image: '/assets/images/placeholder/image copy 6.png', tall: true },   // full banner, 60vh
-  { image: '/assets/images/placeholder/image copy 7.png', tall: false },  // banner again
-];
-
-// Hero = full-width banner MEDIA ONLY (no overlay text). TODO: swap for the real banner.
-// To make it clickable later, just wrap the <img> in an <a href="…"> (no visible button).
-const hero = {
-  image: '/assets/images/placeholder/heroprodukplacholder.png',
-};
-
-// LG product types (category = product type). Edit/extend freely.
-const types = [
-  { name: 'T-Shirt',   href: '/product/#tshirt',   img: ph(0) },
-  { name: 'Jersey',    href: '/product/#jersey',    img: ph(1) },
-  { name: 'Workshirt', href: '/product/#workshirt', img: ph(2) },
-  { name: 'Jacket',    href: '/product/#jacket',    img: ph(3) },
-  { name: 'Hoodie',    href: '/product/#hoodie',    img: ph(4) },
-  { name: 'Sweater',   href: '/product/#sweater',   img: ph(5) },
-  { name: 'Polo',      href: '/product/#polo',      img: ph(6) },
-  { name: 'Kemeja',    href: '/product/#kemeja',    img: ph(7) },
-  { name: 'Almamater', href: '/product/#almamater', img: ph(0) },
-  { name: 'Topi',      href: '/product/#topi',      img: ph(1) },
-  { name: 'Totebag',   href: '/product/#totebag',   img: ph(2) },
-  { name: 'Training',  href: '/product/#training',  img: ph(3) },
-];
+import siteConfig from '../../data/site-config.json';
+const wa = (siteConfig as any).contact?.whatsapp || '6285183091599';
+const dest = `https://wa.me/${wa}?text=` + encodeURIComponent('Halo Level Garment, aku mau pesan produk custom. Boleh info katalog & harga?');
 ---
-<BaseLayout title="Produk" description="Pilih jenis produk Level Garment — kaos, jersey, jaket, dan lainnya. Semua bisa di-custom.">
-  <!-- Hero — full-width banner media only (clickable later, no button) -->
-  <section class="lg-prod-hero">
-    <img class="lg-prod-hero-img" src={hero.image} alt="Banner produk Level Garment" />
-  </section>
-
-  <!-- Browse by product type -->
-  <section class="lg-prod-cats">
-    <div class="lg-prod-wrap">
-      <h2 class="lg-prod-cats-title">Pilih Kategori</h2>
-      <div class="lg-prod-grid">
-        {types.map((t) => (
-          <a class="lg-prod-cat" href={t.href}>
-            <div class="lg-prod-cat-img"><img src={t.img} alt={t.name} loading="lazy" /></div>
-            <span class="lg-prod-cat-label">{t.name}</span>
-          </a>
-        ))}
-      </div>
-    </div>
-  </section>
-
-  <!-- Promo banners (media only, clickable later) -->
-  {banners.map((b) => (
-    <section class:list={['lg-prod-banner', { 'is-tall': b.tall }]}>
-      <img class="lg-prod-banner-img" src={b.image} alt="" loading="lazy" />
-    </section>
-  ))}
-
-  <!-- End CTA (reused from the homepage) -->
-  <EndCTA />
-</BaseLayout>
-
-<style>
-  /* Hero — banner media only, taller */
-  .lg-prod-hero { width: 100%; height: clamp(24rem, 72vh, 54rem); overflow: hidden; background: var(--lg-bg-soft, #F6F3FB); }
-  .lg-prod-hero-img { width: 100%; height: 100%; object-fit: cover; display: block; }
-
-  /* Category grid */
-  .lg-prod-cats { background: var(--lg-bg, #fff); padding: clamp(2.5rem, 6vw, 5rem) 0; }
-  .lg-prod-wrap { max-width: 82rem; margin: 0 auto; padding: 0 clamp(1.25rem, 4vw, 3rem); }
-  .lg-prod-cats-title { font-family:'Inter',sans-serif; font-weight:800; font-size: clamp(1.6rem, 3vw, 2.4rem); letter-spacing:-.02em; color: var(--lg-ink, #1A1A2E); margin: 0 0 clamp(1.6rem, 4vw, 2.8rem); }
-  .lg-prod-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: clamp(1.6rem, 4vw, 2.8rem) clamp(1rem, 3vw, 2rem); }
-  @media (min-width: 560px) { .lg-prod-grid { grid-template-columns: repeat(3, 1fr); } }
-  @media (min-width: 960px) { .lg-prod-grid { grid-template-columns: repeat(6, 1fr); } }
-  .lg-prod-cat { display: flex; flex-direction: column; align-items: center; text-align: center; text-decoration: none; }
-  .lg-prod-cat-img { width: 100%; aspect-ratio: 1 / 1; border-radius: var(--lg-rounded, .9rem); overflow: hidden; background: var(--lg-bg-soft, #F6F3FB); }
-  .lg-prod-cat-img img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .45s cubic-bezier(.19,1,.22,1); }
-  .lg-prod-cat-label { margin-top: .9rem; font-family:'Inter',sans-serif; font-weight:600; font-size: .95rem; color: var(--lg-ink, #1A1A2E); transition: color .2s ease; }
-  @media (hover:hover) {
-    .lg-prod-cat:hover .lg-prod-cat-img img { transform: scale(1.06); }
-    .lg-prod-cat:hover .lg-prod-cat-label { color: var(--lg-primary-dark, #9A66C2); }
-  }
-
-  /* Promo banners — full width, media only */
-  .lg-prod-banner { width: 100%; overflow: hidden; height: clamp(18rem, 46vh, 34rem); background: var(--lg-bg-soft, #F6F3FB); }
-  .lg-prod-banner.is-tall { height: clamp(22rem, 60vh, 46rem); }
-  .lg-prod-banner-img { width: 100%; height: 100%; object-fit: cover; display: block; }
-</style>
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="refresh" content={`0;url=${dest}`} />
+  <meta name="robots" content="noindex" />
+  <link rel="canonical" href={dest} />
+  <title>Produk — Level Garment</title>
+  <script is:inline define:vars={{ dest }}>location.replace(dest)</script>
+</head>
+<body style="font-family:Inter,sans-serif;padding:3rem;text-align:center;background:#1A1A2E;color:#fff">
+  <p>Mengarahkan ke <a href={dest} style="color:#AF7AD5">WhatsApp Level Garment</a>…</p>
+</body>
+</html>
