@@ -1,0 +1,195 @@
+---
+/**
+ * End CTA (homepage).
+ *  • Desktop: WhatsApp CTA centered ("Mulai Pesananmu") over the shared duo bg.
+ *  • Mobile (≤767px): full-screen swipe panel — 3 cards: (1) the CTA, (2) Alamat
+ *    with an interactive map + "Buka di Maps", (3) Jam Operasional. Acts as the
+ *    closing panel / footer on mobile (the real footer is hidden there).
+ * CMS-managed via src/data/home.json → endCta (title, subtitle, waNumber, address, hours).
+ */
+import home from '../../data/home.json';
+const { title, subtitle, waNumber, address, hours } = home.endCta as any;
+const duoBg = home.duoBackground;
+const waDirect = `https://wa.me/${waNumber}?text=` + encodeURIComponent('Halo Level Garment, aku mau konsultasi & pesan custom buat acara/kelas.');
+const addr = address || 'Level Garment Surabaya';
+const mapsUrl = 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(addr);
+const mapEmbed = 'https://maps.google.com/maps?q=' + encodeURIComponent(addr) + '&z=15&output=embed';
+const hrs = (hours && hours.length) ? hours : [{ day: 'Senin – Sabtu', time: '08.00 – 17.00 WIB' }, { day: 'Minggu & Libur', time: 'Tutup' }];
+---
+<section class="lg-mcta" aria-labelledby="lg-mcta-title">
+  <div class="lg-mcta-bg" style={`background-image:url('${duoBg}')`} aria-hidden="true"></div>
+  <div class="lg-mcta-veil" aria-hidden="true"></div>
+
+  <div class="lg-mcta-track" data-mcta>
+    <!-- Card 1 — CTA -->
+    <div class="lg-mcta-card">
+      <div class="lg-mcta-inner">
+        <h2 id="lg-mcta-title" class="lg-mcta-title">{title}</h2>
+        <p class="lg-mcta-sub">{subtitle}</p>
+
+        <form class="lg-mcta-form" data-waform data-wa={waNumber}>
+          <input type="tel" name="phone" inputmode="tel" placeholder="Nomor WhatsApp" aria-label="Nomor WhatsApp" required />
+          <span class="lg-mcta-div" aria-hidden="true"></span>
+          <input type="text" name="need" placeholder="Kebutuhanmu (cth: jaket angkatan 40 pcs)" aria-label="Kebutuhan" />
+          <button type="submit" aria-label="Kirim ke WhatsApp">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </button>
+        </form>
+
+        <a class="lg-mcta-wa" href={waDirect} target="_blank" rel="noopener noreferrer">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M.06 24l1.69-6.16a11.86 11.86 0 0 1-1.59-5.95C.16 5.34 5.5 0 12.06 0a11.82 11.82 0 0 1 8.41 3.49 11.82 11.82 0 0 1 3.48 8.42c0 6.55-5.34 11.89-11.9 11.89a11.9 11.9 0 0 1-5.68-1.45L.06 24Zm6.6-3.8c1.68.99 3.28 1.59 5.4 1.59 5.45 0 9.89-4.43 9.89-9.88a9.86 9.86 0 0 0-9.88-9.89C6.6 2.02 2.16 6.45 2.16 11.9c0 2.23.65 3.9 1.74 5.65l-1 3.65 3.76-.99ZM17.42 14.5c-.07-.12-.27-.2-.56-.34-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.64.07-.3-.15-1.25-.46-2.38-1.47-.88-.78-1.47-1.76-1.64-2.06-.17-.3-.02-.46.13-.6.13-.14.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.67-1.62-.92-2.21-.24-.58-.49-.5-.67-.51l-.57-.01c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48 0 1.46 1.07 2.88 1.22 3.08.15.2 2.1 3.2 5.08 4.49.71.3 1.26.49 1.69.63.71.22 1.36.19 1.87.12.57-.09 1.76-.72 2-1.42.25-.69.25-1.29.18-1.41Z"/></svg>
+          atau langsung WhatsApp
+        </a>
+        <span class="lg-mcta-hint" aria-hidden="true">Geser → lokasi & jam buka</span>
+      </div>
+    </div>
+
+    <!-- Card 2 — Alamat (interactive map) -->
+    <div class="lg-mcta-card lg-mcta-alt">
+      <div class="lg-mcta-inner">
+        <span class="lg-mcta-eyebrow">Lokasi</span>
+        <h2 class="lg-mcta-title">Mampir ke Workshop</h2>
+        <div class="lg-mcta-map">
+          <iframe src={mapEmbed} title="Lokasi Level Garment" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
+        </div>
+        <p class="lg-mcta-addr">{addr}</p>
+        <a class="lg-mcta-btn" href={mapsUrl} target="_blank" rel="noopener noreferrer">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-5.5-7-11a7 7 0 0 1 14 0c0 5.5-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>
+          Buka di Google Maps
+        </a>
+      </div>
+    </div>
+
+    <!-- Card 3 — Jam Operasional -->
+    <div class="lg-mcta-card lg-mcta-alt">
+      <div class="lg-mcta-inner">
+        <span class="lg-mcta-eyebrow">Jam Operasional</span>
+        <h2 class="lg-mcta-title">Kami Buka</h2>
+        <ul class="lg-mcta-hrs">
+          {hrs.map((h: any) => (
+            <li><span class="lg-mcta-hday">{h.day}</span><span class="lg-mcta-htime">{h.time}</span></li>
+          ))}
+        </ul>
+        <a class="lg-mcta-btn" href={waDirect} target="_blank" rel="noopener noreferrer">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M.06 24l1.69-6.16a11.86 11.86 0 0 1-1.59-5.95C.16 5.34 5.5 0 12.06 0a11.82 11.82 0 0 1 8.41 3.49 11.82 11.82 0 0 1 3.48 8.42c0 6.55-5.34 11.89-11.9 11.89a11.9 11.9 0 0 1-5.68-1.45L.06 24Zm6.6-3.8c1.68.99 3.28 1.59 5.4 1.59 5.45 0 9.89-4.43 9.89-9.88a9.86 9.86 0 0 0-9.88-9.89C6.6 2.02 2.16 6.45 2.16 11.9c0 2.23.65 3.9 1.74 5.65l-1 3.65 3.76-.99Z"/></svg>
+          Chat dulu sebelum datang
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="lg-mcta-dots" aria-hidden="true">
+    <span class="is-active"></span><span></span><span></span>
+  </div>
+</section>
+
+<style>
+  .lg-mcta { position: relative; width: 100%; min-height: clamp(26rem, 62vh, 42rem); display: grid; place-items: center; padding: clamp(3rem,7vw,5rem) clamp(1.5rem,5vw,4rem); text-align: center; background: #fff; }
+  .lg-mcta-bg, .lg-mcta-veil, .lg-mcta-alt, .lg-mcta-dots, .lg-mcta-hint { display: none; }   /* mobile-only / extra cards off by default */
+  .lg-mcta-track { display: contents; }   /* desktop: CTA card flows as the centered grid item */
+
+  .lg-mcta-inner { position: relative; z-index: 2; max-width: 42rem; }
+  .lg-mcta-title { color:#1A1A2E; font-family:'Inter',sans-serif; font-weight:800; font-size:clamp(2rem,5vw,3.4rem); line-height:1.03; letter-spacing:-.02em; margin:0 0 .8rem; text-shadow:0 1px 14px rgba(255,255,255,.6); }
+  .lg-mcta-sub { font-family:'Inter',sans-serif; font-weight:500; font-size:clamp(1rem,1.4vw,1.15rem); color:#2c2c3c; margin:0 auto 2rem; max-width:36rem; line-height:1.5; text-shadow:0 1px 10px rgba(255,255,255,.6); }
+
+  .lg-mcta-form { display:flex; align-items:stretch; gap:.25rem; max-width:38rem; margin:0 auto; background:rgba(255,255,255,.7); border:1.5px solid rgba(26,26,46,.18); border-radius:.6rem; padding:.4rem; backdrop-filter: blur(6px); }
+  .lg-mcta-form input { flex:1; min-width:0; background:transparent; border:0; color:#1A1A2E; font:inherit; font-size:1rem; padding:.7rem .9rem; }
+  .lg-mcta-form input::placeholder { color:rgba(26,26,46,.5); }
+  .lg-mcta-form input:focus { outline:none; }
+  .lg-mcta-form input[name=phone] { flex:0 0 38%; }
+  .lg-mcta-div { width:1px; background:rgba(26,26,46,.2); margin:.4rem 0; }
+  .lg-mcta-form button { flex:0 0 auto; width:3rem; border:0; border-radius:.4rem; background:#9A66C2; color:#fff; cursor:pointer; display:grid; place-items:center; transition: transform .15s ease, background .15s ease; }
+  .lg-mcta-form button svg { width:1.25rem; height:1.25rem; }
+  @media (hover:hover){ .lg-mcta-form button:hover { transform: translateX(2px); background:#8a56b2; } }
+
+  .lg-mcta-wa { display:inline-flex; align-items:center; gap:.55rem; margin-top:1.6rem; font-family:'Inter',sans-serif; font-weight:700; font-size:.95rem; color:#1A1A2E; text-decoration:none; opacity:.92; transition: opacity .2s ease, color .2s ease; text-shadow:0 1px 8px rgba(255,255,255,.55); }
+  .lg-mcta-wa svg { width:1.3rem; height:1.3rem; }
+  @media (hover:hover){ .lg-mcta-wa:hover { opacity:1; color:#9A66C2; } }
+
+  @media (max-width:600px){
+    .lg-mcta-form { flex-wrap:wrap; }
+    .lg-mcta-form input[name=phone] { flex:1 1 100%; }
+    .lg-mcta-div { display:none; }
+    .lg-mcta-form input[name=need] { flex:1 1 calc(100% - 3.3rem); }
+  }
+
+  /* ============ MOBILE reels (≤767px): swipe CTA · Alamat · Jam ============ */
+  @media (max-width: 767px) {
+    .lg-mcta { position: relative; display: block; padding: 0; min-height: 0; overflow: hidden; }
+    .lg-mcta-bg { display: block; position: absolute; inset: -8%; z-index: 0; background-size: cover; background-position: center;
+      filter: blur(26px) brightness(.55) saturate(1.1); transform: scale(1.1); }
+    .lg-mcta-veil { display: block; position: absolute; inset: 0; z-index: 1;
+      background: linear-gradient(160deg, rgba(120,75,170,.5) 0%, rgba(30,18,48,.78) 60%, rgba(18,11,30,.9) 100%); }
+
+    .lg-mcta-track { display: flex; position: absolute; inset: 0; z-index: 2;
+      overflow-x: auto; scroll-snap-type: x mandatory; scroll-behavior: auto;
+      -webkit-overflow-scrolling: touch; scrollbar-width: none; }
+    .lg-mcta-track::-webkit-scrollbar { display: none; }
+
+    .lg-mcta-card { flex: 0 0 100vw; scroll-snap-align: center; display: grid; place-items: center; text-align: center;
+      padding: calc(env(safe-area-inset-top,0px) + 4rem) 1.6rem calc(5.6rem + env(safe-area-inset-bottom,0px)); }
+    .lg-mcta-alt { display: grid; }
+    .lg-mcta-inner { width: 100%; max-width: 24rem; }
+
+    .lg-mcta-eyebrow { display: inline-block; margin-bottom: .7rem; font-family:'Inter',sans-serif; font-weight:700; font-size:.7rem;
+      letter-spacing:.22em; text-transform:uppercase; color:#fff; padding:.32rem .8rem; border:1.5px solid rgba(175,122,213,.95); border-radius:999px; }
+    .lg-mcta-title { color:#fff; font-size:clamp(1.7rem,7vw,2.2rem); text-shadow:0 2px 18px rgba(0,0,0,.4); margin:0 0 .7rem; }
+    .lg-mcta-sub { color:rgba(255,255,255,.86); font-weight:400; text-shadow:0 1px 10px rgba(0,0,0,.4); margin:0 auto 1.6rem; }
+    .lg-mcta-form { background:rgba(255,255,255,.92); border-color:rgba(255,255,255,.5); }
+    .lg-mcta-wa { color:#fff; text-shadow:0 1px 10px rgba(0,0,0,.5); }
+    .lg-mcta-hint { display:block; margin-top:1.5rem; font-family:'Inter',sans-serif; font-size:.78rem; font-weight:500; letter-spacing:.04em; color:rgba(255,255,255,.65); }
+
+    /* Alamat card */
+    .lg-mcta-map { width:100%; aspect-ratio: 16/11; border-radius:1rem; overflow:hidden; margin:.4rem 0 1rem; border:1px solid rgba(255,255,255,.25);
+      box-shadow:0 12px 34px -12px rgba(0,0,0,.55); }
+    .lg-mcta-map iframe { width:100%; height:100%; border:0; display:block; filter: saturate(1.05); }
+    .lg-mcta-addr { color:rgba(255,255,255,.9); font-family:'Inter',sans-serif; font-weight:500; font-size:.95rem; line-height:1.5; margin:0 0 1.2rem; text-shadow:0 1px 8px rgba(0,0,0,.5); }
+
+    /* Jam card */
+    .lg-mcta-hrs { list-style:none; margin:.4rem 0 1.4rem; padding:0; width:100%; }
+    .lg-mcta-hrs li { display:flex; justify-content:space-between; align-items:center; gap:1rem; padding:.85rem .2rem; border-bottom:1px solid rgba(255,255,255,.18); }
+    .lg-mcta-hday { color:#fff; font-family:'Inter',sans-serif; font-weight:600; font-size:.98rem; }
+    .lg-mcta-htime { color:rgba(255,255,255,.82); font-family:'Inter',sans-serif; font-weight:500; font-size:.95rem; }
+
+    .lg-mcta-btn { display:inline-flex; align-items:center; gap:.5rem; padding:.8rem 1.4rem; border-radius:999px;
+      background:#fff; color:#5a2e86; font-family:'Inter',sans-serif; font-weight:700; font-size:.92rem; text-decoration:none;
+      box-shadow:0 8px 22px -8px rgba(0,0,0,.5); }
+    .lg-mcta-btn svg { width:1.15rem; height:1.15rem; }
+
+    /* story-bar at the very top (section-1 style): full-width segments, active = solid white */
+    .lg-mcta-dots { display:flex; gap:4px; position:absolute; z-index:5; left:0; right:0;
+      top: calc(env(safe-area-inset-top,0px) + .6rem); padding:0 .7rem; }
+    .lg-mcta-dots span { flex:1 1 0; height:3px; border-radius:999px; background:rgba(255,255,255,.4); transition: background .3s ease; }
+    .lg-mcta-dots span.is-active { background:#fff; }
+  }
+</style>
+
+<script>
+  // WhatsApp form → prefilled chat
+  document.querySelectorAll<HTMLFormElement>('[data-waform]').forEach((form) => {
+    if ((form as any)._wabound) return; (form as any)._wabound = true;
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const wa = form.dataset.wa || '';
+      const phone = (form.elements.namedItem('phone') as HTMLInputElement)?.value.trim();
+      const need = (form.elements.namedItem('need') as HTMLInputElement)?.value.trim();
+      let msg = 'Halo Level Garment, aku mau pesan custom.';
+      if (need) msg += ` Kebutuhan: ${need}.`;
+      if (phone) msg += ` Nomor WhatsApp-ku: ${phone}.`;
+      window.open(`https://wa.me/${wa}?text=` + encodeURIComponent(msg), '_blank', 'noopener');
+    });
+  });
+
+  // mobile swipe dots
+  document.querySelectorAll<HTMLElement>('.lg-mcta').forEach((root) => {
+    const track = root.querySelector<HTMLElement>('[data-mcta]');
+    const dots = Array.from(root.querySelectorAll<HTMLElement>('.lg-mcta-dots span'));
+    if (!track || !dots.length) return;
+    let raf = 0;
+    const paint = () => {
+      const i = Math.round(track.scrollLeft / track.clientWidth);
+      dots.forEach((d, k) => d.classList.toggle('is-active', k === i));
+    };
+    track.addEventListener('scroll', () => { cancelAnimationFrame(raf); raf = requestAnimationFrame(paint); }, { passive: true });
+  });
+</script>

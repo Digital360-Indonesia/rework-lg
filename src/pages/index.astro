@@ -14,9 +14,14 @@
 
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Hero from '../components/home/Hero.astro';
-import ValueProposition from '../components/home/ValueProposition.astro';
-import CTASection from '../components/home/CTASection.astro';
+// import ProductCategories from '../components/home/ProductCategories.astro'; // saved (old section-2 carousel) — superseded by ProductRail
+import ProductRail from '../components/home/ProductRail.astro';
+import VideoBanner from '../components/home/VideoBanner.astro';
+import SplitBanner from '../components/home/SplitBanner.astro';
+import SponsorshipShowcase from '../components/home/SponsorshipShowcase.astro';
+import EndCtaMedia from '../components/home/EndCtaMedia.astro';
 import siteConfig from '../data/site-config.json';
+import home from '../data/home.json';
 
 // Page metadata
 const pageTitle = siteConfig.seo.defaultTitle;
@@ -32,14 +37,37 @@ const ogImage = '/assets/images/logo/logo-colored.webp';
   <!-- Hero Section -->
   <Hero variant="default" />
 
-  <!-- Value Proposition & Video Gallery Section -->
-  <ValueProposition />
+  <!-- Section 2 — editorial product rail (replaces old ProductCategories carousel) -->
+  <ProductRail />
 
-  <!-- CTA Section -->
-  <CTASection variant="default" />
+  <!-- Video banner -->
+  <VideoBanner />
+
+  {/* Split banner (static left + sliding right) — HIDDEN for now (Araya) on desktop + mobile */}
+  {/* <SplitBanner /> */}
+
+  <!-- Sponsorship + End CTA share ONE continuous background (sky on top → rooftop/models on bottom) -->
+  <!-- Sponsorship — standalone (own background) -->
+  <SponsorshipShowcase />
+
+  <!-- End CTA — plain white, standalone -->
+  <EndCtaMedia />
+
+  <script is:inline>document.documentElement.classList.add('lg-home');</script>
 </BaseLayout>
 
 <style>
+  /* Sponsorship + End CTA: one shared background image spanning both (sky → rooftop).
+     full-width so the models at the edges stay in frame; bottom-anchored to keep them. */
+  .lg-duo {
+    position: relative;
+    /* background-image set inline from home.json → duoBackground (CMS-editable) */
+    background-size: cover;
+    background-position: center bottom;
+    background-repeat: no-repeat;
+    background-color: #C6A4E6;
+  }
+
   /* Smooth scrolling for anchor links */
   html {
     scroll-behavior: smooth;
@@ -53,5 +81,31 @@ const ogImage = '/assets/images/logo/logo-colored.webp';
   /* Prevent layout shift */
   main {
     min-height: 100vh;
+  }
+
+  /* ============ MOBILE (phones ≤767px): TikTok / Reels-style full-screen swipe feed ============
+     Native CSS scroll-snap — each section is a full-screen panel; swipe up/down snaps one at a time. */
+  @media (max-width: 767px) {
+    /* TikTok-feel: mandatory one-at-a-time snap, no rubber-band chaining, direct snap */
+    :global(html) { scroll-snap-type: y mandatory; overscroll-behavior-y: contain; scroll-behavior: auto; }
+    :global(body) { overscroll-behavior-y: contain; }
+    /* kill the 80px desktop-header scroll offset so each panel snaps FLUSH (one swipe = full fit, TikTok-style) */
+    :global(section) { scroll-margin-top: 0 !important; }
+    /* Top header + announcement are hidden on mobile (BaseLayout) — the purple bottom nav (MobileNav) is the navigator. */
+    :global(.lg-hero),
+    :global(.lg-rail),
+    :global(.lg-banner),
+    :global(.lg-spon),
+    :global(.lg-mcta) {
+      height: 100dvh !important;   /* dynamic viewport — fills exactly on iPhone/Android, no peek of the next section */
+      min-height: 100dvh !important;
+      margin: 0 !important;
+      scroll-snap-align: start;
+      scroll-snap-stop: always;
+    }
+    /* Section 4 (split banner) skipped on mobile for now */
+    :global(.lg-split) { display: none !important; }
+    /* No shared connected background on mobile — Sponsorship + End-CTA become their own full-screen panels */
+    .lg-duo { display: contents; }
   }
 </style>

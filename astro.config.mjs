@@ -2,6 +2,10 @@ import { defineConfig } from 'astro/config';
 import tailwind from '@astrojs/tailwind';
 import sitemap from '@astrojs/sitemap';
 import compress from 'astro-compress';
+import { readFileSync } from 'node:fs';
+// Legacy URL safety net for go-live: old levelgarment.com URLs (WP) with no new
+// equivalent → a relevant page, so nothing 404s. Generated from the old sitemap.
+const legacyRedirects = JSON.parse(readFileSync(new URL('./src/data/legacy-redirects.json', import.meta.url), 'utf-8'));
 
 // Blog post slugs from production sitemap - redirect old URLs to /berita/{slug}
 const blogSlugs = [
@@ -144,6 +148,7 @@ blogSlugs.forEach(slug => {
 
 export default defineConfig({
   site: 'https://levelgarment.com',
+  redirects: { ...legacyRedirects },
   integrations: [
     tailwind({
       applyBaseStyles: false,

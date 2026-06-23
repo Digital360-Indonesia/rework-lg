@@ -1,299 +1,182 @@
 ---
 /**
- * Hero Section Component - Level Garment Homepage
- *
- * Features:
- * - Full screen height (100vh - header height)
- * - Two-column layout: 40% image left, 60% content right
- * - White background
- * - Slideshow with Tinder-style Card Stack Swipe animation
- *
- * @version 1.0.0
+ * Level Garment hero — full-screen (100svh) IG-story banner. Each slide carries
+ * its OWN title + description (fades as slides advance). Title is the CTA
+ * (underline-draws on hover, clickable). Story indicator = dots + active fill-pill,
+ * centered at the bottom.
  */
-
-interface Props {
-  variant?: 'default' | 'simple';
-}
-
+interface Props { variant?: 'default' | 'simple'; }
 const { variant = 'default' } = Astro.props;
 
-// Hero content from WordPress (matches live site exactly)
-const heroTitle = "Konveksi Pelajar Indonesia di Surabaya";
-
-const heroDescription = [
-  "Level Garment sebagai konveksi terpercaya para pelajar Indonesia untuk kebutuhan custom baju kegiatanmu seperti class meeting, study tour, foto album kenangan, event dies natalis, event konser sekolah, sampai ke event skala kecil maupun besar di kampusmu.",
-  "Mulai dari kaos barcode spotify atau kaos sablon reflektif, jaket varsity full patch, workjacket, workshirt, jersey baseball, topi, lanyard & ID Card, semua kebutuhanmu serahkan aja ke Level Garment.",
-  "Masih belum bikin kamu tertarik? Kami berikan cashback spesial untuk pemesanan pertamamu!"
-];
-
-// Slideshow images from live site
-const slideshowImages = [
-  '/assets/images/homepage/slideshow/20250424-slide_lg_3.webp',
-  '/assets/images/homepage/slideshow/20250424-slide_lg_4.webp',
-  '/assets/images/homepage/slideshow/20250424-slide_lg_5.webp',
-  '/assets/images/homepage/slideshow/20250424-slide_lg_6.webp',
-  '/assets/images/homepage/slideshow/20250424-slide_lg_8.webp',
-  '/assets/images/homepage/slideshow/20250424-slide_lg_7.webp',
-  '/assets/images/homepage/slideshow/20250424-slide_lg_1.webp',
-  '/assets/images/homepage/slideshow/20250424-slide_lg_2.webp',
-];
+import home from '../../data/home.json';
+// 5 slides — first is a video, the rest images (CMS-managed via src/data/home.json → hero.slides).
+const slides = home.hero.slides;
 ---
-
-<!-- Hero Section - Full Screen with White Background -->
-<section
-  id="hero"
-  class="hero-section relative w-full bg-white"
->
-  <div class="container mx-auto px-4 pt-16 pb-8 lg:pt-20 lg:pb-8">
-    <!-- Two Column Layout: 40% Image / 60% Content -->
-    <div class="grid grid-cols-1 lg:grid-cols-5 gap-6 lg:gap-8 items-center">
-      <!-- Left Column - Card Stack Slideshow (40% width = 2/5 columns) -->
-      <div class="lg:col-span-2 order-2 lg:order-1">
-        {variant === 'default' && (
-          <div class="relative w-full h-[400px] sm:h-[450px] lg:h-[500px] rounded-xl sm:rounded-2xl">
-            <!-- Card Stack Container -->
-            <div class="card-stack-container absolute inset-0">
-              {slideshowImages.map((img, index) => (
-                <div
-                  class={`card-stack-item absolute inset-0 rounded-xl sm:rounded-2xl overflow-hidden shadow-2xl ${index === 0 ? 'top-card' : ''}`}
-                  data-index={index}
-                  style={`z-index: ${slideshowImages.length - index};`}
-                >
-                  <img
-                    src={img}
-                    alt={`Level Garment Slide ${index + 1}`}
-                    class="w-full h-full object-cover"
-                    loading={index === 0 ? 'eager' : 'lazy'}
-                  />
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
+<section id="hero" class="lg-hero" data-slides={slides.length}>
+  <div class="lg-hero-slides">
+    {slides.map((s, i) => (
+      <div class:list={['lg-hero-slide', { 'is-active': i === 0, 'is-init': i === 0 }]} data-i={i}
+           data-title={s.title} data-desc={s.desc} data-href={s.href}>
+        {s.video
+          ? <video src={s.video} autoplay loop muted playsinline preload="metadata"></video>
+          : <picture>
+              {(s as any).imageMobile && <source srcset={(s as any).imageMobile} media="(max-width: 1023px)" />}
+              <img src={s.image} alt="" loading={i === 0 ? 'eager' : 'lazy'} fetchpriority={i === 0 ? 'high' : undefined} />
+            </picture>}
       </div>
+    ))}
+    <div class="lg-hero-scrim" aria-hidden="true"></div>
+  </div>
 
-      <!-- Right Column - Content (60% width = 3/5 columns) -->
-      <div class="lg:col-span-3 order-1 lg:order-2">
-        <div class="space-y-4 sm:space-y-6">
-          <!-- Main Title -->
-          <h1 class="text-2xl sm:text-3xl lg:text-5xl xl:text-6xl font-bold leading-tight text-gray-900">
-            {heroTitle}
-          </h1>
+  <button class="lg-hero-nav lg-hero-nav-prev" aria-label="Slide sebelumnya" data-prev>
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+  </button>
+  <button class="lg-hero-nav lg-hero-nav-next" aria-label="Slide berikutnya" data-next>
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+  </button>
 
-          <!-- Description -->
-          <div class="prose prose-lg max-w-none">
-            <div class="text-gray-600 text-sm sm:text-base lg:text-lg xl:text-xl leading-relaxed space-y-3 sm:space-y-4">
-              {heroDescription.map((paragraph, index) => (
-                <p key={index} class="hidden sm:block first:block">{paragraph}</p>
-              ))}
-            </div>
-            <!-- Mobile: Show all paragraphs but in smaller font -->
-            <div class="text-gray-600 text-sm leading-relaxed space-y-3 sm:hidden">
-              {heroDescription.map((paragraph, index) => (
-                <p key={index}>{paragraph}</p>
-              ))}
-            </div>
-          </div>
-
-          <!-- CTA Buttons -->
-          <div class="flex flex-col sm:flex-row gap-3 sm:gap-4 pt-2 sm:pt-4">
-            <a
-              href="https://wa.me/6285183091599?text=Hai%20kak!%20Saya%20tertarik%20buat%20pesan%20custom%20baju."
-              target="_blank"
-              rel="noopener noreferrer"
-              class="inline-flex items-center justify-center px-5 py-2.5 sm:px-8 sm:py-4 bg-primary hover:bg-primary-dark text-white font-semibold rounded-full transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1 text-sm sm:text-base"
-            >
-              <svg class="w-4 h-4 sm:w-5 sm:h-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
-              </svg>
-              Pesan Sekarang
-            </a>
-            <a
-              href="/product/"
-              class="inline-flex items-center justify-center px-5 py-2.5 sm:px-8 sm:py-4 border-2 border-primary text-primary hover:bg-primary hover:text-white font-semibold rounded-full transition-all duration-300 text-sm sm:text-base"
-            >
-              Lihat Produk
-            </a>
-          </div>
-        </div>
-      </div>
+  <div class="lg-hero-bottom">
+    <div class="lg-hero-copy" data-copy>
+      <h1 class="lg-hero-title"><a id="lg-hero-link" href={slides[0].href}>{slides[0].title}</a></h1>
+      <p class="lg-hero-sub" id="lg-hero-sub">{slides[0].desc}</p>
     </div>
   </div>
 
+  <div class="lg-hero-progress" aria-hidden="true">
+    {slides.map((_, i) => (<span class="lg-hp" data-i={i}><i></i></span>))}
+  </div>
 </section>
 
 <style>
-  /* Tinder-style Card Stack Swipe Animation */
+  :root { --lg-primary: #AF7AD5; --lg-amber: #FFC107; --lg-ink: #1A1A2E; }
+  /* FIXED aspect-ratio (KG approach) so the crop is consistent across devices, not viewport-dependent */
+  .lg-hero { position: relative; width: 100%; aspect-ratio: 16 / 9; min-height: 30rem; overflow: hidden; background: #1A1A2E; isolation: isolate; }
+  @media (max-width: 1023px) { .lg-hero { aspect-ratio: 4 / 5; } }
 
-  .card-stack-item {
-    transform-origin: center bottom;
-    transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  }
+  .lg-hero-slides { position: absolute; inset: 0; z-index: 0; }
+  .lg-hero-slide { position: absolute; inset: 0; opacity: 0; z-index: 0; will-change: transform, filter; }
+  /* TikTok whip-pan — direction-aware: forward (next) swipes right, backward (prev) swipes left */
+  .lg-hero-slide.is-active  { opacity: 1; z-index: 1; animation: lg-whip-in-l  .58s cubic-bezier(.5,0,.18,1) both; }
+  .lg-hero-slide.is-leaving { opacity: 1; z-index: 2; animation: lg-whip-out-l .58s cubic-bezier(.5,0,.18,1) both; }
+  .lg-hero-slide.is-active.is-back  { animation-name: lg-whip-in-r; }
+  .lg-hero-slide.is-leaving.is-back { animation-name: lg-whip-out-r; }
+  .lg-hero-slide.is-init { animation: none; }   /* first slide on load — no whip intro */
+  @keyframes lg-whip-in-r  { from { transform: translate3d(-100%,0,0); filter: blur(6px); } to { transform: translate3d(0,0,0); filter: blur(0); } }
+  @keyframes lg-whip-out-r { from { transform: translate3d(0,0,0); filter: blur(0); } to { transform: translate3d(100%,0,0); filter: blur(6px); } }
+  @keyframes lg-whip-in-l  { from { transform: translate3d(100%,0,0); filter: blur(6px); } to { transform: translate3d(0,0,0); filter: blur(0); } }
+  @keyframes lg-whip-out-l { from { transform: translate3d(0,0,0); filter: blur(0); } to { transform: translate3d(-100%,0,0); filter: blur(6px); } }
+  .lg-hero-slide img, .lg-hero-slide video { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .lg-hero-scrim { position: absolute; inset: 0; background:
+    linear-gradient(to top, rgba(18,18,30,.92) 0%, rgba(18,18,30,.66) 22%, rgba(18,18,30,.30) 46%, rgba(18,18,30,0) 72%); }
+  /* hidden for now (kept in markup) — no overlay, no text. (dots = .lg-hero-progress shown) */
+  .lg-hero-scrim, .lg-hero-bottom { display: none; }
 
-  /* Initial stack state - cards stacked with offset */
-  .card-stack-item:not(.top-card) {
-    transform: scale(0.9) translateY(10px);
-    opacity: 0.7;
-  }
+  .lg-hero-bottom { position: absolute; z-index: 3; bottom: clamp(2.4rem, 7vh, 4rem); left: clamp(1.5rem, 5vw, 4rem); right: clamp(1.5rem, 5vw, 4rem); color: #fff; }
+  .lg-hero-copy { max-width: 38rem; transition: opacity .4s ease, transform .4s ease; }
+  .lg-hero-copy.is-swapping { opacity: 0; transform: translateY(10px); }
+  .lg-hero-title { color: #fff; font-family:'Inter',sans-serif; font-weight:800; font-size: clamp(2.4rem, 6.5vw, 5rem); line-height: 1; letter-spacing:-.03em; margin: 0 0 .85rem; text-shadow: 0 2px 24px rgba(0,0,0,.55), 0 1px 3px rgba(0,0,0,.4); white-space: nowrap; }
+  .lg-hero-title a { color: inherit; text-decoration: none; position: relative; display: inline-block; }
+  .lg-hero-title a::after { content: ''; position: absolute; left: 0; right: 0; bottom: 0.04em; height: 0.055em; background: currentColor; transform: scaleX(0); transform-origin: left center; transition: transform .45s cubic-bezier(.19,1,.22,1); }
+  @media (hover: hover) { .lg-hero-title a:hover::after { transform: scaleX(1); } }
+  .lg-hero-sub { font-family:'Inter',sans-serif; font-weight:500; font-size: clamp(.98rem,1.4vw,1.15rem); line-height:1.5; color: rgba(255,255,255,.92); margin: 0;
+    display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; max-width: 32rem; }
 
-  /* Second card in stack */
-  .card-stack-item:nth-child(2):not(.top-card),
-  .card-stack-item[data-stack-position="1"] {
-    transform: scale(0.92) translateY(8px);
-    opacity: 0.8;
-  }
+  /* hover-reveal prev/next (show only when hovering the left/right edge) */
+  .lg-hero-nav { position: absolute; top: 0; bottom: 0; width: 16%; min-width: 4rem; z-index: 1; display: grid; place-items: center; background: none; border: 0; cursor: pointer; opacity: 0; transition: opacity .3s ease; }
+  .lg-hero-nav-prev { left: 0; } .lg-hero-nav-next { right: 0; }
+  .lg-hero-nav svg { width: 2rem; height: 2rem; color: #fff; filter: drop-shadow(0 2px 10px rgba(0,0,0,.5)); transition: transform .2s ease; }
+  @media (hover: hover) { .lg-hero-nav:hover { opacity: 1; } .lg-hero-nav-prev:hover svg { transform: translateX(-3px); } .lg-hero-nav-next:hover svg { transform: translateX(3px); } }
 
-  /* Third card in stack */
-  .card-stack-item:nth-child(3):not(.top-card),
-  .card-stack-item[data-stack-position="2"] {
-    transform: scale(0.94) translateY(6px);
-    opacity: 0.85;
-  }
+  .lg-hero-progress { position: absolute; z-index: 3; left: 50%; transform: translateX(-50%); bottom: clamp(1.4rem, 4vh, 2.4rem); display: flex; align-items: center; gap: .5rem; }
+  .lg-hp { position: relative; width: 7px; height: 7px; border-radius: 999px; background: rgba(255,255,255,.5); overflow: hidden; transition: width .45s cubic-bezier(.19,1,.22,1), background .3s ease; flex: 0 0 auto; }
+  .lg-hp i { position:absolute; inset:0; width:0; background:#fff; border-radius:999px; }
+  .lg-hp.is-done { background: rgba(255,255,255,.5); }
+  .lg-hp.is-active { width: 2.4rem; background: rgba(255,255,255,.35); }
+  .lg-hp.is-active i { width: 100%; transition: width var(--dur, 4.2s) linear; }
 
-  /* Top card (currently visible) */
-  .card-stack-item.top-card {
-    transform: scale(1) translateY(0) rotate(0deg);
-    opacity: 1;
-  }
+  @media (prefers-reduced-motion: reduce){ .lg-hero-slide.is-active{ animation:none; } .lg-hero-slide.is-leaving{ animation:none; opacity:0; } .lg-hp.is-active i{ transition:none; width:100%; } }
 
-  /* Card swiping left (dislike) */
-  .card-stack-item.swipe-left {
-    transform: translateX(-150%) translateY(50px) rotate(-30deg) !important;
-    opacity: 0 !important;
-  }
-
-  /* Card swiping right (like) */
-  .card-stack-item.swipe-right {
-    transform: translateX(150%) translateY(50px) rotate(30deg) !important;
-    opacity: 0 !important;
-  }
-
-  /* Card scaling up to become top card */
-  .card-stack-item.scaling-up {
-    transform: scale(1) translateY(0) rotate(0deg);
-    opacity: 1;
-  }
-
-  /* Text reveal animation */
-  @keyframes fadeInUp {
-    from {
-      opacity: 0;
-      transform: translateY(30px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-
-  .hero-section h1,
-  .hero-section .prose,
-  .hero-section a {
-    animation: fadeInUp 0.8s ease-out forwards;
-  }
-
-  .hero-section h1 {
-    animation-delay: 0.2s;
-  }
-
-  .hero-section .prose {
-    animation-delay: 0.4s;
-    opacity: 0;
-  }
-
-  .hero-section a:first-of-type {
-    animation-delay: 0.6s;
-    opacity: 0;
-  }
-
-  .hero-section a:last-of-type {
-    animation-delay: 0.7s;
-    opacity: 0;
-  }
-
-  /* Mobile responsive adjustments */
-  @media (max-width: 1023px) {
-    .hero-section {
-      min-height: auto;
-    }
-
-    .hero-section h1 {
-      animation-delay: 0.1s;
-    }
-
-    .hero-section .prose {
-      animation-delay: 0.2s;
-    }
-
-    .hero-section a:first-of-type {
-      animation-delay: 0.3s;
-    }
-
-    .hero-section a:last-of-type {
-      animation-delay: 0.4s;
-    }
+  /* MOBILE reels: Instagram-Stories progress — pinned to the TOP. Segments fill left→right
+     and STAY filled: done = solid white, active = dim track filling, ahead = dim. */
+  @media (max-width: 767px) {
+    .lg-hero-progress { top: calc(.6rem + env(safe-area-inset-top, 0px)); bottom: auto; left: 0; right: 0; transform: none; padding: 0 .7rem; gap: 4px; }
+    .lg-hp { flex: 1 1 0; width: auto; height: 3px; border-radius: 999px; background: rgba(255,255,255,.4); }
+    .lg-hp.is-active { width: auto; background: rgba(255,255,255,.4); }   /* dim track; <i> fills white over the slide's duration */
+    .lg-hp.is-done { width: auto; background: #fff; }                     /* completed → solid white, stays filled */
+    .lg-hp i { background: #fff; }
   }
 </style>
 
 <script>
-  // Tinder-style Card Stack Swipe Animation
-  const cards = document.querySelectorAll('.card-stack-item');
-  const slideDuration = 4000; // 4 seconds per swipe
-  let currentIndex = 0;
-  const totalCards = cards.length;
+  const hero = document.getElementById('hero');
+  if (hero) {
+    const slides = Array.from(hero.querySelectorAll<HTMLElement>('.lg-hero-slide'));
+    const bars = Array.from(hero.querySelectorAll<HTMLElement>('.lg-hp'));
+    const copy = hero.querySelector<HTMLElement>('[data-copy]');
+    const link = document.getElementById('lg-hero-link') as HTMLAnchorElement | null;
+    const sub = document.getElementById('lg-hero-sub');
+    const DUR = 4200;
+    let cur = 0; let timer: ReturnType<typeof setTimeout> | null = null;
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  function updateStack() {
-    cards.forEach((card, index) => {
-      const cardEl = card as HTMLElement;
-      const relativeIndex = (index - currentIndex + totalCards) % totalCards;
-
-      // Reset all classes
-      cardEl.classList.remove('top-card', 'swipe-left', 'swipe-right', 'scaling-up');
-      cardEl.style.transform = '';
-      cardEl.style.opacity = '';
-      cardEl.style.zIndex = `${totalCards - relativeIndex}`;
-
-      if (relativeIndex === 0) {
-        // Top card - currently visible
-        cardEl.classList.add('top-card');
-      } else if (relativeIndex === 1) {
-        // Second card - slightly smaller, offset
-        cardEl.style.transform = 'scale(0.94) translateY(6px)';
-        cardEl.style.opacity = '0.9';
-      } else if (relativeIndex === 2) {
-        // Third card - even smaller
-        cardEl.style.transform = 'scale(0.88) translateY(12px)';
-        cardEl.style.opacity = '0.7';
-      } else {
-        // Cards deeper in stack
-        cardEl.style.transform = 'scale(0.82) translateY(18px)';
-        cardEl.style.opacity = '0.5';
-      }
-    });
-  }
-
-  function swipeCard() {
-    const currentCard = cards[currentIndex] as HTMLElement;
-
-    // Randomly swipe left or right
-    const swipeDirection = Math.random() > 0.5 ? 'swipe-left' : 'swipe-right';
-    currentCard.classList.add(swipeDirection);
-
-    // After animation completes, move to next card
-    setTimeout(() => {
-      currentIndex = (currentIndex + 1) % totalCards;
-      updateStack();
-
-      // Reset the swiped card position for next time
+    const swapCopy = (el: HTMLElement) => {
+      const t = el.dataset.title || '', d = el.dataset.desc || '', h = el.dataset.href || '#';
+      if (!copy) return;
+      copy.classList.add('is-swapping');
       setTimeout(() => {
-        currentCard.classList.remove(swipeDirection);
-      }, 100);
-    }, 800); // Match the CSS transition duration
+        if (link) { link.textContent = t; link.setAttribute('href', h); link.target = h.startsWith('http') ? '_blank' : ''; }
+        if (sub) sub.textContent = d;
+        copy.classList.remove('is-swapping');
+      }, 280);
+    };
+
+    const show = (n: number, dir: number = 1) => {
+      const prev = cur;
+      slides.forEach((s) => s.classList.remove('is-leaving', 'is-back', 'is-init'));
+      slides[prev].classList.remove('is-active');
+      slides[prev].classList.add('is-leaving');
+      if (dir < 0) slides[prev].classList.add('is-back');
+      cur = (n + slides.length) % slides.length;
+      // Stories progress, declarative by position (works forward AND backward):
+      // segments before cur = full, cur = filling (set by activateBar), ahead = empty.
+      bars.forEach((b, i) => { b.classList.remove('is-active'); b.classList.toggle('is-done', i < cur); });
+      slides[cur].classList.add('is-active');
+      if (dir < 0) slides[cur].classList.add('is-back');
+      swapCopy(slides[cur]);
+      scheduleNext();
+    };
+
+    // Light up the current dot and run its fill over `durMs` (matches the slide's real dwell time).
+    const activateBar = (durMs: number) => {
+      bars[cur].style.setProperty('--dur', durMs + 'ms');
+      void bars[cur].offsetWidth;        // restart the fill transition
+      bars[cur].classList.add('is-active');
+    };
+
+    // Image slides dwell for DUR; the video slide dwells for its FULL duration —
+    // and the loading dot's fill follows whichever it is.
+    function scheduleNext() {
+      if (timer) { clearTimeout(timer); timer = null; }
+      const vid = slides[cur].querySelector('video') as HTMLVideoElement | null;
+      if (vid) {
+        const go = () => {
+          try { vid.currentTime = 0; vid.play().catch(() => {}); } catch {}
+          const dur = (isFinite(vid.duration) && vid.duration > 0) ? vid.duration : 8;
+          activateBar(dur * 1000);
+          if (!reduce) timer = setTimeout(() => show(cur + 1), dur * 1000);
+        };
+        if (isFinite(vid.duration) && vid.duration > 0) go();
+        else vid.addEventListener('loadedmetadata', go, { once: true });
+        return;
+      }
+      activateBar(DUR);
+      if (!reduce) timer = setTimeout(() => show(cur + 1), DUR);
+    }
+    // kick off slide 0 — fills its dot over the video's real duration, then advances
+    scheduleNext();
+
+    // hover-reveal prev/next
+    hero.querySelector('[data-prev]')?.addEventListener('click', () => show(cur - 1, -1));
+    hero.querySelector('[data-next]')?.addEventListener('click', () => show(cur + 1, 1));
   }
-
-  // Initialize stack
-  updateStack();
-
-  // Start auto-swipe
-  setInterval(swipeCard, slideDuration);
 </script>

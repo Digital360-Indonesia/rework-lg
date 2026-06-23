@@ -3,8 +3,10 @@
  * Base Layout - Level Garment
  * Main layout wrapper for all pages
  */
+import AnnouncementBar from '../components/layout/AnnouncementBar.astro';
 import Header from '../components/layout/Header.astro';
 import Footer from '../components/layout/Footer.astro';
+import MobileNav from '../components/layout/MobileNav.astro';
 import siteConfig from '../data/site-config.json';
 import '../styles/global.css';
 
@@ -90,9 +92,11 @@ const pageType = type === 'article' ? 'article' : 'website';
   <meta name="twitter:description" content={description}>
   <meta name="twitter:image" content={new URL(image, siteConfig.siteUrl)}>
 
-  <!-- Favicon -->
+  <!-- Favicon - from levelgarment.com -->
   <link rel="icon" type="image/png" sizes="196x196" href="/favicon.png">
+  <link rel="icon" type="image/png" sizes="196x196" href="/07062024-lg-favicon.png">
   <link rel="apple-touch-icon" sizes="196x196" href="/favicon.png">
+  <link rel="apple-touch-icon" sizes="196x196" href="/07062024-lg-favicon.png">
 
   <!-- Fonts - matches live site levelgarment.com (Poppins, Inter, Montserrat, Roboto) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -112,7 +116,7 @@ const pageType = type === 'article' ? 'article' : 'website';
       "url": siteConfig.siteUrl,
       "logo": {
         "@type": "ImageObject",
-        "url": new URL('/assets/images/logo/lg-logo.png', siteConfig.siteUrl)
+        "url": new URL('/assets/images/logo.png', siteConfig.siteUrl)
       },
       "sameAs": [
         siteConfig.social.instagram,
@@ -127,13 +131,14 @@ const pageType = type === 'article' ? 'article' : 'website';
   })} type="application/ld+json"></script>
 </head>
 
-<body class="min-h-screen flex flex-col overflow-x-hidden">
+<body class="min-h-screen flex flex-col">
   <!-- Skip to main content for accessibility -->
   <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 bg-primary text-white px-4 py-2 rounded-lg z-50">
     Skip to main content
   </a>
 
-  <!-- Header / Navigation -->
+  <!-- Announcement ticker + Header / Navigation -->
+  <AnnouncementBar />
   <Header />
 
   <!-- Main Content -->
@@ -144,43 +149,8 @@ const pageType = type === 'article' ? 'article' : 'website';
   <!-- Footer -->
   <Footer />
 
-  <!-- Back to Top Button -->
-  <button
-    id="back-to-top"
-    aria-label="Back to top"
-    class="fixed bottom-20 right-4 sm:bottom-8 sm:right-8 bg-primary text-white p-2.5 sm:p-3 rounded-full shadow-lg opacity-0 invisible transition-all duration-300 hover:bg-primary-dark z-40"
-  >
-    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 sm:h-6 sm:w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18" />
-    </svg>
-  </button>
-
-  <!-- Back to Top Script -->
-  <script define:vars={{ threshold: 300 }}>
-    const backToTop = document.getElementById('back-to-top');
-    let isVisible = false;
-
-    const toggleBackToTop = () => {
-      const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-
-      if (scrollTop > threshold && !isVisible) {
-        backToTop.classList.remove('opacity-0', 'invisible');
-        backToTop.classList.add('opacity-100', 'visible');
-        isVisible = true;
-      } else if (scrollTop <= threshold && isVisible) {
-        backToTop.classList.add('opacity-0', 'invisible');
-        backToTop.classList.remove('opacity-100', 'visible');
-        isVisible = false;
-      }
-    };
-
-    const scrollToTop = () => {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    };
-
-    window.addEventListener('scroll', toggleBackToTop);
-    backToTop.addEventListener('click', scrollToTop);
-  </script>
+  <!-- Mobile bottom navigation (phones only) — replaces the top header/hamburger on mobile -->
+  <MobileNav />
 </body>
 </html>
 
@@ -207,5 +177,17 @@ const pageType = type === 'article' ? 'article' : 'website';
     overflow: visible;
     clip: auto;
     white-space: normal;
+  }
+
+  /* ===== MOBILE (≤767px): top header + announcement give way to the bottom nav bar ===== */
+  @media (max-width: 767px) {
+    :global(.lg-header),
+    :global(.lg-ticker) { display: none !important; }
+    /* mobile: the bottom nav is the site chrome everywhere — hide the old web footer site-wide */
+    :global(.lgf) { display: none !important; }
+    /* normal (non-homepage) pages: clear the fixed bottom nav so last content isn't hidden.
+       The homepage reels feed is full-screen behind the nav, so it opts out via html.lg-home. */
+    main { padding-bottom: calc(3.9rem + env(safe-area-inset-bottom, 0px)); }
+    :global(html.lg-home) main { padding-bottom: 0; }
   }
 </style>

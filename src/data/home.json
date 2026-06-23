@@ -1,0 +1,167 @@
+{
+  "hero": {
+    "slides": [
+      {
+        "video": "",
+        "image": "/assets/images/uploads/4.jpg",
+        "imageMobile": "/assets/images/uploads/mobile3.jpg",
+        "title": "Level Up Acara-mu",
+        "desc": "Jaket kelas, jersey & kaos custom — desain bebas, tanpa minimal order.",
+        "href": "https://wa.me/6285183091599?text=Halo%20Level%20Garment%2C%20aku%20mau%20bikin%20custom%20buat%20acara%2Fkelas.%20Boleh%20info%3F"
+      },
+      {
+        "video": "/assets/images/uploads/hero-2.mov",
+        "image": "",
+        "title": "Jaket Angkatan Anti Pasaran",
+        "desc": "Varsity full-patch sampai bomber — bahan tebal, jahitan rapi.",
+        "href": "/product/"
+      },
+      {
+        "video": "",
+        "image": "/assets/images/uploads/3.jpg",
+        "imageMobile": "/assets/images/uploads/mobile2.jpg",
+        "title": "Jersey Baseball Squad-mu",
+        "desc": "Dryfit adem, nama & nomor tiap member, desain bebas.",
+        "href": "/product/"
+      },
+      {
+        "video": "",
+        "image": "/assets/images/uploads/2.jpg",
+        "imageMobile": "/assets/images/uploads/mobile1.jpg",
+        "title": "Kaos Kelas yang Beda",
+        "desc": "Sablon, bordir, atau DTF — cotton combed premium.",
+        "href": "/product/"
+      }
+    ]
+  },
+  "rail": {
+    "title": "Mau Custom Apa?",
+    "subtitle": "Geser & pilih kategori — semua bisa di-custom buat tim-mu.",
+    "cards": [
+      {
+        "name": "T-Shirt",
+        "image": "/assets/images/uploads/section2-t-shirt.jpeg",
+        "href": "/product/#tshirt"
+      },
+      {
+        "name": "Jersey",
+        "image": "/assets/images/uploads/section2-jersey.jpeg",
+        "href": "/product/#jersey",
+        "featured": true
+      },
+      {
+        "name": "Workshirt",
+        "image": "/assets/images/uploads/section2-workshirt.jpeg",
+        "href": "/product/#workshirt"
+      },
+      {
+        "name": "Jacket",
+        "image": "/assets/images/uploads/section2-jacket.jpeg",
+        "href": "/product/#jacket",
+        "featured": true
+      },
+      {
+        "name": "Rompi",
+        "image": "/assets/images/uploads/section2-rompi.jpeg",
+        "href": "/product/"
+      },
+      {
+        "name": "Jas",
+        "image": "/assets/images/uploads/section2-jas.jpeg",
+        "href": "/product/",
+        "featured": true
+      },
+      {
+        "name": "Merchandise",
+        "image": "/assets/images/uploads/section2-merch.jpeg",
+        "href": "/product/"
+      }
+    ]
+  },
+  "videoBanner": {
+    "videoDesktop": "/assets/videos/section3-ds-smooth.mp4",
+    "videoMobile": "/assets/videos/section3-mb-smooth.mp4",
+    "title": "Dukung Setiap Kreasi Pelajar Indonesia",
+    "subtitle": "Buat tim, kelas, organisasi, atau angkatan — apa pun produknya, kami wujudkan.",
+    "href": "/product/"
+  },
+  "splitBanner": {
+    "leftImage": "/assets/images/placeholder/secleft.png",
+    "leftDesc": "Wujudkan kebersamaan angkatanmu lewat custom apparel yang bener-bener kalian banget.",
+    "leftCtaLabel": "Selengkapnya",
+    "leftCtaHref": "#",
+    "rightSlides": [
+      {
+        "image": "/assets/images/placeholder/image%20copy%202.png",
+        "title": "Jaket Angkatan"
+      },
+      {
+        "image": "/assets/images/placeholder/image%20copy%203.png",
+        "title": "Jersey Baseball"
+      },
+      {
+        "image": "/assets/images/placeholder/image%20copy%204.png",
+        "title": "Kaos Kelas"
+      },
+      {
+        "image": "/assets/images/placeholder/image%20copy%205.png",
+        "title": "Seragam Organisasi"
+      }
+    ]
+  },
+  "sponsorship": {
+    "tag": "Sponsorship Solutions",
+    "account": "Level Garment",
+    "events": [
+      {
+        "name": "EFESTAPHORIA 2025",
+        "image": "/assets/images/sponsorship/efestaphoria-ds.jpg",
+        "videoMobile": "/assets/videos/efestaphoria-mb.mp4",
+        "info": "Festival musik & seni tahunan dengan ribuan pengunjung. Level Garment dipercaya garap jersey panitia, kaos crew, sampai merch eksklusif buat peserta — semua custom, rapi, dan tepat waktu."
+      },
+      {
+        "name": "PORSENI 2025",
+        "image": "/assets/images/sponsorship/porseni-ds.jpg",
+        "info": "Pekan Olahraga & Seni antar sekolah se-kota. Kami suplai jersey tiap cabang, seragam panitia, sampai merch juara dengan bahan adem dan jahitan rapi."
+      },
+      {
+        "name": "NOUVEAU 2025",
+        "video": "/assets/videos/nouveau-ds.mp4",
+        "info": "Gelaran kreatif tahunan yang ramai dikunjungi pelajar. Level Garment jadi partner apparel resmi buat panitia, tenant, sampai volunteer acara."
+      },
+      {
+        "name": "CONCERTA 2025",
+        "image": "/assets/images/sponsorship/concerta-ds.jpg",
+        "info": "Konser kampus bertabur bintang tamu. Kami kerjain kaos crew, jaket panitia, sampai bundle merch eksklusif buat penonton — desain bebas, hasil maksimal."
+      },
+      {
+        "name": "Collaborative Research UNJ 2025",
+        "image": "/assets/images/sponsorship/unj-ds.jpg",
+        "imageMobile": "/assets/images/sponsorship/unj-mb.jpg",
+        "info": "Kolaborasi riset & apparel bareng Universitas Negeri Jakarta — dari jaket tim, jersey kegiatan, sampai merch acara kampus. Satu tim buat semua kebutuhan apparel kalian."
+      }
+    ]
+  },
+  "endCta": {
+    "title": "Mulai Pesananmu",
+    "subtitle": "Custom buat angkatan, kelas, atau komunitas — isi sebentar, langsung terhubung ke tim kami di WhatsApp.",
+    "waNumber": "6285183091599",
+    "address": "Jl. Sidosermo IV Gg. III No. 37 (Raya Prapen), Sidosermo, Surabaya",
+    "hours": [
+      {
+        "day": "Senin – Jumat",
+        "time": "08.00 – 17.00 WIB"
+      },
+      {
+        "day": "Sabtu",
+        "time": "08.00 – 15.00 WIB"
+      },
+      {
+        "day": "Minggu & Libur",
+        "time": "Tutup"
+      }
+    ]
+  },
+  "duoBackground": "/assets/images/uploads/WhatsApp Image 2026-06-19 at 16.27.30.jpeg",
+  "_note": "CMS-editable homepage content for Level Garment (Sveltia /admin → 'Homepage'). Each section maps to a component in src/components/home/. Images/videos use image/file widgets."
+}

@@ -1,161 +1,42 @@
 ---
 /**
- * Blog Card Component - Level Garment
- * Displays a blog post preview card
+ * Blog card — Gopuff-style: rounded image on top, gray category eyebrow, bold title, date.
  */
 export interface Props {
   title: string;
   slug: string;
-  excerpt: string;
+  excerpt?: string;
   publishDate: string;
   category?: string;
   image?: string;
 }
-
-const {
-  title,
-  slug,
-  excerpt,
-  publishDate,
-  category = 'Berita',
-  image = '/assets/images/blog-placeholder.jpg'
-} = Astro.props;
-
-// Format date for display
-const formatDate = (dateString: string) => {
-  return new Date(dateString).toLocaleDateString('id-ID', {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric'
-  });
-};
-
-// Get category color
-const getCategoryColor = (cat: string) => {
-  const colors: Record<string, string> = {
-    'Edukasi': 'bg-primary/10 text-primary',
-    'Rekomendasi': 'bg-primary/10 text-primary',
-    'Tips': 'bg-primary/10 text-primary',
-    'Berita': 'bg-primary/10 text-primary'
-  };
-  return colors[cat] || 'bg-primary/10 text-primary';
-};
+const { title, slug, publishDate, category = 'Tips', image = '' } = Astro.props;
+const formatDate = (d: string) => new Date(d).toLocaleDateString('id-ID', { year: 'numeric', month: 'long', day: 'numeric' });
 ---
-
-<article class="blog-card card card-hover overflow-hidden">
-  <a href={`/berita/${slug}/`} class="block">
-    <!-- Thumbnail -->
-    <div class="blog-card-image aspect-video bg-gray-200 overflow-hidden">
-      <img
-        src={image}
-        alt={title}
-        class="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
-        loading="lazy"
-        width="800"
-        height="450"
-      />
+<article class="lg-bc">
+  <a class="lg-bc-link" href={`/berita/${slug}/`}>
+    <div class="lg-bc-img">
+      {image ? <img src={image} alt={title} loading="lazy" /> : <div class="lg-bc-ph"></div>}
+    </div>
+    <div class="lg-bc-body">
+      <span class="lg-bc-cat">{category}</span>
+      <h3 class="lg-bc-title">{title}</h3>
+      <time class="lg-bc-date" datetime={publishDate}>{formatDate(publishDate)}</time>
     </div>
   </a>
-
-  <!-- Content -->
-  <div class="blog-card-content p-6">
-    <!-- Meta -->
-    <div class="flex flex-wrap items-center gap-3 mb-3 text-sm">
-      <span class={`px-2 py-1 rounded-full font-semibold ${getCategoryColor(category)}`}>
-        {category}
-      </span>
-      <time datetime={publishDate} class="text-gray-500">
-        {formatDate(publishDate)}
-      </time>
-    </div>
-
-    <!-- Title & Excerpt -->
-    <a href={`/berita/${slug}/`} class="block group">
-      <h3 class="text-xl font-semibold mb-2 group-hover:text-primary transition-colors line-clamp-2">
-        {title}
-      </h3>
-      <p class="text-gray-600 line-clamp-3">
-        {excerpt}
-      </p>
-    </a>
-
-    <!-- Read More Link -->
-    <a
-      href={`/berita/${slug}/`}
-      class="inline-flex items-center gap-1 mt-4 text-primary font-semibold hover:gap-2 transition-all"
-    >
-      Baca Selengkapnya
-      <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-      </svg>
-    </a>
-  </div>
 </article>
 
 <style>
-  .blog-card {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-  }
-
-  .blog-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
-  }
-
-  .blog-card-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-
-  .line-clamp-2 {
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-  }
-
-  .line-clamp-3 {
-    display: -webkit-box;
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-  }
-
-  .blog-card-content {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-  }
-
-  .blog-card-content h3 {
-    margin-bottom: 0.5rem;
-  }
-
-  .blog-card-content p {
-    flex: 1;
-    margin-bottom: 1rem;
-  }
-
-  /* Mobile responsive adjustments */
-  @media (max-width: 639px) {
-    .blog-card-content {
-      padding: 1rem !important;
-    }
-
-    .blog-card-content h3 {
-      font-size: 1rem !important;
-    }
-
-    .blog-card-content .text-gray-600 {
-      font-size: 0.8125rem;
-    }
-
-    .blog-card-content .text-sm {
-      font-size: 0.6875rem;
-    }
-  }
+  .lg-bc { height: 100%; }
+  .lg-bc-link { display: flex; flex-direction: column; height: 100%; text-decoration: none; }
+  .lg-bc-img { aspect-ratio: 4/3; overflow: hidden; border-radius: 1rem; background: #eee9f3; }
+  .lg-bc-img img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .5s ease; }
+  @media (hover:hover){ .lg-bc:hover .lg-bc-img img { transform: scale(1.04); } }
+  .lg-bc-ph { width: 100%; height: 100%; background: linear-gradient(135deg,#d8c8ee,#eee9f3); }
+  .lg-bc-body { padding: .95rem .15rem 0; display: flex; flex-direction: column; flex: 1; }
+  .lg-bc-cat { font-family:'Inter',sans-serif; font-weight: 700; font-size: .68rem; letter-spacing: .12em; text-transform: uppercase; color: #9a8db0; margin-bottom: .5rem; }
+  .lg-bc-title { font-family:'Inter',sans-serif; font-weight: 800; font-size: 1.12rem; line-height: 1.28; letter-spacing: -.01em; color: #1A1A2E; margin: 0 0 .55rem;
+    display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical; overflow:hidden; transition: color .2s ease; }
+  @media (hover:hover){ .lg-bc:hover .lg-bc-title { color: #9A66C2; } }
+  .lg-bc-date { margin-top: auto; font-family:'Inter',sans-serif; font-size: .82rem; color: #9a9aa8; }
 </style>

@@ -1,0 +1,80 @@
+---
+/**
+ * Mobile bottom navigation bar (Instagram/TikTok style) — phones only.
+ * Purple LG bar: Home · Produk · [LG logo center, raised] · Tips · Kontak.
+ * Icons are white outline when inactive, filled white when you're on that page.
+ */
+const path = (Astro.url.pathname.replace(/\/+$/, '') || '/');
+const isActive = (href: string) => {
+  const h = (href.replace(/\/+$/, '') || '/');
+  return h === '/' ? path === '/' : (path === h || path.startsWith(h + '/'));
+};
+
+const ICONS: Record<string, string> = {
+  home: '<path d="M3 10.5 12 3l9 7.5V21H3z"/>',
+  bag: '<path d="M4 4h6v6H4zM14 4h6v6h-6zM4 14h6v6H4zM14 14h6v6h-6z"/>',
+  tips: '<path d="M6 3h8l4 4v13H6z"/>',
+  contact: '<path d="M4 4h16v11H8l-4 4z"/>',
+};
+
+const items = [
+  { label: 'Home',   href: '/',         icon: 'home' },
+  { label: 'Produk', href: '/product/', icon: 'bag' },
+  { label: 'Trik',   href: '/berita/',  icon: 'tips' },
+  { label: 'Kontak', href: '/kontak/',  icon: 'contact' },
+];
+const centerActive = isActive('/');
+---
+<nav class="lg-botnav" aria-label="Navigasi utama">
+  <a href={items[0].href} class:list={['lg-botnav-item', { 'is-active': isActive(items[0].href) }]}>
+    <span class="lg-botnav-ico" set:html={`<svg viewBox="0 0 24 24">${ICONS[items[0].icon]}</svg>`}></span>
+    <span class="lg-botnav-label">{items[0].label}</span>
+  </a>
+  <a href={items[1].href} class:list={['lg-botnav-item', { 'is-active': isActive(items[1].href) }]}>
+    <span class="lg-botnav-ico" set:html={`<svg viewBox="0 0 24 24">${ICONS[items[1].icon]}</svg>`}></span>
+    <span class="lg-botnav-label">{items[1].label}</span>
+  </a>
+
+  <a href="/" class:list={['lg-botnav-center', { 'is-active': centerActive }]} aria-label="Level Garment — Home">
+    <img src="/assets/images/logo/favicon-w128.webp" alt="Level Garment" width="34" height="34" />
+  </a>
+
+  <a href={items[2].href} class:list={['lg-botnav-item', { 'is-active': isActive(items[2].href) }]}>
+    <span class="lg-botnav-ico" set:html={`<svg viewBox="0 0 24 24">${ICONS[items[2].icon]}</svg>`}></span>
+    <span class="lg-botnav-label">{items[2].label}</span>
+  </a>
+  <a href={items[3].href} class:list={['lg-botnav-item', { 'is-active': isActive(items[3].href) }]}>
+    <span class="lg-botnav-ico" set:html={`<svg viewBox="0 0 24 24">${ICONS[items[3].icon]}</svg>`}></span>
+    <span class="lg-botnav-label">{items[3].label}</span>
+  </a>
+</nav>
+
+<style>
+  .lg-botnav { display: none; }
+  @media (max-width: 767px) {
+    .lg-botnav {
+      display: flex; align-items: flex-start; justify-content: space-around;
+      position: fixed; left: 0; right: 0; bottom: 0; z-index: 60;
+      background: #AF7AD5; height: 3.9rem; padding: .4rem .5rem 0;
+      padding-bottom: env(safe-area-inset-bottom, 0);
+      box-shadow: 0 -2px 18px rgba(70,35,110,.22);
+    }
+    .lg-botnav-item {
+      flex: 1 1 0; display: flex; flex-direction: column; align-items: center; gap: 3px;
+      text-decoration: none; color: #fff; min-width: 0;
+    }
+    /* :global — the <svg> is injected via set:html, so it never gets Astro's scoped attribute */
+    :global(.lg-botnav-ico svg) { width: 1.5rem; height: 1.5rem; display: block; fill: none; stroke: #fff; stroke-width: 1.7; stroke-linejoin: round; stroke-linecap: round; }
+    :global(.lg-botnav-item.is-active .lg-botnav-ico svg) { fill: #fff; stroke: #fff; }
+    .lg-botnav-label { font-family: 'Inter', sans-serif; font-size: .58rem; font-weight: 600; letter-spacing: .01em; opacity: .85; }
+    .lg-botnav-item.is-active .lg-botnav-label { opacity: 1; }
+
+    /* center — raised white circle with the LG mark */
+    .lg-botnav-center {
+      flex: 0 0 auto; display: grid; place-items: center; width: 3.5rem; height: 3.5rem;
+      margin: -1.35rem .2rem 0; border-radius: 999px; background: #fff;
+      box-shadow: 0 4px 16px rgba(70,35,110,.4); border: 3px solid #AF7AD5;
+    }
+    .lg-botnav-center img { width: 2rem; height: 2rem; object-fit: contain; display: block; }
+  }
+</style>

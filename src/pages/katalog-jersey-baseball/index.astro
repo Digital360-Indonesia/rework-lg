@@ -1,215 +1,104 @@
 ---
 /**
- * Katalog Jersey Baseball Page - Level Garment
- *
- * Displays jersey baseball catalog (PDF viewer)
+ * Katalog Jersey Baseball — branded catalog page. Working PDF viewer (the file was
+ * restored from the old site) + download/fullscreen, jersey types, features, WA CTA.
  */
 import PageLayout from '../../layouts/PageLayout.astro';
 import siteConfig from '../../data/site-config.json';
-
-const catalogPdf = '/assets/catalog/Katalog-Jersey-Level.pdf'; // Update with actual PDF path
-const whatsappMessage = 'Hai kak! Saya ingin konsultasi tentang katalog jersey baseball.';
-const whatsappUrl = `${siteConfig.contact.whatsappUrl}?text=${encodeURIComponent(whatsappMessage)}`;
-
-// Jersey features (can be extracted from PDF or added manually)
-const features = [
-  {
-    title: 'Bahan Premium',
-    description: 'Menggunakan bahan berkualitas tinggi yang nyaman dipakai dan tahan lama',
-    icon: 'fabric'
-  },
-  {
-    title: 'Desain Custom',
-    description: 'Bebas tentukan desain sesuai keinginan tim komunitas Anda',
-    icon: 'design'
-  },
-  {
-    title: 'Sablon & Bordir',
-    description: 'Teknik sablon dan bordir berkualitas untuk hasil yang tajam dan rapi',
-    icon: 'print'
-  },
-  {
-    title: 'Warna Variatif',
-    description: 'Tersedia berbagai pilihan warna yang bisa disesuaikan dengan identitas tim',
-    icon: 'color'
-  }
-];
-
-// Available jersey types (from catalog)
+const catalogPdf = '/assets/catalog/katalog-jersey-baseball.pdf';
+const waChat = `${siteConfig.contact.whatsappUrl}?text=` + encodeURIComponent('Halo Level Garment, aku mau konsultasi katalog jersey baseball. Boleh info & penawaran?');
+const WA = 'M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347';
 const jerseyTypes = [
-  {
-    name: 'Jersey Baseball Basic',
-    description: 'Desain klasik dengan kancing di bagian depan, cocok untuk tim baseball dan komunitas'
-  },
-  {
-    name: 'Jersey Baseball Full Print',
-    description: 'Desain modern dengan printing full body, lebih bebas berkreasi dengan desain tim'
-  },
-  {
-    name: 'Jersey Basketball',
-    description: 'Desain khusus untuk basket dengan bahan yang breathable dan elastis'
-  }
+  { name: 'Jersey Baseball Basic', desc: 'Desain klasik dengan kancing depan — cocok untuk tim baseball, kelas, dan komunitas.' },
+  { name: 'Jersey Baseball Full Print', desc: 'Printing full body, lebih bebas berkreasi dengan desain & warna tim.' },
+  { name: 'Jersey Basketball', desc: 'Khusus basket dengan bahan dryfit yang breathable dan elastis.' },
+];
+const features = [
+  { title: 'Bahan Premium', desc: 'Bahan berkualitas tinggi, nyaman dipakai dan tahan lama.' },
+  { title: 'Desain Bebas', desc: 'Tentukan sendiri desain sesuai identitas tim & komunitasmu.' },
+  { title: 'Sablon & Bordir', desc: 'Teknik sablon dan bordir rapi untuk hasil tajam dan awet.' },
+  { title: 'Tanpa Minimal Order', desc: 'Bisa custom satuan sampai ratusan pcs — fleksibel buat acara apa pun.' },
 ];
 ---
-
 <PageLayout
   title="Katalog Jersey Baseball - Level Garment"
-  description="Lihat katalog lengkap jersey baseball custom dari Level Garment. Kualitas premium, harga terjangkau."
-  showHero={true}
-  heroTitle="Katalog Jersey Baseball"
-  heroSubtitle="Jersey baseball custom kualitas premium untuk tim dan komunitas Anda"
+  description="Katalog lengkap jersey baseball custom Level Garment — kualitas premium, desain bebas, tanpa minimal order."
+  showHero={false}
 >
-  <div class="katalog-page">
-    <!-- Catalog Introduction -->
-    <section class="intro section">
-      <div class="container">
-        <div class="max-w-3xl mx-auto text-center">
-          <h2 class="text-3xl font-bold mb-4">Katalog Jersey Baseball</h2>
-          <p class="text-lg text-gray-600 mb-6">
-            Jelajahi katalog lengkap jersey baseball custom dari Level Garment. Kami menyediakan berbagai pilihan jersey dengan kualitas premium dan harga terjangkau.
-          </p>
-          <p class="text-gray-600">
-            Jangan ragu hubungi kami untuk konsultasi untuk jersey kelas atau angkatan yang akan Anda buat.
-          </p>
-        </div>
+  <section class="lg-kat">
+    <div class="lg-kat-wrap">
+      <header class="lg-kat-head">
+        <span class="lg-kat-eyebrow">Katalog</span>
+        <h1 class="lg-kat-title">Jersey Baseball Custom</h1>
+        <p class="lg-kat-sub">Jelajahi katalog lengkap kami — kualitas premium, desain bebas, tanpa minimal order. Buat tim, kelas, dan komunitas.</p>
+      </header>
+
+      <div class="lg-kat-viewer">
+        <iframe src={`${catalogPdf}#view=FitH`} title="Katalog Jersey Baseball" loading="lazy"></iframe>
       </div>
-    </section>
-
-    <!-- PDF Catalog Viewer -->
-    <section class="catalog-viewer section bg-gray-50">
-      <div class="container">
-        <div class="catalog-embed">
-          <div class="bg-white rounded-xl shadow-lg p-4">
-            <div class="aspect-[8.5/11] bg-gray-100 rounded-lg flex items-center justify-center">
-              <!-- PDF Embed -->
-              {catalogPdf ? (
-                <iframe
-                  src={catalogPdf}
-                  class="w-full h-full rounded-lg"
-                  title="Katalog Jersey Baseball"
-                  loading="lazy"
-                />
-              ) : (
-                <div class="text-center p-8">
-                  <svg class="w-16 h-16 mx-auto text-gray-400 mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                  </svg>
-                  <p class="text-gray-500 mb-4">Katalog PDF akan ditampilkan di sini</p>
-                  <p class="text-sm text-gray-400">Letakkan file PDF di: /public/assets/catalog/Katalog-Jersey-Level.pdf</p>
-                </div>
-              )}
-            </div>
-          </div>
-
-          <!-- Download Button -->
-          <div class="text-center mt-6">
-            <a
-              href={catalogPdf}
-              download="Katalog-Jersey-Level.pdf"
-              class="btn btn-outline inline-flex"
-            >
-              <svg class="w-5 h-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
-              </svg>
-              Download Katalog PDF
-            </a>
-          </div>
-        </div>
+      <div class="lg-kat-actions">
+        <a class="lg-kat-btn is-primary" href={catalogPdf} target="_blank" rel="noopener noreferrer">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M21 14v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5"/></svg>
+          Buka Layar Penuh
+        </a>
+        <a class="lg-kat-btn" href={catalogPdf} download>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0 4-4m-4 4-4-4"/><path d="M5 21h14"/></svg>
+          Download PDF
+        </a>
       </div>
-    </section>
 
-    <!-- Jersey Types -->
-    <section class="jersey-types section">
-      <div class="container">
-        <h2 class="text-2xl font-bold text-center mb-8">Jenis Jersey Baseball</h2>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {jerseyTypes.map((type, index) => (
-            <div class="card p-6 text-center">
-              <div class="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                <span class="text-3xl">🏆</span>
-              </div>
-              <h3 class="text-xl font-semibold mb-2">{type.name}</h3>
-              <p class="text-gray-600">{type.description}</p>
-            </div>
-          ))}
-        </div>
+      <h2 class="lg-kat-h2">Jenis Jersey</h2>
+      <div class="lg-kat-grid">
+        {jerseyTypes.map((t) => (<article class="lg-kat-card"><h3>{t.name}</h3><p>{t.desc}</p></article>))}
       </div>
-    </section>
 
-    <!-- Features -->
-    <section class="features section bg-gray-50">
-      <div class="container">
-        <h2 class="text-2xl font-bold text-center mb-8">Keunggulan Jersey Baseball Kami</h2>
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {features.map(feature => (
-            <div class="card p-6 text-center">
-              <div class="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                {feature.icon === 'fabric' && (
-                  <svg class="w-8 h-8 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z" />
-                  </svg>
-                )}
-                {feature.icon === 'design' && (
-                  <svg class="w-8 h-8 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
-                  </svg>
-                )}
-                {feature.icon === 'print' && (
-                  <svg class="w-8 h-8 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z" />
-                  </svg>
-                )}
-                {feature.icon === 'color' && (
-                  <svg class="w-8 h-8 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01" />
-                  </svg>
-                )}
-              </div>
-              <h3 class="text-xl font-semibold mb-2">{feature.title}</h3>
-              <p class="text-gray-600">{feature.description}</p>
-            </div>
-          ))}
-        </div>
+      <h2 class="lg-kat-h2">Kenapa Level Garment</h2>
+      <div class="lg-kat-grid is-feat">
+        {features.map((f) => (<article class="lg-kat-card"><h3>{f.title}</h3><p>{f.desc}</p></article>))}
       </div>
-    </section>
 
-    <!-- CTA Section -->
-    <section class="section bg-accent">
-      <div class="container text-center">
-        <h2 class="text-3xl font-bold text-gray-900 mb-4">
-          Tertarik dengan Jersey Baseball Kami?
-        </h2>
-        <p class="text-xl text-gray-800 mb-8">
-          Konsultasikan kebutuhan jersey baseball custommu sekarang!
-        </p>
-        <a
-          href={whatsappUrl}
-          class="btn btn-secondary inline-flex"
-        >
-          <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
-            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
-          </svg>
+      <div class="lg-kat-cta">
+        <h2>Siap bikin jersey tim-mu?</h2>
+        <p>Konsultasi gratis &amp; penawaran terbaik buat acara, kelas, atau komunitasmu.</p>
+        <a class="lg-kat-wa" href={waChat} target="_blank" rel="noopener noreferrer">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d={WA}/><path d="M12.05 0C5.5 0 .16 5.34.16 11.9c0 2.1.55 4.14 1.59 5.95L0 24l6.3-1.65a11.9 11.9 0 0 0 5.74 1.46h.01c6.55 0 11.89-5.34 11.89-11.9C23.94 5.34 18.6 0 12.05 0Zm0 21.8h-.01a9.87 9.87 0 0 1-5.03-1.38l-.36-.21-3.74.98 1-3.65-.24-.37a9.86 9.86 0 0 1-1.51-5.26c0-5.45 4.44-9.88 9.9-9.88a9.86 9.86 0 0 1 9.88 9.89c0 5.45-4.44 9.88-9.89 9.88Z"/></svg>
           Konsultasi WhatsApp
         </a>
       </div>
-    </section>
-  </div>
+    </div>
+  </section>
 </PageLayout>
 
 <style>
-  .catalog-embed {
-    max-width: 800px;
-    margin: 0 auto;
-  }
+  .lg-kat { background: #f7f4fb; padding: clamp(2.5rem, 6vw, 4.5rem) 0; }
+  .lg-kat-wrap { max-width: 56rem; margin: 0 auto; padding: 0 clamp(1.25rem, 5vw, 2rem); }
 
-  .catalog-embed iframe {
-    min-height: 600px;
-    border: none;
-  }
+  .lg-kat-head { text-align: center; margin-bottom: clamp(1.6rem, 4vw, 2.6rem); }
+  .lg-kat-eyebrow { display: inline-block; font-family:'Inter',sans-serif; font-weight:700; font-size:.72rem; letter-spacing:.22em; text-transform:uppercase; color:#9A66C2; padding:.32rem .85rem; border:1.5px solid rgba(175,122,213,.5); border-radius:999px; margin-bottom:1rem; }
+  .lg-kat-title { font-family:'Inter',sans-serif; font-weight:800; font-size:clamp(1.9rem,5vw,2.8rem); line-height:1.05; letter-spacing:-.02em; color:#1A1A2E; margin:0 0 .7rem; }
+  .lg-kat-sub { font-family:'Inter',sans-serif; font-weight:400; font-size:clamp(1rem,1.4vw,1.12rem); line-height:1.55; color:#5a5a6e; max-width:38rem; margin:0 auto; }
 
-  @media (max-width: 768px) {
-    .catalog-embed iframe {
-      min-height: 400px;
-    }
-  }
+  .lg-kat-viewer { width:100%; aspect-ratio: 8.5 / 11; max-height: 80vh; background:#fff; border:1px solid rgba(26,26,46,.1); border-radius:1rem; overflow:hidden; box-shadow:0 22px 48px -26px rgba(26,26,46,.5); }
+  .lg-kat-viewer iframe { width:100%; height:100%; border:0; display:block; }
+  .lg-kat-actions { display:flex; flex-wrap:wrap; justify-content:center; gap:.8rem; margin:1.1rem 0 clamp(2.5rem,6vw,4rem); }
+  .lg-kat-btn { display:inline-flex; align-items:center; gap:.5rem; padding:.8rem 1.4rem; border-radius:999px; font-family:'Inter',sans-serif; font-weight:700; font-size:.95rem; text-decoration:none;
+    background:#fff; color:#1A1A2E; border:1.5px solid rgba(26,26,46,.16); transition: transform .2s ease, border-color .2s ease; }
+  .lg-kat-btn svg { width:1.15rem; height:1.15rem; }
+  .lg-kat-btn.is-primary { background:#9A66C2; color:#fff; border-color:#9A66C2; box-shadow:0 12px 26px -12px rgba(122,60,168,.6); }
+  @media (hover:hover){ .lg-kat-btn:hover { transform: translateY(-2px); border-color:#AF7AD5; } }
+
+  .lg-kat-h2 { text-align:center; font-family:'Inter',sans-serif; font-weight:800; font-size:clamp(1.4rem,2.6vw,1.9rem); color:#1A1A2E; letter-spacing:-.01em; margin: clamp(1.5rem,3vw,2.5rem) 0 1.4rem; }
+  .lg-kat-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(15rem,1fr)); gap:1rem; }
+  .lg-kat-grid.is-feat { grid-template-columns:repeat(auto-fit,minmax(12rem,1fr)); }
+  .lg-kat-card { background:#fff; border:1px solid rgba(26,26,46,.09); border-radius:1rem; padding:1.3rem 1.2rem; box-shadow:0 8px 22px -18px rgba(26,26,46,.4); transition: transform .2s ease, box-shadow .2s ease; }
+  @media (hover:hover){ .lg-kat-card:hover { transform: translateY(-3px); box-shadow:0 16px 30px -20px rgba(70,35,110,.5); } }
+  .lg-kat-card h3 { margin:0 0 .4rem; font-family:'Inter',sans-serif; font-weight:700; font-size:1.05rem; color:#1A1A2E; }
+  .lg-kat-card p { margin:0; font-family:'Inter',sans-serif; font-size:.92rem; line-height:1.5; color:#5a5a6e; }
+
+  .lg-kat-cta { text-align:center; margin-top: clamp(2.5rem,6vw,4rem); padding: clamp(2rem,4vw,3rem); background: linear-gradient(160deg,#2a1a45,#1A1A2E); border-radius:1.4rem; }
+  .lg-kat-cta h2 { margin:0 0 .6rem; font-family:'Inter',sans-serif; font-weight:800; font-size:clamp(1.5rem,3vw,2.1rem); color:#fff; }
+  .lg-kat-cta p { margin:0 auto 1.6rem; max-width:32rem; font-family:'Inter',sans-serif; font-size:1rem; line-height:1.5; color:rgba(255,255,255,.82); }
+  .lg-kat-wa { display:inline-flex; align-items:center; gap:.6rem; padding:1rem 1.7rem; border-radius:999px; background:#25d366; color:#fff; font-family:'Inter',sans-serif; font-weight:700; font-size:1.02rem; text-decoration:none; box-shadow:0 14px 30px -12px rgba(37,211,102,.6); transition: transform .2s ease, background .2s ease; }
+  .lg-kat-wa svg { width:1.4rem; height:1.4rem; }
+  @media (hover:hover){ .lg-kat-wa:hover { transform: translateY(-2px); background:#1fbe5b; } }
 </style>

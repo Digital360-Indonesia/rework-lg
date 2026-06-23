@@ -1,0 +1,172 @@
+# Level Garment — Sveltia CMS config.
+# Admins edit at /admin. Saving commits to the repo → site rebuilds.
+# Online login uses base_url (the sveltia-cms-auth Cloudflare Worker). On localhost,
+# local_backend lets you edit the repo files directly (no login) via the FS Access API.
+#
+# Online login is LIVE (2026-06-19): levelgarment.dockbay.xyz is in the shared worker's
+# ALLOWED_DOMAINS (same worker KG uses). Local editing on localhost still works too.
+
+backend:
+  name: github
+  repo: Digital360-Indonesia/rework-lg
+  branch: bobthebuilder
+  base_url: https://sveltia-cms-auth.arayassuryanto.workers.dev   # OAuth relay (reuse KG's worker)
+
+local_backend: true
+
+media_folder: "public/assets/images/uploads"
+public_folder: "/assets/images/uploads"
+
+collections:
+  # ---------------- GLOBAL (brand, contact, social, nav) ----------------
+  - name: settings
+    label: "Pengaturan Situs"
+    delete: false
+    files:
+      - name: site
+        label: "Global — brand, kontak, sosial, navigasi"
+        file: "src/data/site-config.json"
+        fields:
+          - { name: siteName, label: "Nama Situs", widget: string }
+          - { name: tagline, label: "Tagline", widget: string, required: false }
+          - { name: description, label: "Deskripsi (SEO)", widget: text, required: false }
+          - name: contact
+            label: "Kontak"
+            widget: object
+            fields:
+              - { name: phoneFormatted, label: "Telepon (tampil)", widget: string, required: false }
+              - { name: phone, label: "Telepon (angka)", widget: string, required: false }
+              - { name: whatsappUrl, label: "WhatsApp URL", widget: string, required: false }
+              - { name: whatsapp, label: "WhatsApp (angka)", widget: string, required: false }
+              - { name: email, label: "Email", widget: string, required: false }
+              - { name: address, label: "Alamat", widget: text, required: false }
+              - { name: city, label: "Kota", widget: string, required: false }
+              - { name: province, label: "Provinsi", widget: string, required: false }
+          - name: social
+            label: "Sosial Media"
+            widget: object
+            fields:
+              - { name: instagram, label: "Instagram URL", widget: string, required: false }
+              - { name: tiktok, label: "TikTok URL", widget: string, required: false }
+              - { name: facebook, label: "Facebook URL", widget: string, required: false }
+              - { name: twitter, label: "Twitter/X URL", widget: string, required: false }
+              - { name: youtube, label: "YouTube URL", widget: string, required: false }
+          - name: navigation
+            label: "Navigasi Header"
+            widget: list
+            fields:
+              - { name: name, label: "Label", widget: string }
+              - { name: path, label: "Link", widget: string }
+          - name: company
+            label: "Perusahaan"
+            widget: object
+            fields:
+              - { name: name, label: "Nama perusahaan", widget: string, required: false }
+              - { name: slogan, label: "Slogan", widget: string, required: false }
+              - { name: establishedYear, label: "Tahun berdiri", widget: string, required: false }
+
+  # ---------------- PRODUCTS (category = product type) ----------------
+  - name: products
+    label: "Produk — Jenis / Kategori"
+    delete: false
+    files:
+      - name: products
+        label: "Jenis produk (T-Shirt, Jersey, Workshirt, Jacket, …)"
+        file: "src/data/products.json"
+        fields:
+          - name: categories
+            label: "Jenis produk"
+            widget: list
+            fields:
+              - { name: name, label: "Nama jenis", widget: string }
+              - { name: anchor, label: "Anchor / slug", widget: string, required: false }
+
+  # ---------------- HOMEPAGE (all sections + media) ----------------
+  - name: homepage
+    label: "Homepage"
+    delete: false
+    files:
+      - name: home
+        label: "Homepage — semua section & media"
+        file: "src/data/home.json"
+        fields:
+          - name: hero
+            label: "Section 1 — Hero (slideshow)"
+            widget: object
+            fields:
+              - name: slides
+                label: "Slide (video atau gambar)"
+                widget: list
+                fields:
+                  - { name: video, label: "Video (isi kalau slide ini video)", widget: file, required: false }
+                  - { name: image, label: "Gambar desktop (16:9 lebar)", widget: image, required: false }
+                  - { name: imageMobile, label: "Gambar mobile (4:5 portrait, opsional)", widget: image, required: false }
+                  - { name: title, label: "Judul", widget: string }
+                  - { name: desc, label: "Deskripsi", widget: text }
+                  - { name: href, label: "Link", widget: string }
+          - name: rail
+            label: "Section 2 — Rail Kategori"
+            widget: object
+            fields:
+              - { name: title, label: "Judul (bold)", widget: string }
+              - { name: subtitle, label: "Subjudul (lebih tipis — tampil di mobile)", widget: text, required: false }
+              - name: cards
+                label: "Kartu (gambar 5:7 vertikal)"
+                widget: list
+                fields:
+                  - { name: name, label: "Nama", widget: string }
+                  - { name: image, label: "Gambar (5:7)", widget: image }
+                  - { name: href, label: "Link", widget: string }
+                  - { name: featured, label: "Unggulan (badge bintang)", widget: boolean, default: false, required: false }
+          - name: videoBanner
+            label: "Section 3 — Video Banner"
+            widget: object
+            fields:
+              - { name: videoDesktop, label: "Video desktop (loop seamless: frame awal = frame akhir)", widget: file }
+              - { name: videoMobile, label: "Video mobile (opsional)", widget: file, required: false }
+              - { name: title, label: "Judul (jadi link — underline saat hover)", widget: string, required: false }
+              - { name: subtitle, label: "Subjudul", widget: text, required: false }
+              - { name: href, label: "Link judul (mis. /product/)", widget: string, required: false, default: "/product/" }
+          - name: splitBanner
+            label: "Section 4 — Split Banner"
+            widget: object
+            fields:
+              - { name: leftImage, label: "Gambar kiri (panel statis)", widget: image }
+              - { name: leftDesc, label: "Deskripsi kiri", widget: text }
+              - { name: leftCtaLabel, label: "Label tombol kiri", widget: string }
+              - { name: leftCtaHref, label: "Link tombol kiri", widget: string }
+              - name: rightSlides
+                label: "Slide kanan (gambar + caption)"
+                widget: list
+                fields:
+                  - { name: image, label: "Gambar", widget: image }
+                  - { name: title, label: "Caption", widget: string }
+          - name: sponsorship
+            label: "Section 5 — Sponsorship"
+            widget: object
+            fields:
+              - { name: tag, label: "Tag (chip atas)", widget: string }
+              - { name: account, label: "Nama akun (caption mobile)", widget: string, required: false, default: "Level Garment" }
+              - name: events
+                label: "Event (gambar 2:1 + nama + info)"
+                widget: list
+                fields:
+                  - { name: image, label: "Gambar event (2:1)", widget: image }
+                  - { name: name, label: "Nama event (judul caption)", widget: string }
+                  - { name: info, label: "Info event (subjudul — bisa di-expand di mobile)", widget: text, required: false }
+          - name: endCta
+            label: "Section 6 — End CTA"
+            widget: object
+            fields:
+              - { name: title, label: "Judul", widget: string }
+              - { name: subtitle, label: "Subjudul", widget: text }
+              - { name: waNumber, label: "Nomor WhatsApp (angka, cth 6285…)", widget: string }
+              - { name: address, label: "Alamat (kartu Lokasi mobile)", widget: text, required: false }
+              - name: hours
+                label: "Jam Operasional (kartu mobile)"
+                widget: list
+                required: false
+                fields:
+                  - { name: day, label: "Hari", widget: string }
+                  - { name: time, label: "Jam", widget: string }
+          - { name: duoBackground, label: "Background gabungan Sponsorship + End CTA (~1:1)", widget: image }

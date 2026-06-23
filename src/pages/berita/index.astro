@@ -1,422 +1,138 @@
 ---
 /**
- * Berita (Blog) Index Page - Level Garment
- *
- * Displays all blog posts fetched from marketing.vidogarment API at build time.
+ * Tips & Trik (blog) index — Gopuff-style editorial: big featured post (image left +
+ * content right), two horizontal secondary posts, then a filterable card grid.
  */
 import PageLayout from '../../layouts/PageLayout.astro';
-import { getAllBlogPosts, getBlogCategories, BlogApiError } from '../../lib/blog';
-import siteConfig from '../../data/site-config.json';
+import BlogCard from '../../components/content/BlogCard.astro';
+import blogPosts from '../../data/blog-posts.json';
 
-let error: string | null = null;
-let blogPosts: any[] = [];
-let categories: string[] = [];
-let featuredPosts: any[] = [];
-
-try {
-  blogPosts = await getAllBlogPosts();
-  categories = await getBlogCategories();
-  featuredPosts = blogPosts.filter(post => post.featured);
-} catch (err) {
-  if (err instanceof BlogApiError) {
-    error = err.message;
-  } else {
-    error = 'Terjadi kesalahan saat memuat artikel. Silakan coba lagi nanti.';
-  }
-  console.error('[berita/index] Error:', err);
-}
+const posts = (blogPosts as any[]).slice().sort((a, b) => new Date(b.publishDate).getTime() - new Date(a.publishDate).getTime());
+const featured = posts[0];
+const secondary = posts.slice(1, 3);
+const rest = posts.slice(3);
+const categories = [...new Set(posts.map((p) => p.category))];
+const fmt = (d: string) => new Date(d).toLocaleDateString('id-ID', { year: 'numeric', month: 'long', day: 'numeric' });
 ---
-
 <PageLayout
-  title="Berita - Level Garment"
-  description="Baca artikel menarik seputar konveksi, jersey, jaket, dan tips seputar pemesanan baju custom."
-  showHero={true}
-  heroTitle="Berita & Artikel"
-  heroSubtitle="Informasi menarik seputar konveksi dan tips pemesanan"
+  title="Tips & Trik - Level Garment"
+  description="Panduan, inspirasi, dan tips seputar jersey, jaket, dan kaos custom untuk tim, kelas, dan komunitas."
+  showHero={false}
 >
-  <div class="berita-page">
-    {error ? (
-      <!-- Error State -->
-      <section class="py-24">
-        <div class="container">
-          <div class="error-state">
-            <div class="error-icon">
-              <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L4.082 16.5c-.77.833.192 2.5 1.732 2.5z" />
-              </svg>
-            </div>
-            <h2 class="error-title">Gagal Memuat Artikel</h2>
-            <p class="error-message">{error}</p>
-            <div class="error-actions">
-              <button onclick="location.reload()" class="btn-retry">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
-                </svg>
-                Coba Lagi
-              </button>
-              <a href="/" class="btn-home">Kembali ke Beranda</a>
-            </div>
-          </div>
-        </div>
-      </section>
-    ) : blogPosts.length === 0 ? (
-      <!-- Empty State -->
-      <section class="py-24">
-        <div class="container">
-          <div class="error-state">
-            <div class="empty-icon">
-              <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z" />
-              </svg>
-            </div>
-            <h2 class="error-title">Belum Ada Artikel</h2>
-            <p class="error-message">Artikel sedang disiapkan. Silakan kunjungi kembali nanti.</p>
-            <a href="/" class="btn-retry">Kembali ke Beranda</a>
-          </div>
-        </div>
-      </section>
-    ) : (
-    <>
-    <!-- Featured Posts -->
-    {featuredPosts.length > 0 && (
-      <section class="featured-posts py-12 bg-gray-50">
-        <div class="container">
-          <h2 class="text-2xl md:text-3xl font-bold text-gray-900 mb-8 text-center">
-            Artikel Pilihan
-          </h2>
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {featuredPosts.slice(0, 2).map((post) => (
-              <a
-                href={`/berita/${post.slug}`}
-                class="group bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300"
-              >
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-0">
-                  <div class="relative aspect-square md:aspect-auto overflow-hidden">
-                    <img
-                      src={post.image}
-                      alt={post.title}
-                      class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                      loading="lazy"
-                    />
-                  </div>
-                  <div class="p-6 flex flex-col justify-center">
-                    <span class="inline-block bg-primary/10 text-primary text-xs font-semibold px-3 py-1 rounded-full mb-3 w-fit">
-                      {post.category}
-                    </span>
-                    <h3 class="font-bold text-xl text-gray-900 mb-2 group-hover:text-primary transition-colors">
-                      {post.title}
-                    </h3>
-                    <p class="text-sm text-gray-600 mb-4 line-clamp-2">
-                      {post.excerpt}
-                    </p>
-                    <div class="flex items-center gap-2 text-xs text-gray-500">
-                      <span>{post.author}</span>
-                      <span>•</span>
-                      <time datetime={post.pubDate}>
-                        {new Date(post.pubDate).toLocaleDateString('id-ID', { year: 'numeric', month: 'long', day: 'numeric' })}
-                      </time>
-                    </div>
-                  </div>
-                </div>
-              </a>
-            ))}
-          </div>
-        </div>
-      </section>
-    )}
+  <section class="lg-blog">
+    <div class="lg-blog-wrap">
+      <header class="lg-blog-head">
+        <h1 class="lg-blog-h1">Tips &amp; Trik</h1>
+        <p class="lg-blog-sub">Panduan, inspirasi &amp; tips seputar custom apparel — buat tim, kelas, dan komunitasmu.</p>
+      </header>
 
-    <!-- All Blog Posts -->
-    <section class="blog-posts section">
-      <div class="container">
-        <!-- Category Filter -->
+      {featured && (
+        <a class="lg-blog-feat" href={`/berita/${featured.slug}/`}>
+          <div class="lg-blog-feat-img">
+            {featured.image ? <img src={featured.image} alt={featured.title} /> : <div class="lg-blog-ph"></div>}
+          </div>
+          <div class="lg-blog-feat-body">
+            <span class="lg-blog-eyebrow">{featured.category}</span>
+            <h2 class="lg-blog-feat-title">{featured.title}</h2>
+            <p class="lg-blog-feat-ex">{featured.excerpt}</p>
+            <time class="lg-blog-date" datetime={featured.publishDate}>{fmt(featured.publishDate)}</time>
+          </div>
+        </a>
+      )}
+
+      {secondary.length > 0 && (
+        <div class="lg-blog-sec">
+          {secondary.map((p) => (
+            <a class="lg-blog-mini" href={`/berita/${p.slug}/`}>
+              <div class="lg-blog-mini-img">
+                {p.image ? <img src={p.image} alt={p.title} /> : <div class="lg-blog-ph"></div>}
+              </div>
+              <div class="lg-blog-mini-body">
+                <h3 class="lg-blog-mini-title">{p.title}</h3>
+                <time class="lg-blog-date" datetime={p.publishDate}>{fmt(p.publishDate)}</time>
+              </div>
+            </a>
+          ))}
+        </div>
+      )}
+
+      <div class="lg-blog-bar">
+        <h2 class="lg-blog-more-h">Semua Artikel</h2>
         {categories.length > 1 && (
-          <div class="category-filter mb-8 p-4 bg-white rounded-xl shadow-sm">
-            <div class="flex flex-wrap gap-2 justify-center">
-              <button class="category-btn active" data-category="all">
-                Semua
-              </button>
-              {categories.map(cat => (
-                <button class="category-btn" data-category={cat}>
-                  {cat}
-                </button>
-              ))}
-            </div>
+          <div class="lg-blog-filter" data-filter>
+            <button class="is-active" data-cat="all">Semua</button>
+            {categories.map((c) => (<button data-cat={c}>{c}</button>))}
           </div>
         )}
-
-        <!-- Section Title -->
-        <h2 class="text-2xl md:text-3xl font-bold text-gray-900 mb-8 text-center">
-          Semua Artikel
-        </h2>
-
-        <!-- Mobile: Vertical Stack -->
-        <div class="md:hidden space-y-6" id="mobile-posts">
-          {blogPosts.map((post) => (
-            <a
-              href={`/berita/${post.slug}`}
-              class="blog-post-item group block bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300"
-              data-category={post.category}
-            >
-              <div class="relative aspect-video overflow-hidden">
-                <img
-                  src={post.image}
-                  alt={post.title}
-                  class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                  loading="lazy"
-                />
-              </div>
-              <div class="p-5">
-                <span class="inline-block bg-primary/10 text-primary text-xs font-semibold px-3 py-1 rounded-full mb-3">
-                  {post.category}
-                </span>
-                <h3 class="font-bold text-lg text-gray-900 mb-2 group-hover:text-primary transition-colors">
-                  {post.title}
-                </h3>
-                <p class="text-sm text-gray-600 mb-3 line-clamp-2">
-                  {post.excerpt}
-                </p>
-                <div class="flex items-center gap-2 pt-3 border-t border-gray-100 text-xs text-gray-500">
-                  <span>{post.author}</span>
-                  <span>•</span>
-                  <time datetime={post.pubDate}>
-                    {new Date(post.pubDate).toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' })}
-                  </time>
-                </div>
-              </div>
-            </a>
-          ))}
-        </div>
-
-        <!-- Desktop: Grid -->
-        <div class="hidden md:grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="desktop-posts">
-          {blogPosts.map((post) => (
-            <a
-              href={`/berita/${post.slug}`}
-              class="blog-post-item group bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300"
-              data-category={post.category}
-            >
-              <div class="relative aspect-video overflow-hidden">
-                <img
-                  src={post.image}
-                  alt={post.title}
-                  class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                  loading="lazy"
-                />
-              </div>
-              <div class="p-5">
-                <span class="inline-block bg-primary/10 text-primary text-xs font-semibold px-3 py-1 rounded-full mb-3">
-                  {post.category}
-                </span>
-                <h3 class="font-bold text-lg text-gray-900 mb-2 group-hover:text-primary transition-colors">
-                  {post.title}
-                </h3>
-                <p class="text-sm text-gray-600 mb-3 line-clamp-2">
-                  {post.excerpt}
-                </p>
-                <div class="flex items-center gap-2 pt-3 border-t border-gray-100 text-xs text-gray-500">
-                  <span>{post.author}</span>
-                  <span>•</span>
-                  <time datetime={post.pubDate}>
-                    {new Date(post.pubDate).toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' })}
-                  </time>
-                </div>
-              </div>
-            </a>
-          ))}
-        </div>
-
-        <!-- Post Count -->
-        <div class="mt-12 text-center text-gray-500">
-          <p>Menampilkan {blogPosts.length} artikel</p>
-        </div>
       </div>
-    </section>
 
-    <!-- CTA Section -->
-    <section class="section bg-primary/10">
-      <div class="container text-center">
-        <h2 class="text-3xl font-bold text-gray-900 mb-4">
-          Punya Pertanyaan?
-        </h2>
-        <p class="text-xl text-gray-600 mb-8">
-          Hubungi kami untuk konsultasi gratis!
-        </p>
-        <a
-          href={`${siteConfig.contact.whatsappUrl}?text=Hai%20kak!%20Ada%20yang%20ingin%20saya%20tanyakan%20tentang%20artikel%20di%20website%20Level%20Garment`}
-          class="btn btn-primary inline-flex"
-        >
-          <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
-            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
-          </svg>
-          Chat WhatsApp
-        </a>
+      <div class="lg-blog-grid" data-grid>
+        {rest.map((p) => (
+          <div class="lg-blog-item" data-category={p.category}>
+            <BlogCard title={p.title} slug={p.slug} publishDate={p.publishDate} category={p.category} image={p.image} />
+          </div>
+        ))}
       </div>
-    </section>
-    </>
-    )}
-  </div>
+    </div>
+  </section>
 </PageLayout>
 
 <style>
-  .berita-page {
-    overflow-x: hidden;
-  }
+  .lg-blog { background: #fff; padding: clamp(2.5rem, 6vw, 4.5rem) 0 clamp(3rem, 7vw, 5rem); }
+  .lg-blog-wrap { max-width: 74rem; margin: 0 auto; padding: 0 clamp(1.25rem, 5vw, 2.5rem); }
 
-  .category-btn {
-    padding: 0.5rem 1.25rem;
-    border: 2px solid #e5e7eb;
-    background: white;
-    border-radius: 2rem;
-    font-weight: 500;
-    color: #6b7280;
-    cursor: pointer;
-    transition: all 0.3s ease;
-  }
+  .lg-blog-head { margin-bottom: clamp(2rem, 4vw, 3rem); }
+  .lg-blog-h1 { font-family:'Inter',sans-serif; font-weight: 800; font-size: clamp(2.2rem, 5vw, 3.4rem); line-height: 1.02; letter-spacing: -.03em; color: #1A1A2E; margin: 0 0 .6rem; }
+  .lg-blog-sub { font-family:'Inter',sans-serif; font-size: clamp(1.02rem, 1.5vw, 1.2rem); line-height: 1.5; color: #6a6a7c; max-width: 42rem; margin: 0; }
 
-  .category-btn:hover {
-    border-color: #AF7AD5;
-    color: #AF7AD5;
-  }
+  /* featured: image left, content right */
+  .lg-blog-feat { display: grid; grid-template-columns: 1.05fr 1fr; gap: clamp(1.5rem, 4vw, 3.5rem); align-items: center; text-decoration: none; color: #1A1A2E; margin-bottom: clamp(2.2rem, 5vw, 3.5rem); }
+  @media (max-width: 768px) { .lg-blog-feat { grid-template-columns: 1fr; gap: 1.3rem; } }
+  .lg-blog-feat-img { aspect-ratio: 16/11; overflow: hidden; border-radius: 1.2rem; background: #eee9f3; }
+  .lg-blog-feat-img img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .6s ease; }
+  @media (hover:hover){ .lg-blog-feat:hover .lg-blog-feat-img img { transform: scale(1.03); } }
+  .lg-blog-ph { width: 100%; height: 100%; background: linear-gradient(135deg,#d8c8ee,#eee9f3); }
+  .lg-blog-feat-body { min-width: 0; }
+  .lg-blog-eyebrow { display: block; font-family:'Inter',sans-serif; font-weight: 700; font-size: .74rem; letter-spacing: .14em; text-transform: uppercase; color: #9a8db0; margin-bottom: .9rem; }
+  .lg-blog-feat-title { font-family:'Inter',sans-serif; font-weight: 800; font-size: clamp(1.7rem, 3.4vw, 2.7rem); line-height: 1.08; letter-spacing: -.02em; color: #1A1A2E; margin: 0 0 1rem; transition: color .2s ease; }
+  @media (hover:hover){ .lg-blog-feat:hover .lg-blog-feat-title { color: #9A66C2; } }
+  .lg-blog-feat-ex { font-family:'Inter',sans-serif; font-size: clamp(1rem, 1.4vw, 1.15rem); line-height: 1.6; color: #5a5a6e; margin: 0 0 1.4rem;
+    display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical; overflow:hidden; }
+  .lg-blog-date { font-family:'Inter',sans-serif; font-size: .9rem; color: #9a9aa8; }
 
-  .category-btn.active {
-    background: #AF7AD5;
-    border-color: #AF7AD5;
-    color: white;
-  }
+  /* two secondary, horizontal */
+  .lg-blog-sec { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(1.3rem, 3vw, 2.5rem); margin-bottom: clamp(2.5rem, 5vw, 4rem); }
+  @media (max-width: 768px) { .lg-blog-sec { grid-template-columns: 1fr; gap: 1.4rem; } }
+  .lg-blog-mini { display: grid; grid-template-columns: 9rem 1fr; gap: 1.1rem; align-items: center; text-decoration: none; color: #1A1A2E; }
+  @media (max-width: 420px) { .lg-blog-mini { grid-template-columns: 7rem 1fr; gap: .9rem; } }
+  .lg-blog-mini-img { aspect-ratio: 1/1; overflow: hidden; border-radius: .9rem; background: #eee9f3; }
+  .lg-blog-mini-img img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .5s ease; }
+  @media (hover:hover){ .lg-blog-mini:hover .lg-blog-mini-img img { transform: scale(1.05); } }
+  .lg-blog-mini-title { font-family:'Inter',sans-serif; font-weight: 800; font-size: clamp(1.02rem, 1.5vw, 1.18rem); line-height: 1.25; letter-spacing: -.01em; color: #1A1A2E; margin: 0 0 .45rem;
+    display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical; overflow:hidden; transition: color .2s ease; }
+  @media (hover:hover){ .lg-blog-mini:hover .lg-blog-mini-title { color: #9A66C2; } }
 
-  /* Error & Empty State */
-  .error-state {
-    text-align: center;
-    padding: 40px 20px;
-  }
+  /* section bar */
+  .lg-blog-bar { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1rem; padding-top: clamp(1.5rem, 3vw, 2.2rem); border-top: 1px solid rgba(26,26,46,.1); margin-bottom: clamp(1.4rem, 3vw, 2rem); }
+  .lg-blog-more-h { font-family:'Inter',sans-serif; font-weight: 800; font-size: clamp(1.5rem, 3vw, 2.1rem); letter-spacing: -.02em; color: #1A1A2E; margin: 0; }
+  .lg-blog-filter { display: flex; flex-wrap: wrap; gap: .5rem; }
+  .lg-blog-filter button { font-family:'Inter',sans-serif; font-weight: 600; font-size: .85rem; color: #6a6a7c; background: #f4f1f9; border: 1.5px solid transparent; border-radius: 999px; padding: .45rem 1rem; cursor: pointer; transition: all .2s ease; }
+  @media (hover:hover){ .lg-blog-filter button:hover { color: #9A66C2; } }
+  .lg-blog-filter button.is-active { background: #1A1A2E; color: #fff; }
 
-  .error-icon, .empty-icon {
-    width: 96px;
-    height: 96px;
-    margin: 0 auto 32px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .error-icon {
-    background: #fef2f2;
-    color: #f87171;
-  }
-
-  .empty-icon {
-    background: #eff6ff;
-    color: #60a5fa;
-  }
-
-  .error-title {
-    font-size: 28px;
-    font-weight: 700;
-    color: #111827;
-    margin-bottom: 12px;
-  }
-
-  .error-message {
-    font-size: 16px;
-    color: #6b7280;
-    max-width: 400px;
-    margin: 0 auto 32px;
-    line-height: 1.6;
-  }
-
-  .error-actions {
-    display: flex;
-    gap: 12px;
-    justify-content: center;
-    flex-wrap: wrap;
-  }
-
-  .btn-retry {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    padding: 12px 24px;
-    background: #AF7AD5;
-    color: #fff;
-    font-size: 15px;
-    font-weight: 600;
-    border: none;
-    border-radius: 12px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    text-decoration: none;
-  }
-
-  .btn-retry:hover {
-    background: #9b5fc4;
-    transform: translateY(-2px);
-    box-shadow: 0 8px 20px rgba(175, 122, 213, 0.3);
-  }
-
-  .btn-home {
-    display: inline-flex;
-    align-items: center;
-    padding: 12px 24px;
-    background: transparent;
-    color: #374151;
-    font-size: 15px;
-    font-weight: 600;
-    border: 2px solid #e5e7eb;
-    border-radius: 12px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    text-decoration: none;
-  }
-
-  .btn-home:hover {
-    border-color: #374151;
-    background: #f9fafb;
-  }
-
-  .line-clamp-2 {
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-  }
-
-  @media (max-width: 640px) {
-    .category-filter {
-      padding: 0.75rem;
-    }
-
-    .category-btn {
-      padding: 0.375rem 0.875rem;
-      font-size: 0.875rem;
-    }
-  }
+  /* grid */
+  .lg-blog-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(15.5rem, 1fr)); gap: clamp(1.4rem, 2.5vw, 2.2rem) clamp(1.1rem, 2vw, 1.7rem); }
+  .lg-blog-item.is-hidden { display: none; }
 </style>
 
 <script>
-  // Category filter functionality
-  const categoryButtons = document.querySelectorAll('.category-btn');
-  const mobilePosts = document.querySelectorAll('#mobile-posts .blog-post-item');
-  const desktopPosts = document.querySelectorAll('#desktop-posts .blog-post-item');
-
-  categoryButtons.forEach(button => {
-    button.addEventListener('click', () => {
-      const category = button.getAttribute('data-category');
-
-      // Update active state
-      categoryButtons.forEach(btn => btn.classList.remove('active'));
-      button.classList.add('active');
-
-      // Filter posts
-      const allPosts = [...mobilePosts, ...desktopPosts];
-      allPosts.forEach(post => {
-        const postCategory = post.getAttribute('data-category');
-        if (category === 'all' || postCategory === category) {
-          (post as HTMLElement).style.display = '';
-        } else {
-          (post as HTMLElement).style.display = 'none';
-        }
-      });
-    });
+  const wrap = document.querySelector<HTMLElement>('[data-filter]');
+  const items = Array.from(document.querySelectorAll<HTMLElement>('.lg-blog-item'));
+  wrap?.addEventListener('click', (e) => {
+    const btn = (e.target as HTMLElement).closest('button');
+    if (!btn) return;
+    wrap.querySelectorAll('button').forEach((b) => b.classList.toggle('is-active', b === btn));
+    const cat = btn.dataset.cat;
+    items.forEach((it) => it.classList.toggle('is-hidden', cat !== 'all' && it.dataset.category !== cat));
   });
 </script>

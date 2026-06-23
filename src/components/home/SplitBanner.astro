@@ -1,0 +1,131 @@
+---
+/**
+ * Split banner — seamless two-panel block (no gap). LEFT is static: LG white logo
+ * centered + desc + CTA over a fixed image. RIGHT is a dynamic image slider with a
+ * short KG-style caption bottom-left, a small load bar bottom-center, and prev/next
+ * arrows that reveal only on left/right edge hover. Same height as the video banner.
+ */
+import home from '../../data/home.json';
+const sb = home.splitBanner;     // CMS-managed: src/data/home.json → splitBanner
+const leftBg = sb.leftImage;
+const leftDesc = sb.leftDesc;
+const leftCta = { label: sb.leftCtaLabel, href: sb.leftCtaHref };
+const rightSlides = sb.rightSlides;   // [{ image, title }]
+---
+<section class="lg-split" aria-label="Sorotan">
+  <!-- LEFT — static -->
+  <div class="lg-split-left" style={`background-image:url('${leftBg}')`}>
+    <div class="lg-split-left-scrim" aria-hidden="true"></div>
+    <div class="lg-split-left-inner">
+      <img class="lg-split-logo" src="/assets/images/logo/logo-white.webp" alt="Level Garment" width="220" height="66" />
+      <p class="lg-split-desc">{leftDesc}</p>
+      <a class="lg-split-cta" href={leftCta.href}>{leftCta.label}</a>
+    </div>
+  </div>
+
+  <!-- RIGHT — sliding -->
+  <div class="lg-split-right" data-slider>
+    {rightSlides.map((s, i) => (
+      <div class:list={['lg-split-slide', { 'is-active': i === 0 }]} data-i={i} data-title={s.title}>
+        <img src={s.image} alt="" loading="lazy" />
+      </div>
+    ))}
+    <div class="lg-split-right-scrim" aria-hidden="true"></div>
+    <span class="lg-split-caption" data-caption>{rightSlides[0].title}</span>
+
+    <button class="lg-split-arrow lg-split-prev" data-prev aria-label="Slide sebelumnya">
+      <span class="lg-split-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg></span>
+    </button>
+    <button class="lg-split-arrow lg-split-next" data-next aria-label="Slide berikutnya">
+      <span class="lg-split-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></span>
+    </button>
+
+    <div class="lg-split-progress" aria-hidden="true">
+      {rightSlides.map((_, i) => (<span class="lg-sp" data-i={i}><i></i></span>))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .lg-split {
+    display: grid; grid-template-columns: 1fr 1fr; width: 100%;
+    height: clamp(32rem, 92vh, 56rem);
+    margin: clamp(1.75rem, 4vw, 3.25rem) 0;
+    overflow: hidden; background: #1A1A2E; isolation: isolate;
+  }
+
+  /* LEFT */
+  .lg-split-left { position: relative; background-size: cover; background-position: center; display: grid; place-items: center; }
+  .lg-split-left-scrim { position: absolute; inset: 0; background: rgba(18,18,30,.42); }
+  .lg-split-left-inner { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; text-align: center; padding: 2rem; max-width: 30rem; }
+  .lg-split-logo { width: clamp(11rem, 16vw, 15rem); height: auto; margin-bottom: 1.6rem; filter: drop-shadow(0 2px 18px rgba(0,0,0,.4)); }
+  .lg-split-desc { color: #fff; font-family:'Inter',sans-serif; font-weight:500; font-size:clamp(1rem,1.2vw,1.15rem); line-height:1.55; margin:0 0 1.7rem; text-shadow:0 1px 12px rgba(0,0,0,.4); }
+  .lg-split-cta { color:#fff; font-family:'Inter',sans-serif; font-weight:700; font-size:.9rem; letter-spacing:.06em; text-transform:uppercase; text-decoration:none; position:relative; padding-bottom:.35rem; }
+  .lg-split-cta::after { content:''; position:absolute; left:0; right:0; bottom:0; height:1.5px; background:#fff; transform-origin:center; transition:transform .4s cubic-bezier(.19,1,.22,1); }
+  @media (hover:hover){ .lg-split-cta:hover::after { transform:scaleX(0); } }
+
+  /* RIGHT */
+  .lg-split-right { position: relative; overflow: hidden; }
+  .lg-split-slide { position: absolute; inset: 0; opacity: 0; transition: opacity 1s ease; }
+  .lg-split-slide.is-active { opacity: 1; }
+  .lg-split-slide img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .lg-split-right-scrim { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,.5) 0%, rgba(0,0,0,.1) 30%, rgba(0,0,0,0) 52%); }
+  .lg-split-caption { position: absolute; left: clamp(1.25rem, 2.5vw, 2.25rem); bottom: clamp(1.6rem, 4vh, 2.75rem); z-index: 3; color:#fff; font-family:'Inter',sans-serif; font-weight:700; font-size:clamp(.95rem,1.4vw,1.25rem); letter-spacing:.02em; text-shadow:0 1px 12px rgba(0,0,0,.5); transition: opacity .35s ease; }
+
+  /* hover-reveal arrows */
+  .lg-split-arrow { position: absolute; top: 0; bottom: 0; width: 32%; z-index: 4; display: grid; align-items: center; background: none; border: 0; cursor: pointer; opacity: 0; transition: opacity .25s ease; }
+  .lg-split-prev { left: 0; justify-items: start; padding-left: clamp(.75rem,2vw,1.5rem); }
+  .lg-split-next { right: 0; justify-items: end; padding-right: clamp(.75rem,2vw,1.5rem); }
+  .lg-split-ico { width: 2.6rem; height: 2.6rem; border-radius: 999px; background: rgba(255,255,255,.88); color: #1A1A2E; display: grid; place-items: center; box-shadow: 0 8px 22px -10px rgba(0,0,0,.5); transition: transform .2s ease; }
+  .lg-split-ico svg { width: 1.25rem; height: 1.25rem; }
+  @media (hover: hover) { .lg-split-arrow:hover { opacity: 1; } .lg-split-arrow:hover .lg-split-ico { transform: scale(1.06); } }
+
+  /* small load bar — bottom center */
+  .lg-split-progress { position: absolute; left: 50%; transform: translateX(-50%); bottom: clamp(1rem, 2.5vh, 1.6rem); z-index: 3; display: flex; gap: 4px; }
+  .lg-sp { width: 1.6rem; height: 2.5px; background: rgba(255,255,255,.4); border-radius: 999px; overflow: hidden; }
+  .lg-sp i { display: block; width: 0; height: 100%; background: #fff; border-radius: 999px; }
+  .lg-sp.is-done i { width: 100%; }
+  .lg-sp.is-active i { width: 100%; transition: width var(--dur, 4s) linear; }
+
+  @media (max-width: 768px) {
+    .lg-split { grid-template-columns: 1fr; height: auto; }
+    .lg-split-left, .lg-split-right { height: 80svh; min-height: 26rem; }
+    .lg-split-arrow { display: none; }
+  }
+</style>
+
+<script>
+  document.querySelectorAll<HTMLElement>('.lg-split-right[data-slider]').forEach((slider) => {
+    const slides = Array.from(slider.querySelectorAll<HTMLElement>('.lg-split-slide'));
+    const bars = Array.from(slider.querySelectorAll<HTMLElement>('.lg-sp'));
+    const caption = slider.querySelector<HTMLElement>('[data-caption]');
+    const prev = slider.querySelector<HTMLButtonElement>('[data-prev]');
+    const next = slider.querySelector<HTMLButtonElement>('[data-next]');
+    if (slides.length < 2) return;
+    const DUR = 4200;
+    let cur = 0; let timer: ReturnType<typeof setTimeout> | null = null;
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    const show = (n: number) => {
+      slides[cur].classList.remove('is-active');
+      bars[cur].classList.remove('is-active'); bars[cur].classList.add('is-done');
+      cur = (n + slides.length) % slides.length;
+      if (cur === 0) bars.forEach((b) => b.classList.remove('is-done'));
+      slides[cur].classList.add('is-active');
+      if (caption) {
+        caption.style.opacity = '0';
+        setTimeout(() => { caption.textContent = slides[cur].dataset.title || ''; caption.style.opacity = '1'; }, 320);
+      }
+      bars[cur].style.setProperty('--dur', DUR + 'ms');
+      void bars[cur].offsetWidth;
+      bars[cur].classList.add('is-active');
+      if (!reduce) { if (timer) clearTimeout(timer); timer = setTimeout(() => show(cur + 1), DUR); }
+    };
+
+    bars[0].style.setProperty('--dur', DUR + 'ms');
+    requestAnimationFrame(() => { void bars[0].offsetWidth; bars[0].classList.add('is-active'); });
+    if (!reduce) timer = setTimeout(() => show(1), DUR);
+    prev?.addEventListener('click', () => show(cur - 1));
+    next?.addEventListener('click', () => show(cur + 1));
+  });
+</script>

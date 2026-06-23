@@ -1,153 +1,71 @@
 ---
-/**
- * Blog Post Detail Page - Level Garment
- *
- * Displays individual blog post fetched from marketing.vidogarment API
- */
 import BlogLayout from '../../layouts/BlogLayout.astro';
-import { getAllBlogPosts } from '../../lib/blog';
-import siteConfig from '../../data/site-config.json';
+import BlogCard from '../../components/content/BlogCard.astro';
+import blogPosts from '../../data/blog-posts.json';
 
-// Generate static paths for all blog posts
-export async function getStaticPaths() {
-  const blogPosts = await getAllBlogPosts();
-  return blogPosts.map(post => ({
+export const getStaticPaths = () => {
+  const posts = blogPosts as any[];
+  return posts.map((post) => ({
     params: { slug: post.slug },
     props: {
-      post,
-      allPosts: blogPosts,
+      title: post.title,
+      description: post.excerpt,
+      publishDate: post.publishDate,
+      modifiedDate: post.publishDate,
+      category: post.category,
+      readTime: Math.ceil(post.content.split(' ').length / 200),
+      image: post.image,
+      // strip the duplicate leading <h1> (same as the title already shown in the hero)
+      content: post.content.replace(/^\s*<h1\b[^>]*>[\s\S]*?<\/h1>\s*/i, ''),
     },
   }));
+};
+
+const { title, description, image, publishDate, modifiedDate, category, readTime, content } = Astro.props;
+const posts = blogPosts as any[];
+let related = posts.filter((p) => p.category === category && p.title !== title).slice(0, 3);
+if (related.length < 3) {
+  const more = posts.filter((p) => p.title !== title && !related.some((r) => r.slug === p.slug)).slice(0, 3 - related.length);
+  related = [...related, ...more];
 }
-
-const { post, allPosts } = Astro.props;
-
-// Render markdown body ke HTML
-let renderedBody = post.body;
-if (post.body && !post.body.startsWith('<')) {
-  try {
-    const { marked } = await import('marked');
-    renderedBody = await marked(post.body);
-  } catch {
-    renderedBody = post.body.replace(/\n/g, '<br>');
-  }
-}
-
-// Calculate read time (approx. 200 words per minute)
-const wordCount = post.body?.split(/\s+/).length || 0;
-const readTime = Math.ceil(wordCount / 200);
-
-// Get related posts (same category, exclude current) - use allPosts from props
-const relatedPosts = allPosts
-  .filter(p => p.category === post.category && p.slug !== post.slug)
-  .slice(0, 3);
 ---
 
 <BlogLayout
-  title={post.title}
-  description={post.excerpt}
-  image={post.image}
-  publishDate={new Date(post.pubDate).toISOString()}
-  category={post.category}
+  title={title}
+  description={description}
+  image={image}
+  publishDate={publishDate}
+  modifiedDate={modifiedDate}
+  category={category}
   readTime={readTime}
-  author={post.author}
 >
-  <!-- Render Markdown Content -->
-  <Fragment set:html={renderedBody} />
+  <div set:html={content} />
 
-  <!-- Tags Section -->
-  {post.tags && post.tags.length > 0 && (
-    <div class="mt-12 pt-8 border-t border-gray-200">
-      <span class="text-gray-600 font-semibold mr-3">Tags:</span>
-      <div class="flex flex-wrap gap-2 mt-2 inline">
-        {post.tags.map(tag => (
-          <span class="bg-gray-100 text-gray-700 text-sm px-4 py-1.5 rounded-full font-medium hover:bg-gray-200 transition-colors">
-            #{tag}
-          </span>
-        ))}
-      </div>
-    </div>
-  )}
-
-  <!-- Share Buttons -->
-  <div class="mt-8 pt-8 border-t border-gray-200">
-    <h3 class="text-lg font-semibold text-gray-900 mb-4">Bagikan artikel ini:</h3>
-    <div class="flex flex-wrap gap-3">
-      <a
-        href={`https://wa.me/?text=${encodeURIComponent(post.title + ' - ' + Astro.url.href)}`}
-        target="_blank"
-        rel="noopener noreferrer"
-        class="inline-flex items-center gap-2 bg-primary hover:bg-primary-dark text-white px-5 py-2.5 rounded-lg transition-colors"
-        aria-label="Share on WhatsApp"
-      >
-        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
-        </svg>
-        <span>WhatsApp</span>
-      </a>
-      <a
-        href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(Astro.url.href)}`}
-        target="_blank"
-        rel="noopener noreferrer"
-        class="inline-flex items-center gap-2 bg-primary hover:bg-primary-dark text-white px-5 py-2.5 rounded-lg transition-colors"
-        aria-label="Share on Facebook"
-      >
-        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-          <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
-        </svg>
-        <span>Facebook</span>
-      </a>
-    </div>
-  </div>
-
-  <!-- Related Articles -->
-  {relatedPosts.length > 0 && (
-    <section class="related-posts mt-16 pt-12 border-t border-gray-200">
-      <h2 class="text-2xl md:text-3xl font-bold text-gray-900 mb-8 text-center">Artikel Terkait</h2>
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-        {relatedPosts.map((related) => (
-          <article class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow">
-            <div class="aspect-video overflow-hidden">
-              <img
-                src={related.image}
-                alt={related.title}
-                class="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
-                loading="lazy"
-              />
-            </div>
-            <div class="p-6">
-              <span class="text-sm text-gray-500 font-semibold">{related.category}</span>
-              <h3 class="text-lg font-bold mt-2 mb-3 line-clamp-2">{related.title}</h3>
-              <p class="text-gray-600 text-sm mb-4 line-clamp-2">{related.excerpt}</p>
-              <a href={`/berita/${related.slug}`} class="text-gray-900 font-semibold hover:text-primary transition-colors">
-                Baca Selengkapnya →
-              </a>
-            </div>
-          </article>
+  {related.length > 0 && (
+    <section class="lg-rel not-prose">
+      <h2 class="lg-rel-h">Tips &amp; Trik Lainnya</h2>
+      <div class="lg-rel-grid">
+        {related.map((p) => (
+          <BlogCard title={p.title} slug={p.slug} publishDate={p.publishDate} category={p.category} image={p.image} />
         ))}
       </div>
     </section>
   )}
 
-  <!-- Back to Blog -->
-  <nav class="back-to-blog mt-12 pt-8 border-t border-gray-200">
-    <a
-      href="/berita/"
-      class="inline-flex items-center gap-2 text-gray-700 font-semibold hover:gap-3 transition-all group"
-    >
-      <svg class="w-5 h-5 group-hover:-translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
-      </svg>
-      Kembali ke Berita
+  <nav class="lg-back not-prose">
+    <a href="/berita/" class="lg-back-link">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+      Kembali ke Tips &amp; Trik
     </a>
   </nav>
 </BlogLayout>
 
 <style>
-  .line-clamp-2 {
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-  }
+  .lg-rel { margin-top: clamp(3rem, 6vw, 4.5rem); padding-top: clamp(2rem, 4vw, 2.8rem); border-top: 1px solid rgba(26,26,46,.1); }
+  .lg-rel-h { font-family:'Inter',sans-serif; font-weight: 800; font-size: clamp(1.35rem, 2.4vw, 1.7rem); letter-spacing: -.02em; color: #1A1A2E; margin: 0 0 1.5rem; }
+  .lg-rel-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(14.5rem, 1fr)); gap: clamp(1.2rem, 2.5vw, 1.8rem); }
+  .lg-back { margin: 2.5rem 0 1rem; }
+  .lg-back-link { display: inline-flex; align-items: center; gap: .5rem; font-family:'Inter',sans-serif; font-weight: 700; font-size: .95rem; color: #9A66C2; text-decoration: none; }
+  .lg-back-link svg { width: 1.1rem; height: 1.1rem; transition: transform .2s ease; }
+  .lg-back-link:hover svg { transform: translateX(-3px); }
 </style>
