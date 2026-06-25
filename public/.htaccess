@@ -1,0 +1,2 @@
+# Serve the branded 404 page for unmatched paths (Astro static build)
+ErrorDocument 404 /404.html
