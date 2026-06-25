@@ -1,0 +1,10 @@
+# robots.txt for Level Garment
+
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://levelgarment.com/sitemap-index.xml
+
+# Crawl-delay (optional, polite to servers)
+Crawl-delay: 1

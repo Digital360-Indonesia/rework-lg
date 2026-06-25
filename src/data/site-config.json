@@ -32,7 +32,8 @@
     },
     {
       "name": "Portfolio",
-      "path": "/portfolio/"
+      "path": "https://portfolio.levelgarment.com",
+      "external": true
     },
     {
       "name": "Promo",
