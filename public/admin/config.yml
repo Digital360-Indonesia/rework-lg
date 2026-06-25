@@ -128,7 +128,7 @@ collections:
               - { name: subtitle, label: "Subjudul", widget: text, required: false }
               - { name: href, label: "Link judul (mis. /product/)", widget: string, required: false, default: "/product/" }
           - name: splitBanner
-            label: "Section 4 — Split Banner"
+            label: "Section 4 — Split Banner (disembunyikan untuk sekarang)"
             widget: object
             fields:
               - { name: leftImage, label: "Gambar kiri (panel statis)", widget: image }
@@ -148,11 +148,18 @@ collections:
               - { name: tag, label: "Tag (chip atas)", widget: string }
               - { name: account, label: "Nama akun (caption mobile)", widget: string, required: false, default: "Level Garment" }
               - name: events
-                label: "Event (gambar 2:1 + nama + info)"
+                label: "Event (gambar/video 16:9 + varian mobile + nama + info)"
+                label_singular: "Event"
                 widget: list
+                summary: "{{fields.name}}"
                 fields:
-                  - { name: image, label: "Gambar event (2:1)", widget: image }
                   - { name: name, label: "Nama event (judul caption)", widget: string }
+                  # Desktop media — isi SALAH SATU: gambar ATAU video
+                  - { name: image, label: "Gambar desktop (16:9) — isi ini KALAU pakai gambar", widget: image, required: false }
+                  - { name: video, label: "Video desktop (16:9, .mp4) — isi ini KALAU pakai video", widget: file, required: false }
+                  # Mobile media (opsional) — kalau kosong, dipakai versi desktop di atas
+                  - { name: imageMobile, label: "Gambar mobile (portrait, opsional)", widget: image, required: false }
+                  - { name: videoMobile, label: "Video mobile (portrait .mp4, opsional)", widget: file, required: false }
                   - { name: info, label: "Info event (subjudul — bisa di-expand di mobile)", widget: text, required: false }
           - name: endCta
             label: "Section 6 — End CTA"
@@ -169,4 +176,4 @@ collections:
                 fields:
                   - { name: day, label: "Hari", widget: string }
                   - { name: time, label: "Jam", widget: string }
-          - { name: duoBackground, label: "Background gabungan Sponsorship + End CTA (~1:1)", widget: image }
+          - { name: duoBackground, label: "Background Sponsorship (area ungu atas yang memudar ke putih)", widget: image }
