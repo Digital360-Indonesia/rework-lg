@@ -115,7 +115,7 @@
     "events": [
       {
         "name": "EFESTAPHORIA 2025",
-        "image": "/assets/images/sponsorship/efestaphoria-ds.jpg",
+        "video": "/assets/videos/efestaphoria-ds.mp4",
         "videoMobile": "/assets/videos/efestaphoria-mb.mp4",
         "info": "Festival musik & seni tahunan dengan ribuan pengunjung. Level Garment dipercaya garap jersey panitia, kaos crew, sampai merch eksklusif buat peserta — semua custom, rapi, dan tepat waktu."
       },
@@ -127,6 +127,7 @@
       {
         "name": "NOUVEAU 2025",
         "video": "/assets/videos/nouveau-ds.mp4",
+        "videoMobile": "/assets/videos/nouveau-mb.mp4",
         "info": "Gelaran kreatif tahunan yang ramai dikunjungi pelajar. Level Garment jadi partner apparel resmi buat panitia, tenant, sampai volunteer acara."
       },
       {
@@ -139,6 +140,18 @@
         "image": "/assets/images/sponsorship/unj-ds.jpg",
         "imageMobile": "/assets/images/sponsorship/unj-mb.jpg",
         "info": "Kolaborasi riset & apparel bareng Universitas Negeri Jakarta — dari jaket tim, jersey kegiatan, sampai merch acara kampus. Satu tim buat semua kebutuhan apparel kalian."
+      },
+      {
+        "name": "NOGOGENI TEAM ITS",
+        "video": "/assets/videos/nogogeni-ds.mp4",
+        "videoMobile": "/assets/videos/nogogeni-mb.mp4",
+        "info": "Tim riset kendaraan hemat energi kebanggaan ITS yang langganan juara di ajang nasional. Level Garment garap jersey tim, jaket crew, sampai apparel official biar mereka tampil solid di tiap kompetisi."
+      },
+      {
+        "name": "E-WEEK FEB UNAIR 2025",
+        "video": "/assets/videos/eweek-ds.mp4",
+        "videoMobile": "/assets/videos/eweek-mb.mp4",
+        "info": "Economic Week tahunan dari FEB Universitas Airlangga — rangkaian kompetisi, seminar, sampai expo yang rame peserta. Kami suplai kaos panitia, jersey volunteer, sampai merch acara dengan bahan adem dan jahitan rapi."
       }
     ]
   },
