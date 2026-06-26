@@ -86,9 +86,13 @@ const ogImage = '/assets/images/logo/logo-colored.webp';
   /* ============ MOBILE (phones ≤767px): TikTok / Reels-style full-screen swipe feed ============
      Native CSS scroll-snap — each section is a full-screen panel; swipe up/down snaps one at a time. */
   @media (max-width: 767px) {
-    /* TikTok-feel: mandatory one-at-a-time snap, no rubber-band chaining, direct snap */
-    :global(html) { scroll-snap-type: y mandatory; overscroll-behavior-y: contain; scroll-behavior: auto; }
-    :global(body) { overscroll-behavior-y: contain; }
+    /* TikTok-feel snap: make BODY the single full-screen snap scroller.
+       iOS Safari ignores scroll-snap-type on <html> when body has overflow-x:hidden (it shifts the
+       scroll container to <body>) → snap silently dies and you get free web-scroll. Locking <html>
+       and making <body> the fixed-height snap scroller is the robust cross-engine fix. */
+    :global(html.lg-home) { height: 100dvh; overflow: hidden; }
+    :global(html.lg-home body) { height: 100dvh; overflow-x: hidden; overflow-y: scroll; -webkit-overflow-scrolling: touch;
+      scroll-snap-type: y mandatory; overscroll-behavior-y: contain; scroll-behavior: auto; }
     /* kill the 80px desktop-header scroll offset so each panel snaps FLUSH (one swipe = full fit, TikTok-style) */
     :global(section) { scroll-margin-top: 0 !important; }
     /* Top header + announcement are hidden on mobile (BaseLayout) — the purple bottom nav (MobileNav) is the navigator. */
@@ -102,6 +106,10 @@ const ogImage = '/assets/images/logo/logo-colored.webp';
       margin: 0 !important;
       scroll-snap-align: start;
       scroll-snap-stop: always;
+      /* Suppress iOS long-press preview (the "zoom on hold") + double-tap-to-zoom on the reels feed.
+         touch-action:manipulation keeps panning + pinch-zoom (a11y) but kills the double-tap gesture. */
+      -webkit-touch-callout: none; -webkit-user-select: none; user-select: none;
+      -webkit-tap-highlight-color: transparent; touch-action: manipulation;
     }
     /* Section 4 (split banner) skipped on mobile for now */
     :global(.lg-split) { display: none !important; }

@@ -44,13 +44,13 @@ const first = events[0];
           <article class="lg-spon-card" data-real={e._real} data-name={e.name} data-info={e.info || ''} data-has-mb={hasMb ? 'true' : 'false'}>
             <div class="lg-spon-media lg-spon-ds">
               {dsVideo
-                ? <video src={dsVideo} autoplay muted loop playsinline preload="metadata"></video>
+                ? <video src={dsVideo} muted loop playsinline preload="metadata" data-spon-vid></video>
                 : <img src={e.image} alt={e.name} loading="lazy" />}
             </div>
             {hasMb && (
               <div class="lg-spon-media lg-spon-mb">
                 {mbVideo
-                  ? <video src={mbVideo} autoplay muted loop playsinline preload="metadata"></video>
+                  ? <video src={mbVideo} muted loop playsinline preload="metadata" data-spon-vid></video>
                   : <img src={mbImage} alt={e.name} loading="lazy" />}
               </div>
             )}
@@ -165,12 +165,24 @@ const first = events[0];
     const setScroll = (r: number, smooth: boolean) =>
       track.scrollTo({ left: centerOf(cards[r]) - track.clientWidth / 2, behavior: smooth ? 'smooth' : 'instant' as ScrollBehavior });
 
-    let curR = 1, lastReal = -1, raf = 0, stop = 0;
+    let curR = 1, lastReal = -1, raf = 0, stop = 0, lastVid = -1;
+    // Play ONLY the centered card's video; pause (and free decode on) everything else.
+    // Hidden variants (display:none → offsetParent null) never play, so mobile doesn't load the
+    // desktop clips and vice-versa. Keeps the reels light instead of decoding ~8 videos at once.
+    const tuneVideos = (best: number) => {
+      if (best === lastVid) return;
+      lastVid = best;
+      cards.forEach((card, i) => card.querySelectorAll('video').forEach((v) => {
+        if (i === best && v.offsetParent !== null) { v.play().catch(() => {}); }
+        else if (!v.paused) { v.pause(); }
+      }));
+    };
     const paint = () => {
       const c = track.scrollLeft + track.clientWidth / 2;
       let best = 1, bestD = Infinity;
       cards.forEach((card, i) => { const d = Math.abs(centerOf(card) - c); if (d < bestD) { bestD = d; best = i; } });
       curR = best;
+      tuneVideos(best);
       const real = Number(cards[best].dataset.real);
       if (real !== lastReal) {
         lastReal = real;
