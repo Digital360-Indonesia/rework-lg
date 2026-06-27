@@ -40,17 +40,18 @@ const first = events[0];
         const mbVideo = (e as any).videoMobile;
         const mbImage = (e as any).imageMobile;
         const hasMb = !!(mbVideo || mbImage);
+        const poster = (v?: string) => v ? `/assets/videos/posters/spon/${v.split('/').pop()!.replace(/\.\w+$/, '.jpg')}` : undefined;
         return (
           <article class="lg-spon-card" data-real={e._real} data-name={e.name} data-info={e.info || ''} data-has-mb={hasMb ? 'true' : 'false'}>
             <div class="lg-spon-media lg-spon-ds">
               {dsVideo
-                ? <video src={dsVideo} muted loop playsinline preload="metadata" data-spon-vid></video>
+                ? <video src={dsVideo} poster={poster(dsVideo)} autoplay muted loop playsinline preload="metadata" data-spon-vid></video>
                 : <img src={e.image} alt={e.name} loading="lazy" />}
             </div>
             {hasMb && (
               <div class="lg-spon-media lg-spon-mb">
                 {mbVideo
-                  ? <video src={mbVideo} muted loop playsinline preload="metadata" data-spon-vid></video>
+                  ? <video src={mbVideo} poster={poster(mbVideo)} autoplay muted loop playsinline preload="metadata" data-spon-vid></video>
                   : <img src={mbImage} alt={e.name} loading="lazy" />}
               </div>
             )}
