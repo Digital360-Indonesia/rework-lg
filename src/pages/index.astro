@@ -90,8 +90,8 @@ const ogImage = '/assets/images/logo/logo-colored.webp';
        iOS Safari ignores scroll-snap-type on <html> when body has overflow-x:hidden (it shifts the
        scroll container to <body>) → snap silently dies and you get free web-scroll. Locking <html>
        and making <body> the fixed-height snap scroller is the robust cross-engine fix. */
-    :global(html.lg-home) { height: var(--app-vh, 100dvh); overflow: hidden; }
-    :global(html.lg-home body) { height: var(--app-vh, 100dvh); overflow-x: hidden; overflow-y: scroll; -webkit-overflow-scrolling: touch;
+    :global(html.lg-home) { height: var(--app-vh, 100svh); overflow: hidden; }
+    :global(html.lg-home body) { height: var(--app-vh, 100svh); overflow-x: hidden; overflow-y: scroll; -webkit-overflow-scrolling: touch;
       scroll-snap-type: y mandatory; overscroll-behavior-y: contain; scroll-behavior: auto; }
     /* kill the 80px desktop-header scroll offset so each panel snaps FLUSH (one swipe = full fit, TikTok-style) */
     :global(section) { scroll-margin-top: 0 !important; }
@@ -101,8 +101,8 @@ const ogImage = '/assets/images/logo/logo-colored.webp';
     :global(.lg-banner),
     :global(.lg-spon),
     :global(.lg-mcta) {
-      height: var(--app-vh, 100dvh) !important;   /* JS-pinned to real viewport (fallback dvh) — fills exactly, last panel reachable */
-      min-height: var(--app-vh, 100dvh) !important;
+      height: var(--app-vh, 100svh) !important;   /* JS-pinned to real viewport; svh fallback = toolbar-safe minimum so iOS last panel still fits */
+      min-height: var(--app-vh, 100svh) !important;
       margin: 0 !important;
       scroll-snap-align: start;
       scroll-snap-stop: always;

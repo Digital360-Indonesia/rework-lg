@@ -56,14 +56,24 @@ const pageType = type === 'article' ? 'article' : 'website';
        (not per-scroll) to avoid mid-scroll reflow. -->
   <script is:inline>
     (function () {
-      var set = function () { document.documentElement.style.setProperty('--app-vh', window.innerHeight + 'px'); };
+      var de = document.documentElement, last = 0;
+      // visualViewport.height is the REAL visible area on iOS Safari (toolbar-aware); innerHeight is a
+      // fallback. iOS often reports a wrong innerHeight on the very first read (before the toolbar
+      // settles) and never fires a correcting resize — so we re-measure on load + a settle delay too.
+      var measure = function () { return (window.visualViewport && window.visualViewport.height) || window.innerHeight; };
+      var set = function () {
+        var h = measure();
+        // ignore the tiny toolbar-collapse deltas that fire mid-scroll (would resize panels and jank);
+        // only commit real changes (rotate / first correct value / window resize).
+        if (h && Math.abs(h - last) > 40) { last = h; de.style.setProperty('--app-vh', h + 'px'); }
+      };
       set();
-      addEventListener('orientationchange', function () { setTimeout(set, 250); });
-      addEventListener('resize', function () {
-        // only react to real viewport changes (rotate / window resize), ignore the tiny
-        // toolbar-driven deltas that fire during scroll
-        clearTimeout(window.__avhT); window.__avhT = setTimeout(set, 200);
-      });
+      addEventListener('DOMContentLoaded', set);
+      addEventListener('load', set);
+      setTimeout(set, 300); setTimeout(set, 900);   // catch iOS's late-correct viewport height
+      addEventListener('orientationchange', function () { last = 0; setTimeout(set, 250); });
+      if (window.visualViewport) window.visualViewport.addEventListener('resize', set);
+      addEventListener('resize', set);
     })();
   </script>
 
