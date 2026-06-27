@@ -51,7 +51,7 @@ const STAR = '<path fill="currentColor" d="M12 2.6l2.85 5.78 6.38.93-4.62 4.5 1.
       <a class="lg-rail-item" href={c.href} data-img={c.image}
          data-clone={c._clone ? 'true' : 'false'}
          aria-hidden={c._clone ? 'true' : undefined} tabindex={c._clone ? -1 : undefined}>
-        <div class="lg-rail-img"><img src={c.image} alt={c.name} loading="lazy" /></div>
+        <div class="lg-rail-img"><img class="lg-rv" src={c.image} alt={c.name} loading="lazy" /></div>
         <div class="lg-rail-meta">
           <span class="lg-rail-ico" set:html={`<svg viewBox="0 0 24 24" width="100%" height="100%">${iconFor(c.name)}</svg>`}></span>
           <span class="lg-rail-label">{c.name}</span>

@@ -47,16 +47,16 @@ const first = events[0];
         const blur = (v?: string) => { if (!v) return undefined; const k = (lqip as any)[v.split('/').pop()!.replace(/\.\w+$/, '')]; return k ? `background-image:url(${k});background-size:cover;background-position:center` : undefined; };
         return (
           <article class="lg-spon-card" data-real={e._real} data-name={e.name} data-info={e.info || ''} data-has-mb={hasMb ? 'true' : 'false'}>
-            <div class="lg-spon-media lg-spon-ds" style={dsVideo ? blur(dsVideo) : undefined}>
+            <div class="lg-spon-media lg-spon-ds" style={blur(dsVideo || e.image)}>
               {dsVideo
-                ? <video src={dsVideo} poster={poster(dsVideo)} muted loop playsinline preload="none" data-spon-vid></video>
-                : <img src={e.image} alt={e.name} loading="lazy" />}
+                ? <video class="lg-rv" src={dsVideo} poster={poster(dsVideo)} muted loop playsinline preload="none" data-spon-vid></video>
+                : <img class="lg-rv" src={e.image} alt={e.name} loading="lazy" />}
             </div>
             {hasMb && (
-              <div class="lg-spon-media lg-spon-mb" style={mbVideo ? blur(mbVideo) : undefined}>
+              <div class="lg-spon-media lg-spon-mb" style={blur(mbVideo || mbImage)}>
                 {mbVideo
-                  ? <video src={mbVideo} poster={poster(mbVideo)} muted loop playsinline preload="none" data-spon-vid></video>
-                  : <img src={mbImage} alt={e.name} loading="lazy" />}
+                  ? <video class="lg-rv" src={mbVideo} poster={poster(mbVideo)} muted loop playsinline preload="none" data-spon-vid></video>
+                  : <img class="lg-rv" src={mbImage} alt={e.name} loading="lazy" />}
               </div>
             )}
             <div class="lg-spon-cap">

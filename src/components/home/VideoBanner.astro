@@ -17,9 +17,9 @@ const link = href || '/product/';
 const L = (v?: string) => { if (!v) return ''; const k = (lqip as Record<string,string>)[v.split('/').pop()!.replace(/\.\w+$/, '')]; return k ? `url(${k})` : ''; };
 const lqipVars = `--lqip-ds:${L(videoDesktop)};--lqip-mb:${L(videoMobile || videoDesktop)}`;
 ---
-<section id="banner" class="lg-banner" aria-label="Banner">
+<section id="banner" class="lg-banner" aria-label="Banner" style={lqipVars}>
   <!-- no <source media> (unreliable on <video>) — JS picks ds/mb via matchMedia below -->
-  <video class="lg-banner-video" loop muted playsinline preload="none" style={lqipVars}
+  <video class="lg-banner-video lg-rv" loop muted playsinline preload="none"
          data-ds={videoDesktop} data-mb={videoMobile || videoDesktop}></video>
   <div class="lg-banner-scrim" aria-hidden="true"></div>
 
@@ -34,11 +34,11 @@ const lqipVars = `--lqip-ds:${L(videoDesktop)};--lqip-mb:${L(videoMobile || vide
     position: relative; width: 100%;
     height: clamp(32rem, 92vh, 56rem);
     margin: clamp(1.75rem, 4vw, 3.25rem) 0;   /* the "break" above & below (desktop only) */
-    overflow: hidden; background: #1A1A2E; isolation: isolate;
+    overflow: hidden; background-color: #1A1A2E; isolation: isolate;
+    background-image: var(--lqip-ds); background-size: cover; background-position: center;   /* blur-up first-frame under the video */
   }
-  .lg-banner-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; display: block;
-    background-image: var(--lqip-ds); background-size: cover; background-position: center; }
-  @media (max-width: 767px) { .lg-banner-video { background-image: var(--lqip-mb); } }
+  @media (max-width: 767px) { .lg-banner { background-image: var(--lqip-mb); } }
+  .lg-banner-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; display: block; }
   .lg-banner-scrim { position: absolute; inset: 0; z-index: 1;
     background: linear-gradient(to top, rgba(0,0,0,.5) 0%, rgba(0,0,0,.18) 26%, rgba(0,0,0,0) 52%); }
 

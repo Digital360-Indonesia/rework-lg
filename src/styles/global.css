@@ -500,3 +500,35 @@
     display: none !important;
   }
 }
+
+/* ============================================================================
+   Smooth media reveal — consistent, "knowable" loading across the site.
+   A media element marked `.lg-rv` starts hidden and fades in once it's actually
+   ready (img load / video playing), revealing over a placeholder: either a tiny
+   inlined blur-up first-frame (set as the container background) or, where there's
+   no first-frame, an animated shimmer skeleton (.lg-skel). No blink, no pop-in.
+   ============================================================================ */
+/* Progressive enhancement: media is visible by default (no-JS / script-error safe). Only when JS is
+   confirmed (html.lg-js) do we hide-then-fade. A 5s CSS failsafe animation force-reveals regardless,
+   so media can never get stuck invisible. */
+.lg-rv { opacity: 1; }
+.lg-js .lg-rv { opacity: 0; transition: opacity .55s ease; animation: lg-rv-failsafe 0s linear 5s forwards; }
+.lg-js .lg-rv.is-ready { opacity: 1; }
+@keyframes lg-rv-failsafe { to { opacity: 1; } }
+
+/* shimmer skeleton for containers without a blur-up first-frame */
+.lg-skel { position: relative; background: #ece9f1; }
+.lg-skel::after {
+  content: ''; position: absolute; inset: 0; z-index: 1; pointer-events: none;
+  transform: translateX(-100%);
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,.55), transparent);
+  animation: lg-shimmer 1.4s ease-in-out infinite;
+}
+.lg-skel.is-ready::after { animation: none; opacity: 0; }
+
+@keyframes lg-shimmer { to { transform: translateX(100%); } }
+
+@media (prefers-reduced-motion: reduce) {
+  .lg-rv { transition: none; }
+  .lg-skel::after { animation: none; opacity: 0; }
+}

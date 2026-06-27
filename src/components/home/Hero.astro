@@ -19,12 +19,12 @@ const heroBlur = (v?: string) => { if (!v) return undefined; const k = (lqip as 
   <div class="lg-hero-slides">
     {slides.map((s, i) => (
       <div class:list={['lg-hero-slide', { 'is-active': i === 0, 'is-init': i === 0 }]} data-i={i}
-           data-title={s.title} data-desc={s.desc} data-href={s.href} style={s.video ? heroBlur(s.video) : undefined}>
+           data-title={s.title} data-desc={s.desc} data-href={s.href} style={heroBlur(s.video || s.image)}>
         {s.video
-          ? <video src={s.video} poster={`/assets/videos/posters/${s.video.split('/').pop()!.replace(/\.\w+$/, '.jpg')}`} loop muted playsinline preload="metadata"></video>
+          ? <video class="lg-rv" src={s.video} poster={`/assets/videos/posters/${s.video.split('/').pop()!.replace(/\.\w+$/, '.jpg')}`} loop muted playsinline preload="metadata"></video>
           : <picture>
               {(s as any).imageMobile && <source srcset={(s as any).imageMobile} media="(max-width: 1023px)" />}
-              <img src={s.image} alt="" loading={i === 0 ? 'eager' : 'lazy'} fetchpriority={i === 0 ? 'high' : undefined} />
+              <img class="lg-rv" src={s.image} alt="" loading={i === 0 ? 'eager' : 'lazy'} fetchpriority={i === 0 ? 'high' : undefined} />
             </picture>}
       </div>
     ))}
