@@ -86,13 +86,19 @@ const ogImage = '/assets/images/logo/logo-colored.webp';
   /* ============ MOBILE (phones ≤767px): TikTok / Reels-style full-screen swipe feed ============
      Native CSS scroll-snap — each section is a full-screen panel; swipe up/down snaps one at a time. */
   @media (max-width: 767px) {
-    /* TikTok-feel snap: make BODY the single full-screen snap scroller.
-       iOS Safari ignores scroll-snap-type on <html> when body has overflow-x:hidden (it shifts the
-       scroll container to <body>) → snap silently dies and you get free web-scroll. Locking <html>
-       and making <body> the fixed-height snap scroller is the robust cross-engine fix. */
-    :global(html.lg-home) { height: var(--app-vh, 100svh); overflow: hidden; }
-    :global(html.lg-home body) { height: var(--app-vh, 100svh); overflow-x: hidden; overflow-y: scroll; -webkit-overflow-scrolling: touch;
-      scroll-snap-type: y mandatory; overscroll-behavior-y: contain; scroll-behavior: auto; }
+    /* TikTok-feel snap — iOS-robust architecture: the SCROLL CONTAINER is <main> pinned with
+       position:fixed; inset:0. On iOS Safari a fixed inset:0 element is sized to the REAL visible
+       viewport (toolbar-aware) natively — no 100dvh/innerHeight guessing — and panels at height:100%
+       therefore fill EXACTLY, including the last one. <html>/<body> are locked (no scroll) so main is
+       the only scroller; snap lives on main. (Earlier body-as-scroller + 100dvh under-filled the last
+       panel on iOS because dvh assumes a collapsed toolbar that this mode keeps shown.) */
+    :global(html.lg-home), :global(html.lg-home body) { height: 100%; overflow: hidden; overscroll-behavior: none; }
+    :global(html.lg-home main) {
+      position: fixed; inset: 0; overflow-x: hidden; overflow-y: scroll; -webkit-overflow-scrolling: touch;
+      scroll-snap-type: y mandatory; overscroll-behavior-y: contain; scroll-behavior: auto;
+      min-height: 0 !important;   /* override the desktop `main{min-height:100vh}` so inset:0 alone sizes it to the viewport */
+      padding-bottom: 0 !important;
+    }
     /* kill the 80px desktop-header scroll offset so each panel snaps FLUSH (one swipe = full fit, TikTok-style) */
     :global(section) { scroll-margin-top: 0 !important; }
     /* Top header + announcement are hidden on mobile (BaseLayout) — the purple bottom nav (MobileNav) is the navigator. */
@@ -101,8 +107,8 @@ const ogImage = '/assets/images/logo/logo-colored.webp';
     :global(.lg-banner),
     :global(.lg-spon),
     :global(.lg-mcta) {
-      height: var(--app-vh, 100svh) !important;   /* JS-pinned to real viewport; svh fallback = toolbar-safe minimum so iOS last panel still fits */
-      min-height: var(--app-vh, 100svh) !important;
+      height: 100% !important;   /* 100% of the fixed-inset:0 main = exact visible viewport on every engine, incl. iOS Safari */
+      min-height: 100% !important;
       margin: 0 !important;
       scroll-snap-align: start;
       scroll-snap-stop: always;
