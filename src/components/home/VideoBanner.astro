@@ -15,7 +15,7 @@ const link = href || '/product/';
 ---
 <section id="banner" class="lg-banner" aria-label="Banner">
   <!-- no <source media> (unreliable on <video>) — JS picks ds/mb via matchMedia below -->
-  <video class="lg-banner-video" autoplay loop muted playsinline preload="metadata"
+  <video class="lg-banner-video" loop muted playsinline preload="none"
          data-ds={videoDesktop} data-mb={videoMobile || videoDesktop}></video>
   <div class="lg-banner-scrim" aria-hidden="true"></div>
 
@@ -60,18 +60,23 @@ const link = href || '/product/';
   if (v) {
     // pick mobile vs desktop source ourselves (reliable, unlike <source media> on video)
     const mq = window.matchMedia('(max-width: 1023px)');
-    const apply = () => {
-      const want = (mq.matches ? v.dataset.mb : v.dataset.ds) || v.dataset.ds || '';
-      if (v.getAttribute('src') === want || !want) return;
-      v.src = want; v.load(); v.play().catch(() => {});
-    };
-    apply();
-    mq.addEventListener('change', apply);   // re-pick on rotate/resize across the breakpoint
-
-    // plain loop — pause when off-screen to save battery
+    const pick = () => (mq.matches ? v.dataset.mb : v.dataset.ds) || v.dataset.ds || '';
+    // Don't download until the banner is actually on screen — on the mobile reels feed every section
+    // sits in the DOM at once, so eager-loading here starved the hero. IO sets src + plays on entry,
+    // pauses on exit. (preload="none" + no initial src ⇒ zero bytes until visible.)
     const io = new IntersectionObserver((entries) => {
-      entries.forEach((e) => { e.isIntersecting ? v.play().catch(() => {}) : v.pause(); });
-    }, { threshold: 0.1 });
+      entries.forEach((e) => {
+        if (e.isIntersecting) {
+          const want = pick();
+          if (want && v.getAttribute('src') !== want) { v.src = want; v.load(); }
+          v.play().catch(() => {});
+        } else { v.pause(); }
+      });
+    }, { threshold: 0.25 });
     io.observe(v);
+    mq.addEventListener('change', () => {   // re-pick on rotate/resize across the breakpoint
+      const want = pick();
+      if (v.getAttribute('src') && want && v.getAttribute('src') !== want) { v.src = want; v.load(); v.play().catch(() => {}); }
+    });
   }
 </script>

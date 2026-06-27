@@ -18,7 +18,7 @@ const slides = home.hero.slides;
       <div class:list={['lg-hero-slide', { 'is-active': i === 0, 'is-init': i === 0 }]} data-i={i}
            data-title={s.title} data-desc={s.desc} data-href={s.href}>
         {s.video
-          ? <video src={s.video} poster={`/assets/videos/posters/${s.video.split('/').pop()!.replace(/\.\w+$/, '.jpg')}`} autoplay loop muted playsinline preload={i === 0 ? 'auto' : 'metadata'}></video>
+          ? <video src={s.video} poster={`/assets/videos/posters/${s.video.split('/').pop()!.replace(/\.\w+$/, '.jpg')}`} loop muted playsinline preload="metadata"></video>
           : <picture>
               {(s as any).imageMobile && <source srcset={(s as any).imageMobile} media="(max-width: 1023px)" />}
               <img src={s.image} alt="" loading={i === 0 ? 'eager' : 'lazy'} fetchpriority={i === 0 ? 'high' : undefined} />
