@@ -49,6 +49,23 @@ const pageType = type === 'article' ? 'article' : 'website';
   <meta name="generator" content={Astro.generator}>
   <!-- mark JS-capable ASAP so the smooth media-reveal (.lg-rv) only hides media when it can fade it back in -->
   <script is:inline>document.documentElement.classList.add('lg-js');</script>
+  <!-- Pin --app-vh to the REAL viewport height. The mobile reels feed makes <body> the snap scroller,
+       which changes how iOS/Android size 100dvh under the browser toolbar — leaving the last panel
+       able to under-scroll (not full-screen). Measuring window.innerHeight and driving panel height
+       off it fills each panel to the actual visible area. Updated only on orientation/size change
+       (not per-scroll) to avoid mid-scroll reflow. -->
+  <script is:inline>
+    (function () {
+      var set = function () { document.documentElement.style.setProperty('--app-vh', window.innerHeight + 'px'); };
+      set();
+      addEventListener('orientationchange', function () { setTimeout(set, 250); });
+      addEventListener('resize', function () {
+        // only react to real viewport changes (rotate / window resize), ignore the tiny
+        // toolbar-driven deltas that fire during scroll
+        clearTimeout(window.__avhT); window.__avhT = setTimeout(set, 200);
+      });
+    })();
+  </script>
 
   <!-- SEO Meta Tags -->
   <title>{title} - {siteConfig.siteName}</title>
