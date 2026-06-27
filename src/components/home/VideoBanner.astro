@@ -10,12 +10,16 @@
  * title, subtitle, href). When videoMobile is blank the desktop clip fits all sizes.
  */
 import home from '../../data/home.json';
+import lqip from '../../data/video-lqip.json';
 const { videoDesktop, videoMobile, title, subtitle, href } = home.videoBanner as any;
 const link = href || '/product/';
+// instant blur-up first-frames (ds + mb) so the banner never flashes its dark background pre-play
+const L = (v?: string) => { if (!v) return ''; const k = (lqip as Record<string,string>)[v.split('/').pop()!.replace(/\.\w+$/, '')]; return k ? `url(${k})` : ''; };
+const lqipVars = `--lqip-ds:${L(videoDesktop)};--lqip-mb:${L(videoMobile || videoDesktop)}`;
 ---
 <section id="banner" class="lg-banner" aria-label="Banner">
   <!-- no <source media> (unreliable on <video>) — JS picks ds/mb via matchMedia below -->
-  <video class="lg-banner-video" loop muted playsinline preload="none"
+  <video class="lg-banner-video" loop muted playsinline preload="none" style={lqipVars}
          data-ds={videoDesktop} data-mb={videoMobile || videoDesktop}></video>
   <div class="lg-banner-scrim" aria-hidden="true"></div>
 
@@ -32,7 +36,9 @@ const link = href || '/product/';
     margin: clamp(1.75rem, 4vw, 3.25rem) 0;   /* the "break" above & below (desktop only) */
     overflow: hidden; background: #1A1A2E; isolation: isolate;
   }
-  .lg-banner-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; display: block; }
+  .lg-banner-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; display: block;
+    background-image: var(--lqip-ds); background-size: cover; background-position: center; }
+  @media (max-width: 767px) { .lg-banner-video { background-image: var(--lqip-mb); } }
   .lg-banner-scrim { position: absolute; inset: 0; z-index: 1;
     background: linear-gradient(to top, rgba(0,0,0,.5) 0%, rgba(0,0,0,.18) 26%, rgba(0,0,0,0) 52%); }
 

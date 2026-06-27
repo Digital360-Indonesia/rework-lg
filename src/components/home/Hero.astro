@@ -9,14 +9,17 @@ interface Props { variant?: 'default' | 'simple'; }
 const { variant = 'default' } = Astro.props;
 
 import home from '../../data/home.json';
+import lqip from '../../data/video-lqip.json';
 // 5 slides — first is a video, the rest images (CMS-managed via src/data/home.json → hero.slides).
 const slides = home.hero.slides;
+// instant blur-up first-frame behind a video slide so it never flashes the dark/gray background
+const heroBlur = (v?: string) => { if (!v) return undefined; const k = (lqip as Record<string,string>)[v.split('/').pop()!.replace(/\.\w+$/, '')]; return k ? `background-image:url(${k});background-size:cover;background-position:center` : undefined; };
 ---
 <section id="hero" class="lg-hero" data-slides={slides.length}>
   <div class="lg-hero-slides">
     {slides.map((s, i) => (
       <div class:list={['lg-hero-slide', { 'is-active': i === 0, 'is-init': i === 0 }]} data-i={i}
-           data-title={s.title} data-desc={s.desc} data-href={s.href}>
+           data-title={s.title} data-desc={s.desc} data-href={s.href} style={s.video ? heroBlur(s.video) : undefined}>
         {s.video
           ? <video src={s.video} poster={`/assets/videos/posters/${s.video.split('/').pop()!.replace(/\.\w+$/, '.jpg')}`} loop muted playsinline preload="metadata"></video>
           : <picture>
